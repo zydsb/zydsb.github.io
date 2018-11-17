@@ -79,16 +79,16 @@
 
 
 
-<meta name="description" content="zhangyang瞎BB的地方">
+<meta name="description" content="我瞎BB的地方">
 <meta property="og:type" content="website">
 <meta property="og:title" content="天王盖地虎">
 <meta property="og:url" content="http://snailed.cn/index.html">
 <meta property="og:site_name" content="天王盖地虎">
-<meta property="og:description" content="zhangyang瞎BB的地方">
+<meta property="og:description" content="我瞎BB的地方">
 <meta property="og:locale" content="en">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="天王盖地虎">
-<meta name="twitter:description" content="zhangyang瞎BB的地方">
+<meta name="twitter:description" content="我瞎BB的地方">
 
 
 
@@ -160,7 +160,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle">Be Real</p>
+        <p class="site-subtitle"></p>
       
   </div>
 
@@ -218,6 +218,173 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/我的Hive学习之旅/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="天王盖地虎">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/我的Hive学习之旅/" itemprop="url">我的Hive学习之旅</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-17T22:27:12+08:00">
+                2018-11-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="row-number"><a href="#row-number" class="headerlink" title="row number"></a>row number</h4><p><strong>作用 ： 返回这个Partition下的当前Row号，根据排序字段生成，无重复。</strong></p>
+<p>语法 ：row_number() over (partition by 字段a order by 计算项b desc ) rank<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> seasonid, episodeid , </span><br><span class="line">row_number() <span class="keyword">over</span>(<span class="keyword">partition</span> <span class="keyword">by</span> seasonid <span class="keyword">order</span> <span class="keyword">by</span> episodeid <span class="keyword">asc</span>) <span class="keyword">as</span> <span class="keyword">rank</span> </span><br><span class="line"><span class="keyword">from</span> tutor.dw_season_live_information a </span><br><span class="line"><span class="keyword">where</span> dt = <span class="keyword">date_sub</span>(<span class="keyword">current_date</span>,<span class="number">1</span>) <span class="keyword">limit</span> <span class="number">100</span></span><br></pre></td></tr></table></figure></p>
+<p>内置rank分析函数区别 ：</p>
+<ul>
+<li>row_number:不管排名是否有相同的，都按照顺序1，2，3…..n </li>
+<li>rank:排名相同的名次一样，同一排名有几个，后面排名就会跳过几次 </li>
+<li>dense_rank:排名相同的名次一样，且后面名次不跳跃</li>
+</ul>
+<h4 id="with-cube-amp-grouping-sets-amp-rollup"><a href="#with-cube-amp-grouping-sets-amp-rollup" class="headerlink" title="with cube &amp; grouping sets &amp; rollup"></a>with cube &amp; grouping sets &amp; rollup</h4><p><strong>主要用于不能用简单group by语句处理需求的情况</strong></p>
+<ul>
+<li><p>grouping sets : 其后面跟括号里指定了零个或多个分组变量的聚合，然后产生这个维度下的聚合结果，再将每个结果UNION到一起，其实也就是相当于</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> a,<span class="keyword">sum</span>(xx) <span class="keyword">form</span> table1 … <span class="keyword">group</span>  <span class="keyword">by</span> a </span><br><span class="line"><span class="keyword">union</span> </span><br><span class="line"><span class="keyword">select</span> b,<span class="keyword">sum</span>(xx) <span class="keyword">form</span> table1 … <span class="keyword">group</span>  <span class="keyword">by</span> b</span><br><span class="line"><span class="keyword">union</span> </span><br><span class="line"><span class="keyword">select</span> <span class="keyword">sum</span>(xx) <span class="keyword">form</span> table1 …  <span class="keyword">group</span>  <span class="keyword">by</span> a,b </span><br><span class="line"><span class="keyword">union</span> </span><br><span class="line">...</span><br><span class="line">这个意思</span><br><span class="line"></span><br><span class="line">用法：</span><br><span class="line"><span class="keyword">select</span> ga, gb, <span class="keyword">sum</span>(val) <span class="keyword">from</span> <span class="keyword">table</span></span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> ga, gb</span><br><span class="line"><span class="keyword">GROUPING</span> <span class="keyword">SETS</span> ((ga), (gb), ());</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>with cube : 对变量进行有/无的组合，如果有三个对象，就会产生2^3 = 8种聚合情况</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">eg :</span><br><span class="line">     cube (a,b,c) </span><br><span class="line">     equal </span><br><span class="line">     grouping sets( (a,b,c), (a,b), (a,c), (a),(b,c), (b), (c),  () )</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>rollup : 是cube的子集，以最左侧的维度为主，从该维度进行层级聚合  </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">eg  : </span><br><span class="line">     rollup(a,b,c)</span><br><span class="line">     equal </span><br><span class="line">     grouping sets( (a,b,c),(a,b),(a),() )</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="regexp-extract"><a href="#regexp-extract" class="headerlink" title="regexp_extract"></a>regexp_extract</h4><p><strong>字符串正则表达式解析函数</strong><br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">eg : </span><br><span class="line">    <span class="keyword">select</span> regexp_extract(  <span class="string">'yfd-mkt-0207juzhanYY05-grp-123'</span>, <span class="string">'yfd-mkt-([^\\-]+)-.*'</span>, <span class="number">1</span>) <span class="keyword">as</span> keyfrom_type;    — res : 0207juzhanYY05</span><br><span class="line">    </span><br><span class="line"> 0 : 表示把整个正则表达式对应的结果全部返回</span><br><span class="line"> 1 ：表示返回表达式中第一个()对应的结果</span><br><span class="line"> 依次类推...  </span><br><span class="line"> 相关函数 : regexp_replace()</span><br></pre></td></tr></table></figure></p>
+<h4 id="get-json-object"><a href="#get-json-object" class="headerlink" title="get_json_object"></a>get_json_object</h4><p><strong>作用 ： 从复杂json对象中提取元素</strong><br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">‘$’表示对Root对象</span><br><span class="line"></span><br><span class="line">eg : get_json_object(t.info,'$.xx')</span><br></pre></td></tr></table></figure></p>
+<h4 id="nvl"><a href="#nvl" class="headerlink" title="nvl"></a>nvl</h4><p>NVL函数的格式如下：NVL(expr1,expr2)<br>含义是：如果oracle第一个参数为空那么显示第二个参数的值，如果第一个参数的值不为空，则显示第一个参数本来的值。</p>
+<h4 id="时间处理-："><a href="#时间处理-：" class="headerlink" title="时间处理 ："></a>时间处理 ：</h4><p><strong>一种思路 ： 可以把时间转化为一个整数，经过处理之后，再转化为日期格式。</strong>  </p>
+<p> 常见hive时间转换函数</p>
+<ul>
+<li>from_unixtime ： 日期函数UNIX时间戳转日期函数: from_unixtime语法:   from_unixtime(bigint unixtime[, string format]),可以是识别到月</li>
+<li><p>unix_timestamp(string date, string pattern) : 指定格式日期转UNIX时间戳函数，可以识别到月</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">hive&gt;   select unix_timestamp(&apos;20111207 13:01:03&apos;,&apos;yyyyMMdd HH:mm:ss&apos;);</span><br><span class="line">1323234063</span><br><span class="line">hive&gt; select unix_timestamp(&apos;2011-12-07 13:05&apos;,&apos;yyyy-MM-dd HH:mm&apos;);</span><br><span class="line">1323234300</span><br><span class="line">hive&gt; select unix_timestamp(&apos;2011-12&apos;,&apos;yyyy-MM&apos;);</span><br><span class="line">1322668800</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>date_format : </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">hive&gt; select date_format(&apos;2015-04-08&apos;, &apos;y&apos;);</span><br><span class="line">2015</span><br><span class="line">hive&gt; select date_format(&apos;2015-04-08&apos;, &apos;yyyy&apos;);</span><br><span class="line">2015</span><br><span class="line">hive&gt; select date_format(&apos;2015-04-08&apos;, &apos;yyyy-MM&apos;);</span><br><span class="line">2015-04</span><br><span class="line">hive&gt; select date_format(&apos;2015-04-08 10:10:01&apos;, &apos;yyyy-MM&apos;);</span><br><span class="line">2015-04</span><br><span class="line">hive&gt; select date_format(&apos;2015-04-08&apos;, &apos;yyyy-MM-dd&apos;);</span><br><span class="line">2015-04-08</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>to_date</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">hive&gt;   select to_date(&apos;2011-12-08 10:03:01&apos;);</span><br><span class="line">2011-12-08</span><br><span class="line">hive&gt; select to_date(&apos;2011-12-08&apos;);</span><br><span class="line">2011-12-08</span><br><span class="line">hive&gt; select to_date(&apos;2011-12&apos;);</span><br><span class="line">NULL</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>date_sub | date_add 这个用法还是非常显而易见的</p>
+</li>
+</ul>
+<h4 id="窗口函数-："><a href="#窗口函数-：" class="headerlink" title="窗口函数 ："></a>窗口函数 ：</h4><p>  <strong>可以实现既显示聚集前的数据,又要显示聚集后的数据</strong></p>
+<ul>
+<li>lag : 与lead相反，用于统计窗口内往上第n行值。第一个参数为列名，第二个参数为往上第n行（可选，默认为1），第三个参数为默认值（当往上第n行为NULL时候，取默认值，如不指定，则为NULL）</li>
+<li>lead : 用于统计窗口内往下第n行值。第一个参数为列名，第二个参数为往下第n行（可选，默认为1），第三个参数为默认值（当往下第n行为NULL时候，取默认值，如不指定，则为NULL） </li>
+<li>first_value : 取分组排序后，截止到当前行，第一个值</li>
+<li>last_value : 取分组排序后，截止到当前行，最后一个值</li>
+<li>NTILE : 用于将分组数据按照顺序切分成n片，返回当前切片值</li>
+</ul>
+<p>window子句构建适用于over()子句，构建一个窗口</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -304,7 +471,7 @@
         
           
             <blockquote>
-<p>2018.10.13夜</p>
+<p>2018.11.13夜</p>
 </blockquote>
 <p>今天读完了《菊与刀》这本书，先Mark一下个人读完还可以想起来的点。</p>
 <ul>
@@ -787,134 +954,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/hello-world/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="天王盖地虎">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-04T21:46:23+08:00">
-                2018-11-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -951,7 +990,7 @@
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
               <p class="site-author-name" itemprop="name">zhangyang</p>
-              <p class="site-description motion-element" itemprop="description">zhangyang瞎BB的地方</p>
+              <p class="site-description motion-element" itemprop="description">我瞎BB的地方</p>
           </div>
 
           <nav class="site-state motion-element">
@@ -974,7 +1013,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
