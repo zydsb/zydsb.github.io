@@ -79,21 +79,21 @@
 
 
 
-<meta name="description" content="###简介K-means算法是聚类算法中最简单的一种，但是里面包含的思想却不一般。K-means属于无监督学习，以往的回归、朴素贝叶斯、SVM等都是有类别标签y的，也就是说样例中已经给出了样例的分类。而聚类的样本中却没有给定y，只有特征x，假设宇宙星空中的点集可以表现成（X，Y，Z），聚类的目的就是为X找到潜在的Y，并将同类别的Y放在一起   ###算法描述  随机选取K个点作为质点   对于每一">
+<meta name="description" content="简介K-means算法是聚类算法中最简单的一种，但是里面包含的思想却不一般。K-means属于无监督学习，以往的回归、朴素贝叶斯、SVM等都是有类别标签y的，也就是说样例中已经给出了样例的分类。而聚类的样本中却没有给定y，只有特征x，假设宇宙星空中的点集可以表现成（X，Y，Z），聚类的目的就是为X找到潜在的Y，并将同类别的Y放在一起   算法描述  随机选取K个点作为质点   对于每一个样本点X，">
 <meta name="keywords" content="机器学习 算法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="K-means简述">
 <meta property="og:url" content="http://snailed.cn/K-means简述/index.html">
 <meta property="og:site_name" content="天王盖地虎">
-<meta property="og:description" content="###简介K-means算法是聚类算法中最简单的一种，但是里面包含的思想却不一般。K-means属于无监督学习，以往的回归、朴素贝叶斯、SVM等都是有类别标签y的，也就是说样例中已经给出了样例的分类。而聚类的样本中却没有给定y，只有特征x，假设宇宙星空中的点集可以表现成（X，Y，Z），聚类的目的就是为X找到潜在的Y，并将同类别的Y放在一起   ###算法描述  随机选取K个点作为质点   对于每一">
+<meta property="og:description" content="简介K-means算法是聚类算法中最简单的一种，但是里面包含的思想却不一般。K-means属于无监督学习，以往的回归、朴素贝叶斯、SVM等都是有类别标签y的，也就是说样例中已经给出了样例的分类。而聚类的样本中却没有给定y，只有特征x，假设宇宙星空中的点集可以表现成（X，Y，Z），聚类的目的就是为X找到潜在的Y，并将同类别的Y放在一起   算法描述  随机选取K个点作为质点   对于每一个样本点X，">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5115722-8d44e5307220a167.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5115722-c4446e11823ec528.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5115722-811474cc69d39d39.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-11-19T04:08:06.193Z">
+<meta property="og:updated_time" content="2018-11-19T15:36:53.921Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="K-means简述">
-<meta name="twitter:description" content="###简介K-means算法是聚类算法中最简单的一种，但是里面包含的思想却不一般。K-means属于无监督学习，以往的回归、朴素贝叶斯、SVM等都是有类别标签y的，也就是说样例中已经给出了样例的分类。而聚类的样本中却没有给定y，只有特征x，假设宇宙星空中的点集可以表现成（X，Y，Z），聚类的目的就是为X找到潜在的Y，并将同类别的Y放在一起   ###算法描述  随机选取K个点作为质点   对于每一">
+<meta name="twitter:description" content="简介K-means算法是聚类算法中最简单的一种，但是里面包含的思想却不一般。K-means属于无监督学习，以往的回归、朴素贝叶斯、SVM等都是有类别标签y的，也就是说样例中已经给出了样例的分类。而聚类的样本中却没有给定y，只有特征x，假设宇宙星空中的点集可以表现成（X，Y，Z），聚类的目的就是为X找到潜在的Y，并将同类别的Y放在一起   算法描述  随机选取K个点作为质点   对于每一个样本点X，">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/5115722-8d44e5307220a167.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
@@ -304,8 +304,8 @@
       
 
       
-        <p>###简介<br>K-means算法是聚类算法中最简单的一种，但是里面包含的思想却不一般。K-means属于无监督学习，以往的回归、朴素贝叶斯、SVM等都是有类别标签y的，也就是说样例中已经给出了样例的分类。而聚类的样本中却没有给定y，只有特征x，假设宇宙星空中的点集可以表现成（X，Y，Z），聚类的目的就是为X找到潜在的Y，并将同类别的Y放在一起  </p>
-<p>###算法描述<br><img src="http://upload-images.jianshu.io/upload_images/5115722-8d44e5307220a167.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="算法具体过程"></p>
+        <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>K-means算法是聚类算法中最简单的一种，但是里面包含的思想却不一般。K-means属于无监督学习，以往的回归、朴素贝叶斯、SVM等都是有类别标签y的，也就是说样例中已经给出了样例的分类。而聚类的样本中却没有给定y，只有特征x，假设宇宙星空中的点集可以表现成（X，Y，Z），聚类的目的就是为X找到潜在的Y，并将同类别的Y放在一起  </p>
+<h3 id="算法描述"><a href="#算法描述" class="headerlink" title="算法描述"></a>算法描述</h3><p><img src="http://upload-images.jianshu.io/upload_images/5115722-8d44e5307220a167.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="算法具体过程"></p>
 <ol>
 <li>随机选取K个点作为质点  </li>
 <li>对于每一个样本点X，将其归类为距离质心点最近的类别  </li>
@@ -313,7 +313,7 @@
 <li>重复步骤二三，直至质心不变或变化很小  </li>
 </ol>
 <p><img src="http://upload-images.jianshu.io/upload_images/5115722-c4446e11823ec528.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="聚类效果"></p>
-<p>###问题<br>1.K-means算法的第一个问题就是如何保证收敛，因为前面算法的结束条件就是收敛，下面我们来描述一下：<br>定义畸变函数J（c，u）  ,表示每个样本点到其质心的距离平方和<br><img src="http://upload-images.jianshu.io/upload_images/5115722-811474cc69d39d39.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="J函数"><br> 此时我们的重点是研究如何研究是J函数最小，假设J函数没有函数达到最小值，那样我们就可以先固定每个类的质心，调整每个样例所属的类别来让J函数减小，或者固定类别，调整质心也可以使J减小。这两个过程就是内循环中使J函数减小的过程，当J函数最小时，u，c也同时收敛。  </p>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>1.K-means算法的第一个问题就是如何保证收敛，因为前面算法的结束条件就是收敛，下面我们来描述一下：<br>定义畸变函数J（c，u）  ,表示每个样本点到其质心的距离平方和<br><img src="http://upload-images.jianshu.io/upload_images/5115722-811474cc69d39d39.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="J函数"><br> 此时我们的重点是研究如何研究是J函数最小，假设J函数没有函数达到最小值，那样我们就可以先固定每个类的质心，调整每个样例所属的类别来让J函数减小，或者固定类别，调整质心也可以使J减小。这两个过程就是内循环中使J函数减小的过程，当J函数最小时，u，c也同时收敛。  </p>
 <p>由于畸变函数J是非凸函数，意味着我们不能保证取得的最小值是全局最小值，也就是说k-means对质心初始位置的选取比较感冒，但一般情况下k-means达到的局部最优已经满足需求。但如果你怕陷入局部最优，那么可以选取不同的初始值跑多遍k-means，然后取其中最小的J对应的u  </p>
 <blockquote>
 <p>凸优化有个非常重要的定理，即任何局部最优解即为全局最优解。  </p>
@@ -414,8 +414,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -466,6 +475,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法描述"><span class="nav-number">2.</span> <span class="nav-text">算法描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题"><span class="nav-number">3.</span> <span class="nav-text">问题</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
