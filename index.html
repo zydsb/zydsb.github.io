@@ -232,6 +232,314 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/了解用户画像/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="天王盖地虎">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/了解用户画像/" itemprop="url">了解用户画像</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-19T12:10:42+08:00">
+                2018-11-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>###为什么</p>
+<ul>
+<li>构建具体蓝本，有助于产品团队脱离自身喜好和整个团队目标的一致性  </li>
+<li>精准营销  </li>
+</ul>
+<p>###怎么做<br>构建用户画像的核心是打标签，通过高度精炼的标签去描述一个用户，如年龄性别地域偏好等。  </p>
+<ol>
+<li>明确构建用户画像的目的</li>
+<li>根据目的，明确需要收集什么数据，进行数据的采集（宏观，微观等）</li>
+<li>进行数据分析与建模  <blockquote>
+<p>通过定性与定量相结合的方式进行数据建模。定性的方法，表现为对产品、行为、用户个体的性质和特征的概括，从而形成对应的产品标签、行为标签以及用户标签；定量的方法，是在定性的基础上，给每个标签加上特定的权重，最后通过计算得出总标签权重，从而形成完整的用户模型。  </p>
+</blockquote>
+</li>
+</ol>
+<p><strong>标签权重模型</strong>： 待续      </p>
+<ul>
+<li>原始数据  </li>
+<li>事实标签  </li>
+<li>模型标签  </li>
+<li>预测标签<br><strong>基于TF-IDF算法的权重分类</strong>：一个词语的重要性随着他在该文章中出现的次数成正比，随着它在整个文档集中出现的次数成反比。<br>假设w（P , T）表示一个标签T被用于标记用户P的次数，TF（P，T）表示这个标记次数在用户P所有标签中所占的比重：    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">IDF（P , T）表示标签T在全部标签中的稀缺程度，如果标签次数出现越少，并同时标注某一个用户，则代表该标签与用户联系很紧密。</span><br><span class="line">```IDF(P,T) = LOG( 全部用户的全部标签之和 / 所有打T标签的用户之和)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>最后根据TF<em>IDF即可得到该用户该标签的权重值<br>实际业务上需要根据具体情况做出改变：  
+</em>用户标签权重 =行为类型权重 <em> 衰减时间 </em> TF-IDF标签权重 <em> 行为次数</em><br><strong>基于相关系数矩阵的权重归类</strong>  :<img src="http://upload-images.jianshu.io/upload_images/5115722-0fd228a4b350da6b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="相关系数矩阵"></p>
+<ol start="4">
+<li>进行数据维度分解和列举<br>根据相关性原则，进一步筛选和构建用户画像相关的数据维度，避免无用数据干扰分析的过程，用户数据维度可以分为以下几个特征：</li>
+</ol>
+<ul>
+<li>用户自然特征：性别、年龄、地域、教育水平、出生日期、星座等  </li>
+<li>用户兴趣特征：兴趣爱好、偏爱的应用、品牌偏好  </li>
+<li>用户社会特征：婚姻状况、家庭状况、社会地位  </li>
+<li>用户消费特征：收入、购买力、购买渠道、购买频次  </li>
+</ul>
+<p>###如何应用用户画像  </p>
+<ol>
+<li>根据用户画像列举用户场景及需求  </li>
+<li>应用用户画像进行产品设计决策  </li>
+</ol>
+<p>###注意事项（Persona原则）</p>
+<ul>
+<li>P - 基本性 指是否基于对真实用户的访谈  </li>
+<li>E -同理性（不理解）指指用户角色中包含姓名、照片和产品相关的描述，该用户角色是否引同理心;  </li>
+<li>R -真实性指用户画像是否看起来真实，特别是对于每天和用户打交道的人来说  </li>
+<li>O - 目标性指该用户是否包含与产品相关的高层次目标，是否包含关键词来描述该目标  </li>
+<li>N -数量性指数量要足够少，以便使设计团队记住每一个角色的姓名  </li>
+<li>A -应用性指用户画像是否实用，能够辅助设计决策  </li>
+</ul>
+<p>一个产品大概需要4-8个用户画像，最好设置优先级，当产品特别大的时候，可以考虑针对不同模块建立用户画像  </p>
+<p>###相关工作  </p>
+<ol>
+<li>构建用户画像文档  </li>
+<li>展示用户画像  </li>
+<li>完善用户画像  </li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/K-means简述/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="天王盖地虎">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/K-means简述/" itemprop="url">K-means简述</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-19T12:06:54+08:00">
+                2018-11-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>###简介<br>K-means算法是聚类算法中最简单的一种，但是里面包含的思想却不一般。K-means属于无监督学习，以往的回归、朴素贝叶斯、SVM等都是有类别标签y的，也就是说样例中已经给出了样例的分类。而聚类的样本中却没有给定y，只有特征x，假设宇宙星空中的点集可以表现成（X，Y，Z），聚类的目的就是为X找到潜在的Y，并将同类别的Y放在一起  </p>
+<p>###算法描述<br><img src="http://upload-images.jianshu.io/upload_images/5115722-8d44e5307220a167.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="算法具体过程"></p>
+<ol>
+<li>随机选取K个点作为质点  </li>
+<li>对于每一个样本点X，将其归类为距离质心点最近的类别  </li>
+<li>更新每个类别的质心点为隶属于该类别所有点的平均值  </li>
+<li>重复步骤二三，直至质心不变或变化很小  </li>
+</ol>
+<p><img src="http://upload-images.jianshu.io/upload_images/5115722-c4446e11823ec528.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="聚类效果"></p>
+<p>###问题<br>1.K-means算法的第一个问题就是如何保证收敛，因为前面算法的结束条件就是收敛，下面我们来描述一下：<br>定义畸变函数J（c，u）  ,表示每个样本点到其质心的距离平方和<br><img src="http://upload-images.jianshu.io/upload_images/5115722-811474cc69d39d39.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="J函数"><br> 此时我们的重点是研究如何研究是J函数最小，假设J函数没有函数达到最小值，那样我们就可以先固定每个类的质心，调整每个样例所属的类别来让J函数减小，或者固定类别，调整质心也可以使J减小。这两个过程就是内循环中使J函数减小的过程，当J函数最小时，u，c也同时收敛。  </p>
+<p>由于畸变函数J是非凸函数，意味着我们不能保证取得的最小值是全局最小值，也就是说k-means对质心初始位置的选取比较感冒，但一般情况下k-means达到的局部最优已经满足需求。但如果你怕陷入局部最优，那么可以选取不同的初始值跑多遍k-means，然后取其中最小的J对应的u  </p>
+<blockquote>
+<p>凸优化有个非常重要的定理，即任何局部最优解即为全局最优解。  </p>
+</blockquote>
+<p><strong>EM思想：</strong>这里只是指出EM的思想，E步就是估计隐含类别y的期望值，M步调整其他参数使得在给定类别y的情况下，极大似然估计P(x,y)能够达到极大值。然后在其他参数确定的情况下，重新估计y，周而复始，直至收敛。其实总体还是一个迭代优化的过程。</p>
+<p>缺点：K-means算法有两个缺点，第一、该方法对K个质心初始位置的选择比较感冒，一般而言k-means算法只能达到局部最优，因此K个质心初始位置不同，则达到的局部最优解也会不一样；第二、K值一般要根据先验知识，事先给定。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://snailed.cn/初识Git/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1258,7 +1566,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1271,7 +1579,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
