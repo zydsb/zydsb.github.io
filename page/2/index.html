@@ -232,6 +232,265 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Linux-command-md/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="天王盖地虎">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Linux-command-md/" itemprop="url">Linux_command.md</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-15T20:31:07+08:00">
+                2018-11-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Linux是程序猿的必修课，所以掌握一下怎么和机器对话吧:)</p>
+<h4 id="ls"><a href="#ls" class="headerlink" title="ls"></a>ls</h4><p><strong>缺省下ls会打印当前目录下的文件清单，若指定其他目录则会显示指定目录下的文件及文件清单。其可以查看目录，文件权限等信息</strong></p>
+<ol>
+<li>命令格式 ： ls [选项][目录名]</li>
+<li><p>常用参数 ： </p>
+<pre><code>- a : -all，列出目录下所有文件，包括.开头的文件
+- h : 列出文件大小
+- t : 以文件修改时间排序
+</code></pre><p>   -l : 列出文件的所有信息，包括文件权限，文件所有者，文件大小</p>
+</li>
+</ol>
+<h4 id="mv"><a href="#mv" class="headerlink" title="mv"></a>mv</h4><p><strong>move的缩写，可以用来移动文件或者重命名文件，是Linux下常用的命令</strong></p>
+<ol>
+<li>命令格式 : mv [选项] 源文件或目录 目标文件或目录</li>
+<li>常用参数 ： <pre><code>根据目标文件或者参数来自动悬着移动或者是重命名文件，如果是目录，则移动，如果是文件，则重命名
+- b : 如果需要覆盖文件，则覆盖前先备份
+- f : 强制覆盖
+- t : 适用于移动多个源文件到一个目录
+</code></pre></li>
+</ol>
+<h4 id="find"><a href="#find" class="headerlink" title="find"></a>find</h4><p><strong>在目录结构中搜索文件，并执行指定的操作。其功能十分强大，只要你具有相应的权限，基本都是可以使用的。</strong></p>
+<ol>
+<li>命令格式 : find pathname -options [-print -exec -ok …]</li>
+<li><p>命令参数 : </p>
+<pre><code>- pathname : find命令所查找的目录路径
+- print : find命令将匹配的文件输出到标准输出
+- exec : find命令对匹配的文件执行该参数所给出的shell命令。
+</code></pre><p>3.命令选项 : </p>
+<pre><code>- name : 按照文件名查找文件
+- user : 按照文件主属性来查找文件
+- cmin : 查找系统最后N分钟被改变的文件状态 
+</code></pre></li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">➜  pipe_warehouse git:(master) find tutor/ -name odsTutorMarketStudentCpa.py</span><br><span class="line">tutor//odsTutorMarketStudentCpa/odsTutorMarketStudentCpa.py</span><br><span class="line">➜  code <span class="built_in">cd</span> test_code</span><br><span class="line">➜  test_code ls</span><br><span class="line">test_para_pass.sh</span><br><span class="line">➜  test_code vim test.txt</span><br><span class="line">➜  test_code ls</span><br><span class="line">test.txt          test_para_pass.sh</span><br><span class="line">➜  test_code <span class="built_in">cd</span> ~/Desktop/code/</span><br><span class="line">➜  code <span class="built_in">pwd</span></span><br><span class="line">/Users/zhangyangfenbi.com/Desktop/code</span><br><span class="line">➜  code find test_code -name test.txt</span><br><span class="line">test_code/test.txt</span><br><span class="line">➜  code find test_code -name test.txt | xargs cat</span><br><span class="line"></span><br><span class="line">hello zhangyang</span><br></pre></td></tr></table></figure>
+<h4 id="pwd"><a href="#pwd" class="headerlink" title="pwd"></a>pwd</h4><p><strong>查看当前目录的完整路径</strong></p>
+<ol>
+<li>命令格式 ： pwd [选项]</li>
+<li>常用参数 ： 一般情况下不带任何参数，但是如果目录是链接的时候，格式： pwd -P 显示出实际路径，而非使用的Link路径。</li>
+</ol>
+<h4 id="mkdir"><a href="#mkdir" class="headerlink" title="mkdir"></a>mkdir</h4><p><strong>在指定位置创建指定名称的文件夹或者目录，要求创建者对所创建的文件夹的父文件夹具有写权限，并且创建的文件夹不可以和父文件夹重名。</strong></p>
+<ol>
+<li>命令格式 : mkdir [选项] 目录</li>
+<li>命令参数 :<br>   -m : —mode = 模式，设定权限&lt;模式&gt;，类似于chmod<pre><code>eg : mkdir -m 777 zy_test
+</code></pre>   -p : 递归创建多个目录</li>
+</ol>
+<hr>
+<h4 id="大型拖现场"><a href="#大型拖现场" class="headerlink" title="大型拖现场"></a>大型拖现场</h4><ul>
+<li>date : 2018-05-28</li>
+<li>date : 2018-05-29</li>
+<li>date : 2018-05-30</li>
+</ul>
+<p>感觉自己是个呆瓜…</p>
+<ul>
+<li>date : 2018-05-31</li>
+</ul>
+<p>出去玩三天，暂停更新。</p>
+<ul>
+<li>date : 2018-06-04</li>
+<li>date : 2018-06-05</li>
+</ul>
+<p>呆瓜如我…</p>
+<ul>
+<li>date : 2018-06-06</li>
+</ul>
+<hr>
+<h4 id="man"><a href="#man" class="headerlink" title="man"></a>man</h4><p><strong>Linux下的帮助指令，通过man指令可以查看Linux中的指令帮助、配置文件、编程帮助等信息</strong></p>
+<ol>
+<li>命令格式 ： man (选项)(参数)<br>2.常用参数 ： <pre><code>-f : 等价于whatis指令，显示给定关键词的剪短描述信息
+</code></pre></li>
+</ol>
+<p>Google一下，man一下, wiki一下，实在不行再问人。勿要轻易打扰他人。 </p>
+<h4 id="which"><a href="#which" class="headerlink" title="which"></a>which</h4><p><strong>查看可执行文件的位置</strong></p>
+<ol>
+<li>命令格式 ： which 可执行文件的名称 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">➜  code <span class="built_in">which</span> python3</span><br><span class="line">/usr/<span class="built_in">local</span>/bin/python3</span><br><span class="line">➜  code <span class="built_in">which</span> java</span><br><span class="line">/Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home/bin/java</span><br><span class="line">➜  code <span class="built_in">which</span> mysql</span><br><span class="line">/usr/<span class="built_in">local</span>/mysql/bin/mysql</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="Updated-换种版式，上面那样写不够流畅（2018-10-25）"><a href="#Updated-换种版式，上面那样写不够流畅（2018-10-25）" class="headerlink" title="Updated 换种版式，上面那样写不够流畅（2018-10-25）"></a>Updated 换种版式，上面那样写不够流畅（2018-10-25）</h4><h4 id="du"><a href="#du" class="headerlink" title="du"></a>du</h4><hr>
+<p><strong>命令也是查看使用空间的，但是与df命令不同的是Linux du命令是对文件和目录磁盘使用的空间的查看，还是和df命令有一些区别的。</strong></p>
+<p><em>语法 ：du -option -file</em></p>
+<p><em>选项</em></p>
+<ul>
+<li>-a或-all 显示目录中个别文件的大小。</li>
+<li>-b或-bytes 显示目录或文件大小时，以byte为单位。</li>
+<li>-c或–total 除了显示个别目录或文件的大小外，同时也显示所有目录或文件的总和。</li>
+<li>-k或–kilobytes 以KB(1024bytes)为单位输出。</li>
+<li>-m或–megabytes 以MB为单位输出。</li>
+<li>-s或–summarize 仅显示总计，只列出最后加总的值。</li>
+<li>-h或–human-readable 以K，M，G为单位，提高信息的可读性。</li>
+<li>-x或–one-file-xystem 以一开始处理时的文件系统为准，若遇上其它不同的文件系统目录则略过。</li>
+<li>-L&lt;符号链接&gt;或–dereference&lt;符号链接&gt; 显示选项中所指定符号链接的源文件大小。</li>
+<li>-S或–separate-dirs 显示个别目录的大小时，并不含其子目录的大小。</li>
+<li>-X&lt;文件&gt;或–exclude-from=&lt;文件&gt; 在&lt;文件&gt;指定目录或文件。</li>
+<li>–exclude=&lt;目录或文件&gt; 略过指定的目录或文件。</li>
+<li>-D或–dereference-args 显示指定符号链接的源文件大小。</li>
+<li>-H或–si 与-h参数相同，但是K，M，G是以1000为换算单位。</li>
+<li>-l或–count-links 重复计算硬件链接的文件。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">➜  Movies ls</span><br><span class="line">[王牌保镖.保镖救杀手][BluRay-720P.MKV][2.96GB][中英字幕]              触不可及-1280高清.mp4</span><br><span class="line">➜  Movies du</span><br><span class="line">6243576	./[王牌保镖.保镖救杀手][BluRay-720P.MKV][2.96GB][中英字幕]</span><br><span class="line">2425128	./触不可及-1280高清.mp4</span><br><span class="line">8668720	.</span><br><span class="line">➜  Movies du -m</span><br><span class="line">3049	./[王牌保镖.保镖救杀手][BluRay-720P.MKV][2.96GB][中英字幕]</span><br><span class="line">1185	./触不可及-1280高清.mp4</span><br><span class="line">4233	.</span><br><span class="line">➜  Movies du -s -m</span><br><span class="line">4233	.</span><br><span class="line">➜  Movies du -h</span><br><span class="line">3.0G	./[王牌保镖.保镖救杀手][BluRay-720P.MKV][2.96GB][中英字幕]</span><br><span class="line">1.2G	./触不可及-1280高清.mp4</span><br><span class="line">4.1G	.</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="df"><a href="#df" class="headerlink" title="df"></a>df</h4><hr>
+<p><strong>命令用于显示磁盘分区上的可使用的磁盘空间。默认显示单位为KB。可以利用该命令来获取硬盘被占用了多少空间，目前还剩下多少空间等信息</strong></p>
+<p><em>语法：df -option -file</em><br><em>选项</em></p>
+<ul>
+<li>-a或–all：包含全部的文件系统；</li>
+<li>–block-size=&lt;区块大小&gt;：以指定的区块大小来显示区块数目；</li>
+<li>-h或–human-readable：以可读性较高的方式来显示信息；</li>
+<li>-H或–si：与-h参数相同，但在计算时是以1000 Bytes为换算单位而非1024 Bytes；</li>
+<li>-i或–inodes：显示inode的信息；</li>
+<li>-k或–kilobytes：指定区块大小为1024字节；</li>
+<li>-l或–local：仅显示本地端的文件系统；</li>
+<li>-m或–megabytes：指定区块大小为1048576字节；</li>
+<li>–no-sync：在取得磁盘使用信息前，不要执行sync指令，此为预设值；</li>
+<li>-P或–portability：使用POSIX的输出格式；</li>
+<li>–sync：在取得磁盘使用信息前，先执行sync指令；</li>
+<li>-t&lt;文件系统类型&gt;或–type=&lt;文件系统类型&gt;：仅显示指定文件系统类型的磁盘信息；</li>
+<li>-T或–print-type：显示文件系统的类型；</li>
+<li>-x&lt;文件系统类型&gt;或–exclude-type=&lt;文件系统类型&gt;：不要显示指定文件系统类型的磁盘信息；</li>
+<li>–help：显示帮助；</li>
+<li>–version：显示版本信息。</li>
+</ul>
+<h4 id="nl"><a href="#nl" class="headerlink" title="nl"></a>nl</h4><hr>
+<p><strong>nl在Linux中用来计算文件中行号。nl可以将输出的文件内容自动的加上行号，其默认结果与<code>cat -n</code>有点不一样，nl可以将行号做比较多的显示设计</strong></p>
+<p><em>语法：nl -option -file</em><br><em>选项</em></p>
+<ul>
+<li>-b : 指定行号的指定方式<ul>
+<li>-b a : 表示不论是否为空行，也同样列出行号</li>
+<li>-b t : 如果有空行，空的那一行不要列出行号</li>
+</ul>
+</li>
+<li>-n : 列出行号表示的方法<ul>
+<li>-n ln : 行号在屏幕最左方显示</li>
+<li>-n rn : 行号在屏幕最右方显示，且不加0</li>
+<li>-n rz : 行号在屏幕最右方显示，且加0</li>
+</ul>
+</li>
+</ul>
+<h4 id="scp"><a href="#scp" class="headerlink" title="scp"></a>scp</h4><hr>
+<p><strong>scp是 secure copy的缩写, scp是linux系统下基于ssh登陆进行安全的远程文件拷贝命令。linux的scp命令可以在linux服务器之间复制文件和目录。(优点:非常不占用系统资源)</strong><br><em>语法： scp -option source_dir tar_dir</em></p>
+<ul>
+<li>-r 递归复制整个目录<br>明天问问运维大哥为啥从f04上面复制不了文件到本机。。。。</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://snailed.cn/Hadoop-Sqoop/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -438,7 +697,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
