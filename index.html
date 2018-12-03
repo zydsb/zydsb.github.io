@@ -232,6 +232,214 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Hive-分析窗口函数/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="天王盖地虎">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Hive-分析窗口函数/" itemprop="url">Hive-分析窗口函数</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-03T19:34:00+08:00">
+                2018-12-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="xbb"><a href="#xbb" class="headerlink" title="xbb"></a>xbb</h3><p><strong>Hive查询使用中难免遇到各种各样奇奇怪怪的需求或者角度，这个时候合理使用分析窗口函数也许会有很好的效果</strong></p>
+<p>前面《我的Hive学习之旅》一文主要讲了row_number(),动态group by还有日期处理之类的问题，稍微涉及了一些窗口函数的东西，但是并没有较为详细地整理一下。今天有时间就整理一下吧~</p>
+<h3 id="窗口函数："><a href="#窗口函数：" class="headerlink" title="窗口函数："></a>窗口函数：</h3><table>
+<thead>
+<tr>
+<th>窗口函数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>lead</td>
+<td>用于统计窗口内往下第n行值。</td>
+</tr>
+<tr>
+<td>lag</td>
+<td>与lead相反，用于统计窗口内往上第n行值。</td>
+</tr>
+<tr>
+<td>first_value</td>
+<td>取分组排序后，截止到当前行，第一个值</td>
+</tr>
+<tr>
+<td>last_value</td>
+<td>取分组排序后，截止到当前行，最后一个值</td>
+</tr>
+</tbody>
+</table>
+<h3 id="分析函数："><a href="#分析函数：" class="headerlink" title="分析函数："></a>分析函数：</h3><table>
+<thead>
+<tr>
+<th>分析函数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RANK</td>
+<td>返回数据项在分区中的排名。排名值序列可能会有间隔</td>
+</tr>
+<tr>
+<td>DENSE_RANK</td>
+<td>返回数据项在分区中的排名。排名值序列是连续的，不会有间隔</td>
+</tr>
+<tr>
+<td>PERCENT_RANK</td>
+<td>计算当前行的百分比排名</td>
+</tr>
+<tr>
+<td>ROW_NUMBER</td>
+<td>确定分区中当前行的序号</td>
+</tr>
+<tr>
+<td>CUME_DIST</td>
+<td>计算分区中当前行的相对排名</td>
+</tr>
+<tr>
+<td>NTILE()</td>
+<td>将每个分区的行尽可能均匀地划分为指定数量的分组</td>
+</tr>
+</tbody>
+</table>
+<h3 id="over子句"><a href="#over子句" class="headerlink" title="over子句"></a>over子句</h3><ul>
+<li>OVER子句可以与标准聚合函数使用(COUNT，SUM，MIN，MAX，AVG) </li>
+<li>OVER可以与一个或多个任何原始数据类型的分区列的PARTITION BY语句使用。</li>
+<li>OVER可以与一个或多个任何原始类型的分区列（排序列）的PARTITION BY(ORDER BY)使用。</li>
+<li>带有窗口规范的OVER子句。窗口可以在WINDOW子句中单独定义。 窗口规范支持如下格式<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">(ROWS | RANGE) BETWEEN (UNBOUNDED | [num]) PRECEDING AND ([num] PRECEDING | CURRENT ROW | (UNBOUNDED | [num]) FOLLOWING)</span><br><span class="line">(ROWS | RANGE) BETWEEN CURRENT ROW AND (CURRENT ROW | (UNBOUNDED | [num]) FOLLOWING)</span><br><span class="line">(ROWS | RANGE) BETWEEN [num] FOLLOWING AND (UNBOUNDED | [num]) FOLLOWING</span><br><span class="line"></span><br><span class="line">eg:</span><br><span class="line"><span class="keyword">select</span> dt , <span class="keyword">count</span>(userid) <span class="keyword">over</span> day_window <span class="keyword">as</span> user_num</span><br><span class="line"><span class="keyword">from</span> <span class="keyword">table</span></span><br><span class="line">window day_window <span class="keyword">as</span> (<span class="keyword">partition</span> <span class="keyword">by</span> userid,dt  <span class="keyword">order</span> <span class="keyword">by</span> diffdays <span class="keyword">ROWS</span> <span class="keyword">BETWEEN</span> <span class="keyword">UNBOUNDED</span> <span class="keyword">PRECEDING</span> <span class="keyword">AND</span> <span class="keyword">CURRENT</span> <span class="keyword">ROW</span> )</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>当缺少WINDOW子句并指定使用ORDER BY时，窗口规范默认为RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW，即从第一行到当前行。</p>
+<p>当缺少ORDER BY和WINDOW子句时，窗口规范默认为ROW BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING，即第一行到最后一行。</p>
+<h4 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h4><p>PRECEDING：表示当前行之前的行</p>
+<p>UNBOUNDED PRECEDING： 第一行 </p>
+<p>num PRECEDING：当前行之前的第num行</p>
+<p>CURRENT ROW：当前行</p>
+<p>FOLLOWING：当前行之后的行</p>
+<p>UNBOUNDED FOLLOWING：最后一行</p>
+<p>num FOLLOWING：当前行之后的第num行</p>
+<p>range是逻辑窗口，是指定当前行对应值的范围取值，列数不固定，只要行值在范围内，对应列都包含在内</p>
+<p>rows是物理窗口，即根据order by 子句排序后，取的前N行及后N行的数据计算（与当前行的值无关，只与排序后的行号相关）</p>
+<p>示例代码中便是在带有窗口规范的OVER子句，其窗口便在window子句中单独定义，但如果是分析规范，则不支持。</p>
+<h4 id="小提示"><a href="#小提示" class="headerlink" title="小提示"></a>小提示</h4><blockquote>
+<p>在count()等聚合函数中，distinct在hive2.2.0之后才支持order by子句和窗口规范<br>hive2.1.0之后over子句中支持聚合函数</p>
+</blockquote>
+<hr>
+<h3 id="实战演习"><a href="#实战演习" class="headerlink" title="实战演习"></a>实战演习</h3><h4 id="分组取top-n"><a href="#分组取top-n" class="headerlink" title="分组取top n"></a>分组取top n</h4><p>row_number()搭配over子句安排得很明明白白，还有*rank()几个函数供使用<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> seasonid, episodeid , </span><br><span class="line">row_number() <span class="keyword">over</span>(<span class="keyword">partition</span> <span class="keyword">by</span> seasonid <span class="keyword">order</span> <span class="keyword">by</span> episodeid <span class="keyword">asc</span>) <span class="keyword">as</span> <span class="keyword">rank</span> </span><br><span class="line"><span class="keyword">from</span> tutor.dw_season_live_information a </span><br><span class="line"><span class="keyword">where</span> dt = <span class="keyword">date_sub</span>(<span class="keyword">current_date</span>,<span class="number">1</span>)</span><br></pre></td></tr></table></figure></p>
+<h4 id="计算累计"><a href="#计算累计" class="headerlink" title="计算累计"></a>计算累计</h4><p>引用网上数据<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">hive&gt; select * from lxw1234;</span><br><span class="line">OK</span><br><span class="line">cookie1 2015-04-10      1</span><br><span class="line">cookie1 2015-04-11      5</span><br><span class="line">cookie1 2015-04-12      7</span><br><span class="line">cookie1 2015-04-13      3</span><br><span class="line">cookie1 2015-04-14      2</span><br><span class="line">cookie1 2015-04-15      4</span><br><span class="line">cookie1 2015-04-16      4</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> cookieid,</span><br><span class="line">createtime,</span><br><span class="line">pv,</span><br><span class="line"><span class="keyword">SUM</span>(pv) <span class="keyword">OVER</span>(<span class="keyword">PARTITION</span> <span class="keyword">BY</span> cookieid <span class="keyword">ORDER</span> <span class="keyword">BY</span> createtime) <span class="keyword">AS</span> pv1, <span class="comment">-- 默认为从起点到当前行</span></span><br><span class="line"><span class="keyword">SUM</span>(pv) <span class="keyword">OVER</span>(<span class="keyword">PARTITION</span> <span class="keyword">BY</span> cookieid <span class="keyword">ORDER</span> <span class="keyword">BY</span> createtime <span class="keyword">ROWS</span> <span class="keyword">BETWEEN</span> <span class="keyword">UNBOUNDED</span> <span class="keyword">PRECEDING</span> <span class="keyword">AND</span> <span class="keyword">CURRENT</span> <span class="keyword">ROW</span>) <span class="keyword">AS</span> pv2, <span class="comment">--从起点到当前行，结果同pv1 </span></span><br><span class="line"><span class="keyword">SUM</span>(pv) <span class="keyword">OVER</span>(<span class="keyword">PARTITION</span> <span class="keyword">BY</span> cookieid) <span class="keyword">AS</span> pv3,	<span class="comment">--分组内所有行</span></span><br><span class="line"><span class="keyword">SUM</span>(pv) <span class="keyword">OVER</span>(<span class="keyword">PARTITION</span> <span class="keyword">BY</span> cookieid <span class="keyword">ORDER</span> <span class="keyword">BY</span> createtime <span class="keyword">ROWS</span> <span class="keyword">BETWEEN</span> <span class="number">3</span> <span class="keyword">PRECEDING</span> <span class="keyword">AND</span> <span class="keyword">CURRENT</span> <span class="keyword">ROW</span>) <span class="keyword">AS</span> pv4,  <span class="comment">--当前行+往前3行</span></span><br><span class="line"><span class="keyword">SUM</span>(pv) <span class="keyword">OVER</span>(<span class="keyword">PARTITION</span> <span class="keyword">BY</span> cookieid <span class="keyword">ORDER</span> <span class="keyword">BY</span> createtime <span class="keyword">ROWS</span> <span class="keyword">BETWEEN</span> <span class="number">3</span> <span class="keyword">PRECEDING</span> <span class="keyword">AND</span> <span class="number">1</span> <span class="keyword">FOLLOWING</span>) <span class="keyword">AS</span> pv5,  <span class="comment">--当前行+往前3行+往后1行</span></span><br><span class="line"><span class="keyword">SUM</span>(pv) <span class="keyword">OVER</span>(<span class="keyword">PARTITION</span> <span class="keyword">BY</span> cookieid <span class="keyword">ORDER</span> <span class="keyword">BY</span> createtime <span class="keyword">ROWS</span> <span class="keyword">BETWEEN</span> <span class="keyword">CURRENT</span> <span class="keyword">ROW</span> <span class="keyword">AND</span> <span class="keyword">UNBOUNDED</span> <span class="keyword">FOLLOWING</span>) <span class="keyword">AS</span> pv6  <span class="comment">---当前行+往后所有行  </span></span><br><span class="line"><span class="keyword">FROM</span> lxw1234;</span><br><span class="line"> </span><br><span class="line">cookieid createtime     pv      pv1     pv2     pv3     pv4     pv5      pv6 </span><br><span class="line"><span class="comment">-----------------------------------------------------------------------------</span></span><br><span class="line">cookie1  2015-04-10      1       1       1       26      1       6       26</span><br><span class="line">cookie1  2015-04-11      5       6       6       26      6       13      25</span><br><span class="line">cookie1  2015-04-12      7       13      13      26      13      16      20</span><br><span class="line">cookie1  2015-04-13      3       16      16      26      16      18      13</span><br><span class="line">cookie1  2015-04-14      2       18      18      26      17      21      10</span><br><span class="line">cookie1  2015-04-15      4       22      22      26      16      20      8</span><br><span class="line">cookie1  2015-04-16      4       26      26      26      13      13      4</span><br></pre></td></tr></table></figure>
+<h4 id="时间序列分析"><a href="#时间序列分析" class="headerlink" title="时间序列分析"></a>时间序列分析</h4><p>主要使用lead()等函数</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://snailed.cn/HMM/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1556,141 +1764,6 @@ create table my_info
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/K-means简述/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="天王盖地虎">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/K-means简述/" itemprop="url">K-means简述</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-19T12:06:54+08:00">
-                2018-11-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>K-means算法是聚类算法中最简单的一种，但是里面包含的思想却不一般。K-means属于无监督学习，以往的回归、朴素贝叶斯、SVM等都是有类别标签y的，也就是说样例中已经给出了样例的分类。而聚类的样本中却没有给定y，只有特征x，假设宇宙星空中的点集可以表现成（X，Y，Z），聚类的目的就是为X找到潜在的Y，并将同类别的Y放在一起  </p>
-<h3 id="算法描述"><a href="#算法描述" class="headerlink" title="算法描述"></a>算法描述</h3><p><img src="http://upload-images.jianshu.io/upload_images/5115722-8d44e5307220a167.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="算法具体过程"></p>
-<ol>
-<li>随机选取K个点作为质点  </li>
-<li>对于每一个样本点X，将其归类为距离质心点最近的类别  </li>
-<li>更新每个类别的质心点为隶属于该类别所有点的平均值  </li>
-<li>重复步骤二三，直至质心不变或变化很小  </li>
-</ol>
-<p><img src="http://upload-images.jianshu.io/upload_images/5115722-c4446e11823ec528.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="聚类效果"></p>
-<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>1.K-means算法的第一个问题就是如何保证收敛，因为前面算法的结束条件就是收敛，下面我们来描述一下：<br>定义畸变函数J（c，u）  ,表示每个样本点到其质心的距离平方和<br><img src="http://upload-images.jianshu.io/upload_images/5115722-811474cc69d39d39.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="J函数"><br> 此时我们的重点是研究如何研究是J函数最小，假设J函数没有函数达到最小值，那样我们就可以先固定每个类的质心，调整每个样例所属的类别来让J函数减小，或者固定类别，调整质心也可以使J减小。这两个过程就是内循环中使J函数减小的过程，当J函数最小时，u，c也同时收敛。  </p>
-<p>由于畸变函数J是非凸函数，意味着我们不能保证取得的最小值是全局最小值，也就是说k-means对质心初始位置的选取比较感冒，但一般情况下k-means达到的局部最优已经满足需求。但如果你怕陷入局部最优，那么可以选取不同的初始值跑多遍k-means，然后取其中最小的J对应的u  </p>
-<blockquote>
-<p>凸优化有个非常重要的定理，即任何局部最优解即为全局最优解。  </p>
-</blockquote>
-<p><strong>EM思想：</strong>这里只是指出EM的思想，E步就是估计隐含类别y的期望值，M步调整其他参数使得在给定类别y的情况下，极大似然估计P(x,y)能够达到极大值。然后在其他参数确定的情况下，重新估计y，周而复始，直至收敛。其实总体还是一个迭代优化的过程。</p>
-<p>缺点：K-means算法有两个缺点，第一、该方法对K个质心初始位置的选择比较感冒，一般而言k-means算法只能达到局部最优，因此K个质心初始位置不同，则达到的局部最优解也会不一样；第二、K值一般要根据先验知识，事先给定。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1741,7 +1814,7 @@ create table my_info
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1754,7 +1827,7 @@ create table my_info
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>

@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="天王盖地虎">
 <meta property="og:description" content="row number作用 ： 返回这个Partition下的当前Row号，根据排序字段生成，无重复。 语法 ：row_number() over (partition by 字段a order by 计算项b desc ) rank1234select seasonid, episodeid , row_number() over(partition by seasonid order by ep">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-11-17T14:28:45.808Z">
+<meta property="og:updated_time" content="2018-12-01T07:22:41.811Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="我的Hive学习之旅">
 <meta name="twitter:description" content="row number作用 ： 返回这个Partition下的当前Row号，根据排序字段生成，无重复。 语法 ：row_number() over (partition by 字段a order by 计算项b desc ) rank1234select seasonid, episodeid , row_number() over(partition by seasonid order by ep">
@@ -339,15 +339,6 @@
 <li><p>date_sub | date_add 这个用法还是非常显而易见的</p>
 </li>
 </ul>
-<h4 id="窗口函数-："><a href="#窗口函数-：" class="headerlink" title="窗口函数 ："></a>窗口函数 ：</h4><p>  <strong>可以实现既显示聚集前的数据,又要显示聚集后的数据</strong></p>
-<ul>
-<li>lag : 与lead相反，用于统计窗口内往上第n行值。第一个参数为列名，第二个参数为往上第n行（可选，默认为1），第三个参数为默认值（当往上第n行为NULL时候，取默认值，如不指定，则为NULL）</li>
-<li>lead : 用于统计窗口内往下第n行值。第一个参数为列名，第二个参数为往下第n行（可选，默认为1），第三个参数为默认值（当往下第n行为NULL时候，取默认值，如不指定，则为NULL） </li>
-<li>first_value : 取分组排序后，截止到当前行，第一个值</li>
-<li>last_value : 取分组排序后，截止到当前行，最后一个值</li>
-<li>NTILE : 用于将分组数据按照顺序切分成n片，返回当前切片值</li>
-</ul>
-<p>window子句构建适用于over()子句，构建一个窗口</p>
 
       
     </div>
@@ -467,7 +458,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -480,7 +471,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
@@ -513,7 +504,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#row-number"><span class="nav-number">1.</span> <span class="nav-text">row number</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#with-cube-amp-grouping-sets-amp-rollup"><span class="nav-number">2.</span> <span class="nav-text">with cube &amp; grouping sets &amp; rollup</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#regexp-extract"><span class="nav-number">3.</span> <span class="nav-text">regexp_extract</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#get-json-object"><span class="nav-number">4.</span> <span class="nav-text">get_json_object</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#nvl"><span class="nav-number">5.</span> <span class="nav-text">nvl</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#时间处理-："><span class="nav-number">6.</span> <span class="nav-text">时间处理 ：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#窗口函数-："><span class="nav-number">7.</span> <span class="nav-text">窗口函数 ：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#row-number"><span class="nav-number">1.</span> <span class="nav-text">row number</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#with-cube-amp-grouping-sets-amp-rollup"><span class="nav-number">2.</span> <span class="nav-text">with cube &amp; grouping sets &amp; rollup</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#regexp-extract"><span class="nav-number">3.</span> <span class="nav-text">regexp_extract</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#get-json-object"><span class="nav-number">4.</span> <span class="nav-text">get_json_object</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#nvl"><span class="nav-number">5.</span> <span class="nav-text">nvl</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#时间处理-："><span class="nav-number">6.</span> <span class="nav-text">时间处理 ：</span></a></li></ol></div>
             
 
           </div>
