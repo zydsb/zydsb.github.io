@@ -307,9 +307,11 @@
 <p>不过也可以这么解释：数据倾斜就是我们在计算数据的时候，数据的分散度不够，导致大量的数据集中到了一台或者几台机器上计算，这些数据的计算速度远远低于平均计算速度，导致整个计算过程过慢。</p>
 <p><strong>一般表现为某个任务Reduce阶段卡在99%不动，以及随之而来的种种诡异现象。</strong></p>
 <p>数据倾斜的问题并不是随着节点的增多而解决的，比如看个例子：</p>
-<pre><code>* 公司 A : 1000万用户，10台64G服务器
-* 公司 B : 10亿用户，1000台64G服务器
-</code></pre><p>两个公司都部署了Hadoop集群。假设现在遇到了数据倾斜，发生什么？</p>
+<ul>
+<li>公司 A : 1000万用户，10台64G服务器</li>
+<li>公司 B : 10亿用户，1000台64G服务器</li>
+</ul>
+<p>两个公司都部署了Hadoop集群。假设现在遇到了数据倾斜，发生什么？</p>
 <p>公司A的数据童鞋在做join的时候发生了数据倾斜，会导致有几百万用户的相关数据集中到了一台服务器上，几百万的用户数据，感觉64G还是轻松的。</p>
 <p>公司B的数据童鞋在做join的时候也发生了数据倾斜，可能会有1个亿的用户相关数据集中到了一台机器上了，一台机器估计就很难搞了，整个task会因为这个而卡住。</p>
 <h4 id="数据倾斜的原理"><a href="#数据倾斜的原理" class="headerlink" title="数据倾斜的原理"></a>数据倾斜的原理</h4><h5 id="数据倾斜产生的原因"><a href="#数据倾斜产生的原因" class="headerlink" title="数据倾斜产生的原因"></a>数据倾斜产生的原因</h5><p>我们在做数据运算的时候，肯定会使用到count,distinct,group by,join/等操作，这些都会触发Shuffle操作，一但出现Shuffle过程中天量相同Key值的数据拉到一个或者少数几个节点上，就容易踩坑。。。</p>
@@ -1839,7 +1841,7 @@ create table my_info
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
