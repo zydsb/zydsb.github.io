@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Markdown,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="写在最前Markdown写东西是很舒服，不过难免会有用到数学公式的地方，之前的解决方式是在Word或者在线编辑器上写好，然后生成图片贴到文章上，这样缺点其实蛮多的（难以修改，格式混乱），现在有了MathJax这样的利器，今晚就跟着大神的博客自己走一遍！ 使用参考如何插入公式 行中公式(放在文中与其它文字混编)可以用如下方法表示：$ 数学公式 $ 独立公式可以用如下方法表示：$$ 数学公式 $$ 自">
+<meta name="keywords" content="Markdown">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Markdown中的数学公式">
+<meta property="og:url" content="http://snailed.cn/Markdown中的数学公式/index.html">
+<meta property="og:site_name" content="天王盖地虎">
+<meta property="og:description" content="写在最前Markdown写东西是很舒服，不过难免会有用到数学公式的地方，之前的解决方式是在Word或者在线编辑器上写好，然后生成图片贴到文章上，这样缺点其实蛮多的（难以修改，格式混乱），现在有了MathJax这样的利器，今晚就跟着大神的博客自己走一遍！ 使用参考如何插入公式 行中公式(放在文中与其它文字混编)可以用如下方法表示：$ 数学公式 $ 独立公式可以用如下方法表示：$$ 数学公式 $$ 自">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-12-06T17:39:48.864Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Markdown中的数学公式">
+<meta name="twitter:description" content="写在最前Markdown写东西是很舒服，不过难免会有用到数学公式的地方，之前的解决方式是在Word或者在线编辑器上写好，然后生成图片贴到文章上，这样缺点其实蛮多的（难以修改，格式混乱），现在有了MathJax这样的利器，今晚就跟着大神的博客自己走一遍！ 使用参考如何插入公式 行中公式(放在文中与其它文字混编)可以用如下方法表示：$ 数学公式 $ 独立公式可以用如下方法表示：$$ 数学公式 $$ 自">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://snailed.cn/Markdown中的数学公式/">
+
+
+
+
+
+  <title>Markdown中的数学公式 | 天王盖地虎</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">天王盖地虎</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Markdown中的数学公式/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="天王盖地虎">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Markdown中的数学公式</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-06T21:08:15+08:00">
+                2018-12-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="写在最前"><a href="#写在最前" class="headerlink" title="写在最前"></a>写在最前</h3><p>Markdown写东西是很舒服，不过难免会有用到数学公式的地方，之前的解决方式是在Word或者在线编辑器上写好，然后生成图片贴到文章上，这样缺点其实蛮多的（难以修改，格式混乱），现在有了MathJax这样的利器，今晚就跟着大神的<a href="https://www.cnblogs.com/q735613050/p/7253073.html" target="_blank" rel="noopener">博客</a>自己走一遍！</p>
+<h3 id="使用参考"><a href="#使用参考" class="headerlink" title="使用参考"></a>使用参考</h3><h4 id="如何插入公式"><a href="#如何插入公式" class="headerlink" title="如何插入公式"></a>如何插入公式</h4><ul>
+<li>行中公式(放在文中与其它文字混编)可以用如下方法表示：<code>$ 数学公式 $</code></li>
+<li>独立公式可以用如下方法表示：<code>$$ 数学公式 $$</code></li>
+<li>自动编号公式：<code>在每个公式末尾前使用\tag{行标}</code></li>
+</ul>
+<p>例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">比如说$ J_\alpha(x) = \sum_&#123;m=0&#125;^\infty \frac&#123;(-1)^m&#125;&#123;m! \Gamma (m + \alpha + 1)&#125; &#123;\left(&#123; \frac&#123;x&#125;&#123;2&#125; &#125;\right)&#125;^&#123;2m + \alpha&#125; \text &#123;，行内公式示例!!&#125; $并不优秀的结尾</span><br></pre></td></tr></table></figure></p>
+<p>显示：</p>
+<p>比如说$ J_\alpha(x) = \sum_{m=0}^\infty \frac{(-1)^m}{m! \Gamma (m + \alpha + 1)} {\left({ \frac{x}{2} }\right)}^{2m + \alpha} \text {，行内公式示例!!} $并不优秀的结尾</p>
+<p>例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">我是开头$$J_\alpha(x) = \sum_&#123;m=0&#125;^\infty \frac&#123;(-1)^m&#125;&#123;m! \Gamma (m + \alpha + 1)&#125; &#123;\left(&#123; \frac&#123;x&#125;&#123;2&#125; &#125;\right)&#125;^&#123;2m + \alpha&#125; \text &#123;，独立公式示例&#125; $$</span><br></pre></td></tr></table></figure>
+<p>显示：</p>
+<p>我是开头$$ J_\alpha(x) = \sum_{m=0}^\infty \frac{(-1)^m}{m! \Gamma (m + \alpha + 1)} {\left({ \frac{x}{2} }\right)}^{2m + \alpha} \text {，独立公式示例} $$</p>
+<h4 id="输入上下标"><a href="#输入上下标" class="headerlink" title="输入上下标"></a>输入上下标</h4><p><code>^</code>表示商标，<code>_</code>表示下标，两者可以同时使用，也可以嵌套。如果遇到多个字符组成组成的内容，可以使用<code>{}</code>来表示为一个整体。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$ e^&#123;x^\pi&#125;=1+y^z $$</span><br></pre></td></tr></table></figure>
+<p>结果显示:</p>
+<p>$$ e^{x^\pi}=1+y^z $$</p>
+<h4 id="如何输入括号和分隔符"><a href="#如何输入括号和分隔符" class="headerlink" title="如何输入括号和分隔符"></a>如何输入括号和分隔符</h4><p><code>()</code>、<code>|</code>还有<code>[]</code>都表示本身<code>{</code>需要使用<code>\</code>转义，即<code>\{\}</code>表示<code>{}</code>,可以用<code>\left</code>和<code>\right</code>命令表示大括号或分隔符。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$f(x,y,z)=e^&#123;xz&#125;+2x\left(3+\frac&#123;1+x&#125;&#123;1+xyz&#125;\right)$$</span><br></pre></td></tr></table></figure>
+<p>显示：<br>$$f(x,y,z)=e^{xz}+2x\left(3+\frac{1+x}{1+xyz}\right)$$</p>
+<h4 id="如何输入分数"><a href="#如何输入分数" class="headerlink" title="如何输入分数"></a>如何输入分数</h4><p>利用<code>\frac{}{}</code>来表示，可以嵌套；使用<code>\frac ab</code>快速生成；<code>分子 \over 分母</code>可表示只有一层的分母<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$ \frac &#123;a+1&#125;&#123;b-1&#125; \quad and \quad \frac &#123;a-1&#125;b \quad and \quad &#123;a-1 \over b+1&#125;  $$</span><br></pre></td></tr></table></figure></p>
+<p>显示：<br>$$ \frac {a+1}{b-1} \quad and \quad \frac {a-1}b \quad and \quad {a-1 \over b+1}  $$</p>
+<h4 id="如何输入开方"><a href="#如何输入开方" class="headerlink" title="如何输入开方"></a>如何输入开方</h4><p><code>\sqrt [根指数，省略时为2] {被开方数}</code>表示开方<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$\sqrt [3] &#123;xyz&#125;  \quad and \quad \sqrt &#123;x&#125;$$</span><br></pre></td></tr></table></figure></p>
+<p>显示：<br>$$\sqrt [3] {xyz}  \quad and \quad \sqrt {x}$$</p>
+<h4 id="如何输入省略号"><a href="#如何输入省略号" class="headerlink" title="如何输入省略号"></a>如何输入省略号</h4><p>数学公式中常见的省略号有两种,<code>\ldots</code>表示与文本底线对齐的省略号,<code>\cdots</code>表示与文本中线对齐的省略号。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$P(w_1,w_2,\cdots,w_n|y_1,y_2,\cdots,y_n)=\frac&#123;P(y_1,y_2,\cdots,y_n|w_1,w_2,\cdots,w_n)P(w_1,w_2,\cdots,w_n)&#125;&#123;P(y_1,y_2,\cdots,y_n)&#125;$$</span><br></pre></td></tr></table></figure></p>
+<p>显示：<br>$$P(w_1,w_2,\cdots,w_n|y_1,y_2,\cdots,y_n)=\frac{P(y_1,y_2,\cdots,y_n|w_1,w_2,\cdots,w_n)P(w_1,w_2,\cdots,w_n)}{P(y_1,y_2,\cdots,y_n)}$$</p>
+<h4 id="如何输入矢量"><a href="#如何输入矢量" class="headerlink" title="如何输入矢量"></a>如何输入矢量</h4><p><code>\vec{矢量}</code>来表示一个矢量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$ \vec&#123;a&#125; \cdot \vec&#123;c&#125; = 0 $$</span><br></pre></td></tr></table></figure></p>
+<p>显示：<br>$$ \vec{a} \cdot \vec{c} = 0 $$</p>
+<h4 id="如何输入积分"><a href="#如何输入积分" class="headerlink" title="如何输入积分"></a>如何输入积分</h4><p><code>\int_积分下限^积分上限 {被积表达式}</code>表示一个积分<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$\int^a_b&#123;x^2&#125;\,&#123;\rm d&#125;x = &#123;1 \over 3&#125;(a^3-b^3)$$</span><br></pre></td></tr></table></figure></p>
+<p>显示：<br>$$\int^a_b{x^2}\,{\rm d}x = {1 \over 3}(a^3-b^3)$$ </p>
+<h4 id="如何输入极限运算"><a href="#如何输入极限运算" class="headerlink" title="如何输入极限运算"></a>如何输入极限运算</h4><p>使用<code>\lim_{变量 \to 表达式}</code>来表示极限，<code>\infty</code>表示取极限，前面可加正负号。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$\lim_&#123;n \to +\infty&#125; &#123;1 \over 1+e^&#123;-n&#125;&#125;=1$$</span><br></pre></td></tr></table></figure></p>
+<p>显示<br>$$\lim_{n \to +\infty} {1 \over 1+e^{-n}}=1$$</p>
+<h4 id="如何表示累积运算"><a href="#如何表示累积运算" class="headerlink" title="如何表示累积运算"></a>如何表示累积运算</h4><p>使用<code>\sum_{下标表达式}^{上标表达式}{}</code>表示累加。<br>与之类似，使用<code>\prod</code>，<code>\bigcup</code>，<code>\bigcap</code>来分别输入累乘、并集和交集<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$\frac&#123;\pi&#125;&#123;4&#125; = \sum_&#123;n=0&#125;^&#123;\infty&#125;\frac&#123;(-1)^n&#125;&#123;2n+1&#125;$$</span><br></pre></td></tr></table></figure></p>
+<p>显示：<br>$$\frac{\pi}{4} = \sum_{n=0}^{\infty}\frac{(-1)^n}{2n+1}$$</p>
+<h4 id="怎么输入希腊字母"><a href="#怎么输入希腊字母" class="headerlink" title="怎么输入希腊字母"></a>怎么输入希腊字母</h4><p>输入<code>\小写希腊字母英文全称</code>和<code>\首字母大写希腊字母英文全称</code>来分别输入小写和大写希腊字母。<br>对于大写希腊字母与现有字母相同的，直接输入大写字母即可。</p>
+<table>
+<thead>
+<tr>
+<th>输入</th>
+<th>显示</th>
+<th>输入</th>
+<th>显示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$\alpha$</code></td>
+<td>$\alpha$</td>
+<td><code>$A$</code></td>
+<td>$A$</td>
+</tr>
+<tr>
+<td><code>$\beta$</code></td>
+<td>$\beta$</td>
+<td><code>$B$</code></td>
+<td>$B$</td>
+</tr>
+<tr>
+<td><code>$\gamma$</code></td>
+<td>$\gamma$</td>
+<td><code>$\Gamma$</code></td>
+<td>$\Gamma$</td>
+</tr>
+<tr>
+<td><code>$\delta$</code></td>
+<td>$\delta$</td>
+<td><code>$\Delta$</code></td>
+<td>$\delta$</td>
+</tr>
+<tr>
+<td><code>$\epsilon$</code></td>
+<td>$\epsilon$</td>
+<td><code>$E$</code></td>
+<td>$E$</td>
+</tr>
+<tr>
+<td><code>$\zeta$</code></td>
+<td>$\zeta$</td>
+<td><code>$Z$</code></td>
+<td>$Z$</td>
+</tr>
+<tr>
+<td><code>$\eta$</code></td>
+<td>$\eta$</td>
+<td><code>$\H$</code></td>
+<td>$H$</td>
+</tr>
+<tr>
+<td><code>$\theta$</code></td>
+<td>$\theta$</td>
+<td><code>$\Theta$</code></td>
+<td>$\Theta$</td>
+</tr>
+<tr>
+<td><code>$\iota$</code></td>
+<td>$\iota$</td>
+<td><code>$I$</code></td>
+<td>$I$</td>
+</tr>
+<tr>
+<td><code>$\kappa$</code></td>
+<td>$\kappa$</td>
+<td><code>$K$</code></td>
+<td>$K$</td>
+</tr>
+<tr>
+<td><code>$\lambda$</code></td>
+<td>$\lambda$</td>
+<td><code>$\Lambda$</code></td>
+<td>$\Lambda$</td>
+</tr>
+<tr>
+<td><code>$\nu$</code></td>
+<td>$\nu$</td>
+<td><code>$N$</code></td>
+<td>$N$</td>
+</tr>
+<tr>
+<td><code>$\mu$</code></td>
+<td>$\mu$</td>
+<td><code>$M$</code></td>
+<td>$M$</td>
+</tr>
+<tr>
+<td><code>$\xi$</code></td>
+<td>$\xi$</td>
+<td><code>$\Xi$</code></td>
+<td>$\Xi$</td>
+</tr>
+<tr>
+<td><code>$o$</code></td>
+<td>$o$</td>
+<td><code>$O$</code></td>
+<td>$O$</td>
+</tr>
+<tr>
+<td><code>$\pi$</code></td>
+<td>$\pi$</td>
+<td><code>$\Pi$</code></td>
+<td>$\Pi$</td>
+</tr>
+<tr>
+<td><code>$\rho$</code></td>
+<td>$\rho$</td>
+<td><code>$P$</code></td>
+<td>$P$</td>
+</tr>
+<tr>
+<td><code>$\sigma$</code></td>
+<td>$\sigma$</td>
+<td><code>$\Sigma$</code></td>
+<td>$\Sigma$</td>
+</tr>
+<tr>
+<td><code>$\tau$</code></td>
+<td>$\tau$</td>
+<td><code>$T$</code></td>
+<td>$T$</td>
+</tr>
+<tr>
+<td><code>$\upsilon$</code></td>
+<td>$\upsilon$</td>
+<td><code>$\Upsilon$</code></td>
+<td>$\Upsilon$</td>
+</tr>
+<tr>
+<td><code>$\phi$</code></td>
+<td>$\phi$</td>
+<td><code>$\Phi$</code></td>
+<td>$\Phi$</td>
+</tr>
+<tr>
+<td><code>$\chi$</code></td>
+<td>$\chi$</td>
+<td><code>$X$</code></td>
+<td>$X$</td>
+</tr>
+<tr>
+<td><code>$\psi$</code></td>
+<td>$\psi$</td>
+<td><code>$\Psi$</code></td>
+<td>$\Psi$</td>
+</tr>
+<tr>
+<td><code>$\omega$</code></td>
+<td>$\omega$</td>
+<td><code>$\Omega$</code></td>
+<td>$\Omega$</td>
+</tr>
+</tbody>
+</table>
+<h4 id="大括号和行标的使用"><a href="#大括号和行标的使用" class="headerlink" title="大括号和行标的使用"></a>大括号和行标的使用</h4><p>使用<code>\left</code>和<code>\right</code>来创建自动匹配高度的 (圆括号)，[方括号] 和 {花括号} 。<br>在每个公式末尾前使用<code>\tag{行标}</code>来实现行标。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$$</span><br><span class="line">f\left(</span><br><span class="line">   \left[ </span><br><span class="line">     \frac&#123;</span><br><span class="line">       1+y</span><br><span class="line">     &#125;&#123;</span><br><span class="line">       \left(</span><br><span class="line">          \frac&#123;x&#125;&#123;y&#125;+\frac&#123;y&#125;&#123;x&#125;</span><br><span class="line">       \right)</span><br><span class="line">       \left(u+1\right)</span><br><span class="line">     &#125;+a</span><br><span class="line">   \right]^&#123;3/2&#125;</span><br><span class="line">\right)</span><br><span class="line">\tag&#123;行标&#125;</span><br><span class="line">$$</span><br></pre></td></tr></table></figure></p>
+<p>$$<br>f\left(<br>   \left[<br>     \frac{<br>       1+y<br>     }{<br>       \left(<br>          \frac{x}{y}+\frac{y}{x}<br>       \right)<br>       \left(u+1\right)<br>     }+a<br>   \right]^{3/2}<br>\right)<br>\tag{行标}<br>$$</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Markdown/" rel="tag"># Markdown</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/隐马尔科夫模型/" rel="next" title="隐马尔科夫模型">
+                <i class="fa fa-chevron-left"></i> 隐马尔科夫模型
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">zhangyang</p>
+              <p class="site-description motion-element" itemprop="description">我瞎BB的地方</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#写在最前"><span class="nav-number">1.</span> <span class="nav-text">写在最前</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用参考"><span class="nav-number">2.</span> <span class="nav-text">使用参考</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#如何插入公式"><span class="nav-number">2.1.</span> <span class="nav-text">如何插入公式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#输入上下标"><span class="nav-number">2.2.</span> <span class="nav-text">输入上下标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何输入括号和分隔符"><span class="nav-number">2.3.</span> <span class="nav-text">如何输入括号和分隔符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何输入分数"><span class="nav-number">2.4.</span> <span class="nav-text">如何输入分数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何输入开方"><span class="nav-number">2.5.</span> <span class="nav-text">如何输入开方</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何输入省略号"><span class="nav-number">2.6.</span> <span class="nav-text">如何输入省略号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何输入矢量"><span class="nav-number">2.7.</span> <span class="nav-text">如何输入矢量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何输入积分"><span class="nav-number">2.8.</span> <span class="nav-text">如何输入积分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何输入极限运算"><span class="nav-number">2.9.</span> <span class="nav-text">如何输入极限运算</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何表示累积运算"><span class="nav-number">2.10.</span> <span class="nav-text">如何表示累积运算</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#怎么输入希腊字母"><span class="nav-number">2.11.</span> <span class="nav-text">怎么输入希腊字母</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#大括号和行标的使用"><span class="nav-number">2.12.</span> <span class="nav-text">大括号和行标的使用</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhangyang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
