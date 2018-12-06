@@ -496,7 +496,24 @@
 </table>
 <h4 id="大括号和行标的使用"><a href="#大括号和行标的使用" class="headerlink" title="大括号和行标的使用"></a>大括号和行标的使用</h4><p>使用<code>\left</code>和<code>\right</code>来创建自动匹配高度的 (圆括号)，[方括号] 和 {花括号} 。<br>在每个公式末尾前使用<code>\tag{行标}</code>来实现行标。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$$</span><br><span class="line">f\left(</span><br><span class="line">   \left[ </span><br><span class="line">     \frac&#123;</span><br><span class="line">       1+y</span><br><span class="line">     &#125;&#123;</span><br><span class="line">       \left(</span><br><span class="line">          \frac&#123;x&#125;&#123;y&#125;+\frac&#123;y&#125;&#123;x&#125;</span><br><span class="line">       \right)</span><br><span class="line">       \left(u+1\right)</span><br><span class="line">     &#125;+a</span><br><span class="line">   \right]^&#123;3/2&#125;</span><br><span class="line">\right)</span><br><span class="line">\tag&#123;行标&#125;</span><br><span class="line">$$</span><br></pre></td></tr></table></figure></p>
 <p>$$<br>f\left(<br>   \left[<br>     \frac{<br>       1+y<br>     }{<br>       \left(<br>          \frac{x}{y}+\frac{y}{x}<br>       \right)<br>       \left(u+1\right)<br>     }+a<br>   \right]^{3/2}<br>\right)<br>\tag{行标}<br>$$</p>
-
+<h4 id="特殊函数"><a href="#特殊函数" class="headerlink" title="特殊函数"></a>特殊函数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$  \sinx \quad and \quand \lnx \quad and \quad \max(a,b,c)  $$</span><br></pre></td></tr></table></figure>
+<p>显示：<br>$$  \sin x \quad and \quad \ln x \quad and \quad \max(a,b,c)  $$</p>
+<h4 id="矩阵展示"><a href="#矩阵展示" class="headerlink" title="矩阵展示"></a>矩阵展示</h4><h5 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h5><p>起始标记<code>\begin{matrix}</code>，结束标记<code>\end{matrix}</code><br>每一行末尾标记<code>\\\</code>，行间元素之间以<code>&amp;</code>分隔<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$$\begin&#123;matrix&#125;</span><br><span class="line">1&amp;0&amp;1\\\</span><br><span class="line">0&amp;1&amp;1\\\</span><br><span class="line">0&amp;1&amp;0\\\</span><br><span class="line">\end&#123;matrix&#125;$$</span><br></pre></td></tr></table></figure></p>
+<p>显示：<br>$$\begin{matrix}<br>1&amp;0&amp;1\\<br>0&amp;1&amp;1\\<br>0&amp;1&amp;0\\<br>\end{matrix}$$</p>
+<h5 id="矩阵边框"><a href="#矩阵边框" class="headerlink" title="矩阵边框"></a>矩阵边框</h5><p>在起始、结束标记处用下列词替换 matrix</p>
+<ul>
+<li>pmatrix ：小括号边框</li>
+<li>bmatrix ：中括号边框</li>
+<li>Bmatrix ：大括号边框</li>
+<li>vmatrix ：单竖线边框</li>
+<li>Vmatrix ：双竖线边框<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$$\begin&#123;matrix&#125;</span><br><span class="line">1&amp;0&amp;1\\\</span><br><span class="line">0&amp;1&amp;1\\\</span><br><span class="line">0&amp;1&amp;0\\\</span><br><span class="line">\end&#123;matrix&#125;$$</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>显示：<br>$$\begin{pmatrix}<br>1&amp;0&amp;1\\<br>0&amp;1&amp;1\\<br>0&amp;1&amp;0\\<br>\end{pmatrix}$$</p>
+<h5 id="省略元素"><a href="#省略元素" class="headerlink" title="省略元素"></a>省略元素</h5><p>同上，添加<code>\vdots</code>代表斜省略号</p>
+<h5 id="方程组"><a href="#方程组" class="headerlink" title="方程组"></a>方程组</h5><p>case环境。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$$\begin&#123;cases&#125;</span><br><span class="line">a_1x+b_1y+c_1z=d_1\\</span><br><span class="line">a_2x+b_2y+c_2z=d_2\\</span><br><span class="line">a_3x+b_3y+c_3z=d_3\\</span><br><span class="line">\end&#123;cases&#125;</span><br><span class="line">$$</span><br></pre></td></tr></table></figure></p>
+<p>显示：<br>$$\begin{cases}<br>a_1x+b_1y+c_1z=d_1\\<br>a_2x+b_2y+c_2z=d_2\\<br>a_3x+b_3y+c_3z=d_3\\<br>\end{cases}<br>$$</p>
+<h3 id="赶紧睡觉！！！"><a href="#赶紧睡觉！！！" class="headerlink" title="赶紧睡觉！！！"></a>赶紧睡觉！！！</h3>
           
         
       
