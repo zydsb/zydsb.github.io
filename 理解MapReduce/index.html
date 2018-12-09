@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hadoop,UserProfile,">
+  <meta name="keywords" content="Hadoop MapReduce,">
 
 
 
@@ -79,20 +79,20 @@
 
 
 
-<meta name="description" content="为什么 构建具体蓝本，有助于产品团队脱离自身喜好和整个团队目标的一致性   精准营销    怎么做构建用户画像的核心是打标签，通过高度精炼的标签去描述一个用户，如年龄性别地域偏好等。    明确构建用户画像的目的 根据目的，明确需要收集什么数据，进行数据的采集（宏观，微观等） 进行数据分析与建模   通过定性与定量相结合的方式进行数据建模。定性的方法，表现为对产品、行为、用户个体的性质和特征的概括">
-<meta name="keywords" content="Hadoop,UserProfile">
+<meta name="description" content="MapReduce的核心思想是分而治之和并行处理。 举个栗子假设我跟一个身高一米八体重一百八的大胖哥打架，我估计是打不过了，这个时候怎么办呢？打个电话叫兄弟呗！单挑是你一个打我们一群，群殴是我们一群揍你一个，MapReduce大概干的也是这个事儿~ 键值对键值对的具体含义键值数据作为MapReduce操作的基础，让MapReduce变得十分强大。因为很多数据要么本身即是键值对的形式，要么可以以键值">
+<meta name="keywords" content="Hadoop MapReduce">
 <meta property="og:type" content="article">
-<meta property="og:title" content="了解用户画像">
-<meta property="og:url" content="http://snailed.cn/了解用户画像/index.html">
+<meta property="og:title" content="理解MapReduce">
+<meta property="og:url" content="http://snailed.cn/理解MapReduce/index.html">
 <meta property="og:site_name" content="天王盖地虎">
-<meta property="og:description" content="为什么 构建具体蓝本，有助于产品团队脱离自身喜好和整个团队目标的一致性   精准营销    怎么做构建用户画像的核心是打标签，通过高度精炼的标签去描述一个用户，如年龄性别地域偏好等。    明确构建用户画像的目的 根据目的，明确需要收集什么数据，进行数据的采集（宏观，微观等） 进行数据分析与建模   通过定性与定量相结合的方式进行数据建模。定性的方法，表现为对产品、行为、用户个体的性质和特征的概括">
+<meta property="og:description" content="MapReduce的核心思想是分而治之和并行处理。 举个栗子假设我跟一个身高一米八体重一百八的大胖哥打架，我估计是打不过了，这个时候怎么办呢？打个电话叫兄弟呗！单挑是你一个打我们一群，群殴是我们一群揍你一个，MapReduce大概干的也是这个事儿~ 键值对键值对的具体含义键值数据作为MapReduce操作的基础，让MapReduce变得十分强大。因为很多数据要么本身即是键值对的形式，要么可以以键值">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5115722-0fd228a4b350da6b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-11-19T15:37:29.687Z">
+<meta property="og:image" content="http://snailed.cn/images/MapReduceProgress.png">
+<meta property="og:updated_time" content="2018-12-09T07:47:08.402Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="了解用户画像">
-<meta name="twitter:description" content="为什么 构建具体蓝本，有助于产品团队脱离自身喜好和整个团队目标的一致性   精准营销    怎么做构建用户画像的核心是打标签，通过高度精炼的标签去描述一个用户，如年龄性别地域偏好等。    明确构建用户画像的目的 根据目的，明确需要收集什么数据，进行数据的采集（宏观，微观等） 进行数据分析与建模   通过定性与定量相结合的方式进行数据建模。定性的方法，表现为对产品、行为、用户个体的性质和特征的概括">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/5115722-0fd228a4b350da6b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="理解MapReduce">
+<meta name="twitter:description" content="MapReduce的核心思想是分而治之和并行处理。 举个栗子假设我跟一个身高一米八体重一百八的大胖哥打架，我估计是打不过了，这个时候怎么办呢？打个电话叫兄弟呗！单挑是你一个打我们一群，群殴是我们一群揍你一个，MapReduce大概干的也是这个事儿~ 键值对键值对的具体含义键值数据作为MapReduce操作的基础，让MapReduce变得十分强大。因为很多数据要么本身即是键值对的形式，要么可以以键值">
+<meta name="twitter:image" content="http://snailed.cn/images/MapReduceProgress.png">
 
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://snailed.cn/了解用户画像/">
+  <link rel="canonical" href="http://snailed.cn/理解MapReduce/">
 
 
 
 
 
-  <title>了解用户画像 | 天王盖地虎</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>理解MapReduce | 天王盖地虎</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -235,7 +235,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/了解用户画像/">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/理解MapReduce/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhangyang">
@@ -252,7 +252,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">了解用户画像</h1>
+          <h1 class="post-title" itemprop="name headline">理解MapReduce</h1>
         
 
         <div class="post-meta">
@@ -264,8 +264,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-19T12:10:42+08:00">
-                2018-11-19
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-09T14:30:38+08:00">
+                2018-12-09
               </time>
             
 
@@ -302,55 +302,30 @@
       
 
       
-        <h3 id="为什么"><a href="#为什么" class="headerlink" title="为什么"></a>为什么</h3><ul>
-<li>构建具体蓝本，有助于产品团队脱离自身喜好和整个团队目标的一致性  </li>
-<li>精准营销  </li>
-</ul>
-<h3 id="怎么做"><a href="#怎么做" class="headerlink" title="怎么做"></a>怎么做</h3><p>构建用户画像的核心是打标签，通过高度精炼的标签去描述一个用户，如年龄性别地域偏好等。  </p>
-<ol>
-<li>明确构建用户画像的目的</li>
-<li>根据目的，明确需要收集什么数据，进行数据的采集（宏观，微观等）</li>
-<li>进行数据分析与建模  <blockquote>
-<p>通过定性与定量相结合的方式进行数据建模。定性的方法，表现为对产品、行为、用户个体的性质和特征的概括，从而形成对应的产品标签、行为标签以及用户标签；定量的方法，是在定性的基础上，给每个标签加上特定的权重，最后通过计算得出总标签权重，从而形成完整的用户模型。  </p>
-</blockquote>
-</li>
-</ol>
-<p><strong>标签权重模型</strong>： 待续      </p>
+        <p>MapReduce的核心思想是<strong>分而治之</strong>和<strong>并行处理</strong>。</p>
+<h3 id="举个栗子"><a href="#举个栗子" class="headerlink" title="举个栗子"></a>举个栗子</h3><p>假设我跟一个身高一米八体重一百八的大胖哥打架，我估计是打不过了，这个时候怎么办呢？打个电话叫兄弟呗！单挑是你一个打我们一群，群殴是我们一群揍你一个，MapReduce大概干的也是这个事儿~</p>
+<h3 id="键值对"><a href="#键值对" class="headerlink" title="键值对"></a>键值对</h3><h4 id="键值对的具体含义"><a href="#键值对的具体含义" class="headerlink" title="键值对的具体含义"></a>键值对的具体含义</h4><p>键值数据作为MapReduce操作的基础，让MapReduce变得十分强大。因为很多数据要么本身即是键值对的形式，要么可以以键值对的形式表示，其简洁而有力，所以我们有必要清晰一下键值对的特征：</p>
 <ul>
-<li>原始数据  </li>
-<li>事实标签  </li>
-<li>模型标签  </li>
-<li>预测标签<br><strong>基于TF-IDF算法的权重分类</strong>：一个词语的重要性随着他在该文章中出现的次数成正比，随着它在整个文档集中出现的次数成反比。<br>假设w（P , T）表示一个标签T被用于标记用户P的次数，TF（P，T）表示这个标记次数在用户P所有标签中所占的比重：    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">IDF（P , T）表示标签T在全部标签中的稀缺程度，如果标签次数出现越少，并同时标注某一个用户，则代表该标签与用户联系很紧密。</span><br><span class="line">```IDF(P,T) = LOG( 全部用户的全部标签之和 / 所有打T标签的用户之和)</span><br></pre></td></tr></table></figure>
-</li>
+<li>键必须是唯一的</li>
+<li>每个值必须与键相关联，但键可能没有值</li>
+<li>对键有明确的定义，比如是否区分大小写</li>
 </ul>
-<p>最后根据TF<em>IDF即可得到该用户该标签的权重值<br>实际业务上需要根据具体情况做出改变：<br>用户标签权重 = 行为类型权重 x 衰减时间 x TF-IDF标签权重 x 行为次数<br><em>*基于相关系数矩阵的权重归类</em></em> :<img src="http://upload-images.jianshu.io/upload_images/5115722-0fd228a4b350da6b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="相关系数矩阵"></p>
-<ol>
-<li>进行数据维度分解和列举<br>根据相关性原则，进一步筛选和构建用户画像相关的数据维度，避免无用数据干扰分析的过程，用户数据维度可以分为以下几个特征：</li>
-</ol>
+<h4 id="MapReduce作为一系列键值变换"><a href="#MapReduce作为一系列键值变换" class="headerlink" title="MapReduce作为一系列键值变换"></a>MapReduce作为一系列键值变换</h4><p>有人这么描述MapReduce:</p>
+<pre><code>{K1,V1} -&gt; {K2,List&lt;V2&gt;} -&gt; {K3,V3}
+</code></pre><p>现在我们试图来理解一下：</p>
 <ul>
-<li>用户自然特征：性别、年龄、地域、教育水平、出生日期、星座等  </li>
-<li>用户兴趣特征：兴趣爱好、偏爱的应用、品牌偏好  </li>
-<li>用户社会特征：婚姻状况、家庭状况、社会地位  </li>
-<li>用户消费特征：收入、购买力、购买渠道、购买频次  </li>
+<li>MapReduce作业中map方法的输入是一系列的键值对，我们称之为K1、V1</li>
+<li>map方法的输出是一系列键和与之对应的值的列表（其作为接下来reduce方法的输入），我们称之为K2、V2。注意一点是map方法输出的其实是一系列单个的键值对，需要shuffle方法组合成键与值列表</li>
+<li>reduce方法接受输入，输出K3、V3</li>
 </ul>
-<h3 id="如何应用用户画像"><a href="#如何应用用户画像" class="headerlink" title="如何应用用户画像"></a>如何应用用户画像</h3><ol>
-<li>根据用户画像列举用户场景及需求  </li>
-<li>应用用户画像进行产品设计决策  </li>
-</ol>
-<h3 id="注意事项（Persona原则）"><a href="#注意事项（Persona原则）" class="headerlink" title="注意事项（Persona原则）"></a>注意事项（Persona原则）</h3><ul>
-<li>P - 基本性 指是否基于对真实用户的访谈  </li>
-<li>E -同理性（不理解）指指用户角色中包含姓名、照片和产品相关的描述，该用户角色是否引同理心;  </li>
-<li>R -真实性指用户画像是否看起来真实，特别是对于每天和用户打交道的人来说  </li>
-<li>O - 目标性指该用户是否包含与产品相关的高层次目标，是否包含关键词来描述该目标  </li>
-<li>N -数量性指数量要足够少，以便使设计团队记住每一个角色的姓名  </li>
-<li>A -应用性指用户画像是否实用，能够辅助设计决策  </li>
-</ul>
-<p>一个产品大概需要4-8个用户画像，最好设置优先级，当产品特别大的时候，可以考虑针对不同模块建立用户画像  </p>
-<h3 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h3><ol>
-<li>构建用户画像文档  </li>
-<li>展示用户画像  </li>
-<li>完善用户画像  </li>
-</ol>
+<h3 id="MapReduce执行流程"><a href="#MapReduce执行流程" class="headerlink" title="MapReduce执行流程"></a>MapReduce执行流程</h3><p>直接看图写作文吧（图来自互联网）<br><img src="/images/MapReduceProgress.png" alt="MapReduce过程"></p>
+<h4 id="1-输入和拆分（Input-amp-Split）"><a href="#1-输入和拆分（Input-amp-Split）" class="headerlink" title="1.输入和拆分（Input&amp;Split）"></a>1.输入和拆分（Input&amp;Split）</h4><p>对数据内容进行分片处理，例如WordCount例子中便对每行内容拆分为单词。</p>
+<h4 id="2-迭代（iteration）"><a href="#2-迭代（iteration）" class="headerlink" title="2.迭代（iteration）"></a>2.迭代（iteration）</h4><p>遍历输入数据，并将之解析成key/value对，即{K1,V1}。</p>
+<h4 id="3-映射（map）"><a href="#3-映射（map）" class="headerlink" title="3.映射（map）"></a>3.映射（map）</h4><p>将输入key/value对映射成另外一些key/value对。MapReduce开始在机器上执行map方法，map()由我们定义。</p>
+<h4 id="4-洗牌过程（shuffle）"><a href="#4-洗牌过程（shuffle）" class="headerlink" title="4.洗牌过程（shuffle）"></a>4.洗牌过程（shuffle）</h4><p>依据 key 对中间数据进行分组(grouping)，输出{K2,List<v2>}。其中会有排序、合并、分区等操作，是一个很神奇的地方，需要专门学习一下。</v2></p>
+<h4 id="5-归约（reduce"><a href="#5-归约（reduce" class="headerlink" title="5.归约（reduce)"></a>5.归约（reduce)</h4><p>以组为单位对数据进行归约(reduce)，输出{K3,V3}。</p>
+<h4 id="6-迭代"><a href="#6-迭代" class="headerlink" title="6.迭代"></a>6.迭代</h4><p>输出文件到HDFS。</p>
+<h3 id="说点屁话"><a href="#说点屁话" class="headerlink" title="说点屁话"></a>说点屁话</h3><p>讲道理到现在直接写MR程序还真没干过，都是直接用Hive搞了，节约了大量的时间，但是理解工欲善其事必先利其器，学习一下MapReduce的各种知识，感觉还是蛮有必要的。</p>
 
       
     </div>
@@ -368,7 +343,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Hadoop-UserProfile/" rel="tag"># Hadoop,UserProfile</a>
+            <a href="/tags/Hadoop-MapReduce/" rel="tag"># Hadoop MapReduce</a>
           
         </div>
       
@@ -381,8 +356,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/K-means简述/" rel="next" title="K-means简述">
-                <i class="fa fa-chevron-left"></i> K-means简述
+              <a href="/Hive-Serde/" rel="next" title="Hive-Serde">
+                <i class="fa fa-chevron-left"></i> Hive-Serde
               </a>
             
           </div>
@@ -390,10 +365,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/正则表达式/" rel="prev" title="正则表达式">
-                正则表达式 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -516,7 +487,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么"><span class="nav-number">1.</span> <span class="nav-text">为什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#怎么做"><span class="nav-number">2.</span> <span class="nav-text">怎么做</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何应用用户画像"><span class="nav-number">3.</span> <span class="nav-text">如何应用用户画像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意事项（Persona原则）"><span class="nav-number">4.</span> <span class="nav-text">注意事项（Persona原则）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#相关工作"><span class="nav-number">5.</span> <span class="nav-text">相关工作</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#举个栗子"><span class="nav-number">1.</span> <span class="nav-text">举个栗子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#键值对"><span class="nav-number">2.</span> <span class="nav-text">键值对</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#键值对的具体含义"><span class="nav-number">2.1.</span> <span class="nav-text">键值对的具体含义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MapReduce作为一系列键值变换"><span class="nav-number">2.2.</span> <span class="nav-text">MapReduce作为一系列键值变换</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MapReduce执行流程"><span class="nav-number">3.</span> <span class="nav-text">MapReduce执行流程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-输入和拆分（Input-amp-Split）"><span class="nav-number">3.1.</span> <span class="nav-text">1.输入和拆分（Input&amp;Split）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-迭代（iteration）"><span class="nav-number">3.2.</span> <span class="nav-text">2.迭代（iteration）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-映射（map）"><span class="nav-number">3.3.</span> <span class="nav-text">3.映射（map）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-洗牌过程（shuffle）"><span class="nav-number">3.4.</span> <span class="nav-text">4.洗牌过程（shuffle）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-归约（reduce"><span class="nav-number">3.5.</span> <span class="nav-text">5.归约（reduce)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-迭代"><span class="nav-number">3.6.</span> <span class="nav-text">6.迭代</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#说点屁话"><span class="nav-number">4.</span> <span class="nav-text">说点屁话</span></a></li></ol></div>
             
 
           </div>
