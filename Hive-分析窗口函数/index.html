@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="xbbHive查询使用中难免遇到各种各样奇奇怪怪的需求或者角度，这个时候合理使用分析窗口函数也许会有很好的效果 前面《我的Hive学习之旅》一文主要讲了row_number(),动态group by还有日期处理之类的问题，稍微涉及了一些窗口函数的东西，但是并没有较为详细地整理一下。今天有时间就整理一下吧~ 窗口函数：   窗口函数 描述     lead 用于统计窗口内往下第n行值。   lag">
+<meta name="description" content="xbbHive查询使用中难免遇到各种各样奇奇怪怪的需求或者角度，这个时候合理使用分析窗口函数也许会有很好的效果 前面《我的Hive学习之旅》一文主要讲了row_number(),动态group by还有日期处理之类的问题，稍微涉及了一些窗口函数的东西，但是并没有较为详细地整理一下。今天有时间就整理一下吧~ 窗口函数：    窗口函数 描述     lead 用于统计窗口内往下第n行值。   lag">
 <meta name="keywords" content="Hive">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hive-分析窗口函数">
 <meta property="og:url" content="http://snailed.cn/Hive-分析窗口函数/index.html">
 <meta property="og:site_name" content="天王盖地虎">
-<meta property="og:description" content="xbbHive查询使用中难免遇到各种各样奇奇怪怪的需求或者角度，这个时候合理使用分析窗口函数也许会有很好的效果 前面《我的Hive学习之旅》一文主要讲了row_number(),动态group by还有日期处理之类的问题，稍微涉及了一些窗口函数的东西，但是并没有较为详细地整理一下。今天有时间就整理一下吧~ 窗口函数：   窗口函数 描述     lead 用于统计窗口内往下第n行值。   lag">
+<meta property="og:description" content="xbbHive查询使用中难免遇到各种各样奇奇怪怪的需求或者角度，这个时候合理使用分析窗口函数也许会有很好的效果 前面《我的Hive学习之旅》一文主要讲了row_number(),动态group by还有日期处理之类的问题，稍微涉及了一些窗口函数的东西，但是并没有较为详细地整理一下。今天有时间就整理一下吧~ 窗口函数：    窗口函数 描述     lead 用于统计窗口内往下第n行值。   lag">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2018-12-03T11:38:59.844Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hive-分析窗口函数">
-<meta name="twitter:description" content="xbbHive查询使用中难免遇到各种各样奇奇怪怪的需求或者角度，这个时候合理使用分析窗口函数也许会有很好的效果 前面《我的Hive学习之旅》一文主要讲了row_number(),动态group by还有日期处理之类的问题，稍微涉及了一些窗口函数的东西，但是并没有较为详细地整理一下。今天有时间就整理一下吧~ 窗口函数：   窗口函数 描述     lead 用于统计窗口内往下第n行值。   lag">
+<meta name="twitter:description" content="xbbHive查询使用中难免遇到各种各样奇奇怪怪的需求或者角度，这个时候合理使用分析窗口函数也许会有很好的效果 前面《我的Hive学习之旅》一文主要讲了row_number(),动态group by还有日期处理之类的问题，稍微涉及了一些窗口函数的东西，但是并没有较为详细地整理一下。今天有时间就整理一下吧~ 窗口函数：    窗口函数 描述     lead 用于统计窗口内往下第n行值。   lag">
 
 
 
@@ -302,7 +302,8 @@
       
         <h3 id="xbb"><a href="#xbb" class="headerlink" title="xbb"></a>xbb</h3><p><strong>Hive查询使用中难免遇到各种各样奇奇怪怪的需求或者角度，这个时候合理使用分析窗口函数也许会有很好的效果</strong></p>
 <p>前面《我的Hive学习之旅》一文主要讲了row_number(),动态group by还有日期处理之类的问题，稍微涉及了一些窗口函数的东西，但是并没有较为详细地整理一下。今天有时间就整理一下吧~</p>
-<h3 id="窗口函数："><a href="#窗口函数：" class="headerlink" title="窗口函数："></a>窗口函数：</h3><table>
+<h3 id="窗口函数："><a href="#窗口函数：" class="headerlink" title="窗口函数："></a>窗口函数：</h3><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>窗口函数</th>
@@ -328,7 +329,9 @@
 </tr>
 </tbody>
 </table>
-<h3 id="分析函数："><a href="#分析函数：" class="headerlink" title="分析函数："></a>分析函数：</h3><table>
+</div>
+<h3 id="分析函数："><a href="#分析函数：" class="headerlink" title="分析函数："></a>分析函数：</h3><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>分析函数</th>
@@ -362,6 +365,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <h3 id="over子句"><a href="#over子句" class="headerlink" title="over子句"></a>over子句</h3><ul>
 <li>OVER子句可以与标准聚合函数使用(COUNT，SUM，MIN，MAX，AVG) </li>
 <li>OVER可以与一个或多个任何原始数据类型的分区列的PARTITION BY语句使用。</li>
@@ -509,7 +513,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

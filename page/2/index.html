@@ -232,6 +232,182 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/深入浅出SQL总结/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="天王盖地虎">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/深入浅出SQL总结/" itemprop="url">深入浅出SQL总结</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-20T00:08:49+08:00">
+                2018-11-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><blockquote>
+<p>SQL语法是不区分大小写的，但是命名的时候最好注意规范，语法规定用<code>_</code>来代替空格  </p>
+</blockquote>
+<p>我是用《深入浅出SQL》这本书来学习的，网上可以查<a href="http://www.w3school.com.cn/sql/sql_insert.asp" target="_blank" rel="noopener">W3School</a>~</p>
+<h4 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h4><h5 id="语句"><a href="#语句" class="headerlink" title="语句"></a>语句</h5><ol>
+<li><strong>CREATE</strong>  <pre><code>    creatr database my_db;
+    use my_db;
+    create table my_info
+      (
+        my_id int not null auto_increment,
+        my_name char(50),
+        primary key(my_id)
+      )
+</code></pre></li>
+<li><p><strong>DROP</strong>   </p>
+<pre><code>       drop table my_name           
+</code></pre></li>
+<li><p><strong>INSERT</strong>   </p>
+<pre><code>       insert into table  my_info(col0,col1...) values(&#39;num0&#39;,&#39;num1&#39;...)
+</code></pre></li>
+<li><strong>SELECT</strong>  <pre><code>       select * from  tavle_name where ..  
+</code></pre><blockquote>
+<p>select 展开讲太多了，最重要的还是灵活运用子查询和各种连接</p>
+</blockquote>
+</li>
+<li><p><strong>UPDATE</strong>    </p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">update table table_name  </span><br><span class="line">         set col = </span><br><span class="line">             case  </span><br><span class="line">                 when condition0 then reslut0  </span><br><span class="line">                 when condition1 then result1</span><br><span class="line">              end;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>DELETE</strong>  </p>
+<pre><code>              delete table_name from where conditon
+</code></pre></li>
+<li><strong>SHOW</strong>    <pre><code>                show databases/tables
+</code></pre></li>
+<li><strong>ALTER</strong>    <pre><code>       ```
+                      alter table table_name
+                       add col...，
+                       rename to ...，  
+                       change...，
+                       modify...，  
+                       drop ..
+                       ```  
+</code></pre>其实就是对表进行修改</li>
+</ol>
+<h5 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h5><p><strong>USE</strong>:接下来的操作都在某个db中进行<br><strong>DESC</strong>：显示db的结构 /在<code>order by</code>中代表逆序<br><strong>NULL</strong>:不是值，代表未被定义的值<br><strong>DEFAULT</strong>:缺省值<br><strong>LIKE</strong>:查找部分文本字符串  , <strong><code>%</code>  </strong>：替换符<br><strong>BETWEEN</strong>:在…之间（&lt;=&amp;&amp;&gt;=）<br><strong>AFTER</strong>:把某列放在另一列之后<br><strong>RIGHT(),LEFT()</strong>:选出指定数量的字符<br>                select right(‘location’,2) from my_table<br><strong>ORDER BY(),GROUP BY()</strong>:按…排序，按…分组<br><strong>MIN(),MAX(),AVG(),SUM(),COUNT()</strong>:其中<code>count()</code>作用是返回指定列中的元素<br><strong>DINSTINCT</strong>：查询列中出现过的不重复元素<br><strong>LIMIT</strong>:查询结果的数量 <code>limit m,n #从m开始一共查询n个</code><br><strong>T.x -&gt; T.y</strong>:在关系表T中，y列函数依赖x列<br><strong>having</strong>:对已经排序的结果进行限制，常和<code>group by</code>等关键词组合使用</p>
+<ul>
+<li><strong>数据模式</strong><ul>
+<li>一对一  </li>
+<li>一对多  </li>
+<li>多对多  </li>
+</ul>
+</li>
+<li><strong>ACID</strong>:原子性，一致性，隔离性，持久性    </li>
+<li><strong>RDBMS的规范</strong>：<br><strong>1NF</strong>：数据具有原子性，有主键<br><strong>2NF</strong>：任何非关键列完全依赖关键列（不存在部分函数依赖）<br><strong>3NF</strong>：任何非关键列不以来其他非关键列（不存在传递函数依赖）  <blockquote>
+<p>字符一般加引号，列名不加</p>
+</blockquote>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://snailed.cn/正则表达式/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -315,11 +491,11 @@
 <p>写完第一步是需要测试的，这里提供一个在线测试网站<a href="http://www.regexplanet.com/advanced/java/index.html" target="_blank" rel="noopener">RegexPlaner</a>  </p>
 <p>以下是个人常用的(具体的看<a href="https://msdn.microsoft.com/zh-cn/library/ae5bf541(v=vs.100" target="_blank" rel="noopener">官方文档</a>.aspx))</p>
 <ol>
-<li>通过在一对分隔符之间放置表达式的各种组成部分，就可以构建正则表达式  <pre><code>/expression/  
+<li>通过在一对分隔符之间放置表达式的各种组成部分，就可以构建正则表达式  <pre><code>       /expression/  
 </code></pre></li>
-<li>最简单的正则表达式是与搜索字符串相比较的单个普通字符。 例如，单字符正则表达式 A 会始终匹配字母 A，无论其会出现在搜索字符串的哪个位置。  <pre><code>/A/  
-/a/  
-/123/  
+<li>最简单的正则表达式是与搜索字符串相比较的单个普通字符。 例如，单字符正则表达式 A 会始终匹配字母 A，无论其会出现在搜索字符串的哪个位置。  <pre><code>      /A/  
+      /a/  
+      /123/  
 </code></pre></li>
 <li><p>元字符    </p>
 <ul>
@@ -330,7 +506,7 @@
 <li><code>\b</code>：匹配单词的开始和结束  </li>
 <li><code>^</code>:字符串的开始  </li>
 <li><code>￥</code>：字符串的结束        </li>
-<li>当然如果你字符串中本来就有这些符号，就可以使用\来进行转义<code>.</code>，如<code>*</code>就应该写成<br>E.G:<br><code>\ba\w*\b</code>匹配以字母a开头的单词——先是某个单词开始处(\b)，然后是字母a,然后是任意数量的字母或数字(\w)，最后是单词结束处(\b)。<br><code>\d+</code>匹配1个或更多连续的数字。这里的+是和<em>类似的元字符，不同的是</em>匹配重复任意次(可能是0次)，而+则匹配重复1次或更多次。<br>元字符<code>^</code>（和数字6在同一个键位上的符号）和<code>$</code>都匹配一个位置，这和<code>\b</code>有点类似。<code>^</code>匹配你要用来查找的字符串的开头，<code>$</code>匹配结尾。比如一个网站如果要求你填写的QQ号必须为5位到12位数字时，可以使用：<code>^\d{5,12}$</code>          </li>
+<li>当然如果你字符串中本来就有这些符号，就可以使用\来进行转义<code>.</code>，如<code>*</code>就应该写成<br>E.G:<br><code>\ba\w*\b</code>匹配以字母a开头的单词——先是某个单词开始处(\b)，然后是字母a,然后是任意数量的字母或数字(\w)，最后是单词结束处(\b)。<br><code>\d+</code>匹配1个或更多连续的数字。这里的+是和<em>类似的元字符，不同的是</em>匹配重复任意次(可能是0次)，而+则匹配重复1次或更多次。<br>元字符<code>^</code>（和数字6在同一个键位上的符号）和<script type="math/tex">`都匹配一个位置，这和`\b`有点类似。`^`匹配你要用来查找的字符串的开头，`</script>匹配结尾。比如一个网站如果要求你填写的QQ号必须为5位到12位数字时，可以使用：<code>^\d{5,12}$</code>          </li>
 </ul>
 </li>
 <li><p>限定符  </p>
@@ -353,7 +529,7 @@
 <ul>
 <li>\W:匹配任意不是字母，数字，下划线，汉字的字符  </li>
 <li>\S:匹配任意不是空白符的字符<br>…  </li>
-<li>[^z]:匹配除了z以外的任意字符  </li>
+<li><sup><a href="#fn_z" id="reffn_z">z</a></sup>:匹配除了z以外的任意字符  </li>
 </ul>
 </li>
 <li><p>分支条件 .<br>正则表达式里的分枝条件指的是有几种规则，如果满足其中任意一种规则都应该当成匹配，具体方法是用<code>|</code>把不同的规则分隔开。<br>E.G:</p>
@@ -504,8 +680,8 @@
 <li>预测标签<br><strong>基于TF-IDF算法的权重分类</strong>：一个词语的重要性随着他在该文章中出现的次数成正比，随着它在整个文档集中出现的次数成反比。<br>假设w（P , T）表示一个标签T被用于标记用户P的次数，TF（P，T）表示这个标记次数在用户P所有标签中所占的比重：    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">IDF（P , T）表示标签T在全部标签中的稀缺程度，如果标签次数出现越少，并同时标注某一个用户，则代表该标签与用户联系很紧密。</span><br><span class="line">```IDF(P,T) = LOG( 全部用户的全部标签之和 / 所有打T标签的用户之和)</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>最后根据TF*IDF即可得到该用户该标签的权重值<br>实际业务上需要根据具体情况做出改变：<br>用户标签权重 = 行为类型权重 x 衰减时间 x TF-IDF标签权重 x 行为次数<br><strong>基于相关系数矩阵的权重归类</strong> :<img src="http://upload-images.jianshu.io/upload_images/5115722-0fd228a4b350da6b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="相关系数矩阵"></p>
-<ol start="4">
+<p>最后根据TF<em>IDF即可得到该用户该标签的权重值<br>实际业务上需要根据具体情况做出改变：<br>用户标签权重 = 行为类型权重 x 衰减时间 x TF-IDF标签权重 x 行为次数<br><em>*基于相关系数矩阵的权重归类</em></em> :<img src="http://upload-images.jianshu.io/upload_images/5115722-0fd228a4b350da6b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="相关系数矩阵"></p>
+<ol>
 <li>进行数据维度分解和列举<br>根据相关性原则，进一步筛选和构建用户画像相关的数据维度，避免无用数据干扰分析的过程，用户数据维度可以分为以下几个特征：</li>
 </ol>
 <ul>
@@ -1215,11 +1391,11 @@
 <li>日本人可以很快地抛弃之前的路线，转而立马走上新的。但是也对传统有着疯狂坚持。</li>
 </ul>
 <ul>
-<li style="list-style: none"><input type="checkbox" checked> 道义</li>
-<li style="list-style: none"><input type="checkbox" checked> 忠</li>
-<li style="list-style: none"><input type="checkbox" checked> 诚</li>
-<li style="list-style: none"><input type="checkbox" checked> 自重</li>
-<li style="list-style: none"><input type="checkbox" checked> 恩</li>
+<li>[x] 道义</li>
+<li>[x] 忠</li>
+<li>[x] 诚</li>
+<li>[x] 自重</li>
+<li>[x] 恩</li>
 </ul>
 <p>延伸：<br>   日本和西德在战后无需关心军备，十年左右的时间打下了完备健康的经济基础。<br>   大概是日本和德国的产品和文化吸引了我，对这两个国家特别感兴趣。失败了就重建且迎头赶上，也不失为一种浪漫呀</p>
 <p>后面找一找关于西德的书，还有《四十七浪人物语》看一看。</p>
@@ -1347,9 +1523,9 @@
 <ol>
 <li>命令格式 ： ls [选项][目录名]</li>
 <li><p>常用参数 ： </p>
-<pre><code>- a : -all，列出目录下所有文件，包括.开头的文件
-- h : 列出文件大小
-- t : 以文件修改时间排序
+<pre><code>   - a : -all，列出目录下所有文件，包括.开头的文件
+   - h : 列出文件大小
+   - t : 以文件修改时间排序
 </code></pre><p>   -l : 列出文件的所有信息，包括文件权限，文件所有者，文件大小</p>
 </li>
 </ol>
@@ -1366,13 +1542,13 @@
 <ol>
 <li>命令格式 : find pathname -options [-print -exec -ok …]</li>
 <li><p>命令参数 : </p>
-<pre><code>- pathname : find命令所查找的目录路径
-- print : find命令将匹配的文件输出到标准输出
-- exec : find命令对匹配的文件执行该参数所给出的shell命令。
+<pre><code>    - pathname : find命令所查找的目录路径
+    - print : find命令将匹配的文件输出到标准输出
+    - exec : find命令对匹配的文件执行该参数所给出的shell命令。
 </code></pre><p>3.命令选项 : </p>
-<pre><code>- name : 按照文件名查找文件
-- user : 按照文件主属性来查找文件
-- cmin : 查找系统最后N分钟被改变的文件状态 
+<pre><code>    - name : 按照文件名查找文件
+    - user : 按照文件主属性来查找文件
+    - cmin : 查找系统最后N分钟被改变的文件状态 
 </code></pre></li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">➜  pipe_warehouse git:(master) find tutor/ -name odsTutorMarketStudentCpa.py</span><br><span class="line">tutor//odsTutorMarketStudentCpa/odsTutorMarketStudentCpa.py</span><br><span class="line">➜  code <span class="built_in">cd</span> test_code</span><br><span class="line">➜  test_code ls</span><br><span class="line">test_para_pass.sh</span><br><span class="line">➜  test_code vim test.txt</span><br><span class="line">➜  test_code ls</span><br><span class="line">test.txt          test_para_pass.sh</span><br><span class="line">➜  test_code <span class="built_in">cd</span> ~/Desktop/code/</span><br><span class="line">➜  code <span class="built_in">pwd</span></span><br><span class="line">/Users/zhangyangfenbi.com/Desktop/code</span><br><span class="line">➜  code find test_code -name test.txt</span><br><span class="line">test_code/test.txt</span><br><span class="line">➜  code find test_code -name test.txt | xargs cat</span><br><span class="line"></span><br><span class="line">hello zhangyang</span><br></pre></td></tr></table></figure>
@@ -1384,7 +1560,7 @@
 <h4 id="mkdir"><a href="#mkdir" class="headerlink" title="mkdir"></a>mkdir</h4><p><strong>在指定位置创建指定名称的文件夹或者目录，要求创建者对所创建的文件夹的父文件夹具有写权限，并且创建的文件夹不可以和父文件夹重名。</strong></p>
 <ol>
 <li>命令格式 : mkdir [选项] 目录</li>
-<li>命令参数 :<br>   -m : —mode = 模式，设定权限&lt;模式&gt;，类似于chmod<pre><code>eg : mkdir -m 777 zy_test
+<li>命令参数 :<br>   -m : —mode = 模式，设定权限&lt;模式&gt;，类似于chmod<pre><code>  eg : mkdir -m 777 zy_test
 </code></pre>   -p : 递归创建多个目录</li>
 </ol>
 <hr>
@@ -1409,7 +1585,7 @@
 <hr>
 <h4 id="man"><a href="#man" class="headerlink" title="man"></a>man</h4><p><strong>Linux下的帮助指令，通过man指令可以查看Linux中的指令帮助、配置文件、编程帮助等信息</strong></p>
 <ol>
-<li>命令格式 ： man (选项)(参数)<br>2.常用参数 ： <pre><code>-f : 等价于whatis指令，显示给定关键词的剪短描述信息
+<li>命令格式 ： man (选项)(参数)<br>2.常用参数 ： <pre><code>   -f : 等价于whatis指令，显示给定关键词的剪短描述信息
 </code></pre></li>
 </ol>
 <p>Google一下，man一下, wiki一下，实在不行再问人。勿要轻易打扰他人。 </p>
@@ -1425,41 +1601,41 @@
 <ul>
 <li>-a或-all 显示目录中个别文件的大小。</li>
 <li>-b或-bytes 显示目录或文件大小时，以byte为单位。</li>
-<li>-c或–total 除了显示个别目录或文件的大小外，同时也显示所有目录或文件的总和。</li>
-<li>-k或–kilobytes 以KB(1024bytes)为单位输出。</li>
-<li>-m或–megabytes 以MB为单位输出。</li>
-<li>-s或–summarize 仅显示总计，只列出最后加总的值。</li>
-<li>-h或–human-readable 以K，M，G为单位，提高信息的可读性。</li>
-<li>-x或–one-file-xystem 以一开始处理时的文件系统为准，若遇上其它不同的文件系统目录则略过。</li>
-<li>-L&lt;符号链接&gt;或–dereference&lt;符号链接&gt; 显示选项中所指定符号链接的源文件大小。</li>
-<li>-S或–separate-dirs 显示个别目录的大小时，并不含其子目录的大小。</li>
-<li>-X&lt;文件&gt;或–exclude-from=&lt;文件&gt; 在&lt;文件&gt;指定目录或文件。</li>
-<li>–exclude=&lt;目录或文件&gt; 略过指定的目录或文件。</li>
-<li>-D或–dereference-args 显示指定符号链接的源文件大小。</li>
-<li>-H或–si 与-h参数相同，但是K，M，G是以1000为换算单位。</li>
-<li>-l或–count-links 重复计算硬件链接的文件。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">➜  Movies ls</span><br><span class="line">[王牌保镖.保镖救杀手][BluRay-720P.MKV][2.96GB][中英字幕]              触不可及-1280高清.mp4</span><br><span class="line">➜  Movies du</span><br><span class="line">6243576	./[王牌保镖.保镖救杀手][BluRay-720P.MKV][2.96GB][中英字幕]</span><br><span class="line">2425128	./触不可及-1280高清.mp4</span><br><span class="line">8668720	.</span><br><span class="line">➜  Movies du -m</span><br><span class="line">3049	./[王牌保镖.保镖救杀手][BluRay-720P.MKV][2.96GB][中英字幕]</span><br><span class="line">1185	./触不可及-1280高清.mp4</span><br><span class="line">4233	.</span><br><span class="line">➜  Movies du -s -m</span><br><span class="line">4233	.</span><br><span class="line">➜  Movies du -h</span><br><span class="line">3.0G	./[王牌保镖.保镖救杀手][BluRay-720P.MKV][2.96GB][中英字幕]</span><br><span class="line">1.2G	./触不可及-1280高清.mp4</span><br><span class="line">4.1G	.</span><br></pre></td></tr></table></figure>
+<li>-c或—total 除了显示个别目录或文件的大小外，同时也显示所有目录或文件的总和。</li>
+<li>-k或—kilobytes 以KB(1024bytes)为单位输出。</li>
+<li>-m或—megabytes 以MB为单位输出。</li>
+<li>-s或—summarize 仅显示总计，只列出最后加总的值。</li>
+<li>-h或—human-readable 以K，M，G为单位，提高信息的可读性。</li>
+<li>-x或—one-file-xystem 以一开始处理时的文件系统为准，若遇上其它不同的文件系统目录则略过。</li>
+<li>-L&lt;符号链接&gt;或—dereference&lt;符号链接&gt; 显示选项中所指定符号链接的源文件大小。</li>
+<li>-S或—separate-dirs 显示个别目录的大小时，并不含其子目录的大小。</li>
+<li>-X&lt;文件&gt;或—exclude-from=&lt;文件&gt; 在&lt;文件&gt;指定目录或文件。</li>
+<li>—exclude=&lt;目录或文件&gt; 略过指定的目录或文件。</li>
+<li>-D或—dereference-args 显示指定符号链接的源文件大小。</li>
+<li>-H或—si 与-h参数相同，但是K，M，G是以1000为换算单位。</li>
+<li>-l或—count-links 重复计算硬件链接的文件。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">➜  Movies ls</span><br><span class="line">[王牌保镖.保镖救杀手][BluRay-720P.MKV][2.96GB][中英字幕]              触不可及-1280高清.mp4</span><br><span class="line">➜  Movies du</span><br><span class="line">6243576	./[王牌保镖.保镖救杀手][BluRay-720P.MKV][2.96GB][中英字幕]</span><br><span class="line">2425128	./触不可及-1280高清.mp4</span><br><span class="line">8668720	.</span><br><span class="line">➜  Movies du -m</span><br><span class="line">3049	./[王牌保镖.保镖救杀手][BluRay-720P.MKV][2.96GB][中英字幕]</span><br><span class="line">1185	./触不可及-1280高清.mp4</span><br><span class="line">4233	.</span><br><span class="line">➜  Movies du -s -m</span><br><span class="line">4233	.</span><br><span class="line">➜  Movies du -h</span><br><span class="line">3.0G	./[王牌保镖.保镖救杀手][BluRay-720P.MKV][2.96GB][中英字幕]</span><br><span class="line">1.2G	./触不可及-1280高清.mp4</span><br><span class="line">4.1G	.</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h4 id="df"><a href="#df" class="headerlink" title="df"></a>df</h4><hr>
 <p><strong>命令用于显示磁盘分区上的可使用的磁盘空间。默认显示单位为KB。可以利用该命令来获取硬盘被占用了多少空间，目前还剩下多少空间等信息</strong></p>
 <p><em>语法：df -option -file</em><br><em>选项</em></p>
 <ul>
-<li>-a或–all：包含全部的文件系统；</li>
-<li>–block-size=&lt;区块大小&gt;：以指定的区块大小来显示区块数目；</li>
-<li>-h或–human-readable：以可读性较高的方式来显示信息；</li>
-<li>-H或–si：与-h参数相同，但在计算时是以1000 Bytes为换算单位而非1024 Bytes；</li>
-<li>-i或–inodes：显示inode的信息；</li>
-<li>-k或–kilobytes：指定区块大小为1024字节；</li>
-<li>-l或–local：仅显示本地端的文件系统；</li>
-<li>-m或–megabytes：指定区块大小为1048576字节；</li>
-<li>–no-sync：在取得磁盘使用信息前，不要执行sync指令，此为预设值；</li>
-<li>-P或–portability：使用POSIX的输出格式；</li>
-<li>–sync：在取得磁盘使用信息前，先执行sync指令；</li>
-<li>-t&lt;文件系统类型&gt;或–type=&lt;文件系统类型&gt;：仅显示指定文件系统类型的磁盘信息；</li>
-<li>-T或–print-type：显示文件系统的类型；</li>
-<li>-x&lt;文件系统类型&gt;或–exclude-type=&lt;文件系统类型&gt;：不要显示指定文件系统类型的磁盘信息；</li>
-<li>–help：显示帮助；</li>
-<li>–version：显示版本信息。</li>
+<li>-a或—all：包含全部的文件系统；</li>
+<li>—block-size=&lt;区块大小&gt;：以指定的区块大小来显示区块数目；</li>
+<li>-h或—human-readable：以可读性较高的方式来显示信息；</li>
+<li>-H或—si：与-h参数相同，但在计算时是以1000 Bytes为换算单位而非1024 Bytes；</li>
+<li>-i或—inodes：显示inode的信息；</li>
+<li>-k或—kilobytes：指定区块大小为1024字节；</li>
+<li>-l或—local：仅显示本地端的文件系统；</li>
+<li>-m或—megabytes：指定区块大小为1048576字节；</li>
+<li>—no-sync：在取得磁盘使用信息前，不要执行sync指令，此为预设值；</li>
+<li>-P或—portability：使用POSIX的输出格式；</li>
+<li>—sync：在取得磁盘使用信息前，先执行sync指令；</li>
+<li>-t&lt;文件系统类型&gt;或—type=&lt;文件系统类型&gt;：仅显示指定文件系统类型的磁盘信息；</li>
+<li>-T或—print-type：显示文件系统的类型；</li>
+<li>-x&lt;文件系统类型&gt;或—exclude-type=&lt;文件系统类型&gt;：不要显示指定文件系统类型的磁盘信息；</li>
+<li>—help：显示帮助；</li>
+<li>—version：显示版本信息。</li>
 </ul>
 <h4 id="nl"><a href="#nl" class="headerlink" title="nl"></a>nl</h4><hr>
 <p><strong>nl在Linux中用来计算文件中行号。nl可以将输出的文件内容自动的加上行号，其默认结果与<code>cat -n</code>有点不一样，nl可以将行号做比较多的显示设计</strong></p>
@@ -1622,7 +1798,8 @@
 <h4 id="2-3-创建Hive表"><a href="#2-3-创建Hive表" class="headerlink" title="2.3 创建Hive表"></a>2.3 创建Hive表</h4><p>生成与关系数据库相对应的Hive表<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$sqoop --create-hive-table --connect jdbc:mysql://192.168.56.121:3306/metastore --username hiveuser --password redhat --table TBLS </span><br><span class="line"></span><br><span class="line">#参数：</span><br><span class="line">--hive-overwrite : 	覆盖掉在hive表中已经存在的数据</span><br><span class="line">--create-hive-table : 默认是false，如果目标表已经存在了，那么创建任务会失败</span><br><span class="line">--hive-table : 后面接要创建的hive表</span><br></pre></td></tr></table></figure></p>
 <h4 id="2-4-导入数据到Hive"><a href="#2-4-导入数据到Hive" class="headerlink" title="2.4 导入数据到Hive"></a>2.4 导入数据到Hive</h4><p>执行下面的命令会将 mysql 中的数据导入到 hdfs 中，然后创建一个hive 表，最后再将 hdfs 上的文件移动到 hive 表的目录下面。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sqoop import --connect jdbc:mysql://192.168.56.121:3306/metastore --username hiveuser --password redhat --table TBLS --fields-terminated-by &quot;\t&quot; --lines-terminated-by &quot;\n&quot; </span><br><span class="line">--hive-import --hive-overwrite --create-hive-table --hive-table dw_srclog.TBLS --delete-target-dir</span><br></pre></td></tr></table></figure></p>
 <p>Tips : Sqoop 默认地导入空值（NULL）为 null 字符串，而 hive 使用 \N 去标识空值（NULL），故你在 import 或者 export 时候，需要做相应的处理。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 在 import 时，使用如下命令</span><br><span class="line">$ sqoop import  ... --null-string &apos;\\N&apos; --null-non-string &apos;\\N&apos;</span><br><span class="line"></span><br><span class="line">#在导出时，使用下面命令</span><br><span class="line">$ sqoop import  ... --input-null-string &apos;&apos; --input-null-non-string &apos;&apos;</span><br></pre></td></tr></table></figure></p>
-<h4 id="2-5-增量导入"><a href="#2-5-增量导入" class="headerlink" title="2.5 增量导入"></a>2.5 增量导入</h4><table>
+<h4 id="2-5-增量导入"><a href="#2-5-增量导入" class="headerlink" title="2.5 增量导入"></a>2.5 增量导入</h4><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>参数</th>
@@ -1644,6 +1821,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <h4 id="2-6-合并HDFS文件"><a href="#2-6-合并HDFS文件" class="headerlink" title="2.6 合并HDFS文件"></a>2.6 合并HDFS文件</h4><p>将HDFS中不同目录下面的数据合在一起，并存放在指定的目录中</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#将/test/p1/person与/test/p2/person合并，放到/test/merged这个目录下，其中优先保留–new-data参数后的数据</span><br><span class="line">sqoop merge –new-data /test/p1/person –onto /test/p2/person –target-dir /test/merged –jar-file /opt/data/sqoop/person/Person.jar –class-name Person –merge-key id</span><br></pre></td></tr></table></figure>
 <h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><ul>
@@ -1736,7 +1914,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

@@ -320,6 +320,7 @@
 <li>业务上搞了大事，单个城市订单猛涨1000倍之类的。</li>
 </ul>
 <p>常见情况参见:</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -351,6 +352,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <h4 id="数据倾斜解决"><a href="#数据倾斜解决" class="headerlink" title="数据倾斜解决"></a>数据倾斜解决</h4><h5 id="SQL调优"><a href="#SQL调优" class="headerlink" title="SQL调优"></a>SQL调优</h5><ul>
 <li>join数据量太大的时候，可以考虑先distinct去重</li>
 <li>大表Join大表，把空值的key变成一个字符串加上随机数，把倾斜的数据分到不同的reduce上，由于null值关联不上，处理后并不影响最终结果。（先对key做一层hash，先将数据打散让它的并行度变大，再汇集）</li>
@@ -483,7 +485,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

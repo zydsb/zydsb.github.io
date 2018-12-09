@@ -312,11 +312,11 @@
 <p>写完第一步是需要测试的，这里提供一个在线测试网站<a href="http://www.regexplanet.com/advanced/java/index.html" target="_blank" rel="noopener">RegexPlaner</a>  </p>
 <p>以下是个人常用的(具体的看<a href="https://msdn.microsoft.com/zh-cn/library/ae5bf541(v=vs.100" target="_blank" rel="noopener">官方文档</a>.aspx))</p>
 <ol>
-<li>通过在一对分隔符之间放置表达式的各种组成部分，就可以构建正则表达式  <pre><code>/expression/  
+<li>通过在一对分隔符之间放置表达式的各种组成部分，就可以构建正则表达式  <pre><code>       /expression/  
 </code></pre></li>
-<li>最简单的正则表达式是与搜索字符串相比较的单个普通字符。 例如，单字符正则表达式 A 会始终匹配字母 A，无论其会出现在搜索字符串的哪个位置。  <pre><code>/A/  
-/a/  
-/123/  
+<li>最简单的正则表达式是与搜索字符串相比较的单个普通字符。 例如，单字符正则表达式 A 会始终匹配字母 A，无论其会出现在搜索字符串的哪个位置。  <pre><code>      /A/  
+      /a/  
+      /123/  
 </code></pre></li>
 <li><p>元字符    </p>
 <ul>
@@ -327,7 +327,7 @@
 <li><code>\b</code>：匹配单词的开始和结束  </li>
 <li><code>^</code>:字符串的开始  </li>
 <li><code>￥</code>：字符串的结束        </li>
-<li>当然如果你字符串中本来就有这些符号，就可以使用\来进行转义<code>.</code>，如<code>*</code>就应该写成<br>E.G:<br><code>\ba\w*\b</code>匹配以字母a开头的单词——先是某个单词开始处(\b)，然后是字母a,然后是任意数量的字母或数字(\w)，最后是单词结束处(\b)。<br><code>\d+</code>匹配1个或更多连续的数字。这里的+是和<em>类似的元字符，不同的是</em>匹配重复任意次(可能是0次)，而+则匹配重复1次或更多次。<br>元字符<code>^</code>（和数字6在同一个键位上的符号）和<code>$</code>都匹配一个位置，这和<code>\b</code>有点类似。<code>^</code>匹配你要用来查找的字符串的开头，<code>$</code>匹配结尾。比如一个网站如果要求你填写的QQ号必须为5位到12位数字时，可以使用：<code>^\d{5,12}$</code>          </li>
+<li>当然如果你字符串中本来就有这些符号，就可以使用\来进行转义<code>.</code>，如<code>*</code>就应该写成<br>E.G:<br><code>\ba\w*\b</code>匹配以字母a开头的单词——先是某个单词开始处(\b)，然后是字母a,然后是任意数量的字母或数字(\w)，最后是单词结束处(\b)。<br><code>\d+</code>匹配1个或更多连续的数字。这里的+是和<em>类似的元字符，不同的是</em>匹配重复任意次(可能是0次)，而+则匹配重复1次或更多次。<br>元字符<code>^</code>（和数字6在同一个键位上的符号）和<script type="math/tex">`都匹配一个位置，这和`\b`有点类似。`^`匹配你要用来查找的字符串的开头，`</script>匹配结尾。比如一个网站如果要求你填写的QQ号必须为5位到12位数字时，可以使用：<code>^\d{5,12}$</code>          </li>
 </ul>
 </li>
 <li><p>限定符  </p>
@@ -350,7 +350,7 @@
 <ul>
 <li>\W:匹配任意不是字母，数字，下划线，汉字的字符  </li>
 <li>\S:匹配任意不是空白符的字符<br>…  </li>
-<li>[^z]:匹配除了z以外的任意字符  </li>
+<li><sup><a href="#fn_z" id="reffn_z">z</a></sup>:匹配除了z以外的任意字符  </li>
 </ul>
 </li>
 <li><p>分支条件 .<br>正则表达式里的分枝条件指的是有几种规则，如果满足其中任意一种规则都应该当成匹配，具体方法是用<code>|</code>把不同的规则分隔开。<br>E.G:</p>
@@ -480,7 +480,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

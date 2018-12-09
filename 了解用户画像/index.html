@@ -323,8 +323,8 @@
 <li>预测标签<br><strong>基于TF-IDF算法的权重分类</strong>：一个词语的重要性随着他在该文章中出现的次数成正比，随着它在整个文档集中出现的次数成反比。<br>假设w（P , T）表示一个标签T被用于标记用户P的次数，TF（P，T）表示这个标记次数在用户P所有标签中所占的比重：    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">IDF（P , T）表示标签T在全部标签中的稀缺程度，如果标签次数出现越少，并同时标注某一个用户，则代表该标签与用户联系很紧密。</span><br><span class="line">```IDF(P,T) = LOG( 全部用户的全部标签之和 / 所有打T标签的用户之和)</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>最后根据TF*IDF即可得到该用户该标签的权重值<br>实际业务上需要根据具体情况做出改变：<br>用户标签权重 = 行为类型权重 x 衰减时间 x TF-IDF标签权重 x 行为次数<br><strong>基于相关系数矩阵的权重归类</strong> :<img src="http://upload-images.jianshu.io/upload_images/5115722-0fd228a4b350da6b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="相关系数矩阵"></p>
-<ol start="4">
+<p>最后根据TF<em>IDF即可得到该用户该标签的权重值<br>实际业务上需要根据具体情况做出改变：<br>用户标签权重 = 行为类型权重 x 衰减时间 x TF-IDF标签权重 x 行为次数<br><em>*基于相关系数矩阵的权重归类</em></em> :<img src="http://upload-images.jianshu.io/upload_images/5115722-0fd228a4b350da6b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="相关系数矩阵"></p>
+<ol>
 <li>进行数据维度分解和列举<br>根据相关性原则，进一步筛选和构建用户画像相关的数据维度，避免无用数据干扰分析的过程，用户数据维度可以分为以下几个特征：</li>
 </ol>
 <ul>
@@ -470,7 +470,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

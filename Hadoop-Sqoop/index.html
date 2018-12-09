@@ -323,7 +323,8 @@
 <h4 id="2-3-创建Hive表"><a href="#2-3-创建Hive表" class="headerlink" title="2.3 创建Hive表"></a>2.3 创建Hive表</h4><p>生成与关系数据库相对应的Hive表<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$sqoop --create-hive-table --connect jdbc:mysql://192.168.56.121:3306/metastore --username hiveuser --password redhat --table TBLS </span><br><span class="line"></span><br><span class="line">#参数：</span><br><span class="line">--hive-overwrite : 	覆盖掉在hive表中已经存在的数据</span><br><span class="line">--create-hive-table : 默认是false，如果目标表已经存在了，那么创建任务会失败</span><br><span class="line">--hive-table : 后面接要创建的hive表</span><br></pre></td></tr></table></figure></p>
 <h4 id="2-4-导入数据到Hive"><a href="#2-4-导入数据到Hive" class="headerlink" title="2.4 导入数据到Hive"></a>2.4 导入数据到Hive</h4><p>执行下面的命令会将 mysql 中的数据导入到 hdfs 中，然后创建一个hive 表，最后再将 hdfs 上的文件移动到 hive 表的目录下面。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sqoop import --connect jdbc:mysql://192.168.56.121:3306/metastore --username hiveuser --password redhat --table TBLS --fields-terminated-by &quot;\t&quot; --lines-terminated-by &quot;\n&quot; </span><br><span class="line">--hive-import --hive-overwrite --create-hive-table --hive-table dw_srclog.TBLS --delete-target-dir</span><br></pre></td></tr></table></figure></p>
 <p>Tips : Sqoop 默认地导入空值（NULL）为 null 字符串，而 hive 使用 \N 去标识空值（NULL），故你在 import 或者 export 时候，需要做相应的处理。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 在 import 时，使用如下命令</span><br><span class="line">$ sqoop import  ... --null-string &apos;\\N&apos; --null-non-string &apos;\\N&apos;</span><br><span class="line"></span><br><span class="line">#在导出时，使用下面命令</span><br><span class="line">$ sqoop import  ... --input-null-string &apos;&apos; --input-null-non-string &apos;&apos;</span><br></pre></td></tr></table></figure></p>
-<h4 id="2-5-增量导入"><a href="#2-5-增量导入" class="headerlink" title="2.5 增量导入"></a>2.5 增量导入</h4><table>
+<h4 id="2-5-增量导入"><a href="#2-5-增量导入" class="headerlink" title="2.5 增量导入"></a>2.5 增量导入</h4><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>参数</th>
@@ -345,6 +346,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <h4 id="2-6-合并HDFS文件"><a href="#2-6-合并HDFS文件" class="headerlink" title="2.6 合并HDFS文件"></a>2.6 合并HDFS文件</h4><p>将HDFS中不同目录下面的数据合在一起，并存放在指定的目录中</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#将/test/p1/person与/test/p2/person合并，放到/test/merged这个目录下，其中优先保留–new-data参数后的数据</span><br><span class="line">sqoop merge –new-data /test/p1/person –onto /test/p2/person –target-dir /test/merged –jar-file /opt/data/sqoop/person/Person.jar –class-name Person –merge-key id</span><br></pre></td></tr></table></figure>
 <h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><ul>
@@ -467,7 +469,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="导语Markdown写习惯了看起来还是习惯很多。 安装  安装之类的十分简单，毕竟是轻量级的标记语言（以下仅推荐）。    Windows: MarkdownPad    IOS: Mou   Web: 简书   Linux: Sublime Text 3    语法 标题一般使用Atx形式###red####red#####red  code:    ###red    ####red    #">
+<meta name="description" content="导语Markdown写习惯了看起来还是习惯很多。 安装  安装之类的十分简单，毕竟是轻量级的标记语言（以下仅推荐）。    Windows: MarkdownPad    IOS: Mou   Web: 简书   Linux: Sublime Text 3    语法 标题一般使用Atx形式  redredredcode:    ###red    ####red    #####red  列表">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Markdown初体验">
 <meta property="og:url" content="http://snailed.cn/Markdown初体验/index.html">
 <meta property="og:site_name" content="天王盖地虎">
-<meta property="og:description" content="导语Markdown写习惯了看起来还是习惯很多。 安装  安装之类的十分简单，毕竟是轻量级的标记语言（以下仅推荐）。    Windows: MarkdownPad    IOS: Mou   Web: 简书   Linux: Sublime Text 3    语法 标题一般使用Atx形式###red####red#####red  code:    ###red    ####red    #">
+<meta property="og:description" content="导语Markdown写习惯了看起来还是习惯很多。 安装  安装之类的十分简单，毕竟是轻量级的标记语言（以下仅推荐）。    Windows: MarkdownPad    IOS: Mou   Web: 简书   Linux: Sublime Text 3    语法 标题一般使用Atx形式  redredredcode:    ###red    ####red    #####red  列表">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2018-11-19T16:31:39.575Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Markdown初体验">
-<meta name="twitter:description" content="导语Markdown写习惯了看起来还是习惯很多。 安装  安装之类的十分简单，毕竟是轻量级的标记语言（以下仅推荐）。    Windows: MarkdownPad    IOS: Mou   Web: 简书   Linux: Sublime Text 3    语法 标题一般使用Atx形式###red####red#####red  code:    ###red    ####red    #">
+<meta name="twitter:description" content="导语Markdown写习惯了看起来还是习惯很多。 安装  安装之类的十分简单，毕竟是轻量级的标记语言（以下仅推荐）。    Windows: MarkdownPad    IOS: Mou   Web: 简书   Linux: Sublime Text 3    语法 标题一般使用Atx形式  redredredcode:    ###red    ####red    #####red  列表">
 
 
 
@@ -308,10 +308,10 @@
 <li>Linux: Sublime Text 3  </li>
 </ul>
 <h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><ol>
-<li>标题<br>一般使用Atx形式<br>###red<br>####red<br>#####red  <pre><code>code:  
+<li>标题<br>一般使用Atx形式  <h3 id="red"><a href="#red" class="headerlink" title="red"></a>red</h3><h4 id="red-1"><a href="#red-1" class="headerlink" title="red"></a>red</h4><h5 id="red-2"><a href="#red-2" class="headerlink" title="red"></a>red</h5><pre><code>code:  
  ###red  
  ####red  
- #####red   
+ #####red
 </code></pre></li>
 <li>列表  <ul>
 <li>有序列表  <ol>
@@ -319,9 +319,9 @@
 <li>blue<br><strong>数字序列+英文<code>.</code>+一个空格</strong></li>
 </ol>
 </li>
-<li>无序列表  <pre><code>+ red   
-- blue  
-* yellow    
+<li>无序列表  <pre><code> + red   
+ - blue  
+ * yellow    
 </code></pre></li>
 </ul>
 </li>
@@ -330,35 +330,36 @@
 <blockquote>
 <p>岂曰无衣 与子同袍                                           </p>
 </blockquote>
-<ol start="4">
-<li>代码区块<br> 使用连续三` 来标记，eg:    <pre><code>print(Hello Markdown)  
+<ol>
+<li>代码区块<br> 使用连续三` 来标记，eg:    <pre><code> print(Hello Markdown)  
 </code></pre><pre><code>code:  
 ```print(Hello Markdown)
-</code></pre><code>`</code><br>或者是使用<code>tab</code>键，四个缩进即可    </li>
+</code></pre><code>``  
+或者是使用</code>tab`键，四个缩进即可    </li>
 <li><p>分隔线  </p>
 <hr>
 <hr>
 <pre><code>code:  
  ---  
- ***  
+ ***
 </code></pre></li>
 <li>换行<br> 在换行处先敲两个空格再回车即可</li>
 <li>链接  <ul>
-<li>行内式<br><a href="www.baidu.com">百度</a>  <pre><code>code:
-    [百度](www.baidu.com)
+<li>行内式<br><a href="www.baidu.com">百度</a>  <pre><code>    code:
+        [百度](www.baidu.com)
 </code></pre></li>
 <li>参考式<br>I love <a href="www.google.com">google</a>,not <a href="www.baidu.com">baidu</a>  </li>
 </ul>
 </li>
 </ol>
-<pre><code>code:  
-    I love [google][1] ,not [baidu][2]  
-    [1]:www.google.com
-    [2]:www.baidu.com      
-</code></pre><ol start="8">
-<li>强调<br>使用<code>*</code>或者<code>_</code>来标记<br><strong>山随平野尽，江入大荒流</strong><br><em>七月在野，八月在宇，九月在户，十月蟋蟀,入我床下</em><pre><code>code:
-     **山随平野尽，江入大荒流**    
-      *七月在野，八月在宇，九月在户，十月蟋蟀,入我床下*  
+<pre><code>          code:  
+              I love [google][1] ,not [baidu][2]  
+              [1]:www.google.com
+              [2]:www.baidu.com      
+</code></pre><ol>
+<li>强调<br>使用<code>*</code>或者<code>_</code>来标记<br><strong>山随平野尽，江入大荒流</strong><br><em>七月在野，八月在宇，九月在户，十月蟋蟀,入我床下</em><pre><code>  code:
+       **山随平野尽，江入大荒流**    
+        *七月在野，八月在宇，九月在户，十月蟋蟀,入我床下*  
 </code></pre></li>
 <li>图片<br>方法类似于<strong>链接</strong>    </li>
 </ol>
@@ -477,7 +478,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -523,7 +524,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#导语"><span class="nav-number">1.</span> <span class="nav-text">导语</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法"><span class="nav-number">3.</span> <span class="nav-text">语法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#导语"><span class="nav-number">1.</span> <span class="nav-text">导语</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法"><span class="nav-number">3.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#red"><span class="nav-number">4.</span> <span class="nav-text">red</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#red-1"><span class="nav-number">4.1.</span> <span class="nav-text">red</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#red-2"><span class="nav-number">4.1.1.</span> <span class="nav-text">red</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

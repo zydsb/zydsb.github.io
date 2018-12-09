@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="前言 SQL语法是不区分大小写的，但是命名的时候最好注意规范，语法规定用_来代替空格    我是用《深入浅出SQL》这本书来学习的，网上可以查W3School~ 基础语法语句 CREATE  creatr database my_db; use my_db; create table my_info   (     my_id int not null auto_increment,     my">
+<meta name="description" content="前言 SQL语法是不区分大小写的，但是命名的时候最好注意规范，语法规定用_来代替空格    我是用《深入浅出SQL》这本书来学习的，网上可以查W3School~ 基础语法语句 CREATE      creatr database my_db;     use my_db;     create table my_info       (         my_id int not null au">
 <meta name="keywords" content="Hadoop">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深入浅出SQL总结">
 <meta property="og:url" content="http://snailed.cn/深入浅出SQL总结/index.html">
 <meta property="og:site_name" content="天王盖地虎">
-<meta property="og:description" content="前言 SQL语法是不区分大小写的，但是命名的时候最好注意规范，语法规定用_来代替空格    我是用《深入浅出SQL》这本书来学习的，网上可以查W3School~ 基础语法语句 CREATE  creatr database my_db; use my_db; create table my_info   (     my_id int not null auto_increment,     my">
+<meta property="og:description" content="前言 SQL语法是不区分大小写的，但是命名的时候最好注意规范，语法规定用_来代替空格    我是用《深入浅出SQL》这本书来学习的，网上可以查W3School~ 基础语法语句 CREATE      creatr database my_db;     use my_db;     create table my_info       (         my_id int not null au">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2018-11-19T16:10:25.953Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入浅出SQL总结">
-<meta name="twitter:description" content="前言 SQL语法是不区分大小写的，但是命名的时候最好注意规范，语法规定用_来代替空格    我是用《深入浅出SQL》这本书来学习的，网上可以查W3School~ 基础语法语句 CREATE  creatr database my_db; use my_db; create table my_info   (     my_id int not null auto_increment,     my">
+<meta name="twitter:description" content="前言 SQL语法是不区分大小写的，但是命名的时候最好注意规范，语法规定用_来代替空格    我是用《深入浅出SQL》这本书来学习的，网上可以查W3School~ 基础语法语句 CREATE      creatr database my_db;     use my_db;     create table my_info       (         my_id int not null au">
 
 
 
@@ -305,22 +305,22 @@
 </blockquote>
 <p>我是用《深入浅出SQL》这本书来学习的，网上可以查<a href="http://www.w3school.com.cn/sql/sql_insert.asp" target="_blank" rel="noopener">W3School</a>~</p>
 <h4 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h4><h5 id="语句"><a href="#语句" class="headerlink" title="语句"></a>语句</h5><ol>
-<li><strong>CREATE</strong>  <pre><code>creatr database my_db;
-use my_db;
-create table my_info
-  (
-    my_id int not null auto_increment,
-    my_name char(50),
-    primary key(my_id)
-  )
+<li><strong>CREATE</strong>  <pre><code>    creatr database my_db;
+    use my_db;
+    create table my_info
+      (
+        my_id int not null auto_increment,
+        my_name char(50),
+        primary key(my_id)
+      )
 </code></pre></li>
 <li><p><strong>DROP</strong>   </p>
-<pre><code>drop table my_name           
+<pre><code>       drop table my_name           
 </code></pre></li>
 <li><p><strong>INSERT</strong>   </p>
-<pre><code>insert into table  my_info(col0,col1...) values(&apos;num0&apos;,&apos;num1&apos;...)
+<pre><code>       insert into table  my_info(col0,col1...) values(&#39;num0&#39;,&#39;num1&#39;...)
 </code></pre></li>
-<li><strong>SELECT</strong>  <pre><code>select * from  tavle_name where ..  
+<li><strong>SELECT</strong>  <pre><code>       select * from  tavle_name where ..  
 </code></pre><blockquote>
 <p>select 展开讲太多了，最重要的还是灵活运用子查询和各种连接</p>
 </blockquote>
@@ -329,18 +329,18 @@ create table my_info
  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">update table table_name  </span><br><span class="line">         set col = </span><br><span class="line">             case  </span><br><span class="line">                 when condition0 then reslut0  </span><br><span class="line">                 when condition1 then result1</span><br><span class="line">              end;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><strong>DELETE</strong>  </p>
-<pre><code>delete table_name from where conditon
+<pre><code>              delete table_name from where conditon
 </code></pre></li>
-<li><strong>SHOW</strong>    <pre><code>show databases/tables
+<li><strong>SHOW</strong>    <pre><code>                show databases/tables
 </code></pre></li>
-<li><strong>ALTER</strong>    <pre><code>```
-               alter table table_name
-                add col...，
-                rename to ...，  
-                change...，
-                modify...，  
-                drop ..
-                ```  
+<li><strong>ALTER</strong>    <pre><code>       ```
+                      alter table table_name
+                       add col...，
+                       rename to ...，  
+                       change...，
+                       modify...，  
+                       drop ..
+                       ```  
 </code></pre>其实就是对表进行修改</li>
 </ol>
 <h5 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h5><p><strong>USE</strong>:接下来的操作都在某个db中进行<br><strong>DESC</strong>：显示db的结构 /在<code>order by</code>中代表逆序<br><strong>NULL</strong>:不是值，代表未被定义的值<br><strong>DEFAULT</strong>:缺省值<br><strong>LIKE</strong>:查找部分文本字符串  , <strong><code>%</code>  </strong>：替换符<br><strong>BETWEEN</strong>:在…之间（&lt;=&amp;&amp;&gt;=）<br><strong>AFTER</strong>:把某列放在另一列之后<br><strong>RIGHT(),LEFT()</strong>:选出指定数量的字符<br>                select right(‘location’,2) from my_table<br><strong>ORDER BY(),GROUP BY()</strong>:按…排序，按…分组<br><strong>MIN(),MAX(),AVG(),SUM(),COUNT()</strong>:其中<code>count()</code>作用是返回指定列中的元素<br><strong>DINSTINCT</strong>：查询列中出现过的不重复元素<br><strong>LIMIT</strong>:查询结果的数量 <code>limit m,n #从m开始一共查询n个</code><br><strong>T.x -&gt; T.y</strong>:在关系表T中，y列函数依赖x列<br><strong>having</strong>:对已经排序的结果进行限制，常和<code>group by</code>等关键词组合使用</p>
@@ -476,7 +476,7 @@ create table my_info
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
