@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="basics,">
+  <meta name="keywords" content="Bayes,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="基本换算关系1 bit 二进制数据1 byte = 8  bit1 字母 = 1 byte = 8 bit1 汉字 = 2 字母 = 16bitbit : 位 （ 0 | 1 ） 标点符号(有坑…)A : 汉族输入状态下，默认为全角输入方式；B :    英文输入状态下，默认为半角输入方式； C : 全角输入方式下，标点符号占2字节；D :   半角输入方式下，标点符号占1字节；">
-<meta name="keywords" content="basics">
+<meta name="description" content="最近开始了解贝叶斯相关的东西，《贝叶斯思维》这本书开篇提到的“Monty Hall Problem”就很有趣（第一次我也错了。。。）这里就记录一下这个问题。 问题是什么书里面描述有点多，直接简化来说现在有三道扇门，其中一扇后面有10w软妹币，另外两扇后面则是1软妹币,现在我们按如下的规则玩游戏：  猜那个后面有大奖，猜中则拿到大奖 让你先挑选一扇门，我们称之为A，另外两扇分别为B，C 为了增加悬念">
+<meta name="keywords" content="Bayes">
 <meta property="og:type" content="article">
-<meta property="og:title" content="位基础">
-<meta property="og:url" content="http://snailed.cn/位基础/index.html">
+<meta property="og:title" content="蒙蒂大厅问题">
+<meta property="og:url" content="http://snailed.cn/Monty_hall/index.html">
 <meta property="og:site_name" content="天王盖地虎">
-<meta property="og:description" content="基本换算关系1 bit 二进制数据1 byte = 8  bit1 字母 = 1 byte = 8 bit1 汉字 = 2 字母 = 16bitbit : 位 （ 0 | 1 ） 标点符号(有坑…)A : 汉族输入状态下，默认为全角输入方式；B :    英文输入状态下，默认为半角输入方式； C : 全角输入方式下，标点符号占2字节；D :   半角输入方式下，标点符号占1字节；">
+<meta property="og:description" content="最近开始了解贝叶斯相关的东西，《贝叶斯思维》这本书开篇提到的“Monty Hall Problem”就很有趣（第一次我也错了。。。）这里就记录一下这个问题。 问题是什么书里面描述有点多，直接简化来说现在有三道扇门，其中一扇后面有10w软妹币，另外两扇后面则是1软妹币,现在我们按如下的规则玩游戏：  猜那个后面有大奖，猜中则拿到大奖 让你先挑选一扇门，我们称之为A，另外两扇分别为B，C 为了增加悬念">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-11-17T14:37:05.356Z">
+<meta property="og:updated_time" content="2018-12-10T17:02:42.594Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="位基础">
-<meta name="twitter:description" content="基本换算关系1 bit 二进制数据1 byte = 8  bit1 字母 = 1 byte = 8 bit1 汉字 = 2 字母 = 16bitbit : 位 （ 0 | 1 ） 标点符号(有坑…)A : 汉族输入状态下，默认为全角输入方式；B :    英文输入状态下，默认为半角输入方式； C : 全角输入方式下，标点符号占2字节；D :   半角输入方式下，标点符号占1字节；">
+<meta name="twitter:title" content="蒙蒂大厅问题">
+<meta name="twitter:description" content="最近开始了解贝叶斯相关的东西，《贝叶斯思维》这本书开篇提到的“Monty Hall Problem”就很有趣（第一次我也错了。。。）这里就记录一下这个问题。 问题是什么书里面描述有点多，直接简化来说现在有三道扇门，其中一扇后面有10w软妹币，另外两扇后面则是1软妹币,现在我们按如下的规则玩游戏：  猜那个后面有大奖，猜中则拿到大奖 让你先挑选一扇门，我们称之为A，另外两扇分别为B，C 为了增加悬念">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://snailed.cn/位基础/">
+  <link rel="canonical" href="http://snailed.cn/Monty_hall/">
 
 
 
 
 
-  <title>位基础 | 天王盖地虎</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>蒙蒂大厅问题 | 天王盖地虎</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -233,7 +233,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/位基础/">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Monty_hall/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhangyang">
@@ -250,7 +250,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">位基础</h1>
+          <h1 class="post-title" itemprop="name headline">蒙蒂大厅问题</h1>
         
 
         <div class="post-meta">
@@ -262,8 +262,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-17T22:34:49+08:00">
-                2018-11-17
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-10T23:34:30+08:00">
+                2018-12-10
               </time>
             
 
@@ -300,9 +300,75 @@
       
 
       
-        <h3 id="基本换算关系"><a href="#基本换算关系" class="headerlink" title="基本换算关系"></a>基本换算关系</h3><p>1 bit 二进制数据<br>1 byte = 8  bit<br>1 字母 = 1 byte = 8 bit<br>1 汉字 = 2 字母 = 16bit<br>bit : 位 （ 0 | 1 ）</p>
-<h3 id="标点符号-有坑…"><a href="#标点符号-有坑…" class="headerlink" title="标点符号(有坑…)"></a>标点符号(有坑…)</h3><p>A : 汉族输入状态下，默认为全角输入方式；<br>B :    英文输入状态下，默认为半角输入方式；</p>
-<p>C : 全角输入方式下，标点符号占2字节；<br>D :   半角输入方式下，标点符号占1字节；</p>
+        <p>最近开始了解贝叶斯相关的东西，《贝叶斯思维》这本书开篇提到的“Monty Hall Problem”就很有趣（第一次我也错了。。。）这里就记录一下这个问题。</p>
+<h3 id="问题是什么"><a href="#问题是什么" class="headerlink" title="问题是什么"></a>问题是什么</h3><p>书里面描述有点多，直接简化来说现在有三道扇门，其中一扇后面有10w软妹币，另外两扇后面则是1软妹币,现在我们按如下的规则玩游戏：</p>
+<ul>
+<li>猜那个后面有大奖，猜中则拿到大奖</li>
+<li>让你先挑选一扇门，我们称之为A，另外两扇分别为B，C</li>
+<li>为了增加悬念，这个时候主持人会打开B，C中的任意一个，假设B吧（B，C中肯定可以开一个)</li>
+<li>然后主持人给你一个选择：是坚持最初的选择还是换到剩下未打开的门上</li>
+</ul>
+<p>我的第一反应是这俩没啥区别，既然开了一扇小的，那么剩下两扇门后面中大奖的概率应该是五五开的。但是一个贝叶斯主义者应该不这么看，此时的概率已经悄然改变。</p>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><h4 id="贝叶斯公式"><a href="#贝叶斯公式" class="headerlink" title="贝叶斯公式"></a>贝叶斯公式</h4><p>估计这个不需要介绍太多</p>
+<script type="math/tex; mode=display">P(A|B) = \frac{P(B)P(A|B)}{P(B}</script><p>通俗一点解释就是：</p>
+<script type="math/tex; mode=display">后验概率 = \frac{先验概率 \cdot 似然度}{标准化常量}</script><p>后文例子中：</p>
+<ul>
+<li>$p(H)$：先验概率</li>
+<li>$p(D \vert H)$：似然度，即在该假设下得到某数据的概率</li>
+<li>$p(D)$：标准化常量，即在任何假设下得到某数据的概率</li>
+<li>$p(H \vert D)$：后验概率，即看到新数据后，我们要计算的概率</li>
+</ul>
+<h4 id="定义事件"><a href="#定义事件" class="headerlink" title="定义事件"></a>定义事件</h4><p>我们可以把事件归纳为以下两件，其中重点是理解事件D</p>
+<ul>
+<li><p>H : 钱在门后面</p>
+</li>
+<li><p>D : <strong>打开门B且钱不在后面</strong></p>
+</li>
+</ul>
+<h4 id="算算概率"><a href="#算算概率" class="headerlink" title="算算概率"></a>算算概率</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>假设</th>
+<th>先验概率$p(H)$</th>
+<th>似然度$p(D \vert H)$</th>
+<th>$p(H)p(D \vert H)$</th>
+<th>后验概率$p(H \vert D)$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>假设A</td>
+<td>${1 \over 3}$</td>
+<td>${1 \over 2 }$</td>
+<td>${1 \over 6 }$</td>
+<td>${1 \over 3 }$</td>
+</tr>
+<tr>
+<td>假设B</td>
+<td>${1 \over 3}$</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>假设C</td>
+<td>${1 \over 3}$</td>
+<td>1</td>
+<td>${1 \over 3 }$</td>
+<td>${2 \over 3 }$</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>先验概率一眼而知，但是似然度就需要一些思考了，现在我们分开来看：</p>
+<ul>
+<li>对于假设A，即钱在A门后面，那么在这种情况下，BC两门任选，即$p(D \vert H)={1 \over 2}$</li>
+<li>对于假设B，主持人必须打开门C，此时$p(D \vert H)=0$</li>
+<li>对于假设C，主持人必须打开门B，此时$p(D \vert H)=1$</li>
+</ul>
+<p>算一算$p(D) = {1 \over 2}$,后面的后验概率也是呼之欲出了</p>
+<h4 id="个人思考"><a href="#个人思考" class="headerlink" title="个人思考"></a>个人思考</h4><p>个人感觉重点是理解似然度的计算，理解已经发生的事情对未知的事情（打开了门B且没有钱）对未知的事情（钱在哪一个门后面）产生的影响。</p>
 
       
     </div>
@@ -320,7 +386,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/basics/" rel="tag"># basics</a>
+            <a href="/tags/Bayes/" rel="tag"># Bayes</a>
           
         </div>
       
@@ -333,8 +399,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/我的Hive学习之旅/" rel="next" title="我的Hive学习之旅">
-                <i class="fa fa-chevron-left"></i> 我的Hive学习之旅
+              <a href="/理解MapReduce/" rel="next" title="理解MapReduce">
+                <i class="fa fa-chevron-left"></i> 理解MapReduce
               </a>
             
           </div>
@@ -342,10 +408,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/初识Git/" rel="prev" title="初识Git">
-                初识Git <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -468,7 +530,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本换算关系"><span class="nav-number">1.</span> <span class="nav-text">基本换算关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标点符号-有坑…"><span class="nav-number">2.</span> <span class="nav-text">标点符号(有坑…)</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题是什么"><span class="nav-number">1.</span> <span class="nav-text">问题是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分析"><span class="nav-number">2.</span> <span class="nav-text">分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#贝叶斯公式"><span class="nav-number">2.1.</span> <span class="nav-text">贝叶斯公式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#定义事件"><span class="nav-number">2.2.</span> <span class="nav-text">定义事件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#算算概率"><span class="nav-number">2.3.</span> <span class="nav-text">算算概率</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#个人思考"><span class="nav-number">2.4.</span> <span class="nav-text">个人思考</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -615,24 +677,7 @@
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config("");
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
 
 
 
@@ -685,6 +730,43 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
   
 
 
