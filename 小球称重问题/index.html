@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="| kk |">
 <meta property="og:description" content="题目描述有 12 个球，外形相同，其中一个小球的质量与其他 11 个不同，给一个天平，需要几次把这个小球找出来并且求出这个小球是比其他的轻还是重? 思考轨迹首先想到的当然是分组称重这样的解法，三次有点bug在：  均分为三组，每组四个 取任意两组称重，若天平平衡，则剩下一组含有特殊小球，两次称重可以找出；若失去平衡，那就麻烦了。。。。  这样是不稳定的， 冥冥之中有种感觉应该往信息论这方面想，感觉">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-12-13T18:40:12.272Z">
+<meta property="og:updated_time" content="2018-12-13T18:42:51.083Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="小球称重问题">
 <meta name="twitter:description" content="题目描述有 12 个球，外形相同，其中一个小球的质量与其他 11 个不同，给一个天平，需要几次把这个小球找出来并且求出这个小球是比其他的轻还是重? 思考轨迹首先想到的当然是分组称重这样的解法，三次有点bug在：  均分为三组，每组四个 取任意两组称重，若天平平衡，则剩下一组含有特殊小球，两次称重可以找出；若失去平衡，那就麻烦了。。。。  这样是不稳定的， 冥冥之中有种感觉应该往信息论这方面想，感觉">
@@ -308,8 +308,8 @@
 <p>这样是不稳定的，</p>
 <p>冥冥之中有种感觉应该往信息论这方面想，感觉有路子：</p>
 <ul>
-<li>有12个小球，分别有重和不重两种状态，即有24种可能，那么信息熵为$H(x)=24 \codt {1 \over 24} \cdot log_2{24}  \approx 4.58bit $</li>
-<li>我们每一次称重存在三种状态，即轻、重、平衡，那么每一次称重的熵为$H(x)=3 \codt {1 \over 3} \cdot log_2{3}  \approx 1.58bit $</li>
+<li>有12个小球，分别有重和不重两种状态，即有24种可能，那么信息熵为$H(x)=24 \codt {1 \over 24} \cdot log{24}  \approx 4.58bit $</li>
+<li>我们每一次称重存在三种状态，即轻、重、平衡，那么每一次称重的熵为$H(x)=3 \codt {1 \over 3} \cdot log{3}  \approx 1.58bit $</li>
 <li>所以理论上称重次数为${4.58 \over 1.58} \approx 3$,三次即可找出小球</li>
 </ul>
 <p>100个，1000个也是同理，从信息论的角度来看只是熵大小的差别。</p>
@@ -617,24 +617,7 @@
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config("");
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
 
 
 
@@ -687,6 +670,43 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
   
 
 
