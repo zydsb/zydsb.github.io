@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hive,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="写在最前这篇文章主要针对自己业务场景中遇到的SQL性能问题进行一下总结，性能对工作效率的影响还是蛮大的。 Map join基于join的性质，我们可以知道把小表放在join的左边，可以有效地减少数据量（基本习惯）。同时我们开启map join，小表数据会被广播到各个节点，消除shuffle运算。 12set hive.auto.convert.join = true ; -- 开启自动转化成map">
+<meta name="keywords" content="Hive">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hive调优">
+<meta property="og:url" content="http://snailed.cn/Hive调优/index.html">
+<meta property="og:site_name" content="| kk |">
+<meta property="og:description" content="写在最前这篇文章主要针对自己业务场景中遇到的SQL性能问题进行一下总结，性能对工作效率的影响还是蛮大的。 Map join基于join的性质，我们可以知道把小表放在join的左边，可以有效地减少数据量（基本习惯）。同时我们开启map join，小表数据会被广播到各个节点，消除shuffle运算。 12set hive.auto.convert.join = true ; -- 开启自动转化成map">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-12-24T11:46:55.117Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hive调优">
+<meta name="twitter:description" content="写在最前这篇文章主要针对自己业务场景中遇到的SQL性能问题进行一下总结，性能对工作效率的影响还是蛮大的。 Map join基于join的性质，我们可以知道把小表放在join的左边，可以有效地减少数据量（基本习惯）。同时我们开启map join，小表数据会被广播到各个节点，消除shuffle运算。 12set hive.auto.convert.join = true ; -- 开启自动转化成map">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://snailed.cn/Hive调优/">
+
+
+
+
+
+  <title>Hive调优 | | kk |</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">| kk |</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Hive调优/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| kk |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Hive调优</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-20T20:44:50+08:00">
+                2018-12-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="写在最前"><a href="#写在最前" class="headerlink" title="写在最前"></a>写在最前</h3><p>这篇文章主要针对自己业务场景中遇到的SQL性能问题进行一下总结，性能对工作效率的影响还是蛮大的。</p>
+<h3 id="Map-join"><a href="#Map-join" class="headerlink" title="Map join"></a>Map join</h3><p>基于join的性质，我们可以知道把小表放在join的左边，可以有效地减少数据量（基本习惯）。同时我们开启<code>map join</code>，小表数据会被广播到各个节点，消除shuffle运算。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> hive.auto.convert.join = <span class="literal">true</span> ; <span class="comment">-- 开启自动转化成mapjoin</span></span><br><span class="line"><span class="keyword">set</span> hive.mapjoin.smalltable.filesize = <span class="number">2500000</span> ; <span class="comment">-- 设置广播小表size</span></span><br></pre></td></tr></table></figure>
+<h3 id="distinct"><a href="#distinct" class="headerlink" title="distinct"></a>distinct</h3><h4 id="多列或者一列去重"><a href="#多列或者一列去重" class="headerlink" title="多列或者一列去重"></a>多列或者一列去重</h4><p>hive是通过<code>group by</code>实现<code>distinct</code>的,如下代码hive的执行计划其实是完全一致的<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span>  <span class="keyword">distinct</span> a,b,func(c) <span class="keyword">as</span> tt  <span class="keyword">from</span> xxx ;</span><br><span class="line"><span class="keyword">select</span>  a,b,func(c) <span class="keyword">as</span> tt  <span class="keyword">from</span> xxx  <span class="keyword">group</span> <span class="keyword">by</span> a,b,func(c)</span><br></pre></td></tr></table></figure></p>
+<p>如果我们可以确定这个func()是一个单映射的话，那么其实是可以直接等效写为:<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> a,b,func(c) <span class="keyword">as</span> tt <span class="keyword">from</span> xxx <span class="keyword">group</span> <span class="keyword">by</span> a,b,c</span><br></pre></td></tr></table></figure></p>
+<h4 id="聚合函数中进行计算"><a href="#聚合函数中进行计算" class="headerlink" title="聚合函数中进行计算"></a>聚合函数中进行计算</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> dt,<span class="keyword">count</span>(<span class="keyword">distinct</span> userid) <span class="keyword">as</span> uv </span><br><span class="line"><span class="keyword">from</span> xxx</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> dt</span><br></pre></td></tr></table></figure>
+<p>这样会把所有的数据放在一个reducer里面，执行时间较长，可以这么优化，即把<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> dt,<span class="keyword">count</span>(<span class="number">1</span>)</span><br><span class="line"><span class="keyword">from</span>(</span><br><span class="line">    <span class="keyword">select</span>  <span class="keyword">distinct</span> dt,userid</span><br><span class="line">    <span class="keyword">from</span> xxx </span><br><span class="line">    ) <span class="keyword">final</span></span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> dt</span><br></pre></td></tr></table></figure></p>
+<p>这样把第一个阶段分担到多个reducer上，但实际业务过程中，大多数的数据都是在多维度下多指标计算（计算量大），经常会导致数据倾斜之类的问题。</p>
+<h5 id="不同条件的count-distinct"><a href="#不同条件的count-distinct" class="headerlink" title="不同条件的count(distinct)"></a>不同条件的count(distinct)</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> dt </span><br><span class="line">, <span class="keyword">count</span>(<span class="keyword">distinct</span> userid) <span class="keyword">as</span> tt </span><br><span class="line">, <span class="keyword">count</span>(<span class="keyword">distinct</span> <span class="keyword">if</span>(a <span class="keyword">rlike</span> <span class="string">'xxx'</span>,userid,<span class="literal">null</span>)) <span class="keyword">as</span> u1</span><br><span class="line">, <span class="keyword">count</span>(<span class="keyword">distinct</span> <span class="keyword">if</span>(b &gt; xxx ,userid, <span class="literal">null</span>)) <span class="keyword">as</span> u2</span><br><span class="line">, <span class="keyword">count</span>(<span class="keyword">distinct</span> <span class="keyword">if</span>(c = xxx , userid , <span class="literal">null</span>)) <span class="keyword">as</span> u3</span><br></pre></td></tr></table></figure>
+<p>可以通过标记的方式来解决<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> dt</span><br><span class="line">, <span class="keyword">count</span>(userid) <span class="keyword">as</span> tt</span><br><span class="line">, <span class="keyword">count</span>(<span class="keyword">if</span>(tag0=<span class="number">1</span>,userid,<span class="literal">null</span>)) <span class="keyword">as</span> u1</span><br><span class="line">, <span class="keyword">count</span>(<span class="keyword">if</span>(tag1=<span class="number">1</span>,userid,<span class="literal">null</span>)) <span class="keyword">as</span> u2</span><br><span class="line">, <span class="keyword">count</span>(<span class="keyword">if</span>(tag2=<span class="number">2</span>,userid,<span class="literal">null</span>)) <span class="keyword">as</span> u3</span><br><span class="line"><span class="keyword">from</span>(</span><br><span class="line">    <span class="keyword">select</span> dt</span><br><span class="line">        , <span class="keyword">max</span>(<span class="keyword">if</span>(a <span class="keyword">rlike</span> <span class="string">'xxx'</span>,<span class="number">1</span>,<span class="number">0</span>)) <span class="keyword">as</span> tag0</span><br><span class="line">        , <span class="keyword">max</span>(<span class="keyword">if</span>(b &gt; xxx ,<span class="number">1</span>,<span class="number">0</span>)) <span class="keyword">as</span> tag1</span><br><span class="line">        , <span class="keyword">max</span>(<span class="keyword">if</span>(c = xxx ,<span class="number">1</span>,<span class="number">0</span>))</span><br><span class="line">    <span class="keyword">group</span> <span class="keyword">by</span> dt </span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
+<h5 id="多维度聚合（group-by-xx-xx-with-cube"><a href="#多维度聚合（group-by-xx-xx-with-cube" class="headerlink" title="多维度聚合（group by xx,xx with cube)"></a>多维度聚合（group by xx,xx with cube)</h5><p>手动维护grouping sets的组合</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">group by semesterid , grade_type , gradeid , courseid  , seasonid , seasonname, teamid</span><br><span class="line">grouping sets( (semesterid , grade_type , gradeid , courseid  , seasonid , seasonname, teamid )</span><br><span class="line">  , (semesterid , grade_type , gradeid , courseid  , seasonid , seasonname)</span><br><span class="line"></span><br><span class="line">  )</span><br></pre></td></tr></table></figure>
+<h5 id="不同列聚合"><a href="#不同列聚合" class="headerlink" title="不同列聚合"></a>不同列聚合</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">count(distinct userid)</span><br><span class="line">count(distinct deviceid)</span><br></pre></td></tr></table></figure>
+<p>可以进行分拆成两个查询分别计算(load两遍数据),最后join到一起</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Hive/" rel="tag"># Hive</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/小球称重问题/" rel="next" title="小球称重问题">
+                <i class="fa fa-chevron-left"></i> 小球称重问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">zhangyang</p>
+              <p class="site-description motion-element" itemprop="description">没事乱写点东西</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#写在最前"><span class="nav-number">1.</span> <span class="nav-text">写在最前</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Map-join"><span class="nav-number">2.</span> <span class="nav-text">Map join</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#distinct"><span class="nav-number">3.</span> <span class="nav-text">distinct</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#多列或者一列去重"><span class="nav-number">3.1.</span> <span class="nav-text">多列或者一列去重</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#聚合函数中进行计算"><span class="nav-number">3.2.</span> <span class="nav-text">聚合函数中进行计算</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#不同条件的count-distinct"><span class="nav-number">3.2.1.</span> <span class="nav-text">不同条件的count(distinct)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#多维度聚合（group-by-xx-xx-with-cube"><span class="nav-number">3.2.2.</span> <span class="nav-text">多维度聚合（group by xx,xx with cube)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#不同列聚合"><span class="nav-number">3.2.3.</span> <span class="nav-text">不同列聚合</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhangyang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
