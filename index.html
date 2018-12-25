@@ -251,7 +251,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/TF-IDF/" itemprop="url">TF-IDF</a></h1>
+                <a class="post-title-link" href="/TF-IDF/" itemprop="url">浅识TF-IDF</a></h1>
         
 
         <div class="post-meta">
@@ -303,7 +303,35 @@
       
         
           
-            
+            <h4 id="写在最前"><a href="#写在最前" class="headerlink" title="写在最前"></a>写在最前</h4><p>关于TF-IDF算法本是我九月组内分享会的内容，前段时间看《数学之美》的时候又重新看到。虽然在实战中使用的机会很少，但是不妨碍我们去感受去理解这些简洁却有力量的思想。</p>
+<h4 id="什么是TF和IDF"><a href="#什么是TF和IDF" class="headerlink" title="什么是TF和IDF"></a>什么是TF和IDF</h4><ul>
+<li>TF:词频(term frequency),即一个词语出现在一篇文章的频率，计算方式很简单：词频=某个词在文章中的出现次数/文章的总词数</li>
+<li>IDF:逆文本频率(inverse document frequency)，是一个词语的普遍重要性的度量，逆文本频率=log(语料库的文档总数/包含该词的文档数+1)</li>
+</ul>
+<p>TF-IDF = TF * IDF </p>
+<p>某一特定文件内的高词语频率，以及该词语在整个文件集合中的低文件频率，可以产生出高权重的TF-IDF。因此，TF-IDF倾向于过滤掉常见的词语，保留重要的词语。</p>
+<p>具体公式可以参见<a href="https://zh.wikipedia.org/wiki/Tf-idf" target="_blank" rel="noopener">维基百科</a></p>
+<h4 id="简单应用"><a href="#简单应用" class="headerlink" title="简单应用"></a>简单应用</h4><p>TF-IDF 思想及其简单，但是应用起来威力就很大，下面我们来看一个判断句子相关性的例子：</p>
+<ul>
+<li>str0:’今天中午的螃蟹真好吃’</li>
+<li>str1:’今天中午的大闸蟹真难吃’</li>
+</ul>
+<h5 id="分词"><a href="#分词" class="headerlink" title="分词"></a>分词</h5><p>首先我们需要对句子进行分词处理，网上有很多优秀的资源，比如<a href="https://github.com/fxsjy/jieba" target="_blank" rel="noopener">结巴中文分词</a>，这里我们从简~</p>
+<p>str0:[‘今天’,’中午’,’的’,’螃蟹’,’真’,’好吃’]<br>str1:[‘今天’,’中午’,’的’,’大闸蟹’,’真’,’难吃’]</p>
+<h5 id="构建词向量"><a href="#构建词向量" class="headerlink" title="构建词向量"></a>构建词向量</h5><p>对我们分词的结果取set(),那么我们可以得到[‘今天’,’中午’,’的’,’螃蟹’,’大闸蟹’,’真’,’好吃’,’难吃’]这个词组。我们分别对str0和str1构建词向量，结果为</p>
+<ul>
+<li>str0=[1,1,1,1,0,1,1,0]</li>
+<li>str1=[1,1,1,0,1,1,0,1]</li>
+</ul>
+<h5 id="计算相关性"><a href="#计算相关性" class="headerlink" title="计算相关性"></a>计算相关性</h5><p>数学上我们学过向量空间的余弦相似度，在这里就派上了大用场。最简单的例子，若两条直线的余弦为0，表示不相关；若为-1，则表示完全相反。即余弦相似度越大，其内容的相似度越高，其推广到多维空间也是成立的。</p>
+<p>公式和计算过程就省略一下,计算结果是0.677,相关系数还蛮高的</p>
+<p>更多内容参考<a href="https://www.cnblogs.com/chaosimple/archive/2013/06/28/3160839.html" target="_blank" rel="noopener">这里</a></p>
+<h5 id="更多应用"><a href="#更多应用" class="headerlink" title="更多应用"></a>更多应用</h5><ul>
+<li>论文检索</li>
+<li>新闻的分类</li>
+<li>用户画像</li>
+</ul>
+
           
         
       
