@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="写在最前这篇文章主要针对自己业务场景中遇到的SQL性能问题进行一下总结，性能对工作效率的影响还是蛮大的。 Map join基于join的性质，我们可以知道把小表放在join的左边，可以有效地减少数据量（基本习惯）。同时我们开启map join，小表数据会被广播到各个节点，消除shuffle运算。 12set hive.auto.convert.join = true ; -- 开启自动转化成map">
+<meta name="description" content="写在最前主要说一下我们平时查询中会遇到的一些性能问题。 Map join基于join的性质，我们可以知道把小表放在join的左边，可以有效地减少数据量（基本习惯）。同时我们开启map join，小表数据会被广播到各个节点，消除shuffle运算。 12set hive.auto.convert.join = true ; -- 开启自动转化成mapjoinset hive.mapjoin.smal">
 <meta name="keywords" content="Hive">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hive调优">
 <meta property="og:url" content="http://snailed.cn/Hive调优/index.html">
 <meta property="og:site_name" content="| kk |">
-<meta property="og:description" content="写在最前这篇文章主要针对自己业务场景中遇到的SQL性能问题进行一下总结，性能对工作效率的影响还是蛮大的。 Map join基于join的性质，我们可以知道把小表放在join的左边，可以有效地减少数据量（基本习惯）。同时我们开启map join，小表数据会被广播到各个节点，消除shuffle运算。 12set hive.auto.convert.join = true ; -- 开启自动转化成map">
+<meta property="og:description" content="写在最前主要说一下我们平时查询中会遇到的一些性能问题。 Map join基于join的性质，我们可以知道把小表放在join的左边，可以有效地减少数据量（基本习惯）。同时我们开启map join，小表数据会被广播到各个节点，消除shuffle运算。 12set hive.auto.convert.join = true ; -- 开启自动转化成mapjoinset hive.mapjoin.smal">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-12-24T11:46:55.117Z">
+<meta property="og:updated_time" content="2018-12-28T10:06:55.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hive调优">
-<meta name="twitter:description" content="写在最前这篇文章主要针对自己业务场景中遇到的SQL性能问题进行一下总结，性能对工作效率的影响还是蛮大的。 Map join基于join的性质，我们可以知道把小表放在join的左边，可以有效地减少数据量（基本习惯）。同时我们开启map join，小表数据会被广播到各个节点，消除shuffle运算。 12set hive.auto.convert.join = true ; -- 开启自动转化成map">
+<meta name="twitter:description" content="写在最前主要说一下我们平时查询中会遇到的一些性能问题。 Map join基于join的性质，我们可以知道把小表放在join的左边，可以有效地减少数据量（基本习惯）。同时我们开启map join，小表数据会被广播到各个节点，消除shuffle运算。 12set hive.auto.convert.join = true ; -- 开启自动转化成mapjoinset hive.mapjoin.smal">
 
 
 
@@ -300,7 +300,7 @@
       
 
       
-        <h3 id="写在最前"><a href="#写在最前" class="headerlink" title="写在最前"></a>写在最前</h3><p>这篇文章主要针对自己业务场景中遇到的SQL性能问题进行一下总结，性能对工作效率的影响还是蛮大的。</p>
+        <h3 id="写在最前"><a href="#写在最前" class="headerlink" title="写在最前"></a>写在最前</h3><p>主要说一下我们平时查询中会遇到的一些性能问题。</p>
 <h3 id="Map-join"><a href="#Map-join" class="headerlink" title="Map join"></a>Map join</h3><p>基于join的性质，我们可以知道把小表放在join的左边，可以有效地减少数据量（基本习惯）。同时我们开启<code>map join</code>，小表数据会被广播到各个节点，消除shuffle运算。</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> hive.auto.convert.join = <span class="literal">true</span> ; <span class="comment">-- 开启自动转化成mapjoin</span></span><br><span class="line"><span class="keyword">set</span> hive.mapjoin.smalltable.filesize = <span class="number">2500000</span> ; <span class="comment">-- 设置广播小表size</span></span><br></pre></td></tr></table></figure>
 <h3 id="distinct"><a href="#distinct" class="headerlink" title="distinct"></a>distinct</h3><h4 id="多列或者一列去重"><a href="#多列或者一列去重" class="headerlink" title="多列或者一列去重"></a>多列或者一列去重</h4><p>hive是通过<code>group by</code>实现<code>distinct</code>的,如下代码hive的执行计划其实是完全一致的<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span>  <span class="keyword">distinct</span> a,b,func(c) <span class="keyword">as</span> tt  <span class="keyword">from</span> xxx ;</span><br><span class="line"><span class="keyword">select</span>  a,b,func(c) <span class="keyword">as</span> tt  <span class="keyword">from</span> xxx  <span class="keyword">group</span> <span class="keyword">by</span> a,b,func(c)</span><br></pre></td></tr></table></figure></p>

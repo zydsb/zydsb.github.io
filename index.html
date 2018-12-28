@@ -692,7 +692,7 @@
       
         
           
-            <p>不提爱情，我觉得自己在某些方面还是蛮孤独的，有时享受，有时难受。书中提到：<strong>好多人在说自己孤独，说自己孤独的人其实并不孤独。孤独不是受到冷落和遗弃，而是无知己，不被理解。真正的孤独者不言孤独，偶尔做些长啸，如我们看到的兽</strong>一句话写出了所有的毛病。</p>
+            <p>不提爱情，我觉得自己在某些方面还是蛮孤独的，有时享受，有时难受。书中提到：<strong>好多人在说自己孤独，说自己孤独的人其实并不孤独。孤独不是受到冷落和遗弃，而是无知己，不被理解。真正的孤独者不言孤独，偶尔做些长啸，如我们看到的兽。</strong>一句话写出了所有的毛病。</p>
 <p>前面两章读起来很有味道，第三章之后便是草草翻阅，大概阅历是可以看的，但是风土人情是应当自己的去感受体会的，看书里面写再多，也不如去到靖边之类的地方住上几日，吃上一碗地地道道的羊肉泡馍。</p>
 <p>洒脱的人生态度很好，但是诸多见解还是无法认同。</p>
 
@@ -814,7 +814,7 @@
       
         
           
-            <h3 id="写在最前"><a href="#写在最前" class="headerlink" title="写在最前"></a>写在最前</h3><p>这篇文章主要针对自己业务场景中遇到的SQL性能问题进行一下总结，性能对工作效率的影响还是蛮大的。</p>
+            <h3 id="写在最前"><a href="#写在最前" class="headerlink" title="写在最前"></a>写在最前</h3><p>主要说一下我们平时查询中会遇到的一些性能问题。</p>
 <h3 id="Map-join"><a href="#Map-join" class="headerlink" title="Map join"></a>Map join</h3><p>基于join的性质，我们可以知道把小表放在join的左边，可以有效地减少数据量（基本习惯）。同时我们开启<code>map join</code>，小表数据会被广播到各个节点，消除shuffle运算。</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> hive.auto.convert.join = <span class="literal">true</span> ; <span class="comment">-- 开启自动转化成mapjoin</span></span><br><span class="line"><span class="keyword">set</span> hive.mapjoin.smalltable.filesize = <span class="number">2500000</span> ; <span class="comment">-- 设置广播小表size</span></span><br></pre></td></tr></table></figure>
 <h3 id="distinct"><a href="#distinct" class="headerlink" title="distinct"></a>distinct</h3><h4 id="多列或者一列去重"><a href="#多列或者一列去重" class="headerlink" title="多列或者一列去重"></a>多列或者一列去重</h4><p>hive是通过<code>group by</code>实现<code>distinct</code>的,如下代码hive的执行计划其实是完全一致的<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span>  <span class="keyword">distinct</span> a,b,func(c) <span class="keyword">as</span> tt  <span class="keyword">from</span> xxx ;</span><br><span class="line"><span class="keyword">select</span>  a,b,func(c) <span class="keyword">as</span> tt  <span class="keyword">from</span> xxx  <span class="keyword">group</span> <span class="keyword">by</span> a,b,func(c)</span><br></pre></td></tr></table></figure></p>
