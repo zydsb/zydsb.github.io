@@ -232,6 +232,133 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/About-Application/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/About-Application/" itemprop="url">关于查询的执行过程</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-29T12:21:30+08:00">
+                2018-12-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="写在最前"><a href="#写在最前" class="headerlink" title="写在最前"></a>写在最前</h3><p>前文提到过查询的优化问题，这里我们了解下怎么更精准地去找到到底是哪里出了问题。</p>
+<h3 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h3><p>这里我们在<code>hive shell</code>里面执行任务时的日志信息，里面可以获取很多信息，这里我们先看一下Application，Task ，Job和Stage这几个概念，这里借鉴一下Spark的…<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Application：User program built on Spark. Consists of a driver program and executors on the cluster.</span><br><span class="line">Task：A unit of work that will be sent to one executor</span><br><span class="line">Job：A parallel computation consisting of multiple tasks that gets spawned in response to a Spark action (e.g. save, collect); you&apos;ll see this term used in the driver&apos;s logs.</span><br><span class="line">Stage：Each job gets divided into smaller sets of tasks called stages that depend on each other (similar to the map and reduce stages in MapReduce); you&apos;ll see this term used in the driver&apos;s logs.</span><br></pre></td></tr></table></figure></p>
+<p>更直观地感受就是去看一下shell里输出的日志信息，里面都是有用的。这里画了一下图，助于理解<br><img src="/images/Application.png" alt="结构"></p>
+<h3 id="执行"><a href="#执行" class="headerlink" title="执行"></a>执行</h3><ul>
+<li>如果发现查询过程中效率很低，这个时候先观察日志，到底是哪一步慢了，至少细化到Stage粒度</li>
+<li>explain yourfile.hql，查看hive的执行计划</li>
+</ul>
+<p>这里就不贴实际的代码和输出的信息了，在公司环境上搞的，还是稳健一点比较好。<br>虽然对Spark了解不多，但感觉对其优化应该也是这么一个思路吧，后面该开始了解一下Spark了。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://snailed.cn/The-Zen-of-Python/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1482,154 +1609,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Hive-Serde/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/Hive-Serde/" itemprop="url">Hive-Serde</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-09T13:59:36+08:00">
-                2018-12-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>SerDe是Serialize/Deserialize的简称，即序列化和和反序列化</p>
-<h3 id="序列化的作用"><a href="#序列化的作用" class="headerlink" title="序列化的作用"></a>序列化的作用</h3><ul>
-<li><p>序列化是对象转化为字节序列的过程 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Row object --&gt; Serializer --&gt; &lt;key, value&gt; --&gt; OutputFileFormat --&gt; HDFS files</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>反序列化是字节序列恢复为对象的过程</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HDFS files --&gt; InputFileFormat --&gt; &lt;key, value&gt; --&gt; Deserializer --&gt; Row object</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>我们对对象序列化主要用于：</p>
-<ul>
-<li>对象的持久化</li>
-<li>对象的网络传送</li>
-</ul>
-</li>
-</ul>
-<p>Hive的反序列化是吧k-v数据反序列化成为Table里的列值，而不需要转化，为海量数据处理节省大量时间。 </p>
-<p>SerDe说明hive如何去处理一条记录，包括Serialize/Deserilize两个功能， Serialize把hive使用的java object转换成能写入hdfs的字节序列，或者其他系统能识别的流文件。Deserilize把字符串或者二进制流转换成hive能识别的java object对象。比如：select语句会用到Deserialize对象， 把hdfs数据解析出来；insert语句会使用Serilize，数据写入hdfs系统，需要把数据序列化。</p>
-<h3 id="SerDe的使用"><a href="#SerDe的使用" class="headerlink" title="SerDe的使用"></a>SerDe的使用</h3><p>Hive建表的时候可以使用自定义的SerDe或者Hive内置的SerDe类型指定数据的序列化和反序列化的方式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">--指定*.RequestSerde做Serde</span><br><span class="line"></span><br><span class="line">create table xxx</span><br><span class="line">(</span><br><span class="line"> userid  string ,</span><br><span class="line"> nickname string ,</span><br><span class="line"> xxx and so on </span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">PARTITIONED BY (</span><br><span class="line">  `year` string,</span><br><span class="line">  `month` string,</span><br><span class="line">  `day` string)</span><br><span class="line">ROW FORMAT SERDE</span><br><span class="line">  &apos;com.fenbi.ape.hive.serde.RequestSerde&apos;</span><br><span class="line">STORED AS INPUTFORMAT</span><br><span class="line">  &apos;org.apache.hadoop.mapred.TextInputFormat&apos;</span><br><span class="line">OUTPUTFORMAT</span><br><span class="line">  &apos;org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat&apos;</span><br><span class="line">LOCATION</span><br><span class="line">  &apos;hdfs://f04/log/tutor&apos;</span><br></pre></td></tr></table></figure>
-<h3 id="SerDe内置类型"><a href="#SerDe内置类型" class="headerlink" title="SerDe内置类型"></a>SerDe内置类型</h3><ul>
-<li>Avro </li>
-<li>ORC </li>
-<li>RegEx</li>
-<li>ThrifT</li>
-<li>Parquet</li>
-<li>CSV</li>
-<li>JsonSerDe</li>
-</ul>
-<h3 id="自定义类型"><a href="#自定义类型" class="headerlink" title="自定义类型"></a>自定义类型</h3><p><em>定义一个类，继承抽象类AbstractSerDe</em></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2018-10-18</span><br><span class="line">demo code to be added</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1680,7 +1659,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-count">30</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1693,7 +1672,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
