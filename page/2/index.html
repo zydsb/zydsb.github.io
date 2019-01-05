@@ -232,6 +232,194 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Monty_hall/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Monty_hall/" itemprop="url">蒙蒂大厅问题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-10T23:34:30+08:00">
+                2018-12-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近开始了解贝叶斯相关的东西，《贝叶斯思维》这本书开篇提到的“Monty Hall Problem”就很有趣（第一次我也错了。。。）这里就记录一下这个问题。</p>
+<h3 id="问题是什么"><a href="#问题是什么" class="headerlink" title="问题是什么"></a>问题是什么</h3><p>书里面描述有点多，直接简化来说现在有三道扇门，其中一扇后面有10w软妹币，另外两扇后面则是1软妹币,现在我们按如下的规则玩游戏：</p>
+<ul>
+<li>猜那个后面有大奖，猜中则拿到大奖</li>
+<li>让你先挑选一扇门，我们称之为A，另外两扇分别为B，C</li>
+<li>为了增加悬念，这个时候主持人会打开B，C中的任意一个，假设B吧（B，C中肯定可以开一个)</li>
+<li>然后主持人给你一个选择：是坚持最初的选择还是换到剩下未打开的门上</li>
+</ul>
+<p>我的第一反应是这俩没啥区别，既然开了一扇小的，那么剩下两扇门后面中大奖的概率应该是五五开的。但是一个贝叶斯主义者应该不这么看，此时的概率已经悄然改变。</p>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><h4 id="贝叶斯公式"><a href="#贝叶斯公式" class="headerlink" title="贝叶斯公式"></a>贝叶斯公式</h4><p>估计这个不需要介绍太多</p>
+<script type="math/tex; mode=display">P(A|B) = \frac{P(B)P(A|B)}{P(B}</script><p>通俗一点解释就是：</p>
+<script type="math/tex; mode=display">后验概率 = \frac{先验概率 \cdot 似然度}{标准化常量}</script><p>后文例子中：</p>
+<ul>
+<li>$p(H)$：先验概率</li>
+<li>$p(D \vert H)$：似然度，即在该假设下得到某数据的概率</li>
+<li>$p(D)$：标准化常量，即在任何假设下得到某数据的概率</li>
+<li>$p(H \vert D)$：后验概率，即看到新数据后，我们要计算的概率</li>
+</ul>
+<h4 id="定义事件"><a href="#定义事件" class="headerlink" title="定义事件"></a>定义事件</h4><p>我们可以把事件归纳为以下两件，其中重点是理解事件D</p>
+<ul>
+<li><p>H : 钱在门后面</p>
+</li>
+<li><p>D : <strong>打开门B且钱不在后面</strong></p>
+</li>
+</ul>
+<h4 id="算算概率"><a href="#算算概率" class="headerlink" title="算算概率"></a>算算概率</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>假设</th>
+<th>先验概率$p(H)$</th>
+<th>似然度$p(D \vert H)$</th>
+<th>$p(H)p(D \vert H)$</th>
+<th>后验概率$p(H \vert D)$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>假设A</td>
+<td>${1 \over 3}$</td>
+<td>${1 \over 2 }$</td>
+<td>${1 \over 6 }$</td>
+<td>${1 \over 3 }$</td>
+</tr>
+<tr>
+<td>假设B</td>
+<td>${1 \over 3}$</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>假设C</td>
+<td>${1 \over 3}$</td>
+<td>1</td>
+<td>${1 \over 3 }$</td>
+<td>${2 \over 3 }$</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>先验概率一眼而知，但是似然度就需要一些思考了，现在我们分开来看：</p>
+<ul>
+<li>对于假设A，即钱在A门后面，那么在这种情况下，BC两门任选，即$p(D \vert H)={1 \over 2}$</li>
+<li>对于假设B，主持人必须打开门C，此时$p(D \vert H)=0$</li>
+<li>对于假设C，主持人必须打开门B，此时$p(D \vert H)=1$</li>
+</ul>
+<p>算一算$p(D) = {1 \over 2}$,后面的后验概率也是呼之欲出了</p>
+<h4 id="个人思考"><a href="#个人思考" class="headerlink" title="个人思考"></a>个人思考</h4><p>个人感觉重点是理解似然度的计算，理解已经发生的事情对未知的事情（打开了门B且没有钱）对未知的事情（钱在哪一个门后面）产生的影响。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://snailed.cn/理解MapReduce/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1798,150 +1986,6 @@ a_3x+b_3y+c_3z=d_3\\\
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/读《人类简史》/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/读《人类简史》/" itemprop="url">读《人类简史》</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-20T00:24:53+08:00">
-                2018-11-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="思考的代价"><a href="#思考的代价" class="headerlink" title="思考的代价"></a><strong>思考的代价</strong></h4><blockquote>
-<p>人类大脑在变得越来越大的过程中，使智人更倾向于直立行走，也改变了女性的怀孕时间，<em>人类都是早产儿</em>（那剖腹产算什么？）<br>相较之下，人类转眼登上顶端，不仅让生态系统猝不及防，也让人类不知所措。<br>人类历史上的众多灾难，不论是生灵涂炭的战乱还是生态遭逢的浩劫，其实都是源于这场过于仓促的跳跃。    </p>
-</blockquote>
-<p>   我们在生活学习中面对巨大的跳跃的时候，还是应当稳健稳健，毕竟我们是个体，是我们自己意志主导的~   同时我们的不起眼的习惯，里面可能有大文章</p>
-<h4 id="替代理论"><a href="#替代理论" class="headerlink" title="替代理论"></a><strong>替代理论</strong></h4><p>类似于美洲大陆被欧洲人发现时的印第安人大屠杀，历史上智人也许对尼安德特人挥起了屠刀。<br>  <em>纳粹</em></p>
-<h4 id="人际交往的限制"><a href="#人际交往的限制" class="headerlink" title="人际交往的限制"></a><strong>人际交往的限制</strong></h4><blockquote>
-<p>社会研究指出，根据八卦来维持的最大’自然’团体就是150人。只要超过这个数字，大多数人就无法真正深入了解，八卦所有成员的生活情形。 </p>
-</blockquote>
-<p>  <em>我也觉得的太多的交际反而让我感到不安</em><br> 不过随着移动互联网的发展 ，改善了我们的交流方式，这个数字应该不止150人，但是face to face来的感情才是最真的！  </p>
-<h4 id="我们的智力"><a href="#我们的智力" class="headerlink" title="我们的智力"></a><strong>我们的智力</strong></h4><p>   <em>讨论虚构的事物，是人类特有的能力</em><br>   叫拉布拉多来算微积分？，不如让它来泼墨吧！  </p>
-<h4 id="新旧之别"><a href="#新旧之别" class="headerlink" title="新旧之别"></a><strong>新旧之别</strong></h4><p>书中观点认为虽然我们现代人的知识量可谓是碾压采集时代的人，但是就单体所掌握的来说，现代人是比不上古人的。其理由在于那个时代的人们需要求生而掌握的知识和技巧远远多于现代人，例如他们需要知道动植物的习性，需要明白地形天气，也要知道怎么走怎么运动才是最省力的等等（PS:他们的身体素质也应该远超过绝大多数的现代人）。不过我认为这就是进化的好处，在之前智人因为语言等文化称霸了人类，于是这也就是成了我们的进化方向，我必须承认绝大多数的我们都是普通的人，没有超乎常人的智力，但是我们可以通过合作达成’1+1&gt;2’的效果，我们现在不需要个人你掌握很多很多的东西，<strong>Team  Work</strong>可以创造更多。  </p>
-<p>  书中还提到了幸福感的问题，作者的观点认为是采集时代的智人会比现在更加幸福，因为没有这么多的压力疾病之类的。虽然也很有道理，但是我认为幸福永远是我们自己的事，应当自己去追求的，比谁更幸福真心没用。  </p>
-<h4 id="宗教"><a href="#宗教" class="headerlink" title="宗教"></a><strong>宗教</strong></h4><p>在远古时期的人类是相信<em>泛神论</em>（各种宗教，图腾，邪教之类的）的，他们认为万物有灵（拉丁语中’anima’既是’灵魂’意思），再普通不过的石头小草都是有灵性的，这一点上，现在世界的绝大多数教派都达成了共识，我会觉得很神奇，为什么当时还几乎没有任何联系的会在上面达成让人惊讶的一致，我猜应该是我们基因决定的吧，再多的不同，可是我们终究发源于同一个地方，生活在同一片天空之下。不过作为一名还比较坚定的无神论者  <strong>待续</strong>  </p>
-<h4 id="关于生态"><a href="#关于生态" class="headerlink" title="关于生态"></a><strong>关于生态</strong></h4><p>人类造成了世界上绝大所数生物的灭绝 ，在向其他陆地进发的时候，作为狩猎者的人类可谓是见神杀神见佛杀佛，无所不用其极，<em>能好怎</em>用得是出神入化。</p>
-<h4 id="小麦驯化了智人"><a href="#小麦驯化了智人" class="headerlink" title="小麦驯化了智人"></a><strong>小麦驯化了智人</strong></h4><p>智人由采集的生活转换为农业，限制了自己的活动空间，改变了自己做的事情，换个角度想来，说智人驯化了人类也没错。  </p>
-<h4 id="关于历史"><a href="#关于历史" class="headerlink" title="关于历史"></a><strong>关于历史</strong></h4><blockquote>
-<p>在现代晚期之前，总人口有九成以上都是农民，日出而作，日落而息。他们生产出的粮食养活了一小撮的精英分子：国王，官员，战士，艺术家，思想家，科学家，但历史写的几乎全是这些人的故事。于是历史只告诉了我们极少数的人在作什么，而其他绝大多数人的生活就是不停地跳水耕田。  </p>
-</blockquote>
-<p>我认为这是理所应当的，大自然的法则便是<strong>优胜劣汰</strong>，但莫要成为那种精致的利己主义者就好，享受了资源，便理所应当地付出。艺术家给人精神享受，思想家带给我们不同的精神世界，科学家去探索世界的真相，政府机构组织起了庞大的人类社会等等等…  </p>
-<h4 id="秩序"><a href="#秩序" class="headerlink" title="秩序"></a><strong>秩序</strong></h4><p>现代我们社会的秩序其实来源于人类极致的想象能力，最有名的比如美国的《独立宣言》，’联合国’等。秩序由人类制定，但也得由人类接受才能有效。<br><strong>我接受的教育是人人平等，但先天的影响与后天的作为着实是不平等的</strong></p>
-<h4 id="历史从无正义"><a href="#历史从无正义" class="headerlink" title="历史从无正义"></a><strong>历史从无正义</strong></h4><p>在我读完看来，其实男女是平等的，历史上的人做了符合当时情况的选择，也就是最大似然估计。在面对战争,生产,甚至某些创作的时候，大多数情况下所表现出来的能力优于女性，于是被选择了。若不信可以试试，假设有一个国家，其女性的决定性的能力高于男性，那发展100年或者更久之后，这个国家会不会就是现在大多数国家的镜像，只不过男女颠倒而已。再加一点，上个世纪开始的关于女性人权的讨论，大多数不也是那些能力卓越的女性所领导的。所以这并不是男女的区别，而是能力的问题。<br><strong>我还是坚决支持男女平等的，公平竞争多好啊</strong>  </p>
-<h4 id="关于历史的融合与统一"><a href="#关于历史的融合与统一" class="headerlink" title="关于历史的融合与统一"></a><strong>关于历史的融合与统一</strong></h4><p>曾经读到一本书，大意是：“人类发展到最后必然走向统一，且在无比巨大的人口基数下，帝国是最好的方式”。这类的问题我没有过多的思考过，不过我想我最应该注意的是自己的生活，如果能够和家人幸福地生活下去，那其他的又有什么重要？  </p>
-<h4 id="Money"><a href="#Money" class="headerlink" title="Money"></a><strong>Money</strong></h4><p>金钱是有史以来最普遍也是最有效的互信系统。  </p>
-<h4 id="关于帝国"><a href="#关于帝国" class="headerlink" title="关于帝国"></a><strong>关于帝国</strong></h4><p>2200年前的今天，也许我的祖先还被人称做‘蛮子’，可是现在他的子孙也被叫做汉人。我们应该这么安慰自己：我们只是时间长河上一滴水，大家一起打出其中的一些水花便被蒸发，可是百川入海。PS：我也不知道我写的这句话有什么意思..  </p>
-<h4 id="资本主义"><a href="#资本主义" class="headerlink" title="资本主义"></a><strong>资本主义</strong></h4><p>是人类的自私与懒惰促进了现代的发展？</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1992,7 +2036,7 @@ a_3x+b_3y+c_3z=d_3\\\
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2042,7 +2086,7 @@ a_3x+b_3y+c_3z=d_3\\\
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
