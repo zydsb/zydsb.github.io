@@ -79,16 +79,16 @@
 
 
 
-<meta name="description" content="没事乱写点东西">
+<meta name="description" content="不要温和地走进那个良夜">
 <meta property="og:type" content="website">
 <meta property="og:title" content="| Yang |">
 <meta property="og:url" content="http://snailed.cn/page/2/index.html">
 <meta property="og:site_name" content="| Yang |">
-<meta property="og:description" content="没事乱写点东西">
+<meta property="og:description" content="不要温和地走进那个良夜">
 <meta property="og:locale" content="en">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="| Yang |">
-<meta name="twitter:description" content="没事乱写点东西">
+<meta name="twitter:description" content="不要温和地走进那个良夜">
 
 
 
@@ -218,6 +218,149 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/小球称重问题/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/小球称重问题/" itemprop="url">小球称重问题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-14T02:12:12+08:00">
+                2018-12-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>有 12 个球，外形相同，其中一个小球的质量与其他 11 个不同，给一个天平，需要几次把这个小球找出来并且求出这个小球是比其他的轻还是重?</p>
+<h3 id="思考轨迹"><a href="#思考轨迹" class="headerlink" title="思考轨迹"></a>思考轨迹</h3><p>首先想到的当然是分组称重这样的解法：</p>
+<ul>
+<li>均分为三组，每组四个</li>
+<li>取任意两组称重，若天平平衡，则剩下一组含有特殊小球，两次称重可以找出；若失去平衡，那就麻烦了。。。。</li>
+</ul>
+<p>这样是不稳定的。</p>
+<p>想了一阵，心里面的答案感觉肯定还是三个，但是并没想到怎么解。</p>
+<p>后上网看了下，涨了姿势:</p>
+<ul>
+<li>有12个小球，分别有重和不重两种状态，即有24种可能，那么信息熵为$H(x)=24 \cdot {1 \over 24} \cdot \log_2{24}  \approx 4.58bit $</li>
+<li>我们每一次称重存在三种状态，即轻、重、平衡，那么每一次称重的熵为$H(x)=3 \cdot {1 \over 3} \cdot \log_2{3}  \approx 1.58bit $</li>
+<li>所以理论上称重次数为${4.58 \over 1.58} \approx 3$,三次即可找出小球</li>
+</ul>
+<p>100个，1000个也是同理，从信息论的角度来看只是熵大小的差别。</p>
+<p>同理，给定称重次数N，也可以反推回去最多可以称多少个小球。（$n = \frac {3^N-3}{2}$）</p>
+<h3 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h3><p>概括一下就是：</p>
+<ul>
+<li>分为三组</li>
+<li>平衡Pass，若不平衡，则引入三个正常球替换三个球</li>
+<li>…</li>
+</ul>
+<h3 id="final"><a href="#final" class="headerlink" title="final"></a>final</h3><p>在金勇的博客上看到这个问题，于此写下回答。</p>
+<p>在解决很多常规想法看起来不好确定的问题的时候，从熵的角度去看会很有用。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -1888,129 +2031,6 @@ a_3x+b_3y+c_3z=d_3\\\
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Seaborn/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/Seaborn/" itemprop="url">Seaborn</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-20T00:44:52+08:00">
-                2018-11-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>明晚来更新，不然这周不喝可乐了！</p>
-<p>2018-11-20,这周没有可乐喝了。。。sad </p>
-<p>不过今天了解了下序列化和反序列化的东西，后面写出来一下</p>
-<p>zhangyang chishibani!</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2051,7 +2071,7 @@ a_3x+b_3y+c_3z=d_3\\\
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
               <p class="site-author-name" itemprop="name">zhangyang</p>
-              <p class="site-description motion-element" itemprop="description">没事乱写点东西</p>
+              <p class="site-description motion-element" itemprop="description">不要温和地走进那个良夜</p>
           </div>
 
           <nav class="site-state motion-element">
@@ -2061,7 +2081,7 @@ a_3x+b_3y+c_3z=d_3\\\
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-count">34</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
