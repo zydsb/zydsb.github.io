@@ -232,6 +232,429 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/About-Application/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/About-Application/" itemprop="url">关于查询的执行过程</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-29T12:21:30+08:00">
+                2018-12-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="写在最前"><a href="#写在最前" class="headerlink" title="写在最前"></a>写在最前</h3><p>前文提到过查询的优化问题，这里我们了解下怎么更精准地去找到到底是哪里出了问题。</p>
+<h3 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h3><p>这里我们在<code>hive shell</code>里面执行任务时的日志信息，里面可以获取很多信息，这里我们先看一下Application，Task ，Job和Stage这几个概念，这里借鉴一下Spark的…<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Application：User program built on Spark. Consists of a driver program and executors on the cluster.</span><br><span class="line">Task：A unit of work that will be sent to one executor</span><br><span class="line">Job：A parallel computation consisting of multiple tasks that gets spawned in response to a Spark action (e.g. save, collect); you&apos;ll see this term used in the driver&apos;s logs.</span><br><span class="line">Stage：Each job gets divided into smaller sets of tasks called stages that depend on each other (similar to the map and reduce stages in MapReduce); you&apos;ll see this term used in the driver&apos;s logs.</span><br></pre></td></tr></table></figure></p>
+<p>更直观地感受就是去看一下shell里输出的日志信息，里面都是有用的。这里画了一下图，助于理解<br><img src="/images/Application.png" alt="结构"></p>
+<h3 id="执行"><a href="#执行" class="headerlink" title="执行"></a>执行</h3><ul>
+<li>如果发现查询过程中效率很低，这个时候先观察日志，到底是哪一步慢了，至少细化到Stage粒度</li>
+<li>explain yourfile.hql，查看hive的执行计划</li>
+</ul>
+<p>这里就不贴实际的代码和输出的信息了，在公司环境上搞的，还是稳健一点比较好。<br>虽然对Spark了解不多，但感觉对其优化应该也是这么一个思路吧，后面该开始了解一下Spark了。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/The-Zen-of-Python/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/The-Zen-of-Python/" itemprop="url">蛇宗三字经</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-26T00:37:28+08:00">
+                2018-12-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> this</span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">The Zen of Python, by Tim Peters</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Beautiful is better than ugly.</span></span><br><span class="line"><span class="string">Explicit is better than implicit.</span></span><br><span class="line"><span class="string">Simple is better than complex.</span></span><br><span class="line"><span class="string">Complex is better than complicated.</span></span><br><span class="line"><span class="string">Flat is better than nested.</span></span><br><span class="line"><span class="string">Sparse is better than dense.</span></span><br><span class="line"><span class="string">Readability counts.</span></span><br><span class="line"><span class="string">Special cases aren't special enough to break the rules.</span></span><br><span class="line"><span class="string">Although practicality beats purity.</span></span><br><span class="line"><span class="string">Errors should never pass silently.</span></span><br><span class="line"><span class="string">Unless explicitly silenced.</span></span><br><span class="line"><span class="string">In the face of ambiguity, refuse the temptation to guess.</span></span><br><span class="line"><span class="string">There should be one-- and preferably only one --obvious way to do it.</span></span><br><span class="line"><span class="string">Although that way may not be obvious at first unless you're Dutch.</span></span><br><span class="line"><span class="string">Now is better than never.</span></span><br><span class="line"><span class="string">Although never is often better than *right* now.</span></span><br><span class="line"><span class="string">If the implementation is hard to explain, it's a bad idea.</span></span><br><span class="line"><span class="string">If the implementation is easy to explain, it may be a good idea.</span></span><br><span class="line"><span class="string">Namespaces are one honking great idea -- let's do more of those!</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure>
+<p>翻译一下:</p>
+<p><strong>Python之禅</strong></p>
+<p>优美胜于丑陋（Python 以编写优美的代码为目标）<br>明了胜于晦涩（优美的代码应当是明了的，命名规范，风格相似）<br>简洁胜于复杂（优美的代码应当是简洁的，不要有复杂的内部实现）<br>复杂胜于凌乱（如果复杂不可避免，那代码间也不能有难懂的关系，要保持接口简洁）<br>扁平胜于嵌套（优美的代码应当是扁平的，不能有太多的嵌套）<br>间隔胜于紧凑（优美的代码有适当的间隔，不要奢望一行代码解决问题）<br>可读性很重要（优美的代码是可读的）<br>即便假借特例的实用性之名，也不可违背这些规则（这些规则至高无上）<br>不要包容所有错误，除非你确定需要这样做（精准地捕获异常，不写 except:pass 风格的代码）<br>当存在多种可能，不要尝试去猜测<br>而是尽量找一种，最好是唯一一种明显的解决方案（如果不确定，就用穷举法）<br>虽然这并不容易，因为你不是 Python 之父（这里的 Dutch 是指 Guido ）<br>做也许好过不做，但不假思索就动手还不如不做（动手之前要细思量）<br>如果你无法向人描述你的方案，那肯定不是一个好方案；反之亦然（方案测评标准）<br>命名空间是一种绝妙的理念，我们应当多加利用（倡导与号召）</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/summary_2018/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/summary_2018/" itemprop="url">2018年终回顾</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-25T23:57:08+08:00">
+                2018-12-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>2018，我大学毕业的第一年<br>2018，我小学毕业的第十年</p>
+</blockquote>
+<h3 id="写在最前"><a href="#写在最前" class="headerlink" title="写在最前"></a>写在最前</h3><p>早有写下2018年终总结的计划，但是一直拖着没有写。今天是2018年12月29号，回想这一年来的种种，还是有一点感慨，里面随便挑一两个都对我的生活产生了巨大的影响，这里就一并写下来。</p>
+<h3 id="关于生活"><a href="#关于生活" class="headerlink" title="关于生活"></a>关于生活</h3><p>生活上最大的改变就是从宿舍搬到自己租的房间了，很幸运地和ruibin一起在公司附近租了一个两室一厅，每天都可以走路上下班了（租房那段时间辛苦ruibin老哥了…）从此离开了大学宿舍开始了自己一个人独立生活，少了些热闹，但多了些自由。不过有一点不好的就是每天还是一点多睡，早上九点多才醒。</p>
+<p>自打工作之后，吃得多了好了，体重也在缓慢增长，虽然已经趋于稳定…五月我在前辈们面前吹嘘我长不胖，现在想来当时前辈们看我的眼神大概是有了一种关爱智障的味道。</p>
+<p>和家里保持一周至少一通电话，不过妈妈说最近越来越想我了。</p>
+<p>运动也少了很多，正式入职之后经常晚上八点多九点才下班，回到家还是很疲倦的，周末也常和kk宅在家里，明年得改。</p>
+<p>五月份去了一趟泰山烟台；六月份毕业旅行去了伊犁；九月去了大连；国庆去了冰山梁，没有赶上十一月的泰国行。明年还是得多走走，读书和旅行都是好东西。</p>
+<p>今年看了蛮多电影和纪录片的，电影院上的、豆瓣Top榜单上的、B站上的纪录片等等，很开心。音乐方面Top3则是《Merry Christmas Mr. Lawrence》《きっとまたいつか 》《沧海一声笑》，工作或是读书都喜欢听~</p>
+<h3 id="关于爱情"><a href="#关于爱情" class="headerlink" title="关于爱情"></a>关于爱情</h3><p>很幸运今年认识了kk，从烟台之行后不久正式在一起，到现在感情越来越好。煽情的话就不在这里说啦，希望以后的日子可以一起走下去！</p>
+<p><img src="/images/xiata1.jpeg" alt="毕业旅行之夏塔"></p>
+<h3 id="关于工作"><a href="#关于工作" class="headerlink" title="关于工作"></a>关于工作</h3><p>春招进入了猿辅导，很开心。</p>
+<p>三月到六月是实习期，这段时间主要熟悉贵司的业务与上手自己的工作，期间很多认识了很多优秀的同学，教会了我很多东西，这里要特别感谢金勇，在刚进公司的初期给了我很多指导，直到现在依然很受用。</p>
+<p>七月开始正式入职，开始全面对接辅导运营推广及部分小学产品的数据工作，中间具体细节不谈。年终回顾一下，领导给予了肯定，对接的同学没有直接问，不过应该也还是可以的。</p>
+<h3 id="关于学习"><a href="#关于学习" class="headerlink" title="关于学习"></a>关于学习</h3><h4 id="学校"><a href="#学校" class="headerlink" title="学校"></a>学校</h4><p>我也忘了是什么时候查的考研分数，鉴于数学涂错答题卡这种操作，跪了。不过当时应该就是知道自己上不了自己想去的实验室了，于是决定春招。还是ruibin老哥抬了一手，内推了一下猿辅导，假期在家里没有玩很多，都是在准备面试，效率不是很高就是了。。。</p>
+<p>开学之后过几天就是面试，比较幸运地拿到了offer，其他同学也都是在准备复试之类的，最后全部都如愿上了研究生（感觉自己有点垃圾…），其后就开始了一边实习一边准备毕设的生活。</p>
+<p>毕业季呀。</p>
+<h4 id="自我学习"><a href="#自我学习" class="headerlink" title="自我学习"></a>自我学习</h4><p>自我学习主要还是来自工作上问题的解决和看书。</p>
+<p>工作上的坑基本都总结到了印象笔记里，主要说一说看了什么书吧:</p>
+<blockquote>
+<p>技术类</p>
+</blockquote>
+<ul>
+<li>《Hadoop基础教程》</li>
+<li>《数学之美》</li>
+<li>《贝叶斯思维》</li>
+<li>《利用Python进行数据分析》—重读</li>
+<li>《Hadoop权威指南》—在读</li>
+</ul>
+<blockquote>
+<p>人文社科类</p>
+</blockquote>
+<ul>
+<li>《菊与刀》</li>
+<li>《王阳明传》</li>
+<li>《乌合之众》</li>
+<li>《黄金时代》</li>
+<li>《活法》</li>
+<li>《自在独行》</li>
+<li>《墨菲定律》</li>
+</ul>
+<p>看得还不够。。。</p>
+<p><img src="/images/reading.jpeg" alt="我的书桌"></p>
+<h3 id="小眺2019"><a href="#小眺2019" class="headerlink" title="小眺2019"></a>小眺2019</h3><p>2018这么看来，其实总体还是偏好的。但也有还有很多没做好的事，都当做明年的flag吧。</p>
+<ul>
+<li>主观地展开一些工作</li>
+<li>学习一些统计和Java相关的知识，争取一月一本技术书籍，人文社科类的随性。</li>
+<li>坚持维护博客</li>
+<li>渐渐开始睡早点，醒早点，稳定于12点睡觉，七点半醒。</li>
+<li>带kk出去走一次长线</li>
+<li>学会吹口琴</li>
+<li>健身，这个随缘…</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://snailed.cn/TF-IDF/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1240,680 +1663,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Hive-Serde/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/Hive-Serde/" itemprop="url">Hive-Serde</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-09T13:59:36+08:00">
-                2018-12-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>SerDe是Serialize/Deserialize的简称，即序列化和和反序列化</p>
-<h3 id="序列化的作用"><a href="#序列化的作用" class="headerlink" title="序列化的作用"></a>序列化的作用</h3><ul>
-<li><p>序列化是对象转化为字节序列的过程 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Row object --&gt; Serializer --&gt; &lt;key, value&gt; --&gt; OutputFileFormat --&gt; HDFS files</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>反序列化是字节序列恢复为对象的过程</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HDFS files --&gt; InputFileFormat --&gt; &lt;key, value&gt; --&gt; Deserializer --&gt; Row object</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>我们对对象序列化主要用于：</p>
-<ul>
-<li>对象的持久化</li>
-<li>对象的网络传送</li>
-</ul>
-</li>
-</ul>
-<p>Hive的反序列化是吧k-v数据反序列化成为Table里的列值，而不需要转化，为海量数据处理节省大量时间。 </p>
-<p>SerDe说明hive如何去处理一条记录，包括Serialize/Deserilize两个功能， Serialize把hive使用的java object转换成能写入hdfs的字节序列，或者其他系统能识别的流文件。Deserilize把字符串或者二进制流转换成hive能识别的java object对象。比如：select语句会用到Deserialize对象， 把hdfs数据解析出来；insert语句会使用Serilize，数据写入hdfs系统，需要把数据序列化。</p>
-<h3 id="SerDe的使用"><a href="#SerDe的使用" class="headerlink" title="SerDe的使用"></a>SerDe的使用</h3><p>Hive建表的时候可以使用自定义的SerDe或者Hive内置的SerDe类型指定数据的序列化和反序列化的方式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">--指定*.RequestSerde做Serde</span><br><span class="line"></span><br><span class="line">create table xxx</span><br><span class="line">(</span><br><span class="line"> userid  string ,</span><br><span class="line"> nickname string ,</span><br><span class="line"> xxx and so on </span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">PARTITIONED BY (</span><br><span class="line">  `year` string,</span><br><span class="line">  `month` string,</span><br><span class="line">  `day` string)</span><br><span class="line">ROW FORMAT SERDE</span><br><span class="line">  &apos;com.fenbi.ape.hive.serde.RequestSerde&apos;</span><br><span class="line">STORED AS INPUTFORMAT</span><br><span class="line">  &apos;org.apache.hadoop.mapred.TextInputFormat&apos;</span><br><span class="line">OUTPUTFORMAT</span><br><span class="line">  &apos;org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat&apos;</span><br><span class="line">LOCATION</span><br><span class="line">  &apos;hdfs://f04/log/tutor&apos;</span><br></pre></td></tr></table></figure>
-<h3 id="SerDe内置类型"><a href="#SerDe内置类型" class="headerlink" title="SerDe内置类型"></a>SerDe内置类型</h3><ul>
-<li>Avro </li>
-<li>ORC </li>
-<li>RegEx</li>
-<li>ThrifT</li>
-<li>Parquet</li>
-<li>CSV</li>
-<li>JsonSerDe</li>
-</ul>
-<h3 id="自定义类型"><a href="#自定义类型" class="headerlink" title="自定义类型"></a>自定义类型</h3><p><em>定义一个类，继承抽象类AbstractSerDe</em></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2018-10-18</span><br><span class="line">demo code to be added</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Markdown中的数学公式/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/Markdown中的数学公式/" itemprop="url">Markdown中的数学公式</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-06T21:08:15+08:00">
-                2018-12-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="写在最前"><a href="#写在最前" class="headerlink" title="写在最前"></a>写在最前</h3><p>Markdown写东西是很舒服，不过难免会有用到数学公式的地方，之前的解决方式是在Word或者在线编辑器上写好，然后生成图片贴到文章上，这样缺点其实蛮多的（难以修改，格式混乱），现在有了MathJax这样的利器，今晚就跟着大神的<a href="https://www.cnblogs.com/q735613050/p/7253073.html" target="_blank" rel="noopener">博客</a>自己走一遍！</p>
-<h3 id="使用参考"><a href="#使用参考" class="headerlink" title="使用参考"></a>使用参考</h3><h4 id="如何插入公式"><a href="#如何插入公式" class="headerlink" title="如何插入公式"></a>如何插入公式</h4><ul>
-<li>行中公式(放在文中与其它文字混编)可以用<code>$</code>来标记</li>
-<li>独立公式可以用两个<code>$</code>来标记</li>
-<li>自动编号公式：<code>在每个公式末尾前使用\tag{行标}</code></li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">我们常说的欧拉公式$e^&#123;i\pi&#125;+1=0$</span><br></pre></td></tr></table></figure>
-<p>显示：<br>我们常说的欧拉公式$e^{i\pi}+1=0$</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$ e^&#123;i\pi&#125;+1=0 $$</span><br></pre></td></tr></table></figure>
-<p>显示：</p>
-<script type="math/tex; mode=display">e^{i\pi}+1=0</script><h4 id="输入上下标"><a href="#输入上下标" class="headerlink" title="输入上下标"></a>输入上下标</h4><p><code>^</code>表示商标，<code>_</code>表示下标，两者可以同时使用，也可以嵌套。如果遇到多个字符组成组成的内容，可以使用<code>{}</code>来表示为一个整体。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$ e^&#123;x^\pi&#125;=1+y^z $$</span><br></pre></td></tr></table></figure>
-<p>结果显示:</p>
-<script type="math/tex; mode=display">e^{x^\pi}=1+y^z</script><h4 id="如何输入括号和分隔符"><a href="#如何输入括号和分隔符" class="headerlink" title="如何输入括号和分隔符"></a>如何输入括号和分隔符</h4><p><code>()</code>、<code>|</code>还有<code>[]</code>都表示本身<code>{</code>需要使用<code>\</code>转义，即<code>\{\}</code>表示<code>{}</code>,可以用<code>\left</code>和<code>\right</code>命令表示大括号或分隔符。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$f(x,y,z)=e^&#123;xz&#125;+2x\left(3+\frac&#123;1+x&#125;&#123;1+xyz&#125;\right)$$</span><br></pre></td></tr></table></figure>
-<p>显示：</p>
-<script type="math/tex; mode=display">f(x,y,z)=e^{xz}+2x\left(3+\frac{1+x}{1+xyz}\right)</script><h4 id="如何输入分数"><a href="#如何输入分数" class="headerlink" title="如何输入分数"></a>如何输入分数</h4><p>利用<code>\frac{}{}</code>来表示，可以嵌套；使用<code>\frac ab</code>快速生成；<code>分子 \over 分母</code>可表示只有一层的分母<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$ \frac &#123;a+1&#125;&#123;b-1&#125; \quad and \quad \frac &#123;a-1&#125;b \quad and \quad &#123;a-1 \over b+1&#125;  $$</span><br></pre></td></tr></table></figure></p>
-<p>显示：</p>
-<script type="math/tex; mode=display">\frac {a+1}{b-1} \quad and \quad \frac {a-1}b \quad and \quad {a-1 \over b+1}</script><h4 id="如何输入开方"><a href="#如何输入开方" class="headerlink" title="如何输入开方"></a>如何输入开方</h4><p><code>\sqrt [根指数，省略时为2] {被开方数}</code>表示开方<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$\sqrt [3] &#123;xyz&#125;  \quad and \quad \sqrt &#123;x&#125;$$</span><br></pre></td></tr></table></figure></p>
-<p>显示：</p>
-<script type="math/tex; mode=display">\sqrt [3] {xyz}  \quad and \quad \sqrt {x}</script><h4 id="如何输入省略号"><a href="#如何输入省略号" class="headerlink" title="如何输入省略号"></a>如何输入省略号</h4><p>数学公式中常见的省略号有两种,<code>\ldots</code>表示与文本底线对齐的省略号,<code>\cdots</code>表示与文本中线对齐的省略号。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$P(w_1,w_2,\cdots,w_n|y_1,y_2,\cdots,y_n)=\frac&#123;P(y_1,y_2,\cdots,y_n|w_1,w_2,\cdots,w_n)P(w_1,w_2,\cdots,w_n)&#125;&#123;P(y_1,y_2,\cdots,y_n)&#125;$$</span><br></pre></td></tr></table></figure></p>
-<p>显示：</p>
-<script type="math/tex; mode=display">P(w_1,w_2,\cdots,w_n|y_1,y_2,\cdots,y_n)=\frac{P(y_1,y_2,\cdots,y_n|w_1,w_2,\cdots,w_n)P(w_1,w_2,\cdots,w_n)}{P(y_1,y_2,\cdots,y_n)}</script><h4 id="如何输入矢量"><a href="#如何输入矢量" class="headerlink" title="如何输入矢量"></a>如何输入矢量</h4><p><code>\vec{矢量}</code>来表示一个矢量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$ \vec&#123;a&#125; \cdot \vec&#123;c&#125; = 0 $$</span><br></pre></td></tr></table></figure></p>
-<p>显示：</p>
-<script type="math/tex; mode=display">\vec{a} \cdot \vec{c} = 0</script><h4 id="如何输入积分"><a href="#如何输入积分" class="headerlink" title="如何输入积分"></a>如何输入积分</h4><p><code>\int_积分下限^积分上限 {被积表达式}</code>表示一个积分<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$\int^a_b&#123;x^2&#125;\,&#123;\rm d&#125;x = &#123;1 \over 3&#125;(a^3-b^3)$$</span><br></pre></td></tr></table></figure></p>
-<p>显示：</p>
-<script type="math/tex; mode=display">\int^a_b{x^2}\,{\rm d}x = {1 \over 3}(a^3-b^3)</script><h4 id="如何输入极限运算"><a href="#如何输入极限运算" class="headerlink" title="如何输入极限运算"></a>如何输入极限运算</h4><p>使用<code>\lim_{变量 \to 表达式}</code>来表示极限，<code>\infty</code>表示取极限，前面可加正负号。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$\lim_&#123;n \to +\infty&#125; &#123;1 \over 1+e^&#123;-n&#125;&#125;=1$$</span><br></pre></td></tr></table></figure></p>
-<p>显示</p>
-<script type="math/tex; mode=display">\lim_{n \to +\infty} {1 \over 1+e^{-n}}=1</script><h4 id="如何表示累积运算"><a href="#如何表示累积运算" class="headerlink" title="如何表示累积运算"></a>如何表示累积运算</h4><p>使用<code>\sum_{下标表达式}^{上标表达式}{}</code>表示累加。<br>与之类似，使用<code>\prod</code>，<code>\bigcup</code>，<code>\bigcap</code>来分别输入累乘、并集和交集<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$\frac&#123;\pi&#125;&#123;4&#125; = \sum_&#123;n=0&#125;^&#123;\infty&#125;\frac&#123;(-1)^n&#125;&#123;2n+1&#125;$$</span><br></pre></td></tr></table></figure></p>
-<p>显示：</p>
-<script type="math/tex; mode=display">\frac{\pi}{4} = \sum_{n=0}^{\infty}\frac{(-1)^n}{2n+1}</script><h4 id="怎么输入希腊字母"><a href="#怎么输入希腊字母" class="headerlink" title="怎么输入希腊字母"></a>怎么输入希腊字母</h4><p>输入<code>\小写希腊字母英文全称</code>和<code>\首字母大写希腊字母英文全称</code>来分别输入小写和大写希腊字母。<br>对于大写希腊字母与现有字母相同的，直接输入大写字母即可。</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>输入</th>
-<th>显示</th>
-<th>输入</th>
-<th>显示</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><script type="math/tex">\alpha</script></td>
-<td>$\alpha$</td>
-<td><script type="math/tex">A</script></td>
-<td>$A$</td>
-</tr>
-<tr>
-<td><script type="math/tex">\beta</script></td>
-<td>$\beta$</td>
-<td><script type="math/tex">B</script></td>
-<td>$B$</td>
-</tr>
-<tr>
-<td><script type="math/tex">\gamma</script></td>
-<td>$\gamma$</td>
-<td><script type="math/tex">\Gamma</script></td>
-<td>$\Gamma$</td>
-</tr>
-<tr>
-<td><script type="math/tex">\delta</script></td>
-<td>$\delta$</td>
-<td><script type="math/tex">\Delta</script></td>
-<td>$\delta$</td>
-</tr>
-<tr>
-<td><script type="math/tex">\epsilon</script></td>
-<td>$\epsilon$</td>
-<td><script type="math/tex">E</script></td>
-<td>$E$</td>
-</tr>
-<tr>
-<td><script type="math/tex">\zeta</script></td>
-<td>$\zeta$</td>
-<td><script type="math/tex">Z</script></td>
-<td>$Z$</td>
-</tr>
-<tr>
-<td><script type="math/tex">\eta</script></td>
-<td>$\eta$</td>
-<td><script type="math/tex">\H</script></td>
-<td>$H$</td>
-</tr>
-<tr>
-<td><script type="math/tex">\theta</script></td>
-<td>$\theta$</td>
-<td><script type="math/tex">\Theta</script></td>
-<td>$\Theta$</td>
-</tr>
-<tr>
-<td><script type="math/tex">\iota</script></td>
-<td>$\iota$</td>
-<td><script type="math/tex">I</script></td>
-<td>$I$</td>
-</tr>
-<tr>
-<td><script type="math/tex">\kappa</script></td>
-<td>$\kappa$</td>
-<td><script type="math/tex">K</script></td>
-<td>$K$</td>
-</tr>
-<tr>
-<td><script type="math/tex">\lambda</script></td>
-<td>$\lambda$</td>
-<td><script type="math/tex">\Lambda</script></td>
-<td>$\Lambda$</td>
-</tr>
-<tr>
-<td><script type="math/tex">\nu</script></td>
-<td>$\nu$</td>
-<td><script type="math/tex">N</script></td>
-<td>$N$</td>
-</tr>
-<tr>
-<td><script type="math/tex">\mu</script></td>
-<td>$\mu$</td>
-<td><script type="math/tex">M</script></td>
-<td>$M$</td>
-</tr>
-<tr>
-<td><script type="math/tex">\xi</script></td>
-<td>$\xi$</td>
-<td><script type="math/tex">\Xi</script></td>
-<td>$\Xi$</td>
-</tr>
-<tr>
-<td><script type="math/tex">o</script></td>
-<td>$o$</td>
-<td><script type="math/tex">O</script></td>
-<td>$O$</td>
-</tr>
-<tr>
-<td><script type="math/tex">\pi</script></td>
-<td>$\pi$</td>
-<td><script type="math/tex">\Pi</script></td>
-<td>$\Pi$</td>
-</tr>
-<tr>
-<td><script type="math/tex">\rho</script></td>
-<td>$\rho$</td>
-<td><script type="math/tex">P</script></td>
-<td>$P$</td>
-</tr>
-<tr>
-<td><script type="math/tex">\sigma</script></td>
-<td>$\sigma$</td>
-<td><script type="math/tex">\Sigma</script></td>
-<td>$\Sigma$</td>
-</tr>
-<tr>
-<td><script type="math/tex">\tau</script></td>
-<td>$\tau$</td>
-<td><script type="math/tex">T</script></td>
-<td>$T$</td>
-</tr>
-<tr>
-<td><script type="math/tex">\upsilon</script></td>
-<td>$\upsilon$</td>
-<td><script type="math/tex">\Upsilon</script></td>
-<td>$\Upsilon$</td>
-</tr>
-<tr>
-<td><script type="math/tex">\phi</script></td>
-<td>$\phi$</td>
-<td><script type="math/tex">\Phi</script></td>
-<td>$\Phi$</td>
-</tr>
-<tr>
-<td><script type="math/tex">\chi</script></td>
-<td>$\chi$</td>
-<td><script type="math/tex">X</script></td>
-<td>$X$</td>
-</tr>
-<tr>
-<td><script type="math/tex">\psi</script></td>
-<td>$\psi$</td>
-<td><script type="math/tex">\Psi</script></td>
-<td>$\Psi$</td>
-</tr>
-<tr>
-<td><script type="math/tex">\omega</script></td>
-<td>$\omega$</td>
-<td><script type="math/tex">\Omega</script></td>
-<td>$\Omega$</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h4 id="大括号和行标的使用"><a href="#大括号和行标的使用" class="headerlink" title="大括号和行标的使用"></a>大括号和行标的使用</h4><p>使用<code>\left</code>和<code>\right</code>来创建自动匹配高度的 (圆括号)，[方括号] 和 {花括号} 。<br>在每个公式末尾前使用<code>\tag{行标}</code>来实现行标。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$$</span><br><span class="line">f\left(</span><br><span class="line">   \left[ </span><br><span class="line">     \frac&#123;</span><br><span class="line">       1+y</span><br><span class="line">     &#125;&#123;</span><br><span class="line">       \left(</span><br><span class="line">          \frac&#123;x&#125;&#123;y&#125;+\frac&#123;y&#125;&#123;x&#125;</span><br><span class="line">       \right)</span><br><span class="line">       \left(u+1\right)</span><br><span class="line">     &#125;+a</span><br><span class="line">   \right]^&#123;3/2&#125;</span><br><span class="line">\right)</span><br><span class="line">\tag&#123;行标&#125;</span><br><span class="line">$$</span><br></pre></td></tr></table></figure></p>
-<script type="math/tex; mode=display">
-f\left(
-   \left[ 
-     \frac{
-       1+y
-     }{
-       \left(
-          \frac{x}{y}+\frac{y}{x}
-       \right)
-       \left(u+1\right)
-     }+a
-   \right]^{3/2}
-\right)
-\tag{行标}</script><h4 id="特殊函数"><a href="#特殊函数" class="headerlink" title="特殊函数"></a>特殊函数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$  \sinx \quad and \quand \lnx \quad and \quad \max(a,b,c)  $$</span><br></pre></td></tr></table></figure>
-<p>显示：</p>
-<script type="math/tex; mode=display">\sin x \quad and \quad \ln x \quad and \quad \max(a,b,c)</script><h4 id="矩阵展示"><a href="#矩阵展示" class="headerlink" title="矩阵展示"></a>矩阵展示</h4><h5 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h5><p>起始标记<code>\begin{matrix}</code>，结束标记<code>\end{matrix}</code><br>每一行末尾标记<code>\\\</code>，行间元素之间以<code>&amp;</code>分隔<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$$\begin&#123;matrix&#125;</span><br><span class="line">1&amp;0&amp;1\\\</span><br><span class="line">0&amp;1&amp;1\\\</span><br><span class="line">0&amp;1&amp;0\\\</span><br><span class="line">\end&#123;matrix&#125;$$</span><br></pre></td></tr></table></figure></p>
-<p>显示：</p>
-<script type="math/tex; mode=display">\begin{matrix}
-1&0&1\\\
-0&1&1\\\
-0&1&0\\\
-\end{matrix}</script><h5 id="矩阵边框"><a href="#矩阵边框" class="headerlink" title="矩阵边框"></a>矩阵边框</h5><p>在起始、结束标记处用下列词替换 matrix</p>
-<ul>
-<li>pmatrix ：小括号边框</li>
-<li>bmatrix ：中括号边框</li>
-<li>Bmatrix ：大括号边框</li>
-<li>vmatrix ：单竖线边框</li>
-<li>Vmatrix ：双竖线边框<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$$\begin&#123;matrix&#125;</span><br><span class="line">1&amp;0&amp;1\\\</span><br><span class="line">0&amp;1&amp;1\\\</span><br><span class="line">0&amp;1&amp;0\\\</span><br><span class="line">\end&#123;matrix&#125;$$</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>显示：</p>
-<script type="math/tex; mode=display">\begin{pmatrix}
-1&0&1\\\
-0&1&1\\\
-0&1&0\\\
-\end{pmatrix}</script><h5 id="省略元素"><a href="#省略元素" class="headerlink" title="省略元素"></a>省略元素</h5><p>同上，添加<code>\vdots</code>代表斜省略号</p>
-<h5 id="方程组"><a href="#方程组" class="headerlink" title="方程组"></a>方程组</h5><p>case环境。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$$\begin&#123;cases&#125;</span><br><span class="line">a_1x+b_1y+c_1z=d_1\\</span><br><span class="line">a_2x+b_2y+c_2z=d_2\\</span><br><span class="line">a_3x+b_3y+c_3z=d_3\\</span><br><span class="line">\end&#123;cases&#125;</span><br><span class="line">$$</span><br></pre></td></tr></table></figure></p>
-<p>显示：</p>
-<script type="math/tex; mode=display">\begin{cases}
-a_1x+b_1y+c_1z=d_1\\\
-a_2x+b_2y+c_2z=d_2\\\
-a_3x+b_3y+c_3z=d_3\\\
-\end{cases}</script><h3 id="赶紧睡觉！！！"><a href="#赶紧睡觉！！！" class="headerlink" title="赶紧睡觉！！！"></a>赶紧睡觉！！！</h3>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/隐马尔科夫模型/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/隐马尔科夫模型/" itemprop="url">隐马尔科夫模型</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-06T01:19:40+08:00">
-                2018-12-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>一个很有趣的模型，适用于有限状态的的预测。下周搞完辅导的预测看看是怎么整股市的HMM预测的。</p>
-<ul>
-<li>有限状态序列Q</li>
-<li>有限观测系列T</li>
-</ul>
-<h3 id="马尔科夫"><a href="#马尔科夫" class="headerlink" title="马尔科夫"></a>马尔科夫</h3><blockquote>
-<p>俄国数学家安德烈·马尔可夫（俄语：Андрей Андреевич Марков）提出。</p>
-</blockquote>
-<p>第一次了解到马尔科夫这个概念，是16年的《随机信号分析课堂》上，应该是用于描述信号传输过程中信号，其中有限状态机、生成概率、转移概率之类的概念，也是在课上了解，不过当时听得云里雾里（主要是上课没认真，是真的遗憾），只记得老师讲的段子了：同学们现在课堂上睡不睡觉，并不取决于昨天晚上睡得好不好，而是取决于前一秒同学们想不想睡。</p>
-<p>不过马尔科夫的基本思想就是这样：下一状态的概率分布只能由当前状态决定，在时间序列中它前面的事件均与之无关（无记忆性）。这种特定类型的“无记忆性”称作马尔可夫性质。</p>
-<p>在马尔可夫链的每一步，系统根据概率分布，可以从一个状态变到另一个状态，也可以保持当前状态。状态的改变叫做转移，与不同的状态改变相关的概率叫做转移概率。</p>
-<p><img src="/images/markov.png" width="60%" border="0"></p>
-<h3 id="隐马尔科夫"><a href="#隐马尔科夫" class="headerlink" title="隐马尔科夫"></a>隐马尔科夫</h3><h4 id="写在最前"><a href="#写在最前" class="headerlink" title="写在最前"></a>写在最前</h4><p>这篇文章绝大部分内容来自互联网，只是自己跟着完全走了一遍并加入了一下自己的心得想法。</p>
-<p>隐马尔可夫模型，简称HMM(Hidden Markov Model), 是一种基于概率的统计分析模型，用来描述一个系统隐性状态的转移和隐性状态的表现概率。</p>
-<h4 id="举个栗子"><a href="#举个栗子" class="headerlink" title="举个栗子"></a>举个栗子</h4><p>假设我们有三个完全正常的骰子，分别是四面体D4，六面体D6，八面体D8（那么其每一面出现的概率分别是1/4,1/6,1/8）:<br><img src="/images/骰子00.png" width="100%" border="0"><br>然后我们就可以开始至骰子了：</p>
-<ul>
-<li>任意条一个骰子（每一个被挑中的概率是1/3）</li>
-<li>掷骰子（出现1-8之间的数字）<br>然后我们不同重复上述过程，即可得到一串数字（假设投十次）：<br><code>1 6 3 5 2 7 3 5 2 4</code><br>我们称这串数字是可见状态链</li>
-</ul>
-<p>当然我们今天要介绍的模型是隐马尔科夫模型，当然不会这么简单，其中还存在这一串隐含状态链，即在这里例子中可能是<code>D6 D8 D8 D6 D4 D8 D6 D6 D4 D8</code>或者其他的隐含状态链。</p>
-<p>一般我们在HMM中的马尔可夫链指的应该是隐含状态链，因为其存在这转化概率（即我们挑骰子过程中选择哪一个骰子），而可见状态是有隐含状态决定的，并不存在直接的转化概率。<br><img src="/images/touzi01.png" width="100%" border="0"><br>在这个例子里，D6的下一个状态是D4，D6，D8的概率都是1/3。D4，D8的下一个状态是D4，D6，D8的转换概率也都一样是1/3。我们其实可以随意设定转换概率的。比如，我们可以这样定义：D6后面不能接D4，D6后面是D6的概率是0.9，是D8的概率是0.1。这样就是一个新的HMM。</p>
-<p><img src="/images/骰子02.png" width="100%" border="0"></p>
-<p>前面我们说道马尔可夫链存在转化概率，且可见转态链没有，但是隐含状态与可见状态存在这输出概率，这个例子里面挺简单即<code>D4:1/4 D6:1/6 D8:1/8</code>当然也可以不是这个，加入赌场做点手脚不就变了嘛。</p>
-<p>其实对于HMM来说，如果提前知道所有隐含状态之间的转换概率和所有隐含状态到所有可见状态之间的输出概率，做模拟是相当容易的。但在实际运用中，往往会缺失一部分信息：有时候你知道骰子有几种，每种骰子是什么，但是不知道掷出来的骰子序列；有时候你知道骰子序列，剩下的什么都不知道。</p>
-<p><strong>主要解决这三类问题</strong></p>
-<ul>
-<li>知道骰子有几种（隐含状态数量），每种骰子是什么（转换概率），根据掷骰子掷出的结果（可见状态链），我想知道每次掷出来的都是哪种骰子（隐含状态链）。</li>
-<li>还是知道骰子有几种（隐含状态数量），每种骰子是什么（转换概率），根据掷骰子掷出的结果（可见状态链），我想知道掷出这个结果的概率。</li>
-<li>知道骰子有几种（隐含状态数量），不知道每种骰子是什么（转换概率），观测到很多次掷骰子的结果（可见状态链），我想反推出每种骰子是什么（转换概率）</li>
-</ul>
-<h4 id="来玩骰子吧"><a href="#来玩骰子吧" class="headerlink" title="来玩骰子吧"></a>来玩骰子吧</h4><p>假设我们给出下图所示的概率，求出现此序列的概率P:<br><img src="/images/骰子03.png" width="60%"><br>很简单可以这么算：</p>
-<script type="math/tex; mode=display">P = \frac {1} {3} \times \frac {1} {6} \times \frac {1} {3}  \times\frac {1} {8}  \times \frac {1} {3} \times \frac {1} {8}</script><p>现在我们看第一个问题，知道我有D4、D6、D8三个骰子（即知道隐含状态），也知道可见状态序列(1 6 3 5 2 7 3 5 2 4)，现在我想知道每次投出来的都是哪些骰子（解最大似然路径问题，假设每个包含当前可见状态的骰子被选中的概率相等）。这个问题是可以通过穷举的方式去解决的，即像上面一样去计算骰子组合的出现的概率，然后选择其中概率最大就OK，但是会出现计算量过大的问题（指数级增大）。</p>
-<p>一般解决这种问题的方式是采用<strong>维特比算法</strong>，通过<strong>DP思想</strong>去解决这个问题，当然这方面可以说的东西太多了…根本不是这里可以说清楚的，大学时《信息编码》这么课有使用这个算法去解码，当时觉得这个算法没啥用，现在真的被啪啪打脸！这里借用《数学之美》里面的一个京深铁路最短路径的问题一下解释。</p>
-<blockquote>
-<p>中国现在铁路网四通八达，打开12306就可以知道从北京去往深圳的铁路可以有很多种出行组合方式（石家庄郑州武汉上海等节点），现在不考虑时间问题，怎么走才是公里数最短的呢？<br>我们可以这样假设，即必然存在一条路径使得京深最短。现在先反推，我们可以知道如果我们从深圳回溯到其上一站A，则北京到A的公里数必然为最短的，不然我们的假设不成立。以此类推，我们在此路径上的任意一个节点，北京到其的距离也必然是最短的。<br>那么现在从正面开始看，即只要找到北京出发到每个层级节点的最优路径就好了（层级节点就是划分把全局最优化解为局部最优的重点）</p>
-</blockquote>
-<p>现在要做的话只需要搞一下基本就好了</p>
-<ul>
-<li>从序列长度为1算起，算序列长度为1时取到每个骰子的最大概率</li>
-<li>然后，逐渐增加长度，每增加一次长度，重新算一遍在这个长度下最后一个位置取到每个骰子的最大概率。因为上一个长度下的取到每个骰子的最大概率都算过了，重新计算的话其实不难。当我们算到最后一位时，就知道最后一位是哪个骰子的概率最大了。</li>
-<li>推出序列</li>
-</ul>
-<h4 id="HMM应用必要条件"><a href="#HMM应用必要条件" class="headerlink" title="HMM应用必要条件"></a>HMM应用必要条件</h4><ul>
-<li>隐性状态的转移必须满足马尔可夫性（二元或N元）</li>
-<li>隐性状态必须能够大概被估计</li>
-</ul>
-<p>HMM适用的问题：真正的状态(隐态)难以被估计，而状态与状态之间又存在联系</p>
-<h4 id="具体应用场景"><a href="#具体应用场景" class="headerlink" title="具体应用场景"></a>具体应用场景</h4><p>《数学之美》里面讲了一些例子，列一列</p>
-<ul>
-<li>语音识别</li>
-<li>中文分词</li>
-<li>拼音输入</li>
-<li>手写输入</li>
-<li>股市预测</li>
-<li>…</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1964,7 +1713,7 @@ a_3x+b_3y+c_3z=d_3\\\
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
