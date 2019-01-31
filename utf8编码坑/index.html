@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="Python,">
 
 
 
@@ -79,16 +79,18 @@
 
 
 
-<meta name="description" content="不要温和地走进那个良夜">
-<meta property="og:type" content="website">
-<meta property="og:title" content="| Yang |">
-<meta property="og:url" content="http://snailed.cn/archives/page/6/index.html">
+<meta name="description" content="保存文件是出现乱码文件缺失BOM的锅，用utf_8_sig解决…具体编码怎么回事参见BOM1df.to_csv(&quot;file&quot;,encoding=&quot;utf_8_sig&quot;) mysql-utf8mb4MySQL的字符设置….注意一下">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="utf8编码坑">
+<meta property="og:url" content="http://snailed.cn/utf8编码坑/index.html">
 <meta property="og:site_name" content="| Yang |">
-<meta property="og:description" content="不要温和地走进那个良夜">
+<meta property="og:description" content="保存文件是出现乱码文件缺失BOM的锅，用utf_8_sig解决…具体编码怎么回事参见BOM1df.to_csv(&quot;file&quot;,encoding=&quot;utf_8_sig&quot;) mysql-utf8mb4MySQL的字符设置….注意一下">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-01-31T17:46:03.494Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="| Yang |">
-<meta name="twitter:description" content="不要温和地走进那个良夜">
+<meta name="twitter:title" content="utf8编码坑">
+<meta name="twitter:description" content="保存文件是出现乱码文件缺失BOM的锅，用utf_8_sig解决…具体编码怎么回事参见BOM1df.to_csv(&quot;file&quot;,encoding=&quot;utf_8_sig&quot;) mysql-utf8mb4MySQL的字符设置….注意一下">
 
 
 
@@ -118,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://snailed.cn/archives/page/6/">
+  <link rel="canonical" href="http://snailed.cn/utf8编码坑/">
 
 
 
 
 
-  <title>Archive | | Yang |</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>utf8编码坑 | | Yang |</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -143,7 +145,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-archive">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -217,75 +219,148 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
-
-      <span class="archive-page-counter">
-        
-        
-         
-          
-        Nice! 51 posts in total. Keep on posting.
-      </span>
-
-      
-
-        
-        
-        
-
-        
-          
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2018">2018</h1>
-          </div>
-        
-        
-
-        
 
   <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/utf8编码坑/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/Hadoop-Sqoop/" itemprop="url">
-              
-                <span itemprop="name">Hadoop Sqoop</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">utf8编码坑</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-11-04T22:24:15+08:00" content="2018-11-04">
-          11-04
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-01T01:40:32+08:00">
+                2019-02-01
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
 
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
+      
 
+      
+        <h3 id="保存文件是出现乱码"><a href="#保存文件是出现乱码" class="headerlink" title="保存文件是出现乱码"></a>保存文件是出现乱码</h3><p>文件缺失BOM的锅，用<code>utf_8_sig</code>解决…具体编码怎么回事参见<a href="https://segmentfault.com/a/1190000004321605" target="_blank" rel="noopener">BOM</a><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.to_csv(<span class="string">"file"</span>,encoding=<span class="string">"utf_8_sig"</span>)</span><br></pre></td></tr></table></figure></p>
+<h3 id="mysql-utf8mb4"><a href="#mysql-utf8mb4" class="headerlink" title="mysql-utf8mb4"></a>mysql-utf8mb4</h3><p>MySQL的字符设置….注意一下</p>
+
+      
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/浅草キッド/" rel="next" title="浅草キッド">
+                <i class="fa fa-chevron-left"></i> 浅草キッド
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/archives/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/5/">5</a><span class="page-number current">6</span>
-  </nav>
+  </article>
 
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -293,6 +368,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -313,8 +392,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -365,6 +453,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#保存文件是出现乱码"><span class="nav-number">1.</span> <span class="nav-text">保存文件是出现乱码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql-utf8mb4"><span class="nav-number">2.</span> <span class="nav-text">mysql-utf8mb4</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -498,11 +602,32 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
 
@@ -555,43 +680,6 @@
   
 
   
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config("");
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
   
 
 
