@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Spark,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="什么是RDDRDD（Resilient Distributed Dataset）叫做弹性分布式数据集，是Spark中最基本的数据抽象，它代表一个不可变、可分区、里面的元素可并行计算的集合。RDD具有数据流模型的特点：  自动容错 位置感知性调度 可伸缩性  RDD允许用户在执行多个查询时显式地将工作集缓存在内存中，后续的查询能够重用工作集，这极大地提升了查询速度（持久化）。 RDD核心概念首先我们">
+<meta name="keywords" content="Spark">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spark学习笔记之RDD">
+<meta property="og:url" content="http://snailed.cn/Spark学习笔记之RDD/index.html">
+<meta property="og:site_name" content="| Yang |">
+<meta property="og:description" content="什么是RDDRDD（Resilient Distributed Dataset）叫做弹性分布式数据集，是Spark中最基本的数据抽象，它代表一个不可变、可分区、里面的元素可并行计算的集合。RDD具有数据流模型的特点：  自动容错 位置感知性调度 可伸缩性  RDD允许用户在执行多个查询时显式地将工作集缓存在内存中，后续的查询能够重用工作集，这极大地提升了查询速度（持久化）。 RDD核心概念首先我们">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-02-26T15:34:06.787Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spark学习笔记之RDD">
+<meta name="twitter:description" content="什么是RDDRDD（Resilient Distributed Dataset）叫做弹性分布式数据集，是Spark中最基本的数据抽象，它代表一个不可变、可分区、里面的元素可并行计算的集合。RDD具有数据流模型的特点：  自动容错 位置感知性调度 可伸缩性  RDD允许用户在执行多个查询时显式地将工作集缓存在内存中，后续的查询能够重用工作集，这极大地提升了查询速度（持久化）。 RDD核心概念首先我们">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://snailed.cn/Spark学习笔记之RDD/">
+
+
+
+
+
+  <title>Spark学习笔记之RDD | | Yang |</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">| Yang |</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Spark学习笔记之RDD/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Spark学习笔记之RDD</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-20T16:34:23+08:00">
+                2019-02-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="什么是RDD"><a href="#什么是RDD" class="headerlink" title="什么是RDD"></a>什么是RDD</h2><p>RDD（Resilient Distributed Dataset）叫做弹性分布式数据集，是Spark中最基本的数据抽象，它代表一个不可变、可分区、里面的元素可并行计算的集合。RDD具有数据流模型的特点：</p>
+<ul>
+<li>自动容错</li>
+<li>位置感知性调度</li>
+<li>可伸缩性</li>
+</ul>
+<p>RDD允许用户在执行多个查询时显式地将工作集缓存在内存中，后续的查询能够重用工作集，这极大地提升了查询速度（持久化）。</p>
+<h2 id="RDD核心概念"><a href="#RDD核心概念" class="headerlink" title="RDD核心概念"></a>RDD核心概念</h2><p>首先我们需要初始化Spark的上下文环境,Spark2.4.0版本应该是默认初始化了的。<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">from pyspark import SparkConf, SparkContext</span><br><span class="line">sc = SparkContext()</span><br></pre></td></tr></table></figure></p>
+<p>然后再创建RDD<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">intRDD = sc.parallelize([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>])</span><br><span class="line">intRDD.collect()</span><br><span class="line"></span><br><span class="line">stringRDD = sc.parallelize([<span class="string">'zhang'</span>,<span class="string">'yang'</span>])</span><br><span class="line">stringRDD.collect()</span><br></pre></td></tr></table></figure></p>
+<h2 id="转化运算"><a href="#转化运算" class="headerlink" title="转化运算"></a>转化运算</h2><p>转化运算是惰性的</p>
+<h3 id="RDD基本转化运算"><a href="#RDD基本转化运算" class="headerlink" title="RDD基本转化运算"></a>RDD基本转化运算</h3><h4 id="map运算"><a href="#map运算" class="headerlink" title="map运算"></a>map运算</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">intRDD.map(<span class="keyword">lambda</span> x:x+<span class="number">1</span>).collect()</span><br></pre></td></tr></table></figure>
+<pre><code>[2, 3, 4, 5, 6, 7, 3, 4]
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">intRDD.map(<span class="keyword">lambda</span> x:x**<span class="number">2</span>).collect()</span><br></pre></td></tr></table></figure>
+<pre><code>[1, 4, 9, 16, 25, 36, 4, 9]
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lines = sc.textFile(<span class="string">'README.md'</span>)</span><br><span class="line">lines.first()</span><br></pre></td></tr></table></figure>
+<pre><code>&#39;[![buildstatus](https://travis-ci.org/holdenk/learning-spark-examples.svg?branch=master)](https://travis-ci.org/holdenk/learning-spark-examples)&#39;
+</code></pre><h4 id="filter运算"><a href="#filter运算" class="headerlink" title="filter运算"></a>filter运算</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">pairs = lines.map(<span class="keyword">lambda</span> x:(x.split(<span class="string">' '</span>)[<span class="number">0</span>],x))</span><br><span class="line"></span><br><span class="line"><span class="comment">#对第二个元素进行筛选</span></span><br><span class="line"></span><br><span class="line">result = pairs.filter(<span class="keyword">lambda</span> keyValue:len(keyValue[<span class="number">1</span>])&lt;<span class="number">20</span>)</span><br><span class="line">result.collect()[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+<pre><code>(&#39;===============&#39;, &#39;===============&#39;)
+</code></pre><h4 id="distinct运算"><a href="#distinct运算" class="headerlink" title="distinct运算"></a>distinct运算</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">intRDD.distinct().collect()</span><br></pre></td></tr></table></figure>
+<pre><code>[4, 1, 5, 2, 6, 3]
+</code></pre><h4 id="randomsplit运算"><a href="#randomsplit运算" class="headerlink" title="randomsplit运算"></a>randomsplit运算</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sRDD = intRDD.randomSplit([<span class="number">0.1</span>,<span class="number">0.1</span>])</span><br><span class="line">print(len(sRDD))</span><br><span class="line">print(sRDD[<span class="number">0</span>].collect())</span><br><span class="line">print(sRDD[<span class="number">1</span>].collect())</span><br></pre></td></tr></table></figure>
+<pre><code>2
+[3, 4, 5, 2, 3]
+[1, 2, 6]
+</code></pre><h4 id="groupby运算"><a href="#groupby运算" class="headerlink" title="groupby运算"></a>groupby运算</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">result = intRDD.groupBy(<span class="keyword">lambda</span> x : x % <span class="number">2</span>).collect()</span><br><span class="line"><span class="keyword">for</span> x,y <span class="keyword">in</span> result:</span><br><span class="line">    print(x,sorted(y))</span><br></pre></td></tr></table></figure>
+<pre><code>0 [2, 2, 4, 6]
+1 [1, 3, 3, 5]
+</code></pre><h3 id="多个RDD转化运算"><a href="#多个RDD转化运算" class="headerlink" title="多个RDD转化运算"></a>多个RDD转化运算</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">intRDD1 = sc.parallelize([<span class="number">3</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">5</span>])</span><br><span class="line">intRDD2 = sc.parallelize([<span class="number">5</span>,<span class="number">6</span>,<span class="number">2</span>])</span><br><span class="line">intRDD3 = sc.parallelize([<span class="number">2</span>,<span class="number">7</span>])</span><br></pre></td></tr></table></figure>
+<h4 id="取并集"><a href="#取并集" class="headerlink" title="取并集"></a>取并集</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># union()</span></span><br><span class="line">print(intRDD1.union(intRDD2).union(intRDD3).collect()) <span class="comment">#取并集</span></span><br><span class="line">print(intRDD1.union(intRDD2).union(intRDD3).distinct().collect()) <span class="comment">#并集且去重</span></span><br></pre></td></tr></table></figure>
+<pre><code>[3, 1, 2, 5, 5, 5, 6, 2, 2, 7]
+[1, 2, 3, 5, 6, 7]
+</code></pre><h4 id="取交集"><a href="#取交集" class="headerlink" title="取交集"></a>取交集</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># intersection()</span></span><br><span class="line">print(intRDD1.intersection(intRDD2).intersection(intRDD3).collect())</span><br></pre></td></tr></table></figure>
+<pre><code>[2]
+</code></pre><h4 id="取差集"><a href="#取差集" class="headerlink" title="取差集"></a>取差集</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># subtract()</span></span><br><span class="line">print(intRDD1.subtract(intRDD2).collect())</span><br></pre></td></tr></table></figure>
+<pre><code>[1, 3]
+</code></pre><h4 id="笛卡尔积运算-cartesian"><a href="#笛卡尔积运算-cartesian" class="headerlink" title="笛卡尔积运算 cartesian()"></a>笛卡尔积运算 cartesian()</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># cartsection()</span></span><br><span class="line">print(intRDD1.cartesian(intRDD2).collect())</span><br></pre></td></tr></table></figure>
+<pre><code>[(3, 5), (3, 6), (3, 2), (1, 5), (1, 6), (1, 2), (2, 5), (2, 6), (2, 2), (5, 5), (5, 5), (5, 6), (5, 6), (5, 2), (5, 2)]
+</code></pre><h2 id="动作运算"><a href="#动作运算" class="headerlink" title="动作运算"></a>动作运算</h2><h3 id="基本动作运算"><a href="#基本动作运算" class="headerlink" title="基本动作运算"></a>基本动作运算</h3><h4 id="读取元素"><a href="#读取元素" class="headerlink" title="读取元素"></a>读取元素</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#取第一条数据</span></span><br><span class="line"><span class="keyword">print</span> (intRDD.first())</span><br><span class="line"><span class="comment">#取前两条数据</span></span><br><span class="line"><span class="keyword">print</span> (intRDD.take(<span class="number">2</span>))</span><br><span class="line"><span class="comment">#升序排列，并取前3条数据</span></span><br><span class="line"><span class="keyword">print</span> (intRDD.takeOrdered(<span class="number">3</span>))</span><br><span class="line"><span class="comment">#降序排列，并取前3条数据</span></span><br><span class="line"><span class="keyword">print</span> (intRDD.takeOrdered(<span class="number">3</span>,<span class="keyword">lambda</span> x:-x))</span><br></pre></td></tr></table></figure>
+<pre><code>1
+[1, 2]
+[1, 2, 2]
+[6, 5, 4]
+</code></pre><h4 id="统计值"><a href="#统计值" class="headerlink" title="统计值"></a>统计值</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#统计</span></span><br><span class="line"><span class="keyword">print</span> (intRDD.stats())</span><br><span class="line"><span class="comment">#最小值</span></span><br><span class="line"><span class="keyword">print</span> (intRDD.min())</span><br><span class="line"><span class="comment">#最大值</span></span><br><span class="line"><span class="keyword">print</span> (intRDD.max())</span><br><span class="line"><span class="comment">#标准差</span></span><br><span class="line"><span class="keyword">print</span> (intRDD.stdev())</span><br><span class="line"><span class="comment">#计数</span></span><br><span class="line"><span class="keyword">print</span> (intRDD.count())</span><br><span class="line"><span class="comment">#求和</span></span><br><span class="line"><span class="keyword">print</span> (intRDD.sum())</span><br><span class="line"><span class="comment">#平均</span></span><br><span class="line"><span class="keyword">print</span> (intRDD.mean())</span><br></pre></td></tr></table></figure>
+<pre><code>(count: 8, mean: 3.25, stdev: 1.5612494995995996, max: 6.0, min: 1.0)
+1
+6
+1.5612494995995996
+8
+26
+3.25
+</code></pre><h3 id="k-v转换"><a href="#k-v转换" class="headerlink" title="k-v转换"></a>k-v转换</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kvRDD1 = sc.parallelize([(<span class="number">3</span>,<span class="number">4</span>),(<span class="number">3</span>,<span class="number">6</span>),(<span class="number">5</span>,<span class="number">6</span>),(<span class="number">1</span>,<span class="number">2</span>)])</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(kvRDD1.keys().collect())</span><br></pre></td></tr></table></figure>
+<pre><code>[3, 3, 5, 1]
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(kvRDD1.values().collect())</span><br></pre></td></tr></table></figure>
+<pre><code>[4, 6, 6, 2]
+</code></pre><h4 id="筛选元素"><a href="#筛选元素" class="headerlink" title="筛选元素"></a>筛选元素</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">print</span> (kvRDD1.filter(<span class="keyword">lambda</span> x:x[<span class="number">0</span>] &lt; <span class="number">5</span>).collect())</span><br></pre></td></tr></table></figure>
+<pre><code>[(3, 4), (3, 6), (1, 2)]
+</code></pre><h4 id="值运算"><a href="#值运算" class="headerlink" title="值运算"></a>值运算</h4><p>使用mapvalue()进行排序</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(kvRDD1.mapValues(<span class="keyword">lambda</span> x:x**<span class="number">2</span>).collect())</span><br></pre></td></tr></table></figure>
+<pre><code>[(3, 16), (3, 36), (5, 36), (1, 4)]
+</code></pre><h4 id="按照key排序"><a href="#按照key排序" class="headerlink" title="按照key排序"></a>按照key排序</h4><p>sortByKey()，传入的参数默认为True，表示从小到大排序</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(kvRDD1.sortByKey().collect())</span><br></pre></td></tr></table></figure>
+<pre><code>[(1, 2), (3, 4), (3, 6), (5, 6)]
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(kvRDD1.sortByKey(<span class="keyword">False</span>).collect())</span><br></pre></td></tr></table></figure>
+<pre><code>[(5, 6), (3, 4), (3, 6), (1, 2)]
+</code></pre><h4 id="合并相同key值的数据"><a href="#合并相同key值的数据" class="headerlink" title="合并相同key值的数据"></a>合并相同key值的数据</h4><p>reduceByKey()</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(kvRDD1.reduceByKey(<span class="keyword">lambda</span> x,y:x+y).collect())</span><br></pre></td></tr></table></figure>
+<pre><code>[(5, 6), (1, 2), (3, 10)]
+</code></pre><h3 id="多个RDD-kv转化运算"><a href="#多个RDD-kv转化运算" class="headerlink" title="多个RDD kv转化运算"></a>多个RDD kv转化运算</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kvRDD1 = sc.parallelize([(<span class="number">3</span>,<span class="number">4</span>),(<span class="number">3</span>,<span class="number">6</span>),(<span class="number">5</span>,<span class="number">6</span>),(<span class="number">1</span>,<span class="number">2</span>)])</span><br><span class="line">kvRDD2 = sc.parallelize([(<span class="number">3</span>,<span class="number">8</span>)])</span><br></pre></td></tr></table></figure>
+<h4 id="内连接"><a href="#内连接" class="headerlink" title="内连接"></a>内连接</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(kvRDD1.join(kvRDD2).collect())</span><br></pre></td></tr></table></figure>
+<pre><code>[(3, (4, 8)), (3, (6, 8))]
+</code></pre><h4 id="左外连接"><a href="#左外连接" class="headerlink" title="左外连接"></a>左外连接</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(kvRDD1.leftOuterJoin(kvRDD2).collect())</span><br></pre></td></tr></table></figure>
+<pre><code>[(1, (2, None)), (3, (4, 8)), (3, (6, 8)), (5, (6, None))]
+</code></pre><h4 id="右外连接"><a href="#右外连接" class="headerlink" title="右外连接"></a>右外连接</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(kvRDD1.rightOuterJoin(kvRDD2).collect())</span><br></pre></td></tr></table></figure>
+<pre><code>[(3, (4, 8)), (3, (6, 8))]
+</code></pre><h4 id="删除相同key值数据"><a href="#删除相同key值数据" class="headerlink" title="删除相同key值数据"></a>删除相同key值数据</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(kvRDD1.subtractByKey(kvRDD2).collect())</span><br></pre></td></tr></table></figure>
+<pre><code>[(1, 2), (5, 6)]
+</code></pre><h3 id="kv-动作运算"><a href="#kv-动作运算" class="headerlink" title="kv-动作运算"></a>kv-动作运算</h3><h4 id="读取数据"><a href="#读取数据" class="headerlink" title="读取数据"></a>读取数据</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#读取第一条数据</span></span><br><span class="line">print(kvRDD1.first())</span><br><span class="line"><span class="comment">#读取前两条数据</span></span><br><span class="line">print(kvRDD1.take(<span class="number">2</span>))</span><br><span class="line"><span class="comment">#读取第一条数据的key值</span></span><br><span class="line">print(kvRDD1.first()[<span class="number">0</span>])</span><br><span class="line"><span class="comment">#读取第一条数据的value值</span></span><br><span class="line">print(kvRDD1.first()[<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+<pre><code>(3, 4)
+[(3, 4), (3, 6)]
+3
+4
+</code></pre><h4 id="按key值统计"><a href="#按key值统计" class="headerlink" title="按key值统计"></a>按key值统计</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(kvRDD1.countByKey())</span><br></pre></td></tr></table></figure>
+<pre><code>defaultdict(&lt;class &#39;int&#39;&gt;, {3: 2, 5: 1, 1: 1})
+</code></pre><h4 id="lookup查找"><a href="#lookup查找" class="headerlink" title="lookup查找"></a>lookup查找</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(kvRDD1.lookup(<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
+<pre><code>[4, 6]
+</code></pre><h3 id="持久化操作"><a href="#持久化操作" class="headerlink" title="持久化操作"></a>持久化操作</h3><p>spark RDD的持久化机制，可以将重复运算的RDD存储在内存中，可以大幅提升运算效率</p>
+<h4 id="持久化"><a href="#持久化" class="headerlink" title="持久化"></a>持久化</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kvRDD1.persist()</span><br></pre></td></tr></table></figure>
+<pre><code>ParallelCollectionRDD[24] at parallelize at PythonRDD.scala:195
+</code></pre><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>等级</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MEMORY_ONLY</td>
+<td>以反序列化的JAVA对象的方式存储在JVM中. 如果内存不够， RDD的一些分区将不会被缓存， 这样当再次需要这些分区的时候，将会重新计算。这是默认的级别。</td>
+</tr>
+<tr>
+<td>MEMORY_AND_DISK</td>
+<td>以反序列化的JAVA对象的方式存储在JVM中. 如果内存不够， RDD的一些分区将将会缓存在磁盘上，再次需要的时候从磁盘读取。</td>
+</tr>
+<tr>
+<td>MEMORY_ONLY_SER</td>
+<td>以序列化JAVA对象的方式存储 (每个分区一个字节数组). 相比于反序列化的方式,这样更高效的利用空间， 尤其是使用快速序列化时。但是读取是CPU操作很密集。</td>
+</tr>
+<tr>
+<td>MEMORY_AND_DISK_SER</td>
+<td>与MEMORY_ONLY_SER相似, 区别是但内存不足时，存储在磁盘上而不是每次重新计算。</td>
+</tr>
+<tr>
+<td>DISK_ONLY</td>
+<td>只存储RDD在磁盘</td>
+</tr>
+<tr>
+<td>MEMORY_ONLY_2, MEMORY_AND_DISK_2, etc.</td>
+<td>与上面的级别相同，只不过每个分区的副本只存储在两个集群节点上。</td>
+</tr>
+<tr>
+<td>OFF_HEAP (experimental)</td>
+<td>将RDD以序列化的方式存储在 Tachyon. 与 MEMORY_ONLY_SER相比, OFF_HEAP减少了垃圾回收。允许执行体更小通过共享一个内存池。因此对于拥有较大堆内存和高并发的环境有较大的吸引力。更重要的是，因为RDD存储在Tachyon上，执行体的崩溃不会造成缓存的丢失。在这种模式下.Tachyon中的内存是可丢弃的，这样 Tachyon 对于从内存中挤出的块不会试图重建它。如果你打算使用Tachyon作为堆缓存，Spark提供了与Tachyon相兼容的版本。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">#pyspark中封装了StorageLevel类，实现不同存储等级的存储</span></span><br><span class="line"><span class="keyword">from</span> pyspark.storagelevel <span class="keyword">import</span> StorageLevel</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, useDisk, useMemory, useOffHeap, deserialized, replication=<span class="number">1</span>)</span>:</span></span><br><span class="line">        self.useDisk = useDisk</span><br><span class="line">        self.useMemory = useMemory</span><br><span class="line">        self.useOffHeap = useOffHeap</span><br><span class="line">        self.deserialized = deserialized</span><br><span class="line">        self.replication = replication</span><br></pre></td></tr></table></figure>
+<h4 id="取消持久化"><a href="#取消持久化" class="headerlink" title="取消持久化"></a>取消持久化</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kvRDD1.unpersist()</span><br></pre></td></tr></table></figure>
+<pre><code>ParallelCollectionRDD[24] at parallelize at PythonRDD.scala:195
+</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Spark/" rel="tag"># Spark</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Spark学习笔记00/" rel="next" title="Spark学习笔记00">
+                <i class="fa fa-chevron-left"></i> Spark学习笔记00
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">zhangyang</p>
+              <p class="site-description motion-element" itemprop="description">不要温和地走进那个良夜</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">54</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是RDD"><span class="nav-number">1.</span> <span class="nav-text">什么是RDD</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RDD核心概念"><span class="nav-number">2.</span> <span class="nav-text">RDD核心概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#转化运算"><span class="nav-number">3.</span> <span class="nav-text">转化运算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RDD基本转化运算"><span class="nav-number">3.1.</span> <span class="nav-text">RDD基本转化运算</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#map运算"><span class="nav-number">3.1.1.</span> <span class="nav-text">map运算</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#filter运算"><span class="nav-number">3.1.2.</span> <span class="nav-text">filter运算</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#distinct运算"><span class="nav-number">3.1.3.</span> <span class="nav-text">distinct运算</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#randomsplit运算"><span class="nav-number">3.1.4.</span> <span class="nav-text">randomsplit运算</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#groupby运算"><span class="nav-number">3.1.5.</span> <span class="nav-text">groupby运算</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多个RDD转化运算"><span class="nav-number">3.2.</span> <span class="nav-text">多个RDD转化运算</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#取并集"><span class="nav-number">3.2.1.</span> <span class="nav-text">取并集</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#取交集"><span class="nav-number">3.2.2.</span> <span class="nav-text">取交集</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#取差集"><span class="nav-number">3.2.3.</span> <span class="nav-text">取差集</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#笛卡尔积运算-cartesian"><span class="nav-number">3.2.4.</span> <span class="nav-text">笛卡尔积运算 cartesian()</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动作运算"><span class="nav-number">4.</span> <span class="nav-text">动作运算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本动作运算"><span class="nav-number">4.1.</span> <span class="nav-text">基本动作运算</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#读取元素"><span class="nav-number">4.1.1.</span> <span class="nav-text">读取元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#统计值"><span class="nav-number">4.1.2.</span> <span class="nav-text">统计值</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#k-v转换"><span class="nav-number">4.2.</span> <span class="nav-text">k-v转换</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#筛选元素"><span class="nav-number">4.2.1.</span> <span class="nav-text">筛选元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#值运算"><span class="nav-number">4.2.2.</span> <span class="nav-text">值运算</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#按照key排序"><span class="nav-number">4.2.3.</span> <span class="nav-text">按照key排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#合并相同key值的数据"><span class="nav-number">4.2.4.</span> <span class="nav-text">合并相同key值的数据</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多个RDD-kv转化运算"><span class="nav-number">4.3.</span> <span class="nav-text">多个RDD kv转化运算</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#内连接"><span class="nav-number">4.3.1.</span> <span class="nav-text">内连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#左外连接"><span class="nav-number">4.3.2.</span> <span class="nav-text">左外连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#右外连接"><span class="nav-number">4.3.3.</span> <span class="nav-text">右外连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除相同key值数据"><span class="nav-number">4.3.4.</span> <span class="nav-text">删除相同key值数据</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#kv-动作运算"><span class="nav-number">4.4.</span> <span class="nav-text">kv-动作运算</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#读取数据"><span class="nav-number">4.4.1.</span> <span class="nav-text">读取数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#按key值统计"><span class="nav-number">4.4.2.</span> <span class="nav-text">按key值统计</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#lookup查找"><span class="nav-number">4.4.3.</span> <span class="nav-text">lookup查找</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#持久化操作"><span class="nav-number">4.5.</span> <span class="nav-text">持久化操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#持久化"><span class="nav-number">4.5.1.</span> <span class="nav-text">持久化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#取消持久化"><span class="nav-number">4.5.2.</span> <span class="nav-text">取消持久化</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhangyang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>

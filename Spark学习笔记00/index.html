@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Python,">
+  <meta name="keywords" content="Spark,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="保存文件是出现乱码文件缺失BOM的锅，用utf_8_sig解决…具体编码怎么回事参见BOM1df.to_csv(&quot;file&quot;,encoding=&quot;utf_8_sig&quot;) mysql-utf8mb4MySQL的字符设置….注意一下">
-<meta name="keywords" content="Python">
+<meta name="description" content="前提是提前安装好Java，因为之前鼓捣Hadoop的时候已经搞定，所以安装很方便，一行命令搞定。 1brew install apache-spark 配合Jupyter使用:12export PYSPARK_DRIVER_PYTHON=jupyterexport PYSPARK_DRIVER_PYTHON_OPTS=&apos;notebook&apos; 相关链接:brew-spark官网">
+<meta name="keywords" content="Spark">
 <meta property="og:type" content="article">
-<meta property="og:title" content="utf8编码坑">
-<meta property="og:url" content="http://snailed.cn/utf8编码坑/index.html">
+<meta property="og:title" content="Spark学习笔记00">
+<meta property="og:url" content="http://snailed.cn/Spark学习笔记00/index.html">
 <meta property="og:site_name" content="| Yang |">
-<meta property="og:description" content="保存文件是出现乱码文件缺失BOM的锅，用utf_8_sig解决…具体编码怎么回事参见BOM1df.to_csv(&quot;file&quot;,encoding=&quot;utf_8_sig&quot;) mysql-utf8mb4MySQL的字符设置….注意一下">
+<meta property="og:description" content="前提是提前安装好Java，因为之前鼓捣Hadoop的时候已经搞定，所以安装很方便，一行命令搞定。 1brew install apache-spark 配合Jupyter使用:12export PYSPARK_DRIVER_PYTHON=jupyterexport PYSPARK_DRIVER_PYTHON_OPTS=&apos;notebook&apos; 相关链接:brew-spark官网">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-01-31T17:46:03.494Z">
+<meta property="og:updated_time" content="2019-02-20T11:29:20.483Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="utf8编码坑">
-<meta name="twitter:description" content="保存文件是出现乱码文件缺失BOM的锅，用utf_8_sig解决…具体编码怎么回事参见BOM1df.to_csv(&quot;file&quot;,encoding=&quot;utf_8_sig&quot;) mysql-utf8mb4MySQL的字符设置….注意一下">
+<meta name="twitter:title" content="Spark学习笔记00">
+<meta name="twitter:description" content="前提是提前安装好Java，因为之前鼓捣Hadoop的时候已经搞定，所以安装很方便，一行命令搞定。 1brew install apache-spark 配合Jupyter使用:12export PYSPARK_DRIVER_PYTHON=jupyterexport PYSPARK_DRIVER_PYTHON_OPTS=&apos;notebook&apos; 相关链接:brew-spark官网">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://snailed.cn/utf8编码坑/">
+  <link rel="canonical" href="http://snailed.cn/Spark学习笔记00/">
 
 
 
 
 
-  <title>utf8编码坑 | | Yang |</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>Spark学习笔记00 | | Yang |</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -233,7 +233,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/utf8编码坑/">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Spark学习笔记00/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhangyang">
@@ -250,7 +250,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">utf8编码坑</h1>
+          <h1 class="post-title" itemprop="name headline">Spark学习笔记00</h1>
         
 
         <div class="post-meta">
@@ -262,8 +262,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-01T01:40:32+08:00">
-                2019-02-01
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-20T00:35:05+08:00">
+                2019-02-20
               </time>
             
 
@@ -300,8 +300,10 @@
       
 
       
-        <h3 id="保存文件是出现乱码"><a href="#保存文件是出现乱码" class="headerlink" title="保存文件是出现乱码"></a>保存文件是出现乱码</h3><p>文件缺失BOM的锅，用<code>utf_8_sig</code>解决…具体编码怎么回事参见<a href="https://segmentfault.com/a/1190000004321605" target="_blank" rel="noopener">BOM</a><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.to_csv(<span class="string">"file"</span>,encoding=<span class="string">"utf_8_sig"</span>)</span><br></pre></td></tr></table></figure></p>
-<h3 id="mysql-utf8mb4"><a href="#mysql-utf8mb4" class="headerlink" title="mysql-utf8mb4"></a>mysql-utf8mb4</h3><p>MySQL的字符设置….注意一下</p>
+        <p>前提是提前安装好Java，因为之前鼓捣Hadoop的时候已经搞定，所以安装很方便，一行命令搞定。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install apache-spark</span><br></pre></td></tr></table></figure>
+<p>配合Jupyter使用:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export PYSPARK_DRIVER_PYTHON=jupyter</span><br><span class="line">export PYSPARK_DRIVER_PYTHON_OPTS='notebook'</span><br></pre></td></tr></table></figure></p>
+<p>相关链接:<br><a href="https://formulae.brew.sh/formula/apache-spark" target="_blank" rel="noopener">brew-spark</a><br><a href="https://spark.apache.org/" target="_blank" rel="noopener">官网</a></p>
 
       
     </div>
@@ -319,7 +321,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Python/" rel="tag"># Python</a>
+            <a href="/tags/Spark/" rel="tag"># Spark</a>
           
         </div>
       
@@ -332,8 +334,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/浅草キッド/" rel="next" title="浅草キッド">
-                <i class="fa fa-chevron-left"></i> 浅草キッド
+              <a href="/入坑tmux/" rel="next" title="入坑tmux">
+                <i class="fa fa-chevron-left"></i> 入坑tmux
               </a>
             
           </div>
@@ -342,8 +344,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/入坑tmux/" rel="prev" title="入坑tmux">
-                入坑tmux <i class="fa fa-chevron-right"></i>
+              <a href="/Spark学习笔记之RDD/" rel="prev" title="Spark学习笔记之RDD">
+                Spark学习笔记之RDD <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -396,17 +398,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -457,22 +450,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#保存文件是出现乱码"><span class="nav-number">1.</span> <span class="nav-text">保存文件是出现乱码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql-utf8mb4"><span class="nav-number">2.</span> <span class="nav-text">mysql-utf8mb4</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       

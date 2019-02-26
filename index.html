@@ -232,6 +232,380 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Spark学习笔记之RDD/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Spark学习笔记之RDD/" itemprop="url">Spark学习笔记之RDD</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-20T16:34:23+08:00">
+                2019-02-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="什么是RDD"><a href="#什么是RDD" class="headerlink" title="什么是RDD"></a>什么是RDD</h2><p>RDD（Resilient Distributed Dataset）叫做弹性分布式数据集，是Spark中最基本的数据抽象，它代表一个不可变、可分区、里面的元素可并行计算的集合。RDD具有数据流模型的特点：</p>
+<ul>
+<li>自动容错</li>
+<li>位置感知性调度</li>
+<li>可伸缩性</li>
+</ul>
+<p>RDD允许用户在执行多个查询时显式地将工作集缓存在内存中，后续的查询能够重用工作集，这极大地提升了查询速度（持久化）。</p>
+<h2 id="RDD核心概念"><a href="#RDD核心概念" class="headerlink" title="RDD核心概念"></a>RDD核心概念</h2><p>首先我们需要初始化Spark的上下文环境,Spark2.4.0版本应该是默认初始化了的。<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">from pyspark import SparkConf, SparkContext</span><br><span class="line">sc = SparkContext()</span><br></pre></td></tr></table></figure></p>
+<p>然后再创建RDD<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">intRDD = sc.parallelize([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>])</span><br><span class="line">intRDD.collect()</span><br><span class="line"></span><br><span class="line">stringRDD = sc.parallelize([<span class="string">'zhang'</span>,<span class="string">'yang'</span>])</span><br><span class="line">stringRDD.collect()</span><br></pre></td></tr></table></figure></p>
+<h2 id="转化运算"><a href="#转化运算" class="headerlink" title="转化运算"></a>转化运算</h2><p>转化运算是惰性的</p>
+<h3 id="RDD基本转化运算"><a href="#RDD基本转化运算" class="headerlink" title="RDD基本转化运算"></a>RDD基本转化运算</h3><h4 id="map运算"><a href="#map运算" class="headerlink" title="map运算"></a>map运算</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">intRDD.map(<span class="keyword">lambda</span> x:x+<span class="number">1</span>).collect()</span><br></pre></td></tr></table></figure>
+<pre><code>[2, 3, 4, 5, 6, 7, 3, 4]
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">intRDD.map(<span class="keyword">lambda</span> x:x**<span class="number">2</span>).collect()</span><br></pre></td></tr></table></figure>
+<pre><code>[1, 4, 9, 16, 25, 36, 4, 9]
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lines = sc.textFile(<span class="string">'README.md'</span>)</span><br><span class="line">lines.first()</span><br></pre></td></tr></table></figure>
+<pre><code>&#39;[![buildstatus](https://travis-ci.org/holdenk/learning-spark-examples.svg?branch=master)](https://travis-ci.org/holdenk/learning-spark-examples)&#39;
+</code></pre><h4 id="filter运算"><a href="#filter运算" class="headerlink" title="filter运算"></a>filter运算</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">pairs = lines.map(<span class="keyword">lambda</span> x:(x.split(<span class="string">' '</span>)[<span class="number">0</span>],x))</span><br><span class="line"></span><br><span class="line"><span class="comment">#对第二个元素进行筛选</span></span><br><span class="line"></span><br><span class="line">result = pairs.filter(<span class="keyword">lambda</span> keyValue:len(keyValue[<span class="number">1</span>])&lt;<span class="number">20</span>)</span><br><span class="line">result.collect()[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+<pre><code>(&#39;===============&#39;, &#39;===============&#39;)
+</code></pre><h4 id="distinct运算"><a href="#distinct运算" class="headerlink" title="distinct运算"></a>distinct运算</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">intRDD.distinct().collect()</span><br></pre></td></tr></table></figure>
+<pre><code>[4, 1, 5, 2, 6, 3]
+</code></pre><h4 id="randomsplit运算"><a href="#randomsplit运算" class="headerlink" title="randomsplit运算"></a>randomsplit运算</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sRDD = intRDD.randomSplit([<span class="number">0.1</span>,<span class="number">0.1</span>])</span><br><span class="line">print(len(sRDD))</span><br><span class="line">print(sRDD[<span class="number">0</span>].collect())</span><br><span class="line">print(sRDD[<span class="number">1</span>].collect())</span><br></pre></td></tr></table></figure>
+<pre><code>2
+[3, 4, 5, 2, 3]
+[1, 2, 6]
+</code></pre><h4 id="groupby运算"><a href="#groupby运算" class="headerlink" title="groupby运算"></a>groupby运算</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">result = intRDD.groupBy(<span class="keyword">lambda</span> x : x % <span class="number">2</span>).collect()</span><br><span class="line"><span class="keyword">for</span> x,y <span class="keyword">in</span> result:</span><br><span class="line">    print(x,sorted(y))</span><br></pre></td></tr></table></figure>
+<pre><code>0 [2, 2, 4, 6]
+1 [1, 3, 3, 5]
+</code></pre><h3 id="多个RDD转化运算"><a href="#多个RDD转化运算" class="headerlink" title="多个RDD转化运算"></a>多个RDD转化运算</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">intRDD1 = sc.parallelize([<span class="number">3</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">5</span>])</span><br><span class="line">intRDD2 = sc.parallelize([<span class="number">5</span>,<span class="number">6</span>,<span class="number">2</span>])</span><br><span class="line">intRDD3 = sc.parallelize([<span class="number">2</span>,<span class="number">7</span>])</span><br></pre></td></tr></table></figure>
+<h4 id="取并集"><a href="#取并集" class="headerlink" title="取并集"></a>取并集</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># union()</span></span><br><span class="line">print(intRDD1.union(intRDD2).union(intRDD3).collect()) <span class="comment">#取并集</span></span><br><span class="line">print(intRDD1.union(intRDD2).union(intRDD3).distinct().collect()) <span class="comment">#并集且去重</span></span><br></pre></td></tr></table></figure>
+<pre><code>[3, 1, 2, 5, 5, 5, 6, 2, 2, 7]
+[1, 2, 3, 5, 6, 7]
+</code></pre><h4 id="取交集"><a href="#取交集" class="headerlink" title="取交集"></a>取交集</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># intersection()</span></span><br><span class="line">print(intRDD1.intersection(intRDD2).intersection(intRDD3).collect())</span><br></pre></td></tr></table></figure>
+<pre><code>[2]
+</code></pre><h4 id="取差集"><a href="#取差集" class="headerlink" title="取差集"></a>取差集</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># subtract()</span></span><br><span class="line">print(intRDD1.subtract(intRDD2).collect())</span><br></pre></td></tr></table></figure>
+<pre><code>[1, 3]
+</code></pre><h4 id="笛卡尔积运算-cartesian"><a href="#笛卡尔积运算-cartesian" class="headerlink" title="笛卡尔积运算 cartesian()"></a>笛卡尔积运算 cartesian()</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># cartsection()</span></span><br><span class="line">print(intRDD1.cartesian(intRDD2).collect())</span><br></pre></td></tr></table></figure>
+<pre><code>[(3, 5), (3, 6), (3, 2), (1, 5), (1, 6), (1, 2), (2, 5), (2, 6), (2, 2), (5, 5), (5, 5), (5, 6), (5, 6), (5, 2), (5, 2)]
+</code></pre><h2 id="动作运算"><a href="#动作运算" class="headerlink" title="动作运算"></a>动作运算</h2><h3 id="基本动作运算"><a href="#基本动作运算" class="headerlink" title="基本动作运算"></a>基本动作运算</h3><h4 id="读取元素"><a href="#读取元素" class="headerlink" title="读取元素"></a>读取元素</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#取第一条数据</span></span><br><span class="line"><span class="keyword">print</span> (intRDD.first())</span><br><span class="line"><span class="comment">#取前两条数据</span></span><br><span class="line"><span class="keyword">print</span> (intRDD.take(<span class="number">2</span>))</span><br><span class="line"><span class="comment">#升序排列，并取前3条数据</span></span><br><span class="line"><span class="keyword">print</span> (intRDD.takeOrdered(<span class="number">3</span>))</span><br><span class="line"><span class="comment">#降序排列，并取前3条数据</span></span><br><span class="line"><span class="keyword">print</span> (intRDD.takeOrdered(<span class="number">3</span>,<span class="keyword">lambda</span> x:-x))</span><br></pre></td></tr></table></figure>
+<pre><code>1
+[1, 2]
+[1, 2, 2]
+[6, 5, 4]
+</code></pre><h4 id="统计值"><a href="#统计值" class="headerlink" title="统计值"></a>统计值</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#统计</span></span><br><span class="line"><span class="keyword">print</span> (intRDD.stats())</span><br><span class="line"><span class="comment">#最小值</span></span><br><span class="line"><span class="keyword">print</span> (intRDD.min())</span><br><span class="line"><span class="comment">#最大值</span></span><br><span class="line"><span class="keyword">print</span> (intRDD.max())</span><br><span class="line"><span class="comment">#标准差</span></span><br><span class="line"><span class="keyword">print</span> (intRDD.stdev())</span><br><span class="line"><span class="comment">#计数</span></span><br><span class="line"><span class="keyword">print</span> (intRDD.count())</span><br><span class="line"><span class="comment">#求和</span></span><br><span class="line"><span class="keyword">print</span> (intRDD.sum())</span><br><span class="line"><span class="comment">#平均</span></span><br><span class="line"><span class="keyword">print</span> (intRDD.mean())</span><br></pre></td></tr></table></figure>
+<pre><code>(count: 8, mean: 3.25, stdev: 1.5612494995995996, max: 6.0, min: 1.0)
+1
+6
+1.5612494995995996
+8
+26
+3.25
+</code></pre><h3 id="k-v转换"><a href="#k-v转换" class="headerlink" title="k-v转换"></a>k-v转换</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kvRDD1 = sc.parallelize([(<span class="number">3</span>,<span class="number">4</span>),(<span class="number">3</span>,<span class="number">6</span>),(<span class="number">5</span>,<span class="number">6</span>),(<span class="number">1</span>,<span class="number">2</span>)])</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(kvRDD1.keys().collect())</span><br></pre></td></tr></table></figure>
+<pre><code>[3, 3, 5, 1]
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(kvRDD1.values().collect())</span><br></pre></td></tr></table></figure>
+<pre><code>[4, 6, 6, 2]
+</code></pre><h4 id="筛选元素"><a href="#筛选元素" class="headerlink" title="筛选元素"></a>筛选元素</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">print</span> (kvRDD1.filter(<span class="keyword">lambda</span> x:x[<span class="number">0</span>] &lt; <span class="number">5</span>).collect())</span><br></pre></td></tr></table></figure>
+<pre><code>[(3, 4), (3, 6), (1, 2)]
+</code></pre><h4 id="值运算"><a href="#值运算" class="headerlink" title="值运算"></a>值运算</h4><p>使用mapvalue()进行排序</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(kvRDD1.mapValues(<span class="keyword">lambda</span> x:x**<span class="number">2</span>).collect())</span><br></pre></td></tr></table></figure>
+<pre><code>[(3, 16), (3, 36), (5, 36), (1, 4)]
+</code></pre><h4 id="按照key排序"><a href="#按照key排序" class="headerlink" title="按照key排序"></a>按照key排序</h4><p>sortByKey()，传入的参数默认为True，表示从小到大排序</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(kvRDD1.sortByKey().collect())</span><br></pre></td></tr></table></figure>
+<pre><code>[(1, 2), (3, 4), (3, 6), (5, 6)]
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(kvRDD1.sortByKey(<span class="keyword">False</span>).collect())</span><br></pre></td></tr></table></figure>
+<pre><code>[(5, 6), (3, 4), (3, 6), (1, 2)]
+</code></pre><h4 id="合并相同key值的数据"><a href="#合并相同key值的数据" class="headerlink" title="合并相同key值的数据"></a>合并相同key值的数据</h4><p>reduceByKey()</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(kvRDD1.reduceByKey(<span class="keyword">lambda</span> x,y:x+y).collect())</span><br></pre></td></tr></table></figure>
+<pre><code>[(5, 6), (1, 2), (3, 10)]
+</code></pre><h3 id="多个RDD-kv转化运算"><a href="#多个RDD-kv转化运算" class="headerlink" title="多个RDD kv转化运算"></a>多个RDD kv转化运算</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kvRDD1 = sc.parallelize([(<span class="number">3</span>,<span class="number">4</span>),(<span class="number">3</span>,<span class="number">6</span>),(<span class="number">5</span>,<span class="number">6</span>),(<span class="number">1</span>,<span class="number">2</span>)])</span><br><span class="line">kvRDD2 = sc.parallelize([(<span class="number">3</span>,<span class="number">8</span>)])</span><br></pre></td></tr></table></figure>
+<h4 id="内连接"><a href="#内连接" class="headerlink" title="内连接"></a>内连接</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(kvRDD1.join(kvRDD2).collect())</span><br></pre></td></tr></table></figure>
+<pre><code>[(3, (4, 8)), (3, (6, 8))]
+</code></pre><h4 id="左外连接"><a href="#左外连接" class="headerlink" title="左外连接"></a>左外连接</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(kvRDD1.leftOuterJoin(kvRDD2).collect())</span><br></pre></td></tr></table></figure>
+<pre><code>[(1, (2, None)), (3, (4, 8)), (3, (6, 8)), (5, (6, None))]
+</code></pre><h4 id="右外连接"><a href="#右外连接" class="headerlink" title="右外连接"></a>右外连接</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(kvRDD1.rightOuterJoin(kvRDD2).collect())</span><br></pre></td></tr></table></figure>
+<pre><code>[(3, (4, 8)), (3, (6, 8))]
+</code></pre><h4 id="删除相同key值数据"><a href="#删除相同key值数据" class="headerlink" title="删除相同key值数据"></a>删除相同key值数据</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(kvRDD1.subtractByKey(kvRDD2).collect())</span><br></pre></td></tr></table></figure>
+<pre><code>[(1, 2), (5, 6)]
+</code></pre><h3 id="kv-动作运算"><a href="#kv-动作运算" class="headerlink" title="kv-动作运算"></a>kv-动作运算</h3><h4 id="读取数据"><a href="#读取数据" class="headerlink" title="读取数据"></a>读取数据</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#读取第一条数据</span></span><br><span class="line">print(kvRDD1.first())</span><br><span class="line"><span class="comment">#读取前两条数据</span></span><br><span class="line">print(kvRDD1.take(<span class="number">2</span>))</span><br><span class="line"><span class="comment">#读取第一条数据的key值</span></span><br><span class="line">print(kvRDD1.first()[<span class="number">0</span>])</span><br><span class="line"><span class="comment">#读取第一条数据的value值</span></span><br><span class="line">print(kvRDD1.first()[<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+<pre><code>(3, 4)
+[(3, 4), (3, 6)]
+3
+4
+</code></pre><h4 id="按key值统计"><a href="#按key值统计" class="headerlink" title="按key值统计"></a>按key值统计</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(kvRDD1.countByKey())</span><br></pre></td></tr></table></figure>
+<pre><code>defaultdict(&lt;class &#39;int&#39;&gt;, {3: 2, 5: 1, 1: 1})
+</code></pre><h4 id="lookup查找"><a href="#lookup查找" class="headerlink" title="lookup查找"></a>lookup查找</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(kvRDD1.lookup(<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
+<pre><code>[4, 6]
+</code></pre><h3 id="持久化操作"><a href="#持久化操作" class="headerlink" title="持久化操作"></a>持久化操作</h3><p>spark RDD的持久化机制，可以将重复运算的RDD存储在内存中，可以大幅提升运算效率</p>
+<h4 id="持久化"><a href="#持久化" class="headerlink" title="持久化"></a>持久化</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kvRDD1.persist()</span><br></pre></td></tr></table></figure>
+<pre><code>ParallelCollectionRDD[24] at parallelize at PythonRDD.scala:195
+</code></pre><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>等级</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MEMORY_ONLY</td>
+<td>以反序列化的JAVA对象的方式存储在JVM中. 如果内存不够， RDD的一些分区将不会被缓存， 这样当再次需要这些分区的时候，将会重新计算。这是默认的级别。</td>
+</tr>
+<tr>
+<td>MEMORY_AND_DISK</td>
+<td>以反序列化的JAVA对象的方式存储在JVM中. 如果内存不够， RDD的一些分区将将会缓存在磁盘上，再次需要的时候从磁盘读取。</td>
+</tr>
+<tr>
+<td>MEMORY_ONLY_SER</td>
+<td>以序列化JAVA对象的方式存储 (每个分区一个字节数组). 相比于反序列化的方式,这样更高效的利用空间， 尤其是使用快速序列化时。但是读取是CPU操作很密集。</td>
+</tr>
+<tr>
+<td>MEMORY_AND_DISK_SER</td>
+<td>与MEMORY_ONLY_SER相似, 区别是但内存不足时，存储在磁盘上而不是每次重新计算。</td>
+</tr>
+<tr>
+<td>DISK_ONLY</td>
+<td>只存储RDD在磁盘</td>
+</tr>
+<tr>
+<td>MEMORY_ONLY_2, MEMORY_AND_DISK_2, etc.</td>
+<td>与上面的级别相同，只不过每个分区的副本只存储在两个集群节点上。</td>
+</tr>
+<tr>
+<td>OFF_HEAP (experimental)</td>
+<td>将RDD以序列化的方式存储在 Tachyon. 与 MEMORY_ONLY_SER相比, OFF_HEAP减少了垃圾回收。允许执行体更小通过共享一个内存池。因此对于拥有较大堆内存和高并发的环境有较大的吸引力。更重要的是，因为RDD存储在Tachyon上，执行体的崩溃不会造成缓存的丢失。在这种模式下.Tachyon中的内存是可丢弃的，这样 Tachyon 对于从内存中挤出的块不会试图重建它。如果你打算使用Tachyon作为堆缓存，Spark提供了与Tachyon相兼容的版本。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">#pyspark中封装了StorageLevel类，实现不同存储等级的存储</span></span><br><span class="line"><span class="keyword">from</span> pyspark.storagelevel <span class="keyword">import</span> StorageLevel</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, useDisk, useMemory, useOffHeap, deserialized, replication=<span class="number">1</span>)</span>:</span></span><br><span class="line">        self.useDisk = useDisk</span><br><span class="line">        self.useMemory = useMemory</span><br><span class="line">        self.useOffHeap = useOffHeap</span><br><span class="line">        self.deserialized = deserialized</span><br><span class="line">        self.replication = replication</span><br></pre></td></tr></table></figure>
+<h4 id="取消持久化"><a href="#取消持久化" class="headerlink" title="取消持久化"></a>取消持久化</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kvRDD1.unpersist()</span><br></pre></td></tr></table></figure>
+<pre><code>ParallelCollectionRDD[24] at parallelize at PythonRDD.scala:195
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Spark学习笔记00/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Spark学习笔记00/" itemprop="url">Spark学习笔记00</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-20T00:35:05+08:00">
+                2019-02-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>前提是提前安装好Java，因为之前鼓捣Hadoop的时候已经搞定，所以安装很方便，一行命令搞定。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install apache-spark</span><br></pre></td></tr></table></figure>
+<p>配合Jupyter使用:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export PYSPARK_DRIVER_PYTHON=jupyter</span><br><span class="line">export PYSPARK_DRIVER_PYTHON_OPTS='notebook'</span><br></pre></td></tr></table></figure></p>
+<p>相关链接:<br><a href="https://formulae.brew.sh/formula/apache-spark" target="_blank" rel="noopener">brew-spark</a><br><a href="https://spark.apache.org/" target="_blank" rel="noopener">官网</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://snailed.cn/入坑tmux/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -311,15 +685,15 @@
 <li>保护现场 : 下班回家连上服务器就可以很快回到操作现场，简洁省事</li>
 <li>会话共享 : 将tmux会话的地址分享给他人，这样他们就可以通过 SSH 接入该会话(我应该是用不到这个了）</li>
 </ul>
-<h4 id="安装tmux"><a href="#安装tmux" class="headerlink" title="安装tmux"></a>安装tmux</h4><p>在Mac上安装<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 先安装Homebrew，有则跳过</span><br><span class="line">ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"</span><br><span class="line"><span class="meta">#</span> 安装tmux</span><br><span class="line">brew install tmux</span><br></pre></td></tr></table></figure></p>
+<h4 id="安装tmux"><a href="#安装tmux" class="headerlink" title="安装tmux"></a>安装tmux</h4><p>在Mac上安装<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 先安装Homebrew，有则跳过</span></span><br><span class="line">ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"</span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装tmux</span></span><br><span class="line">brew install tmux</span><br></pre></td></tr></table></figure></p>
 <p>在Linux上安装<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install tmux</span><br></pre></td></tr></table></figure></p>
 <h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4><p>session-window-pane:一个session有多个窗口，一个窗口有多个面板</p>
 <p>多任务神器，用过就知道</p>
 <h4 id="直达使用"><a href="#直达使用" class="headerlink" title="直达使用"></a>直达使用</h4><p>我们先创建一个名为local的session，用第一个命令即可<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tmux new -s local # 创建一个名为local的session</span><br><span class="line">tmux kill-session -t local # 关闭绘画</span><br><span class="line">tmux kill-server #关闭服务器，所有会话被关闭</span><br></pre></td></tr></table></figure></p>
-<p>此时我们可以看到底部默认的小绿条，我理解这就是tmux的状态栏了嘛。tmux已经默认为我们创建好了一个window,这个时候就可以去执行切分pane之类的操作了。我这里随便举个栗子：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 默认所有操作都加了前缀，tmux的快捷键也都是加了前缀才会生效</span><br><span class="line">, # 重命名当前window</span><br><span class="line">- # 横切窗口，默认进入当前目录</span><br><span class="line">| # 竖切窗口，默认进入当前目录</span><br><span class="line">c # 新建window</span><br><span class="line">hjkl # 切换窗口，类似vim操作</span><br><span class="line">t # 显示时钟</span><br></pre></td></tr></table></figure></p>
+<p>此时我们可以看到底部默认的小绿条，我理解这就是tmux的状态栏了嘛。tmux已经默认为我们创建好了一个window,这个时候就可以去执行切分pane之类的操作了。我这里随便举个栗子：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 默认所有操作都加了前缀，tmux的快捷键也都是加了前缀才会生效</span></span><br><span class="line">, # 重命名当前window</span><br><span class="line">- # 横切窗口，默认进入当前目录</span><br><span class="line">| # 竖切窗口，默认进入当前目录</span><br><span class="line">c # 新建window</span><br><span class="line">hjkl # 切换窗口，类似vim操作</span><br><span class="line">t # 显示时钟</span><br></pre></td></tr></table></figure></p>
 <p>我随便截图一下表示效果</p>
 <p><img src="snapshot.png" alt="我的Tmux"></p>
-<h4 id="tmux设置"><a href="#tmux设置" class="headerlink" title="tmux设置"></a>tmux设置</h4><p>这里直接附上我的<code>.tmux.conf</code>文件，不过基本也是来自网上大佬的<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>设置前缀为Ctrl + x</span><br><span class="line">set -g prefix C-x</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>解除Ctrl+b 与前缀的对应关系</span><br><span class="line">unbind C-b</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>up</span><br><span class="line">bind-key k select-pane -U</span><br><span class="line"><span class="meta">#</span>down</span><br><span class="line">bind-key j select-pane -D</span><br><span class="line"><span class="meta">#</span>left</span><br><span class="line">bind-key h select-pane -L</span><br><span class="line"><span class="meta">#</span>right</span><br><span class="line">bind-key l select-pane -R</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 绑定快捷键为r</span><br><span class="line">bind r source-file ~/.tmux.conf \; display-message "Config reloaded.."</span><br><span class="line"></span><br><span class="line">unbind '"'</span><br><span class="line">bind - splitw -v -c '#&#123;pane_current_path&#125;' # 垂直方向新增面板，默认进入当前目录</span><br><span class="line">unbind %</span><br><span class="line">bind | splitw -h -c '#&#123;pane_current_path&#125;' # 水平方向新增面板，默认进入当前目录</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 绑定Ctrl+hjkl键为面板上下左右调整边缘的快捷指令</span><br><span class="line">bind -r ^k resizep -U 5 # 绑定Ctrl+k为往↑调整面板边缘10个单元格</span><br><span class="line">bind -r ^j resizep -D 5 # 绑定Ctrl+j为往↓调整面板边缘10个单元格</span><br><span class="line">bind -r ^h resizep -L 5 # 绑定Ctrl+h为往←调整面板边缘10个单元格</span><br><span class="line">bind -r ^l resizep -R 5 # 绑定Ctrl+l为往→调整面板边缘10个单元格</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 开启鼠标</span><br><span class="line">set-option -g mouse on</span><br></pre></td></tr></table></figure></p>
+<h4 id="tmux设置"><a href="#tmux设置" class="headerlink" title="tmux设置"></a>tmux设置</h4><p>这里直接附上我的<code>.tmux.conf</code>文件，不过基本也是来自网上大佬的<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">设置前缀为Ctrl + x</span></span><br><span class="line">set -g prefix C-x</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">解除Ctrl+b 与前缀的对应关系</span></span><br><span class="line">unbind C-b</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">up</span></span><br><span class="line">bind-key k select-pane -U</span><br><span class="line"><span class="meta">#</span><span class="bash">down</span></span><br><span class="line">bind-key j select-pane -D</span><br><span class="line"><span class="meta">#</span><span class="bash">left</span></span><br><span class="line">bind-key h select-pane -L</span><br><span class="line"><span class="meta">#</span><span class="bash">right</span></span><br><span class="line">bind-key l select-pane -R</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 绑定快捷键为r</span></span><br><span class="line">bind r source-file ~/.tmux.conf \; display-message "Config reloaded.."</span><br><span class="line"></span><br><span class="line">unbind '"'</span><br><span class="line">bind - splitw -v -c '#&#123;pane_current_path&#125;' # 垂直方向新增面板，默认进入当前目录</span><br><span class="line">unbind %</span><br><span class="line">bind | splitw -h -c '#&#123;pane_current_path&#125;' # 水平方向新增面板，默认进入当前目录</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 绑定Ctrl+hjkl键为面板上下左右调整边缘的快捷指令</span></span><br><span class="line">bind -r ^k resizep -U 5 # 绑定Ctrl+k为往↑调整面板边缘10个单元格</span><br><span class="line">bind -r ^j resizep -D 5 # 绑定Ctrl+j为往↓调整面板边缘10个单元格</span><br><span class="line">bind -r ^h resizep -L 5 # 绑定Ctrl+h为往←调整面板边缘10个单元格</span><br><span class="line">bind -r ^l resizep -R 5 # 绑定Ctrl+l为往→调整面板边缘10个单元格</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 开启鼠标</span></span><br><span class="line">set-option -g mouse on</span><br></pre></td></tr></table></figure></p>
 <p>这里要感恩网上大佬分享的教程<a href="http://louiszhai.github.io/2017/09/30/tmux/" target="_blank" rel="noopener">Tmux使用手册</a></p>
 <h3 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h3><p>复制滚屏模式直到现在都还有点不习惯，不过还好开启了鼠标支持，后面再来吐槽。</p>
 
@@ -1431,1992 +1805,6 @@ Freq: D, dtype: float64
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/ch09-Example/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/ch09-Example/" itemprop="url">ch09-Example</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-14T00:58:42+08:00">
-                2019-01-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> pandas <span class="keyword">import</span> Series</span><br><span class="line">PREVIOUS_MAX_ROWS = pd.options.display.max_rows</span><br><span class="line">pd.options.display.max_rows = <span class="number">20</span></span><br><span class="line">np.random.seed(<span class="number">12345</span>)</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">plt.rc(<span class="string">'figure'</span>, figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">np.set_printoptions(precision=<span class="number">4</span>, suppress=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure>
-<h2 id="1-用特定于分组的值填充缺失值"><a href="#1-用特定于分组的值填充缺失值" class="headerlink" title="1. 用特定于分组的值填充缺失值"></a>1. 用特定于分组的值填充缺失值</h2><p>gropna()可以实现，但也可以用fillna()方法填充。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s = Series(np.random.randn(<span class="number">6</span>))</span><br><span class="line">s[::<span class="number">2</span>] = np.nan</span><br><span class="line">s</span><br></pre></td></tr></table></figure>
-<pre><code>0         NaN
-1    0.228913
-2         NaN
-3    0.886429
-4         NaN
-5   -0.371843
-dtype: float64
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s.fillna(s.mean())</span><br></pre></td></tr></table></figure>
-<pre><code>0    0.247833
-1    0.228913
-2    0.247833
-3    0.886429
-4    0.247833
-5   -0.371843
-dtype: float64
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">states = [<span class="string">'Ohio'</span>, <span class="string">'New York'</span>, <span class="string">'Vermont'</span>, <span class="string">'Florida'</span>,</span><br><span class="line">          <span class="string">'Oregon'</span>, <span class="string">'Nevada'</span>, <span class="string">'California'</span>, <span class="string">'Idaho'</span>]</span><br><span class="line">group_key = [<span class="string">'East'</span>] * <span class="number">4</span> + [<span class="string">'West'</span>] * <span class="number">4</span></span><br><span class="line">data = pd.Series(np.random.randn(<span class="number">8</span>), index=states)</span><br><span class="line">data</span><br></pre></td></tr></table></figure>
-<pre><code>Ohio          1.669025
-New York     -0.438570
-Vermont      -0.539741
-Florida       0.476985
-Oregon        3.248944
-Nevada       -1.021228
-California   -0.577087
-Idaho         0.124121
-dtype: float64
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.groupby(group_key).mean()</span><br></pre></td></tr></table></figure>
-<pre><code>East    0.291925
-West    0.443688
-dtype: float64
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fill_mean = <span class="keyword">lambda</span> g: g.fillna(g.mean())</span><br><span class="line">data.groupby(group_key).apply(fill_mean)</span><br></pre></td></tr></table></figure>
-<pre><code>Ohio          1.669025
-New York     -0.438570
-Vermont       0.569147
-Florida       0.476985
-Oregon        3.248944
-Nevada        1.335928
-California   -0.577087
-Idaho         1.335928
-dtype: float64
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fill_values = &#123;<span class="string">'East'</span>: <span class="number">0.5</span>, <span class="string">'West'</span>: <span class="number">-1</span>&#125;</span><br><span class="line">fill_func = <span class="keyword">lambda</span> g: g.fillna(fill_values[g.name])</span><br><span class="line">data.groupby(group_key).apply(fill_func)</span><br></pre></td></tr></table></figure>
-<pre><code>Ohio          1.669025
-New York     -0.438570
-Vermont       0.500000
-Florida       0.476985
-Oregon        3.248944
-Nevada       -1.000000
-California   -0.577087
-Idaho        -1.000000
-dtype: float64
-</code></pre><h2 id="2-随机采样和排列"><a href="#2-随机采样和排列" class="headerlink" title="2. 随机采样和排列"></a>2. 随机采样和排列</h2><p>构造一副扑克牌</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Hearts（红桃）, Spades（黑桃）, Clubs（梅花）, Diamonds（方块）</span></span><br><span class="line"></span><br><span class="line">suits = [<span class="string">'H'</span>,<span class="string">'S'</span>,<span class="string">'C'</span>,<span class="string">'D'</span>]</span><br><span class="line"></span><br><span class="line">card_val = (list(range(<span class="number">1</span>,<span class="number">11</span>))+[<span class="number">10</span>]*<span class="number">3</span>)*<span class="number">4</span></span><br><span class="line">base_names = [<span class="string">'A'</span>] + list(range(<span class="number">2</span>, <span class="number">11</span>)) + [<span class="string">'J'</span>, <span class="string">'K'</span>, <span class="string">'Q'</span>]</span><br><span class="line">cards = []</span><br><span class="line"><span class="keyword">for</span> suit <span class="keyword">in</span> [<span class="string">'H'</span>, <span class="string">'S'</span>, <span class="string">'C'</span>, <span class="string">'D'</span>]:</span><br><span class="line">    cards.extend(str(num) + suit <span class="keyword">for</span> num <span class="keyword">in</span> base_names)</span><br><span class="line">deck = pd.Series(card_val, index=cards)</span><br><span class="line">deck[:<span class="number">13</span>]</span><br></pre></td></tr></table></figure>
-<pre><code>AH      1
-2H      2
-3H      3
-4H      4
-5H      5
-6H      6
-7H      7
-8H      8
-9H      9
-10H    10
-JH     10
-KH     10
-QH     10
-dtype: int64
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">draw</span><span class="params">(deck, n=<span class="number">5</span>)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> deck.sample(n)</span><br><span class="line">draw(deck)</span><br></pre></td></tr></table></figure>
-<pre><code>8S     8
-8C     8
-4C     4
-QD    10
-3C     3
-dtype: int64
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">get_suit = <span class="keyword">lambda</span> x:x[<span class="number">-1</span>]</span><br><span class="line">deck.groupby(get_suit).apply(draw,n=<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
-<pre><code>C  2C     2
-   4C     4
-D  7D     7
-   9D     9
-H  JH    10
-   9H     9
-S  3S     3
-   JS    10
-dtype: int64
-</code></pre><h2 id="3-分组加权平均数和相关系数"><a href="#3-分组加权平均数和相关系数" class="headerlink" title="3. 分组加权平均数和相关系数"></a>3. 分组加权平均数和相关系数</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">df = pd.DataFrame(&#123;<span class="string">'category'</span>: [<span class="string">'a'</span>, <span class="string">'a'</span>, <span class="string">'a'</span>, <span class="string">'a'</span>,</span><br><span class="line">                                <span class="string">'b'</span>, <span class="string">'b'</span>, <span class="string">'b'</span>, <span class="string">'b'</span>],</span><br><span class="line">                   <span class="string">'data'</span>: np.random.randn(<span class="number">8</span>),</span><br><span class="line">                   <span class="string">'weights'</span>: np.random.rand(<span class="number">8</span>)&#125;)</span><br><span class="line">df</span><br></pre></td></tr></table></figure>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>category</th>
-      <th>data</th>
-      <th>weights</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>a</td>
-      <td>0.388782</td>
-      <td>0.959661</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>a</td>
-      <td>0.940880</td>
-      <td>0.652225</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>a</td>
-      <td>1.660720</td>
-      <td>0.513206</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>a</td>
-      <td>0.642044</td>
-      <td>0.682356</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>b</td>
-      <td>0.418988</td>
-      <td>0.489540</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>b</td>
-      <td>-0.259232</td>
-      <td>0.926490</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>b</td>
-      <td>-0.369982</td>
-      <td>0.515880</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>b</td>
-      <td>-0.044528</td>
-      <td>0.072160</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">grouped = df.groupby(<span class="string">'category'</span>)</span><br><span class="line">get_wavg = <span class="keyword">lambda</span> g : np.average(g[<span class="string">'data'</span>],weights=g[<span class="string">'weights'</span>])</span><br><span class="line">grouped.apply(get_wavg)</span><br></pre></td></tr></table></figure>
-<pre><code>category
-a    0.811113
-b   -0.114339
-dtype: float64
-</code></pre><blockquote>
-<p>Yahoo！Finance数据实操</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">close_px = pd.read_csv(<span class="string">'examples/stock_px_2.csv'</span>, parse_dates=<span class="keyword">True</span>,</span><br><span class="line">                       index_col=<span class="number">0</span>)</span><br><span class="line">close_px.info()</span><br></pre></td></tr></table></figure>
-<pre><code>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
-DatetimeIndex: 2214 entries, 2003-01-02 to 2011-10-14
-Data columns (total 4 columns):
-AAPL    2214 non-null float64
-MSFT    2214 non-null float64
-XOM     2214 non-null float64
-SPX     2214 non-null float64
-dtypes: float64(4)
-memory usage: 86.5 KB
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">close_px[<span class="number">-4</span>:]</span><br></pre></td></tr></table></figure>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>AAPL</th>
-      <th>MSFT</th>
-      <th>XOM</th>
-      <th>SPX</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2011-10-11</th>
-      <td>400.29</td>
-      <td>27.00</td>
-      <td>76.27</td>
-      <td>1195.54</td>
-    </tr>
-    <tr>
-      <th>2011-10-12</th>
-      <td>402.19</td>
-      <td>26.96</td>
-      <td>77.16</td>
-      <td>1207.25</td>
-    </tr>
-    <tr>
-      <th>2011-10-13</th>
-      <td>408.43</td>
-      <td>27.18</td>
-      <td>76.37</td>
-      <td>1203.66</td>
-    </tr>
-    <tr>
-      <th>2011-10-14</th>
-      <td>422.00</td>
-      <td>27.27</td>
-      <td>78.11</td>
-      <td>1224.58</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spx_corr = <span class="keyword">lambda</span> x: x.corrwith(x[<span class="string">'SPX'</span>])</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rets = close_px.pct_change().dropna()</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">get_year = <span class="keyword">lambda</span> x: x.year</span><br><span class="line">by_year = rets.groupby(get_year)</span><br><span class="line">by_year.apply(spx_corr)</span><br></pre></td></tr></table></figure>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>AAPL</th>
-      <th>MSFT</th>
-      <th>XOM</th>
-      <th>SPX</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2003</th>
-      <td>0.541124</td>
-      <td>0.745174</td>
-      <td>0.661265</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>2004</th>
-      <td>0.374283</td>
-      <td>0.588531</td>
-      <td>0.557742</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>2005</th>
-      <td>0.467540</td>
-      <td>0.562374</td>
-      <td>0.631010</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>2006</th>
-      <td>0.428267</td>
-      <td>0.406126</td>
-      <td>0.518514</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>2007</th>
-      <td>0.508118</td>
-      <td>0.658770</td>
-      <td>0.786264</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>2008</th>
-      <td>0.681434</td>
-      <td>0.804626</td>
-      <td>0.828303</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>2009</th>
-      <td>0.707103</td>
-      <td>0.654902</td>
-      <td>0.797921</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>2010</th>
-      <td>0.710105</td>
-      <td>0.730118</td>
-      <td>0.839057</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>2011</th>
-      <td>0.691931</td>
-      <td>0.800996</td>
-      <td>0.859975</td>
-      <td>1.0</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<h2 id="4-面向分组的线性回归"><a href="#4-面向分组的线性回归" class="headerlink" title="4. 面向分组的线性回归"></a>4. 面向分组的线性回归</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> statsmodels.api <span class="keyword">as</span> sm</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">regress</span><span class="params">(data, yvar, xvars)</span>:</span></span><br><span class="line">    Y = data[yvar]</span><br><span class="line">    X = data[xvars]</span><br><span class="line">    X[<span class="string">'intercept'</span>] = <span class="number">1.</span></span><br><span class="line">    result = sm.OLS(Y, X).fit()</span><br><span class="line">    <span class="keyword">return</span> result.params</span><br><span class="line">by_year.apply(regress, <span class="string">'AAPL'</span>, [<span class="string">'SPX'</span>])</span><br></pre></td></tr></table></figure>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>SPX</th>
-      <th>intercept</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2003</th>
-      <td>1.195406</td>
-      <td>0.000710</td>
-    </tr>
-    <tr>
-      <th>2004</th>
-      <td>1.363463</td>
-      <td>0.004201</td>
-    </tr>
-    <tr>
-      <th>2005</th>
-      <td>1.766415</td>
-      <td>0.003246</td>
-    </tr>
-    <tr>
-      <th>2006</th>
-      <td>1.645496</td>
-      <td>0.000080</td>
-    </tr>
-    <tr>
-      <th>2007</th>
-      <td>1.198761</td>
-      <td>0.003438</td>
-    </tr>
-    <tr>
-      <th>2008</th>
-      <td>0.968016</td>
-      <td>-0.001110</td>
-    </tr>
-    <tr>
-      <th>2009</th>
-      <td>0.879103</td>
-      <td>0.002954</td>
-    </tr>
-    <tr>
-      <th>2010</th>
-      <td>1.052608</td>
-      <td>0.001261</td>
-    </tr>
-    <tr>
-      <th>2011</th>
-      <td>0.806605</td>
-      <td>0.001514</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/ch09-GroupBy/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/ch09-GroupBy/" itemprop="url">ch09-GroupBy</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-14T00:57:10+08:00">
-                2019-01-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="GroupBy技术"><a href="#GroupBy技术" class="headerlink" title="GroupBy技术"></a>GroupBy技术</h1><p>split-&gt;apply-&gt;combine</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">df = pd.DataFrame(&#123;<span class="string">'key1'</span> : [<span class="string">'a'</span>, <span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'b'</span>, <span class="string">'a'</span>],</span><br><span class="line">                   <span class="string">'key2'</span> : [<span class="string">'one'</span>, <span class="string">'two'</span>, <span class="string">'one'</span>, <span class="string">'two'</span>, <span class="string">'one'</span>],</span><br><span class="line">                   <span class="string">'data1'</span> : np.random.randn(<span class="number">5</span>),</span><br><span class="line">                   <span class="string">'data2'</span> : np.random.randn(<span class="number">5</span>)&#125;)</span><br><span class="line">df</span><br></pre></td></tr></table></figure>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>key1</th>
-      <th>key2</th>
-      <th>data1</th>
-      <th>data2</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>a</td>
-      <td>one</td>
-      <td>1.587125</td>
-      <td>-0.517650</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>a</td>
-      <td>two</td>
-      <td>0.206854</td>
-      <td>1.503013</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>b</td>
-      <td>one</td>
-      <td>1.074688</td>
-      <td>-1.310088</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>b</td>
-      <td>two</td>
-      <td>0.306591</td>
-      <td>2.236456</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>a</td>
-      <td>one</td>
-      <td>0.462624</td>
-      <td>0.643336</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#利用key1进行分组求data1的平均值</span></span><br><span class="line">grouped = df[<span class="string">'data1'</span>].groupby(df[<span class="string">'key1'</span>])</span><br><span class="line">grouped  <span class="comment">#一个groupby对象</span></span><br></pre></td></tr></table></figure>
-<pre><code>&lt;pandas.core.groupby.groupby.SeriesGroupBy object at 0x10637ba20&gt;
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grouped.mean()</span><br></pre></td></tr></table></figure>
-<pre><code>key1
-a    0.752201
-b    0.690639
-Name: data1, dtype: float64
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grouped.describe()</span><br></pre></td></tr></table></figure>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>count</th>
-      <th>mean</th>
-      <th>std</th>
-      <th>min</th>
-      <th>25%</th>
-      <th>50%</th>
-      <th>75%</th>
-      <th>max</th>
-    </tr>
-    <tr>
-      <th>key1</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>a</th>
-      <td>3.0</td>
-      <td>0.752201</td>
-      <td>0.734288</td>
-      <td>0.206854</td>
-      <td>0.334739</td>
-      <td>0.462624</td>
-      <td>1.024874</td>
-      <td>1.587125</td>
-    </tr>
-    <tr>
-      <th>b</th>
-      <td>2.0</td>
-      <td>0.690639</td>
-      <td>0.543127</td>
-      <td>0.306591</td>
-      <td>0.498615</td>
-      <td>0.690639</td>
-      <td>0.882664</td>
-      <td>1.074688</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">means = df[<span class="string">'data1'</span>].groupby([df[<span class="string">'key1'</span>],df[<span class="string">'key2'</span>]]).mean()</span><br><span class="line">means</span><br></pre></td></tr></table></figure>
-<pre><code>key1  key2
-a     one     1.024874
-      two     0.206854
-b     one     1.074688
-      two     0.306591
-Name: data1, dtype: float64
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">means.unstack()</span><br></pre></td></tr></table></figure>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th>key2</th>
-      <th>one</th>
-      <th>two</th>
-    </tr>
-    <tr>
-      <th>key1</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>a</th>
-      <td>1.024874</td>
-      <td>0.206854</td>
-    </tr>
-    <tr>
-      <th>b</th>
-      <td>1.074688</td>
-      <td>0.306591</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">states = np.array([<span class="string">'Ohio'</span>, <span class="string">'California'</span>, <span class="string">'California'</span>, <span class="string">'Ohio'</span>, <span class="string">'Ohio'</span>])</span><br><span class="line">years = np.array([<span class="number">2005</span>, <span class="number">2005</span>, <span class="number">2006</span>, <span class="number">2005</span>, <span class="number">2006</span>])</span><br><span class="line">df[<span class="string">'data1'</span>].groupby([states, years]).mean()</span><br></pre></td></tr></table></figure>
-<pre><code>California  2005    0.206854
-            2006    1.074688
-Ohio        2005    0.946858
-            2006    0.462624
-Name: data1, dtype: float64
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.groupby(<span class="string">'key1'</span>).mean()</span><br></pre></td></tr></table></figure>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>data1</th>
-      <th>data2</th>
-    </tr>
-    <tr>
-      <th>key1</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>a</th>
-      <td>0.752201</td>
-      <td>0.542900</td>
-    </tr>
-    <tr>
-      <th>b</th>
-      <td>0.690639</td>
-      <td>0.463184</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.groupby([<span class="string">'key1'</span>,<span class="string">'key2'</span>]).mean()</span><br></pre></td></tr></table></figure>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th></th>
-      <th>data1</th>
-      <th>data2</th>
-    </tr>
-    <tr>
-      <th>key1</th>
-      <th>key2</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th rowspan="2" valign="top">a</th>
-      <th>one</th>
-      <td>1.024874</td>
-      <td>0.062843</td>
-    </tr>
-    <tr>
-      <th>two</th>
-      <td>0.206854</td>
-      <td>1.503013</td>
-    </tr>
-    <tr>
-      <th rowspan="2" valign="top">b</th>
-      <th>one</th>
-      <td>1.074688</td>
-      <td>-1.310088</td>
-    </tr>
-    <tr>
-      <th>two</th>
-      <td>0.306591</td>
-      <td>2.236456</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<h2 id="对分组进行迭代"><a href="#对分组进行迭代" class="headerlink" title="对分组进行迭代"></a>对分组进行迭代</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#GroupBy对象支持迭代，可以产生一组二元元组</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> name,group <span class="keyword">in</span> df.groupby(<span class="string">'key1'</span>):</span><br><span class="line">    print(name)</span><br><span class="line">    print(group)</span><br></pre></td></tr></table></figure>
-<pre><code>a
-  key1 key2     data1     data2
-0    a  one  1.587125 -0.517650
-1    a  two  0.206854  1.503013
-4    a  one  0.462624  0.643336
-b
-  key1 key2     data1     data2
-2    b  one  1.074688 -1.310088
-3    b  two  0.306591  2.236456
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#多个键则返回由键值组成的元组</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> name,group <span class="keyword">in</span> df.groupby([<span class="string">'key1'</span>,<span class="string">'key2'</span>]):</span><br><span class="line">    print(name)</span><br><span class="line">    print(group)</span><br></pre></td></tr></table></figure>
-<pre><code>(&#39;a&#39;, &#39;one&#39;)
-  key1 key2     data1     data2
-0    a  one  1.587125 -0.517650
-4    a  one  0.462624  0.643336
-(&#39;a&#39;, &#39;two&#39;)
-  key1 key2     data1     data2
-1    a  two  0.206854  1.503013
-(&#39;b&#39;, &#39;one&#39;)
-  key1 key2     data1     data2
-2    b  one  1.074688 -1.310088
-(&#39;b&#39;, &#39;two&#39;)
-  key1 key2     data1     data2
-3    b  two  0.306591  2.236456
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#造个字典</span></span><br><span class="line">pieces = dict(list(df.groupby(<span class="string">'key1'</span>)))</span><br><span class="line">pieces[<span class="string">'b'</span>]</span><br></pre></td></tr></table></figure>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>key1</th>
-      <th>key2</th>
-      <th>data1</th>
-      <th>data2</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2</th>
-      <td>b</td>
-      <td>one</td>
-      <td>1.074688</td>
-      <td>-1.310088</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>b</td>
-      <td>two</td>
-      <td>0.306591</td>
-      <td>2.236456</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<h2 id="选取一个或者一列"><a href="#选取一个或者一列" class="headerlink" title="选取一个或者一列"></a>选取一个或者一列</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">'data1'</span>].groupby(df[<span class="string">'key1'</span>]).describe()</span><br></pre></td></tr></table></figure>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>count</th>
-      <th>mean</th>
-      <th>std</th>
-      <th>min</th>
-      <th>25%</th>
-      <th>50%</th>
-      <th>75%</th>
-      <th>max</th>
-    </tr>
-    <tr>
-      <th>key1</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>a</th>
-      <td>3.0</td>
-      <td>0.752201</td>
-      <td>0.734288</td>
-      <td>0.206854</td>
-      <td>0.334739</td>
-      <td>0.462624</td>
-      <td>1.024874</td>
-      <td>1.587125</td>
-    </tr>
-    <tr>
-      <th>b</th>
-      <td>2.0</td>
-      <td>0.690639</td>
-      <td>0.543127</td>
-      <td>0.306591</td>
-      <td>0.498615</td>
-      <td>0.690639</td>
-      <td>0.882664</td>
-      <td>1.074688</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.groupby([<span class="string">'key1'</span>])[<span class="string">'data1'</span>].describe()  <span class="comment">#单独选取‘data1’这一列</span></span><br></pre></td></tr></table></figure>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>count</th>
-      <th>mean</th>
-      <th>std</th>
-      <th>min</th>
-      <th>25%</th>
-      <th>50%</th>
-      <th>75%</th>
-      <th>max</th>
-    </tr>
-    <tr>
-      <th>key1</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>a</th>
-      <td>3.0</td>
-      <td>0.752201</td>
-      <td>0.734288</td>
-      <td>0.206854</td>
-      <td>0.334739</td>
-      <td>0.462624</td>
-      <td>1.024874</td>
-      <td>1.587125</td>
-    </tr>
-    <tr>
-      <th>b</th>
-      <td>2.0</td>
-      <td>0.690639</td>
-      <td>0.543127</td>
-      <td>0.306591</td>
-      <td>0.498615</td>
-      <td>0.690639</td>
-      <td>0.882664</td>
-      <td>1.074688</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<h2 id="通过字典或Series进行分组"><a href="#通过字典或Series进行分组" class="headerlink" title="通过字典或Series进行分组"></a>通过字典或Series进行分组</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">people = pd.DataFrame(np.random.randn(<span class="number">5</span>, <span class="number">5</span>),</span><br><span class="line">                      columns=[<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>, <span class="string">'e'</span>],</span><br><span class="line">                      index=[<span class="string">'Joe'</span>, <span class="string">'Steve'</span>, <span class="string">'Wes'</span>, <span class="string">'Jim'</span>, <span class="string">'Travis'</span>])</span><br><span class="line">people.iloc[<span class="number">2</span>:<span class="number">3</span>, [<span class="number">1</span>, <span class="number">2</span>]] = np.nan <span class="comment"># Add a few NA values</span></span><br><span class="line">people</span><br></pre></td></tr></table></figure>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>a</th>
-      <th>b</th>
-      <th>c</th>
-      <th>d</th>
-      <th>e</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>Joe</th>
-      <td>-0.323368</td>
-      <td>-0.768278</td>
-      <td>-0.169238</td>
-      <td>0.308583</td>
-      <td>-0.459496</td>
-    </tr>
-    <tr>
-      <th>Steve</th>
-      <td>-0.597247</td>
-      <td>-0.301618</td>
-      <td>-0.439395</td>
-      <td>-1.482591</td>
-      <td>-0.019049</td>
-    </tr>
-    <tr>
-      <th>Wes</th>
-      <td>0.100330</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0.457292</td>
-      <td>1.192268</td>
-    </tr>
-    <tr>
-      <th>Jim</th>
-      <td>-0.223226</td>
-      <td>-0.196377</td>
-      <td>2.264969</td>
-      <td>-0.982435</td>
-      <td>-1.851675</td>
-    </tr>
-    <tr>
-      <th>Travis</th>
-      <td>-1.245037</td>
-      <td>-0.080968</td>
-      <td>-0.509985</td>
-      <td>0.928633</td>
-      <td>-0.474299</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mapping = &#123;<span class="string">'a'</span>: <span class="string">'red'</span>, <span class="string">'b'</span>: <span class="string">'red'</span>, <span class="string">'c'</span>: <span class="string">'blue'</span>,</span><br><span class="line">           <span class="string">'d'</span>: <span class="string">'blue'</span>, <span class="string">'e'</span>: <span class="string">'red'</span>, <span class="string">'f'</span> : <span class="string">'orange'</span>&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">by_columns = people.groupby(mapping,axis=<span class="number">1</span>) <span class="comment">#要和轴长度一致</span></span><br><span class="line">by_columns.sum()</span><br></pre></td></tr></table></figure>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>blue</th>
-      <th>red</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>Joe</th>
-      <td>0.139345</td>
-      <td>-1.551143</td>
-    </tr>
-    <tr>
-      <th>Steve</th>
-      <td>-1.921986</td>
-      <td>-0.917914</td>
-    </tr>
-    <tr>
-      <th>Wes</th>
-      <td>0.457292</td>
-      <td>1.292598</td>
-    </tr>
-    <tr>
-      <th>Jim</th>
-      <td>1.282534</td>
-      <td>-2.271279</td>
-    </tr>
-    <tr>
-      <th>Travis</th>
-      <td>0.418648</td>
-      <td>-1.800303</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<h2 id="通过函数进行分组"><a href="#通过函数进行分组" class="headerlink" title="通过函数进行分组"></a>通过函数进行分组</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">people.groupby(len).sum()</span><br></pre></td></tr></table></figure>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>a</th>
-      <th>b</th>
-      <th>c</th>
-      <th>d</th>
-      <th>e</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>3</th>
-      <td>-0.446265</td>
-      <td>-0.964655</td>
-      <td>2.095731</td>
-      <td>-0.216560</td>
-      <td>-1.118904</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>-0.597247</td>
-      <td>-0.301618</td>
-      <td>-0.439395</td>
-      <td>-1.482591</td>
-      <td>-0.019049</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>-1.245037</td>
-      <td>-0.080968</td>
-      <td>-0.509985</td>
-      <td>0.928633</td>
-      <td>-0.474299</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<h2 id="根据索引级别分组"><a href="#根据索引级别分组" class="headerlink" title="根据索引级别分组"></a>根据索引级别分组</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">columns = pd.MultiIndex.from_arrays([[<span class="string">'US'</span>, <span class="string">'US'</span>, <span class="string">'US'</span>, <span class="string">'JP'</span>, <span class="string">'JP'</span>],</span><br><span class="line">                                    [<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">1</span>, <span class="number">3</span>]],</span><br><span class="line">                                    names=[<span class="string">'cty'</span>, <span class="string">'tenor'</span>])</span><br><span class="line">hier_df = pd.DataFrame(np.random.randn(<span class="number">4</span>, <span class="number">5</span>), columns=columns)</span><br><span class="line">hier_df</span><br></pre></td></tr></table></figure>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead tr th {
-        text-align: left;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr>
-      <th>cty</th>
-      <th colspan="3" halign="left">US</th>
-      <th colspan="2" halign="left">JP</th>
-    </tr>
-    <tr>
-      <th>tenor</th>
-      <th>1</th>
-      <th>3</th>
-      <th>5</th>
-      <th>1</th>
-      <th>3</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>-0.297194</td>
-      <td>0.028656</td>
-      <td>1.206242</td>
-      <td>1.330768</td>
-      <td>-0.267134</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>0.104323</td>
-      <td>-1.416412</td>
-      <td>-0.602244</td>
-      <td>-0.442782</td>
-      <td>-0.654808</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>1.199846</td>
-      <td>1.050484</td>
-      <td>0.077949</td>
-      <td>-0.214932</td>
-      <td>1.186233</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>0.214656</td>
-      <td>0.337322</td>
-      <td>-0.324943</td>
-      <td>1.581862</td>
-      <td>0.821636</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<h1 id="数据聚合"><a href="#数据聚合" class="headerlink" title="数据聚合"></a>数据聚合</h1><p>主要讲sum(),count()等函数计算时到底发生了什么，我们也可以使用自己定义的聚合函数。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grouped = df.groupby(<span class="string">'key1'</span>)</span><br><span class="line">grouped[<span class="string">'data1'</span>].quantile(<span class="number">0.9</span>)</span><br></pre></td></tr></table></figure>
-<pre><code>key1
-a    1.362225
-b    0.997878
-Name: data1, dtype: float64
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grouped.describe().stack().head()</span><br></pre></td></tr></table></figure>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th></th>
-      <th>data1</th>
-      <th>data2</th>
-    </tr>
-    <tr>
-      <th>key1</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th rowspan="5" valign="top">a</th>
-      <th>count</th>
-      <td>3.000000</td>
-      <td>3.000000</td>
-    </tr>
-    <tr>
-      <th>mean</th>
-      <td>0.752201</td>
-      <td>0.542900</td>
-    </tr>
-    <tr>
-      <th>std</th>
-      <td>0.734288</td>
-      <td>1.014069</td>
-    </tr>
-    <tr>
-      <th>min</th>
-      <td>0.206854</td>
-      <td>-0.517650</td>
-    </tr>
-    <tr>
-      <th>25%</th>
-      <td>0.334739</td>
-      <td>0.062843</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<h1 id="分组运算和转换"><a href="#分组运算和转换" class="headerlink" title="分组运算和转换"></a>分组运算和转换</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#pass transform()</span></span><br></pre></td></tr></table></figure>
-<h2 id="apply-一般性的‘拆分-应用-合并’"><a href="#apply-一般性的‘拆分-应用-合并’" class="headerlink" title="apply:一般性的‘拆分-应用-合并’"></a>apply:一般性的‘拆分-应用-合并’</h2><p>最一般化的GroupBy方法</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tips = pd.read_csv(<span class="string">'examples/tips.csv'</span>)</span><br><span class="line">tips[<span class="string">'tip_pct'</span>] = tips[<span class="string">'tip'</span>] / tips[<span class="string">'total_bill'</span>]</span><br><span class="line">tips[:<span class="number">6</span>]</span><br></pre></td></tr></table></figure>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>total_bill</th>
-      <th>tip</th>
-      <th>smoker</th>
-      <th>day</th>
-      <th>time</th>
-      <th>size</th>
-      <th>tip_pct</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>16.99</td>
-      <td>1.01</td>
-      <td>No</td>
-      <td>Sun</td>
-      <td>Dinner</td>
-      <td>2</td>
-      <td>0.059447</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>10.34</td>
-      <td>1.66</td>
-      <td>No</td>
-      <td>Sun</td>
-      <td>Dinner</td>
-      <td>3</td>
-      <td>0.160542</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>21.01</td>
-      <td>3.50</td>
-      <td>No</td>
-      <td>Sun</td>
-      <td>Dinner</td>
-      <td>3</td>
-      <td>0.166587</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>23.68</td>
-      <td>3.31</td>
-      <td>No</td>
-      <td>Sun</td>
-      <td>Dinner</td>
-      <td>2</td>
-      <td>0.139780</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>24.59</td>
-      <td>3.61</td>
-      <td>No</td>
-      <td>Sun</td>
-      <td>Dinner</td>
-      <td>4</td>
-      <td>0.146808</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>25.29</td>
-      <td>4.71</td>
-      <td>No</td>
-      <td>Sun</td>
-      <td>Dinner</td>
-      <td>4</td>
-      <td>0.186240</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grouped = tips.groupby([<span class="string">'day'</span>, <span class="string">'smoker'</span>])</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grouped_pct = grouped[<span class="string">'tip_pct'</span>]</span><br><span class="line">grouped_pct.agg(<span class="string">'mean'</span>)</span><br></pre></td></tr></table></figure>
-<pre><code>day   smoker
-Fri   No        0.151650
-      Yes       0.174783
-Sat   No        0.158048
-      Yes       0.147906
-Sun   No        0.160113
-      Yes       0.187250
-Thur  No        0.160298
-      Yes       0.163863
-Name: tip_pct, dtype: float64
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grouped_pct.agg([<span class="string">'mean'</span>, <span class="string">'std'</span>])</span><br></pre></td></tr></table></figure>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th></th>
-      <th>mean</th>
-      <th>std</th>
-    </tr>
-    <tr>
-      <th>day</th>
-      <th>smoker</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th rowspan="2" valign="top">Fri</th>
-      <th>No</th>
-      <td>0.151650</td>
-      <td>0.028123</td>
-    </tr>
-    <tr>
-      <th>Yes</th>
-      <td>0.174783</td>
-      <td>0.051293</td>
-    </tr>
-    <tr>
-      <th rowspan="2" valign="top">Sat</th>
-      <th>No</th>
-      <td>0.158048</td>
-      <td>0.039767</td>
-    </tr>
-    <tr>
-      <th>Yes</th>
-      <td>0.147906</td>
-      <td>0.061375</td>
-    </tr>
-    <tr>
-      <th rowspan="2" valign="top">Sun</th>
-      <th>No</th>
-      <td>0.160113</td>
-      <td>0.042347</td>
-    </tr>
-    <tr>
-      <th>Yes</th>
-      <td>0.187250</td>
-      <td>0.154134</td>
-    </tr>
-    <tr>
-      <th rowspan="2" valign="top">Thur</th>
-      <th>No</th>
-      <td>0.160298</td>
-      <td>0.038774</td>
-    </tr>
-    <tr>
-      <th>Yes</th>
-      <td>0.163863</td>
-      <td>0.039389</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grouped_pct.agg([(<span class="string">'foo'</span>, <span class="string">'mean'</span>), (<span class="string">'bar'</span>, np.std)])  <span class="comment">#传入tuple</span></span><br></pre></td></tr></table></figure>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th></th>
-      <th>foo</th>
-      <th>bar</th>
-    </tr>
-    <tr>
-      <th>day</th>
-      <th>smoker</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th rowspan="2" valign="top">Fri</th>
-      <th>No</th>
-      <td>0.151650</td>
-      <td>0.028123</td>
-    </tr>
-    <tr>
-      <th>Yes</th>
-      <td>0.174783</td>
-      <td>0.051293</td>
-    </tr>
-    <tr>
-      <th rowspan="2" valign="top">Sat</th>
-      <th>No</th>
-      <td>0.158048</td>
-      <td>0.039767</td>
-    </tr>
-    <tr>
-      <th>Yes</th>
-      <td>0.147906</td>
-      <td>0.061375</td>
-    </tr>
-    <tr>
-      <th rowspan="2" valign="top">Sun</th>
-      <th>No</th>
-      <td>0.160113</td>
-      <td>0.042347</td>
-    </tr>
-    <tr>
-      <th>Yes</th>
-      <td>0.187250</td>
-      <td>0.154134</td>
-    </tr>
-    <tr>
-      <th rowspan="2" valign="top">Thur</th>
-      <th>No</th>
-      <td>0.160298</td>
-      <td>0.038774</td>
-    </tr>
-    <tr>
-      <th>Yes</th>
-      <td>0.163863</td>
-      <td>0.039389</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">functions = [<span class="string">'count'</span>, <span class="string">'mean'</span>, <span class="string">'max'</span>]</span><br><span class="line">result = grouped[<span class="string">'tip_pct'</span>, <span class="string">'total_bill'</span>].agg(functions)</span><br><span class="line">result</span><br></pre></td></tr></table></figure>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead tr th {
-        text-align: left;
-    }
-
-    .dataframe thead tr:last-of-type th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr>
-      <th></th>
-      <th></th>
-      <th colspan="3" halign="left">tip_pct</th>
-      <th colspan="3" halign="left">total_bill</th>
-    </tr>
-    <tr>
-      <th></th>
-      <th></th>
-      <th>count</th>
-      <th>mean</th>
-      <th>max</th>
-      <th>count</th>
-      <th>mean</th>
-      <th>max</th>
-    </tr>
-    <tr>
-      <th>day</th>
-      <th>smoker</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th rowspan="2" valign="top">Fri</th>
-      <th>No</th>
-      <td>4</td>
-      <td>0.151650</td>
-      <td>0.187735</td>
-      <td>4</td>
-      <td>18.420000</td>
-      <td>22.75</td>
-    </tr>
-    <tr>
-      <th>Yes</th>
-      <td>15</td>
-      <td>0.174783</td>
-      <td>0.263480</td>
-      <td>15</td>
-      <td>16.813333</td>
-      <td>40.17</td>
-    </tr>
-    <tr>
-      <th rowspan="2" valign="top">Sat</th>
-      <th>No</th>
-      <td>45</td>
-      <td>0.158048</td>
-      <td>0.291990</td>
-      <td>45</td>
-      <td>19.661778</td>
-      <td>48.33</td>
-    </tr>
-    <tr>
-      <th>Yes</th>
-      <td>42</td>
-      <td>0.147906</td>
-      <td>0.325733</td>
-      <td>42</td>
-      <td>21.276667</td>
-      <td>50.81</td>
-    </tr>
-    <tr>
-      <th rowspan="2" valign="top">Sun</th>
-      <th>No</th>
-      <td>57</td>
-      <td>0.160113</td>
-      <td>0.252672</td>
-      <td>57</td>
-      <td>20.506667</td>
-      <td>48.17</td>
-    </tr>
-    <tr>
-      <th>Yes</th>
-      <td>19</td>
-      <td>0.187250</td>
-      <td>0.710345</td>
-      <td>19</td>
-      <td>24.120000</td>
-      <td>45.35</td>
-    </tr>
-    <tr>
-      <th rowspan="2" valign="top">Thur</th>
-      <th>No</th>
-      <td>45</td>
-      <td>0.160298</td>
-      <td>0.266312</td>
-      <td>45</td>
-      <td>17.113111</td>
-      <td>41.19</td>
-    </tr>
-    <tr>
-      <th>Yes</th>
-      <td>17</td>
-      <td>0.163863</td>
-      <td>0.241255</td>
-      <td>17</td>
-      <td>19.190588</td>
-      <td>43.11</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<h3 id="分位数和桶分析"><a href="#分位数和桶分析" class="headerlink" title="分位数和桶分析"></a>分位数和桶分析</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#和pandas的cut|qcut结合</span></span><br><span class="line"></span><br><span class="line">frame = pd.DataFrame(&#123;<span class="string">'data1'</span>: np.random.randn(<span class="number">1000</span>),</span><br><span class="line">                      <span class="string">'data2'</span>: np.random.randn(<span class="number">1000</span>)&#125;)</span><br><span class="line">quartiles = pd.cut(frame.data1, <span class="number">4</span>)</span><br><span class="line">quartiles[:<span class="number">10</span>]</span><br></pre></td></tr></table></figure>
-<pre><code>0    (-2.845, -1.307]
-1      (0.225, 1.757]
-2      (0.225, 1.757]
-3      (0.225, 1.757]
-4     (-1.307, 0.225]
-5      (0.225, 1.757]
-6      (0.225, 1.757]
-7     (-1.307, 0.225]
-8       (1.757, 3.29]
-9     (-1.307, 0.225]
-Name: data1, dtype: category
-Categories (4, interval[float64]): [(-2.845, -1.307] &lt; (-1.307, 0.225] &lt; (0.225, 1.757] &lt; (1.757, 3.29]]
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_stats</span><span class="params">(group)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> &#123;<span class="string">'min'</span>: group.min(), <span class="string">'max'</span>: group.max(),</span><br><span class="line">            <span class="string">'count'</span>: group.count(), <span class="string">'mean'</span>: group.mean()&#125;</span><br><span class="line">grouped = frame.data2.groupby(quartiles)</span><br><span class="line">grouped.apply(get_stats).unstack()</span><br></pre></td></tr></table></figure>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>count</th>
-      <th>max</th>
-      <th>mean</th>
-      <th>min</th>
-    </tr>
-    <tr>
-      <th>data1</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>(-2.845, -1.307]</th>
-      <td>106.0</td>
-      <td>1.826602</td>
-      <td>0.117032</td>
-      <td>-2.382809</td>
-    </tr>
-    <tr>
-      <th>(-1.307, 0.225]</th>
-      <td>478.0</td>
-      <td>3.553988</td>
-      <td>0.079556</td>
-      <td>-2.690484</td>
-    </tr>
-    <tr>
-      <th>(0.225, 1.757]</th>
-      <td>379.0</td>
-      <td>2.647662</td>
-      <td>0.005168</td>
-      <td>-2.656434</td>
-    </tr>
-    <tr>
-      <th>(1.757, 3.29]</th>
-      <td>37.0</td>
-      <td>1.995249</td>
-      <td>0.024612</td>
-      <td>-1.838962</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p>后续补上</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -3467,7 +1855,7 @@ Categories (4, interval[float64]): [(-2.845, -1.307] &lt; (-1.307, 0.225] &lt; (
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">52</span>
+                  <span class="site-state-item-count">54</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
