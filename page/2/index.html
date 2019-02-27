@@ -232,6 +232,154 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Scrapy初体验/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Scrapy初体验/" itemprop="url">Scrapy初体验</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-16T11:46:15+08:00">
+                2019-01-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>我是<code>pip3 install Scrapy</code>一梭子完事，但是看文档貌似还要搞搞xcode…</p>
+<p>可以参考官方文档<a href="https://scrapy-chs.readthedocs.io/zh_CN/1.0/intro/install.html" target="_blank" rel="noopener">Scrapy安装指南</a></p>
+<h2 id="初始化项目"><a href="#初始化项目" class="headerlink" title="初始化项目"></a>初始化项目</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy startproject douban_book</span><br></pre></td></tr></table></figure>
+<p>scrapy会自动初始化一个目录，里面有一些必须的文件，其结构如下：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── README.md</span><br><span class="line">├── __init__.py</span><br><span class="line">├── __pycache__</span><br><span class="line">├── items.py</span><br><span class="line">├── middlewares.py</span><br><span class="line">├── pipelines.py</span><br><span class="line">├── settings.py</span><br><span class="line">└── spiders</span><br><span class="line">    ├── __init__.py</span><br><span class="line">    └── __pycache__</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>scrapy.cfg: 项目的配置文件</li>
+<li>items.py: 项目的目标文件</li>
+<li>pipelines.py: 项目的管道文件</li>
+<li>settings.py: 项目的设置文件</li>
+<li>spiders: 爬虫代码目录</li>
+</ul>
+<h2 id="构建项目"><a href="#构建项目" class="headerlink" title="构建项目"></a>构建项目</h2><h3 id="定义数据"><a href="#定义数据" class="headerlink" title="定义数据"></a>定义数据</h3><p>首先我们需要定义我们想要抓取什么数据，编辑<code>item.py</code>，Item定义结构化数据字段，用来保存爬取到的数据，有点像Python中的dict，但是提供了一些额外的保护减少错误。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DoubanBookItem</span><span class="params">(scrapy.Item)</span>:</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># define the fields for your item here like:</span></span><br><span class="line">    <span class="comment"># name = scrapy.Field()</span></span><br><span class="line">    title = scrapy.Field()  <span class="comment">#书名</span></span><br><span class="line">    link = scrapy.Field()  <span class="comment">#链接</span></span><br><span class="line">    author = scrapy.Field()  <span class="comment">#作者</span></span><br><span class="line">    score = scrapy.Field()  <span class="comment">#评分</span></span><br><span class="line">    scoreNum = scrapy.Field() <span class="comment">#评论人数 </span></span><br><span class="line">    press = scrapy.Field()  <span class="comment">#出版社</span></span><br><span class="line">    isbn = scrapy.Field()  <span class="comment">#isbn</span></span><br><span class="line">    price = scrapy.Field()  <span class="comment">#价格</span></span><br><span class="line">    publishyear = scrapy.Field()  <span class="comment">#出版年</span></span><br><span class="line">    authordesc = scrapy.Field()  <span class="comment">#作者简介</span></span><br><span class="line">    bookdesc = scrapy.Field()  <span class="comment">#书简介</span></span><br><span class="line">    label = scrapy.Field() <span class="comment">#标签</span></span><br><span class="line">    pagecount = scrapy.Field() <span class="comment">#字数</span></span><br><span class="line">    imgurl = scrapy.Field() <span class="comment">#图片链接</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="编写爬虫"><a href="#编写爬虫" class="headerlink" title="编写爬虫"></a>编写爬虫</h3><h4 id="爬数据"><a href="#爬数据" class="headerlink" title="爬数据"></a>爬数据</h4><p>我们需要用scrapy.Spider类创建一个子类，并为其确定三个强制的属性。</p>
+<ul>
+<li>name = “” ：这个爬虫的识别名称，必须是唯一的，在不同的爬虫必须定义不同的名字。</li>
+<li>allow_domains = [] 是搜索的域名范围，也就是爬虫的约束区域，规定爬虫只爬取这个域名下的网页，不存在的URL会被忽略</li>
+<li>start_urls = () ：爬取的URL元祖/列表。爬虫从这里开始抓取数据,并根据子url继续往下爬。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">name = <span class="string">"douban_book"</span></span><br><span class="line">allowed_domains = [<span class="string">"douban.com"</span>] <span class="comment">#搜索的域名范围，也就是爬虫的约束区域</span></span><br><span class="line">start_urls = [<span class="string">'https://book.douban.com/subject/25794620/'</span>]</span><br></pre></td></tr></table></figure>
+<h4 id="取数据"><a href="#取数据" class="headerlink" title="取数据"></a>取数据</h4><p>parse()方法解析数据，这里运用了<code>XPATH</code>,虽然以前用的<code>BeautifulSoup4</code>，不过都是解析啦 这个问题不大。<br>chrome浏览器提供检查-&gt;选中元素-&gt;copy-&gt;XPATH的快捷方式获取这个，我写的时候一边写一边测试的。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#举个栗子</span></span><br><span class="line"> title = response.xpath(<span class="string">"//div[@id='wrapper']/h1/span/text()"</span>).extract()  </span><br><span class="line"> link = response.url</span><br><span class="line"> imgurl = response.xpath(<span class="string">"//div[@id='mainpic']/a[@class='nbg']/@href"</span>).extract_first()</span><br></pre></td></tr></table></figure></p>
+<h3 id="存储数据"><a href="#存储数据" class="headerlink" title="存储数据"></a>存储数据</h3><p>现在我们已经获取我们想要的数据了，下一步就是把他们存下来，可以存成csv文件，或者直接存到数据库里。这里选择保存到MySQL。</p>
+<p>在pipelines.py里定义<code>process_item()</code>方法，在这里可以对数据做一定的处理，比如缺失值异常值之类的，然后存入数据库。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">process_item</span><span class="params">(self, item, spider)</span>:</span></span><br><span class="line">    rep = re.compile(<span class="string">'\n| '</span>)</span><br><span class="line">    title = item.get(<span class="string">'title'</span>,<span class="string">'N/A'</span>)</span><br><span class="line">    author_tmp = item.get(<span class="string">'author'</span>,<span class="string">'N/A'</span>)</span><br><span class="line">    <span class="comment">#省略一部分</span></span><br><span class="line">    sql = <span class="string">"replace into book_info (title,author,score,press,isbn,price,publishyear,label,pagecount) values (%s,%s,%s,%s,%s,%s,%s,%s,%s)"</span></span><br><span class="line">    self.cursor.execute(sql,(title,author,score,press,isbn,price,publishyear,label,pagecount))</span><br><span class="line">    self.conn.commit()</span><br></pre></td></tr></table></figure>
+<p>最终结果如下：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">         id: 75</span><br><span class="line">      title: 沉默的大多数</span><br><span class="line">     author: 王小波</span><br><span class="line">      score: 9.1</span><br><span class="line">   scorenum: 0</span><br><span class="line">      press: 中国青年出版社</span><br><span class="line">       isbn: 9787500627098</span><br><span class="line">      price: 27.0000</span><br><span class="line">publishyear: 1997-10</span><br><span class="line">      label: 王小波,杂文,沉默的大多数,思想,随笔,中国文学,文学,中国</span><br><span class="line">  pagecount: 555</span><br></pre></td></tr></table></figure></p>
+<h3 id="ToDo"><a href="#ToDo" class="headerlink" title="ToDo"></a>ToDo</h3><ul>
+<li>页面解析并不是很好，经常缺数据</li>
+<li>加入redis</li>
+<li>会被封IP，需要加ip池</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://snailed.cn/ch09-Example/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -3881,148 +4029,6 @@ Categories (4, interval[float64]): [(-2.845, -1.307] &lt; (-1.307, 0.225] &lt; (
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/读《了不起的盖茨比》/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/读《了不起的盖茨比》/" itemprop="url">读《了不起的盖茨比》</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-08T23:09:55+08:00">
-                2019-01-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="写在最前"><a href="#写在最前" class="headerlink" title="写在最前"></a>写在最前</h2><p>记得去年看村上春树的《挪威的森林》的时候，永泽在和渡边君交谈中说到</p>
-<blockquote>
-<p>若是诵读三遍《了不起的盖茨比》的人，倒像是可以成为我的朋友。</p>
-</blockquote>
-<p>当时有在想是什么书这么屌，以后找个时间看一看。今晚看完了这本书，小小记录一下，虽然我这样的普通青年没有读出啥火花就是了。。。</p>
-<h2 id="内容简介"><a href="#内容简介" class="headerlink" title="内容简介"></a>内容简介</h2><p>内容来自<a href="https://zh.wikipedia.org/wiki/%E4%BA%86%E4%B8%8D%E8%B5%B7%E7%9A%84%E7%9B%96%E8%8C%A8%E6%AF%94" target="_blank" rel="noopener">维基百科</a>:</p>
-<p>小说主要事件发生在1922年夏。耶鲁大学毕业生、一战老兵尼克·卡拉威（也是小说叙述人）从中西部来到纽约，卖债券过活。他在长岛的西卵村租住了一间小屋，与盖茨比为邻。杰·盖茨比是一个年轻、神秘的百万富翁，经常举办豪华宴会，却很少出头露面；有许多人到他那里去吃喝，他始终是一个孤独的人。尼克驱车到东卵村拜访表妹黛西·费伊·布坎南，她丈夫汤姆·布坎南也是尼克的大学同学。他们将尼克介绍给乔丹·贝克小姐，她是位充满魅力却略带自私的青年高尔夫球手；尼克认为自己爱上了她。她告诉尼克，汤姆有外遇，叫默特尔·威尔逊，住在“灰烬谷”：西卵村和纽约城之间的工业垃圾场。不久，尼克和汤姆、默特尔前往他们幽会的公寓，举行放荡的狂欢会。默特尔几度提起黛西的名字，汤姆在愤怒中打扁了默特尔的鼻子。</p>
-<p>夏季某日，尼克收到盖茨比宴会的邀请函。他在宴会上碰见乔丹·贝克，而且终于见到盖茨比，发现盖茨比竟然在战争中与他同在一个师服役。尼克从乔丹那里得知盖茨比在1917年与黛西坠入爱河，但因为他要去参军，黛西终于嫁给了汤姆•布坎南。复员后，他赚了很多钱，在长岛买下豪宅，里眺望海湾对面黛西的家，希望“再续前缘”。盖茨比奢华的生活方式与放荡的狂欢会不过是为了吸引黛西，让她回心转意。盖茨比要尼克安排他与黛西见面。尼克邀请黛西到家品茶，隐瞒了盖茨比的到场。在尴尬的见面之后，盖茨比和黛西重温旧情。他们再次相连，但汤姆很快对此产生怀疑。在饭局上，黛西对盖茨比言辞甜蜜，毫不掩饰，汤姆的怀疑得到了证实。虽然汤姆自己也有情妇，但他还是对妻子的出轨倍感愤怒。汤姆逼迫大家前往纽约市，在广场酒店的套房里与盖茨比对峙，告诉他二人间的故事是盖茨比所不能领悟的。不仅如此，他揭露盖茨比贩卖私酒，从事其它见不得人的勾当，才得到了今日的财富。黛西感觉自己无法承受，只想离开，汤姆叫盖茨比驱车送她回家。</p>
-<p>尼克、乔丹、汤姆驱车回家时经过“灰烬谷”，发现汤姆的情妇默特尔被盖茨比的车撞死了。事后，尼克从盖茨比那里得知是黛西在开车，但盖茨比不愿揭发自己的爱人。默特尔的丈夫乔治误以为车主就是自己妻子的情人，对此展开搜索。汤姆误导乔治，后者发现车主是盖茨比后，来到豪宅，开枪行凶，随后自尽。尼克为盖茨比举办葬礼，结束了与乔丹的关系，看破了东部的生活方式，回到了中西部的老家。</p>
-<h2 id="一点点感受"><a href="#一点点感受" class="headerlink" title="一点点感受"></a>一点点感受</h2><p>这本书具体的价值或者说其代表的深层意义不是我可以评价的，不过这个故事我读起来还是觉得很精彩的，有回味。</p>
-<p>下面摘几个点：</p>
-<h3 id="中国也合适"><a href="#中国也合适" class="headerlink" title="中国也合适"></a>中国也合适</h3><p>这个故事完全可以放到现在的中国…二三线城市小富二代，看着从不知道哪里出来的暴发户、一线城市富一代和白富美之间的故事。</p>
-<p>关于爱情，关于理想，关于阶级…</p>
-<h3 id="首与尾"><a href="#首与尾" class="headerlink" title="首与尾"></a>首与尾</h3><blockquote>
-<p>在我年纪轻轻，资历尚浅的那些年里，父亲曾给我一句忠告，直到今天，这句话仍在我心间萦绕。<br>“每当你想批评别人的时候，”他对我说，“要记住，这世上并不是所有人，都有你拥有的那些优势”</p>
-</blockquote>
-<p>Don’t judge.</p>
-<blockquote>
-<p>我们奋力前行，小舟逆水而上，不断地被浪潮推回到过去。</p>
-</blockquote>
-<p>那个年代，这个年代，这个世界会好吗？</p>
-<p>会好的！</p>
-<h2 id="立Flag"><a href="#立Flag" class="headerlink" title="立Flag"></a>立Flag</h2><p>有机会读一读英文版…</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -4073,7 +4079,7 @@ Categories (4, interval[float64]): [(-2.845, -1.307] &lt; (-1.307, 0.225] &lt; (
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">54</span>
+                  <span class="site-state-item-count">55</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="algorithm,">
+  <meta name="keywords" content="Spark,">
 
 
 
@@ -79,18 +79,21 @@
 
 
 
-<meta name="description" content="写在最前关于TF-IDF算法本是我九月组内分享会的内容，前段时间看《数学之美》的时候又重新看到。虽然在实战中使用的机会很少，但是不妨碍我们去感受去理解这些简洁却有力量的思想。 什么是TF和IDF TF:词频(term frequency),即一个词语出现在一篇文章的频率，计算方式很简单：词频=某个词在文章中的出现次数/文章的总词数 IDF:逆文本频率(inverse document freque">
-<meta name="keywords" content="algorithm">
+<meta name="description" content="依赖关系RDD是一个粗粒度的数据集，什么都可以往里面放，而且前面我们知道了转化操作会生成新的RDD，由此形成了RDD之间就形成了前后依赖关系，RDD和它依赖的父RDD（s）的关系有两种不同的类型，即窄依赖（narrow dependency）和宽依赖（wide dependency），如下图。  从图中可知： 窄依赖：指每个父RDD的一个Partition最多被一个子RDD的Partition所使">
+<meta name="keywords" content="Spark">
 <meta property="og:type" content="article">
-<meta property="og:title" content="浅识TF-IDF">
-<meta property="og:url" content="http://snailed.cn/TF-IDF/index.html">
+<meta property="og:title" content="Spark学习笔记之RDD依赖">
+<meta property="og:url" content="http://snailed.cn/Spark学习笔记之RDD依赖/index.html">
 <meta property="og:site_name" content="| Yang |">
-<meta property="og:description" content="写在最前关于TF-IDF算法本是我九月组内分享会的内容，前段时间看《数学之美》的时候又重新看到。虽然在实战中使用的机会很少，但是不妨碍我们去感受去理解这些简洁却有力量的思想。 什么是TF和IDF TF:词频(term frequency),即一个词语出现在一篇文章的频率，计算方式很简单：词频=某个词在文章中的出现次数/文章的总词数 IDF:逆文本频率(inverse document freque">
+<meta property="og:description" content="依赖关系RDD是一个粗粒度的数据集，什么都可以往里面放，而且前面我们知道了转化操作会生成新的RDD，由此形成了RDD之间就形成了前后依赖关系，RDD和它依赖的父RDD（s）的关系有两种不同的类型，即窄依赖（narrow dependency）和宽依赖（wide dependency），如下图。  从图中可知： 窄依赖：指每个父RDD的一个Partition最多被一个子RDD的Partition所使">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-02-26T15:44:38.396Z">
+<meta property="og:image" content="http://snailed.cn/Spark学习笔记之RDD依赖/rdd_dependcy.png">
+<meta property="og:image" content="http://snailed.cn/Spark学习笔记之RDD依赖/RDD_DAG.png">
+<meta property="og:updated_time" content="2019-02-27T01:36:50.732Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="浅识TF-IDF">
-<meta name="twitter:description" content="写在最前关于TF-IDF算法本是我九月组内分享会的内容，前段时间看《数学之美》的时候又重新看到。虽然在实战中使用的机会很少，但是不妨碍我们去感受去理解这些简洁却有力量的思想。 什么是TF和IDF TF:词频(term frequency),即一个词语出现在一篇文章的频率，计算方式很简单：词频=某个词在文章中的出现次数/文章的总词数 IDF:逆文本频率(inverse document freque">
+<meta name="twitter:title" content="Spark学习笔记之RDD依赖">
+<meta name="twitter:description" content="依赖关系RDD是一个粗粒度的数据集，什么都可以往里面放，而且前面我们知道了转化操作会生成新的RDD，由此形成了RDD之间就形成了前后依赖关系，RDD和它依赖的父RDD（s）的关系有两种不同的类型，即窄依赖（narrow dependency）和宽依赖（wide dependency），如下图。  从图中可知： 窄依赖：指每个父RDD的一个Partition最多被一个子RDD的Partition所使">
+<meta name="twitter:image" content="http://snailed.cn/Spark学习笔记之RDD依赖/rdd_dependcy.png">
 
 
 
@@ -120,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://snailed.cn/TF-IDF/">
+  <link rel="canonical" href="http://snailed.cn/Spark学习笔记之RDD依赖/">
 
 
 
 
 
-  <title>浅识TF-IDF | | Yang |</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>Spark学习笔记之RDD依赖 | | Yang |</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -233,7 +236,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/TF-IDF/">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Spark学习笔记之RDD依赖/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhangyang">
@@ -250,7 +253,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">浅识TF-IDF</h1>
+          <h1 class="post-title" itemprop="name headline">Spark学习笔记之RDD依赖</h1>
         
 
         <div class="post-meta">
@@ -262,8 +265,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-25T01:16:46+08:00">
-                2018-12-25
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-26T23:58:39+08:00">
+                2019-02-26
               </time>
             
 
@@ -300,34 +303,26 @@
       
 
       
-        <h4 id="写在最前"><a href="#写在最前" class="headerlink" title="写在最前"></a>写在最前</h4><p>关于TF-IDF算法本是我九月组内分享会的内容，前段时间看《数学之美》的时候又重新看到。虽然在实战中使用的机会很少，但是不妨碍我们去感受去理解这些简洁却有力量的思想。</p>
-<h4 id="什么是TF和IDF"><a href="#什么是TF和IDF" class="headerlink" title="什么是TF和IDF"></a>什么是TF和IDF</h4><ul>
-<li>TF:词频(term frequency),即一个词语出现在一篇文章的频率，计算方式很简单：词频=某个词在文章中的出现次数/文章的总词数</li>
-<li>IDF:逆文本频率(inverse document frequency)，是一个词语的普遍重要性的度量，逆文本频率=log(语料库的文档总数/包含该词的文档数+1)</li>
-</ul>
-<p>TF-IDF = TF * IDF </p>
-<p>某一特定文件内的高词语频率，以及该词语在整个文件集合中的低文件频率，可以产生出高权重的TF-IDF。因此，TF-IDF倾向于过滤掉常见的词语，保留重要的词语。</p>
-<p>具体公式可以参见<a href="https://zh.wikipedia.org/wiki/Tf-idf" target="_blank" rel="noopener">维基百科</a></p>
-<h4 id="简单应用"><a href="#简单应用" class="headerlink" title="简单应用"></a>简单应用</h4><p>TF-IDF 思想及其简单，但是应用起来威力就很大，下面我们来看一个判断句子相关性的例子：</p>
+        <h3 id="依赖关系"><a href="#依赖关系" class="headerlink" title="依赖关系"></a>依赖关系</h3><p>RDD是一个粗粒度的数据集，什么都可以往里面放，而且前面我们知道了转化操作会生成新的RDD，由此形成了RDD之间就形成了前后依赖关系，RDD和它依赖的父RDD（s）的关系有两种不同的类型，即窄依赖（narrow dependency）和宽依赖（wide dependency），如下图。</p>
+<p><img src="rdd_dependcy.png" alt="RDD依赖"></p>
+<p>从图中可知：</p>
+<p><strong>窄依赖</strong>：指每个父RDD的一个Partition最多被一个子RDD的Partition所使用，比如filter,union,map等操作都会产生窄依赖，也有说法是‘独生子女’</p>
+<p><strong>宽依赖</strong>：指一个父RDD的一个Partition被多个子RDD的Partition所使用，比如groupByKey(),reduceByKey(),sortByKey()等都会产生宽依赖，超生。</p>
+<p>对于join操作有两种情况：</p>
 <ul>
-<li>str0:’今天中午的螃蟹真好吃’</li>
-<li>str1:’今天中午的大闸蟹真难吃’</li>
+<li>如果两个RDD在进行join操作时，一个RDD的partition仅仅和另一个RDD中已知个数的Partition进行join，那么这种类型的join操作就是窄依赖，如图中左半部分的join操作</li>
+<li>其它情况的join操作就是宽依赖，由于是需要父RDD的所有partition进行join的转换，这就涉及到了shuffle，因此这种类型的join操作也是宽依赖</li>
 </ul>
-<h5 id="分词"><a href="#分词" class="headerlink" title="分词"></a>分词</h5><p>首先我们需要对句子进行分词处理，网上有很多优秀的资源，比如<a href="https://github.com/fxsjy/jieba" target="_blank" rel="noopener">结巴中文分词</a>，这里我们从简~</p>
-<p>str0:[‘今天’,’中午’,’的’,’螃蟹’,’真’,’好吃’]<br>str1:[‘今天’,’中午’,’的’,’大闸蟹’,’真’,’难吃’]</p>
-<h5 id="构建词向量"><a href="#构建词向量" class="headerlink" title="构建词向量"></a>构建词向量</h5><p>对我们分词的结果取set(),那么我们可以得到[‘今天’,’中午’,’的’,’螃蟹’,’大闸蟹’,’真’,’好吃’,’难吃’]这个词组。我们分别对str0和str1构建词向量，结果为</p>
-<ul>
-<li>str0=[1,1,1,1,0,1,1,0]</li>
-<li>str1=[1,1,1,0,1,1,0,1]</li>
-</ul>
-<h5 id="计算相关性"><a href="#计算相关性" class="headerlink" title="计算相关性"></a>计算相关性</h5><p>数学上我们学过向量空间的余弦相似度，在这里就派上了大用场。最简单的例子，若两条直线的余弦为0，表示不相关；若为-1，则表示完全相反。即余弦相似度越大，其内容的相似度越高，其推广到多维空间也是成立的。</p>
-<p>公式和计算过程就省略一下,计算结果是0.677,相关系数还蛮高的</p>
-<p>更多内容参考<a href="https://www.cnblogs.com/chaosimple/archive/2013/06/28/3160839.html" target="_blank" rel="noopener">这里</a></p>
-<h5 id="更多应用"><a href="#更多应用" class="headerlink" title="更多应用"></a>更多应用</h5><ul>
-<li>论文检索</li>
-<li>新闻的分类</li>
-<li>用户画像</li>
-</ul>
+<p>总结一下：</p>
+<blockquote>
+<p>我们使用父RDD的Partition被子RDD的Partition所使用的个数来决定依赖关系，即：如果父RDD的一个Partition被子RDD的一个Partition所使用就是窄依赖，否则的话就是宽依赖。同时一个子RDD的Partition可以依赖多个父RDD的Partition,只要关系数量确定，也为窄依赖。<br>具体解释为：即子RDD的partition对父RDD依赖的Partition的数量不会随着RDD数据规模的改变而改变。即无论是有100T的数据量还是1P的数据量，在窄依赖中，子RDD所依赖的父RDD的partition的个数是确定的，而宽依赖是shuffle级别的，数据量越大，那么子RDD所依赖的父RDD的个数就越多，从而子RDD所依赖的父RDD的partition的个数也会变得越来越多。</p>
+</blockquote>
+<h3 id="数据流图"><a href="#数据流图" class="headerlink" title="数据流图"></a>数据流图</h3><p>Spark根据RDD之间的依赖关系来为计算任务生成不同的阶段。由于窄依赖间的依赖关系是确定的，其转换处理可以在同一个线程里完成，因此窄依赖会被Spark划分到同一个Stage里面；宽依赖则只能等父RDD的shuffle流程处理完之后，在下一个stage才能开始接下来的计算。</p>
+<p><img src="RDD_DAG.png" alt="RDD数据流"></p>
+<p><strong>因此Spark划分stage的思路是:</strong>从后往前推，遇到宽依赖就断开划分为一个新的Stage，遇到窄依赖就将这个RDD加入该stage中。</p>
+<blockquote>
+<p>因此如图所示，A为一个单独的Stage,CDEF均为窄依赖，为一个stage,BF为一个stage</p>
+</blockquote>
 
       
     </div>
@@ -345,7 +340,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/algorithm/" rel="tag"># algorithm</a>
+            <a href="/tags/Spark/" rel="tag"># Spark</a>
           
         </div>
       
@@ -358,8 +353,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/读《自在独行》/" rel="next" title="读《自在独行》">
-                <i class="fa fa-chevron-left"></i> 读《自在独行》
+              <a href="/Spark学习笔记之RDD/" rel="next" title="Spark学习笔记之RDD">
+                <i class="fa fa-chevron-left"></i> Spark学习笔记之RDD
               </a>
             
           </div>
@@ -367,10 +362,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/summary_2018/" rel="prev" title="2018年终回顾">
-                2018年终回顾 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -493,7 +484,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#写在最前"><span class="nav-number">1.</span> <span class="nav-text">写在最前</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是TF和IDF"><span class="nav-number">2.</span> <span class="nav-text">什么是TF和IDF</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#简单应用"><span class="nav-number">3.</span> <span class="nav-text">简单应用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#分词"><span class="nav-number">3.1.</span> <span class="nav-text">分词</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#构建词向量"><span class="nav-number">3.2.</span> <span class="nav-text">构建词向量</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#计算相关性"><span class="nav-number">3.3.</span> <span class="nav-text">计算相关性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#更多应用"><span class="nav-number">3.4.</span> <span class="nav-text">更多应用</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#依赖关系"><span class="nav-number">1.</span> <span class="nav-text">依赖关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据流图"><span class="nav-number">2.</span> <span class="nav-text">数据流图</span></a></li></ol></div>
             
 
           </div>

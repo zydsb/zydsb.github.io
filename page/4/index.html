@@ -232,6 +232,139 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Hive调优/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Hive调优/" itemprop="url">Hive调优</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-20T20:44:50+08:00">
+                2018-12-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="写在最前"><a href="#写在最前" class="headerlink" title="写在最前"></a>写在最前</h3><p>主要说一下我们平时查询中会遇到的一些性能问题。</p>
+<h3 id="Map-join"><a href="#Map-join" class="headerlink" title="Map join"></a>Map join</h3><p>基于join的性质，我们可以知道把小表放在join的左边，可以有效地减少数据量（基本习惯）。同时我们开启<code>map join</code>，小表数据会被广播到各个节点，消除shuffle运算。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> hive.auto.convert.join = <span class="literal">true</span> ; <span class="comment">-- 开启自动转化成mapjoin</span></span><br><span class="line"><span class="keyword">set</span> hive.mapjoin.smalltable.filesize = <span class="number">2500000</span> ; <span class="comment">-- 设置广播小表size</span></span><br></pre></td></tr></table></figure>
+<h3 id="distinct"><a href="#distinct" class="headerlink" title="distinct"></a>distinct</h3><h4 id="多列或者一列去重"><a href="#多列或者一列去重" class="headerlink" title="多列或者一列去重"></a>多列或者一列去重</h4><p>hive是通过<code>group by</code>实现<code>distinct</code>的,如下代码hive的执行计划其实是完全一致的<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span>  <span class="keyword">distinct</span> a,b,func(c) <span class="keyword">as</span> tt  <span class="keyword">from</span> xxx ;</span><br><span class="line"><span class="keyword">select</span>  a,b,func(c) <span class="keyword">as</span> tt  <span class="keyword">from</span> xxx  <span class="keyword">group</span> <span class="keyword">by</span> a,b,func(c)</span><br></pre></td></tr></table></figure></p>
+<p>如果我们可以确定这个func()是一个单映射的话，那么其实是可以直接等效写为:<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> a,b,func(c) <span class="keyword">as</span> tt <span class="keyword">from</span> xxx <span class="keyword">group</span> <span class="keyword">by</span> a,b,c</span><br></pre></td></tr></table></figure></p>
+<h4 id="聚合函数中进行计算"><a href="#聚合函数中进行计算" class="headerlink" title="聚合函数中进行计算"></a>聚合函数中进行计算</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> dt,<span class="keyword">count</span>(<span class="keyword">distinct</span> userid) <span class="keyword">as</span> uv </span><br><span class="line"><span class="keyword">from</span> xxx</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> dt</span><br></pre></td></tr></table></figure>
+<p>这样会把所有的数据放在一个reducer里面，执行时间较长，可以这么优化，即把<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> dt,<span class="keyword">count</span>(<span class="number">1</span>)</span><br><span class="line"><span class="keyword">from</span>(</span><br><span class="line">    <span class="keyword">select</span>  <span class="keyword">distinct</span> dt,userid</span><br><span class="line">    <span class="keyword">from</span> xxx </span><br><span class="line">    ) <span class="keyword">final</span></span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> dt</span><br></pre></td></tr></table></figure></p>
+<p>这样把第一个阶段分担到多个reducer上，但实际业务过程中，大多数的数据都是在多维度下多指标计算（计算量大），经常会导致数据倾斜之类的问题。</p>
+<h5 id="不同条件的count-distinct"><a href="#不同条件的count-distinct" class="headerlink" title="不同条件的count(distinct)"></a>不同条件的count(distinct)</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> dt </span><br><span class="line">, <span class="keyword">count</span>(<span class="keyword">distinct</span> userid) <span class="keyword">as</span> tt </span><br><span class="line">, <span class="keyword">count</span>(<span class="keyword">distinct</span> <span class="keyword">if</span>(a <span class="keyword">rlike</span> <span class="string">'xxx'</span>,userid,<span class="literal">null</span>)) <span class="keyword">as</span> u1</span><br><span class="line">, <span class="keyword">count</span>(<span class="keyword">distinct</span> <span class="keyword">if</span>(b &gt; xxx ,userid, <span class="literal">null</span>)) <span class="keyword">as</span> u2</span><br><span class="line">, <span class="keyword">count</span>(<span class="keyword">distinct</span> <span class="keyword">if</span>(c = xxx , userid , <span class="literal">null</span>)) <span class="keyword">as</span> u3</span><br></pre></td></tr></table></figure>
+<p>可以通过标记的方式来解决<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> dt</span><br><span class="line">, <span class="keyword">count</span>(userid) <span class="keyword">as</span> tt</span><br><span class="line">, <span class="keyword">count</span>(<span class="keyword">if</span>(tag0=<span class="number">1</span>,userid,<span class="literal">null</span>)) <span class="keyword">as</span> u1</span><br><span class="line">, <span class="keyword">count</span>(<span class="keyword">if</span>(tag1=<span class="number">1</span>,userid,<span class="literal">null</span>)) <span class="keyword">as</span> u2</span><br><span class="line">, <span class="keyword">count</span>(<span class="keyword">if</span>(tag2=<span class="number">2</span>,userid,<span class="literal">null</span>)) <span class="keyword">as</span> u3</span><br><span class="line"><span class="keyword">from</span>(</span><br><span class="line">    <span class="keyword">select</span> dt</span><br><span class="line">        , <span class="keyword">max</span>(<span class="keyword">if</span>(a <span class="keyword">rlike</span> <span class="string">'xxx'</span>,<span class="number">1</span>,<span class="number">0</span>)) <span class="keyword">as</span> tag0</span><br><span class="line">        , <span class="keyword">max</span>(<span class="keyword">if</span>(b &gt; xxx ,<span class="number">1</span>,<span class="number">0</span>)) <span class="keyword">as</span> tag1</span><br><span class="line">        , <span class="keyword">max</span>(<span class="keyword">if</span>(c = xxx ,<span class="number">1</span>,<span class="number">0</span>))</span><br><span class="line">    <span class="keyword">group</span> <span class="keyword">by</span> dt </span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
+<h5 id="多维度聚合（group-by-xx-xx-with-cube"><a href="#多维度聚合（group-by-xx-xx-with-cube" class="headerlink" title="多维度聚合（group by xx,xx with cube)"></a>多维度聚合（group by xx,xx with cube)</h5><p>手动维护grouping sets的组合</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">group by semesterid , grade_type , gradeid , courseid  , seasonid , seasonname, teamid</span><br><span class="line">grouping sets( (semesterid , grade_type , gradeid , courseid  , seasonid , seasonname, teamid )</span><br><span class="line">  , (semesterid , grade_type , gradeid , courseid  , seasonid , seasonname)</span><br><span class="line"></span><br><span class="line">  )</span><br></pre></td></tr></table></figure>
+<h5 id="不同列聚合"><a href="#不同列聚合" class="headerlink" title="不同列聚合"></a>不同列聚合</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">count(distinct userid)</span><br><span class="line">count(distinct deviceid)</span><br></pre></td></tr></table></figure>
+<p>可以进行分拆成两个查询分别计算(load两遍数据),最后join到一起</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://snailed.cn/小球称重问题/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1908,129 +2041,6 @@ a_3x+b_3y+c_3z=d_3\\\
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/我心中的友谊/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/我心中的友谊/" itemprop="url">我心中的友谊</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-20T00:46:04+08:00">
-                2018-11-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>2018-11-19</p>
-</blockquote>
-<p>有这样的友谊 我好开心呀。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2081,7 +2091,7 @@ a_3x+b_3y+c_3z=d_3\\\
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">54</span>
+                  <span class="site-state-item-count">55</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
