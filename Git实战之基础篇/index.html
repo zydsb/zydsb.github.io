@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Python,">
+  <meta name="keywords" content="Git,">
 
 
 
@@ -79,18 +79,21 @@
 
 
 
-<meta name="description" content="明晚来更新，不然这周不喝可乐了！ 2018-11-20,这周没有可乐喝了。。。sad  不过今天了解了下序列化和反序列化的东西，后面写出来一下 zhangyang chishibani!">
-<meta name="keywords" content="Python">
+<meta name="description" content="写在最前之前有写过对Git的一点点使用，但是不会的还是太多了。 趁着鹏飞讲了Git，自己也跟着走一走。 Git CommitGit仓库中的提交记录保存的是你目录下所有文件的快照，同时Git希望提交记录尽量轻量，因此在你每次进行提交时，它并不会盲目地复制整个目录。条件允许的情况下，它会将当前版本与仓库中的上一个版本进行对比，并把所有的差异打包到一起作为一个提交记录。当然Git也保存了提交的历史记录。">
+<meta name="keywords" content="Git">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Seaborn">
-<meta property="og:url" content="http://snailed.cn/Seaborn/index.html">
+<meta property="og:title" content="Git实战之基础篇">
+<meta property="og:url" content="http://snailed.cn/Git实战之基础篇/index.html">
 <meta property="og:site_name" content="| Yang |">
-<meta property="og:description" content="明晚来更新，不然这周不喝可乐了！ 2018-11-20,这周没有可乐喝了。。。sad  不过今天了解了下序列化和反序列化的东西，后面写出来一下 zhangyang chishibani!">
+<meta property="og:description" content="写在最前之前有写过对Git的一点点使用，但是不会的还是太多了。 趁着鹏飞讲了Git，自己也跟着走一走。 Git CommitGit仓库中的提交记录保存的是你目录下所有文件的快照，同时Git希望提交记录尽量轻量，因此在你每次进行提交时，它并不会盲目地复制整个目录。条件允许的情况下，它会将当前版本与仓库中的上一个版本进行对比，并把所有的差异打包到一起作为一个提交记录。当然Git也保存了提交的历史记录。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-11-30T09:42:05.307Z">
+<meta property="og:image" content="http://snailed.cn/Git实战之基础篇/gitmerge.png">
+<meta property="og:image" content="http://snailed.cn/Git实战之基础篇/gitrebase.png">
+<meta property="og:updated_time" content="2019-03-06T15:44:59.395Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Seaborn">
-<meta name="twitter:description" content="明晚来更新，不然这周不喝可乐了！ 2018-11-20,这周没有可乐喝了。。。sad  不过今天了解了下序列化和反序列化的东西，后面写出来一下 zhangyang chishibani!">
+<meta name="twitter:title" content="Git实战之基础篇">
+<meta name="twitter:description" content="写在最前之前有写过对Git的一点点使用，但是不会的还是太多了。 趁着鹏飞讲了Git，自己也跟着走一走。 Git CommitGit仓库中的提交记录保存的是你目录下所有文件的快照，同时Git希望提交记录尽量轻量，因此在你每次进行提交时，它并不会盲目地复制整个目录。条件允许的情况下，它会将当前版本与仓库中的上一个版本进行对比，并把所有的差异打包到一起作为一个提交记录。当然Git也保存了提交的历史记录。">
+<meta name="twitter:image" content="http://snailed.cn/Git实战之基础篇/gitmerge.png">
 
 
 
@@ -120,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://snailed.cn/Seaborn/">
+  <link rel="canonical" href="http://snailed.cn/Git实战之基础篇/">
 
 
 
 
 
-  <title>Seaborn | | Yang |</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>Git实战之基础篇 | | Yang |</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -233,7 +236,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Seaborn/">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Git实战之基础篇/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhangyang">
@@ -250,7 +253,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Seaborn</h1>
+          <h1 class="post-title" itemprop="name headline">Git实战之基础篇</h1>
         
 
         <div class="post-meta">
@@ -262,8 +265,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-20T00:44:52+08:00">
-                2018-11-20
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-06T22:37:33+08:00">
+                2019-03-06
               </time>
             
 
@@ -300,10 +303,23 @@
       
 
       
-        <p>明晚来更新，不然这周不喝可乐了！</p>
-<p>2018-11-20,这周没有可乐喝了。。。sad </p>
-<p>不过今天了解了下序列化和反序列化的东西，后面写出来一下</p>
-<p>zhangyang chishibani!</p>
+        <h3 id="写在最前"><a href="#写在最前" class="headerlink" title="写在最前"></a>写在最前</h3><p>之前有写过对Git的一点点使用，但是不会的还是太多了。</p>
+<p>趁着鹏飞讲了Git，自己也跟着走一走。</p>
+<h3 id="Git-Commit"><a href="#Git-Commit" class="headerlink" title="Git Commit"></a>Git Commit</h3><p>Git仓库中的提交记录保存的是你目录下所有文件的快照，同时Git希望提交记录尽量轻量，因此在你每次进行提交时，它并不会盲目地复制整个目录。条件允许的情况下，它会将当前版本与仓库中的上一个版本进行对比，并把所有的差异打包到一起作为一个提交记录。当然Git也保存了提交的历史记录。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span>git commit </span><br><span class="line"><span class="meta">#</span> 不过公司提交一般要求加上备注</span><br><span class="line"><span class="meta">$</span>git commit -m 'your comment'</span><br></pre></td></tr></table></figure>
+<h3 id="Git-Branch"><a href="#Git-Branch" class="headerlink" title="Git Branch"></a>Git Branch</h3><p>Git 的分支也非常轻量。它们只是简单地指向某个提交纪录 —— 仅此而已。网上大佬们都说：<br><strong>早建分支！多用分支！</strong></p>
+<p>因为创建再多的分支也不会造成存储或者内存上的开销，并且按照逻辑分解到不同的分支比维护臃肿的分支简单很多。</p>
+<p>使用分支可以理解为“我想基于这个提交以及他的所有父提交进行新的工作”</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 创建新分支</span><br><span class="line"><span class="meta">$</span>git branch bugFix</span><br><span class="line"><span class="meta">#</span> 切换到新分支</span><br><span class="line"><span class="meta">$</span>git checkout bugFix</span><br></pre></td></tr></table></figure>
+<h3 id="Git-Merge"><a href="#Git-Merge" class="headerlink" title="Git Merge"></a>Git Merge</h3><p>在我们新建好分支且完成新功能的开发之后，这个时候我们需要将其合并回主线。我们先来看看第一种方法<code>git merge</code>。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> git branch bugFix</span><br><span class="line"><span class="meta">$</span> git checkout bugFix</span><br><span class="line"><span class="meta">$</span> git commit</span><br><span class="line"><span class="meta">$</span> git checkout master</span><br><span class="line"><span class="meta">$</span> git commit</span><br><span class="line"><span class="meta">$</span> git merge bugFix</span><br></pre></td></tr></table></figure>
+<p><img src="gitmerge.png" alt="Merge"></p>
+<h3 id="Git-Rebase"><a href="#Git-Rebase" class="headerlink" title="Git Rebase"></a>Git Rebase</h3><p><code>git rebase</code>同样是合并分支的方法，其实质是取出一系列的提交记录，“复制”他们，然后再另一个地方逐个的放下去。</p>
+<blockquote>
+<p>Rebase的优势是可以创造更线性的提交历史，因为如果只使用Rebase的话，代码库的提交历史将会变得异常清晰。</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> git branch bugFix</span><br><span class="line"><span class="meta">$</span> git checkout bugFix</span><br><span class="line"><span class="meta">$</span> git commit</span><br><span class="line"><span class="meta">$</span> git checkout master</span><br><span class="line"><span class="meta">$</span> git commit</span><br><span class="line"><span class="meta">$</span> git checkout bugFix</span><br><span class="line"><span class="meta">$</span> git rebase master</span><br></pre></td></tr></table></figure>
+<p><img src="gitrebase.png" alt="Rebase"></p>
 
       
     </div>
@@ -321,7 +337,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Python/" rel="tag"># Python</a>
+            <a href="/tags/Git/" rel="tag"># Git</a>
           
         </div>
       
@@ -334,8 +350,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/记我的爷爷/" rel="next" title="记我的爷爷">
-                <i class="fa fa-chevron-left"></i> 记我的爷爷
+              <a href="/Spark学习笔记之SparkSQL/" rel="next" title="Spark学习笔记之SparkSQL">
+                <i class="fa fa-chevron-left"></i> Spark学习笔记之SparkSQL
               </a>
             
           </div>
@@ -343,10 +359,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/我心中的友谊/" rel="prev" title="我心中的友谊">
-                我心中的友谊 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -398,8 +410,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -450,6 +471,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#写在最前"><span class="nav-number">1.</span> <span class="nav-text">写在最前</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Git-Commit"><span class="nav-number">2.</span> <span class="nav-text">Git Commit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Git-Branch"><span class="nav-number">3.</span> <span class="nav-text">Git Branch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Git-Merge"><span class="nav-number">4.</span> <span class="nav-text">Git Merge</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Git-Rebase"><span class="nav-number">5.</span> <span class="nav-text">Git Rebase</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
