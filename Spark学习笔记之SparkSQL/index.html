@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Spark,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="SparkSQL简介基本特点SparkSQL是Spark用来操作结构化和半结构化数据的接口，其提供了三大功能：  SparkSQL可以从各种数据源中读取数据（JSON，Hive…） SparkSQL不仅支持Spark程序内部使用SQL查询，也支持外部工具（Tableau等）使用JDBC等进行连接 SparkSQL支持SQL与常见的Python/Java/Scala等代码高度整合，包括连接RDD和S">
+<meta name="keywords" content="Spark">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spark学习笔记之SparkSQL">
+<meta property="og:url" content="http://snailed.cn/Spark学习笔记之SparkSQL/index.html">
+<meta property="og:site_name" content="| Yang |">
+<meta property="og:description" content="SparkSQL简介基本特点SparkSQL是Spark用来操作结构化和半结构化数据的接口，其提供了三大功能：  SparkSQL可以从各种数据源中读取数据（JSON，Hive…） SparkSQL不仅支持Spark程序内部使用SQL查询，也支持外部工具（Tableau等）使用JDBC等进行连接 SparkSQL支持SQL与常见的Python/Java/Scala等代码高度整合，包括连接RDD和S">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://snailed.cn/Spark学习笔记之SparkSQL/DataFrame.png">
+<meta property="og:updated_time" content="2019-03-05T16:37:20.485Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spark学习笔记之SparkSQL">
+<meta name="twitter:description" content="SparkSQL简介基本特点SparkSQL是Spark用来操作结构化和半结构化数据的接口，其提供了三大功能：  SparkSQL可以从各种数据源中读取数据（JSON，Hive…） SparkSQL不仅支持Spark程序内部使用SQL查询，也支持外部工具（Tableau等）使用JDBC等进行连接 SparkSQL支持SQL与常见的Python/Java/Scala等代码高度整合，包括连接RDD和S">
+<meta name="twitter:image" content="http://snailed.cn/Spark学习笔记之SparkSQL/DataFrame.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://snailed.cn/Spark学习笔记之SparkSQL/">
+
+
+
+
+
+  <title>Spark学习笔记之SparkSQL | | Yang |</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">| Yang |</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Spark学习笔记之SparkSQL/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Spark学习笔记之SparkSQL</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-05T22:49:16+08:00">
+                2019-03-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="SparkSQL简介"><a href="#SparkSQL简介" class="headerlink" title="SparkSQL简介"></a>SparkSQL简介</h3><h4 id="基本特点"><a href="#基本特点" class="headerlink" title="基本特点"></a>基本特点</h4><p>SparkSQL是Spark用来操作结构化和半结构化数据的接口，其提供了三大功能：</p>
+<ul>
+<li>SparkSQL可以从各种数据源中读取数据（JSON，Hive…）</li>
+<li>SparkSQL不仅支持Spark程序内部使用SQL查询，也支持外部工具（Tableau等）使用JDBC等进行连接</li>
+<li>SparkSQL支持SQL与常见的Python/Java/Scala等代码高度整合，包括连接RDD和SQL表，公开的自定义SQL函数接口等。</li>
+</ul>
+<p>其运行原理也十分简单：把Spark SQL转化为RDD，然后提交到集群运行。</p>
+<h4 id="SparkSession"><a href="#SparkSession" class="headerlink" title="SparkSession"></a>SparkSession</h4><p>SparkSession是Spark2.0引入的新概念。为用户提供了一个统一的切入点，让用户来使用Spark的各项功能。</p>
+<p>在spark的早期版本中，SparkContext是spark的主要切入点，由于RDD是主要的API，我们通过sparkcontext来创建和操作RDD。对于每个其他的API，我们需要使用不同的context。例如，对于Streming，我们需要使用StreamingContext；对于sql，使用sqlContext；对于Hive，使用hiveContext。但是随着DataSet和DataFrame的API逐渐成为标准的API，就需要为他们建立接入点。所以在spark2.0中，引入SparkSession作为DataSet和DataFrame API的切入点，SparkSession封装了SparkConf、SparkContext和SQLContext。为了向后兼容，SQLContext和HiveContext也被保存下来。 </p>
+<p>SparkSession是SQLContext和HiveContext的组合，所以两者的API在SparkSession上都是可用的。SparkSession内部封装了SparkContext，其计算是由SparkContext完成的。</p>
+<blockquote>
+<p>与Spark交互的时候不需要显示地创建SparkConf，SparkContext和SQLcontext，这些对象已经封闭在了SparkSession中。</p>
+</blockquote>
+<h3 id="使用SparkSQL"><a href="#使用SparkSQL" class="headerlink" title="使用SparkSQL"></a>使用SparkSQL</h3><h4 id="DataFrame"><a href="#DataFrame" class="headerlink" title="DataFrame"></a>DataFrame</h4><p>在Spark中DataFrame是一种以RDD为基础的分布式数据集，类似于我们传统数据库中的表。其与RDD的区别是DataFrame带有Schema元信息，即DataFrame所表示的二维数据集的每一列都带有名称和类型。SparkSQL依据此进行了优化，以大幅提升运行时的效率。</p>
+<p><img src="DataFrame.png" alt="RDD与DataFrame"></p>
+<h4 id="读取和存储数据"><a href="#读取和存储数据" class="headerlink" title="读取和存储数据"></a>读取和存储数据</h4><p>SparkSQL支持很多结构化的数据源，包括Hive表、JSON和Parquet文件等等，也指定结构信息可以把RDD转化为DataFrame。</p>
+<h5 id="Hive"><a href="#Hive" class="headerlink" title="Hive"></a>Hive</h5><p>SparkSQL对Hive的支持十分友好。支持Hive的支持的任何存储格式（Serde）。</p>
+<p>我们提供一份Hive配置即可把SparkSQL连接到已经配置好的Hive上，具体操作Goole一下就好。</p>
+<p>示例<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pyspark.sql <span class="keyword">import</span> HiveContext</span><br><span class="line"></span><br><span class="line">hiveCtx = HiveContext(sc)</span><br><span class="line">rows = hiveCtx.sql(<span class="string">"select key,value from my_table"</span>)</span><br><span class="line">key = rows.map(<span class="keyword">lambda</span> row:row[<span class="number">0</span>])</span><br></pre></td></tr></table></figure></p>
+<h5 id="Parquest"><a href="#Parquest" class="headerlink" title="Parquest"></a>Parquest</h5><p>Parquest是一种流行的列式存储格式，可以高效地存储具有嵌套字段的记录。</p>
+<p>首先我们可以通过HiveContext.parquestFile或者SQLContext.parquestFile来读取数据<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">rows = hiveCtx.parquestFile(parquestfile)</span><br><span class="line">names = rows.map(<span class="keyword">lambda</span> row:row.name)</span><br></pre></td></tr></table></figure></p>
+<p>其次我们也可以把Parquest文件注册为SparkSQL的临时表，然后再这张表上进行查询。</p>
+<h5 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h5><p>我们只需要调用hiveCtx中的jsonFile()方法即可读取JSON数据。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">input = hiveCtx.jsonFile(jsonfile)</span><br></pre></td></tr></table></figure></p>
+<h5 id="基于RDD"><a href="#基于RDD" class="headerlink" title="基于RDD"></a>基于RDD</h5><p>除了读取数据，我们也可以基于RDD创建DataFrame。Python中可以创建一个Row对象组成的RDD，然后调用inferSchema()。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">RDDn = sc.parallelize([Row(name=<span class="string">"zy"</span>,tel=<span class="string">"186"</span>)])</span><br><span class="line">SchemaRDDn = hiveCtx.inferSchema(RDDn)</span><br><span class="line">SchemaRDDn.registerTempTable(<span class="string">"info"</span>)</span><br></pre></td></tr></table></figure></p>
+<h3 id="UDF"><a href="#UDF" class="headerlink" title="UDF"></a>UDF</h3><p>SparkSQL不仅有自己的UDF接口，也支持Hive的UDF接口。</p>
+<h4 id="SparkSQL-UDF"><a href="#SparkSQL-UDF" class="headerlink" title="SparkSQL UDF"></a>SparkSQL UDF</h4><p>我们可以使用Spark支持的内建语言编写好函数，然后通过SparkSQL内建的方法传递进来，配合Python/Scala很好用。</p>
+<h4 id="Hive-UDF"><a href="#Hive-UDF" class="headerlink" title="Hive UDF"></a>Hive UDF</h4><p>标准的Hive UDF已经自动添加在SparkSQL中，如果需要添加用户自定义的UDF，我们就需要确保该UDF的JAR包已经在应用中。</p>
+<h3 id="SparkSQL性能调优"><a href="#SparkSQL性能调优" class="headerlink" title="SparkSQL性能调优"></a>SparkSQL性能调优</h3><p>这个估计是要单写一篇文章讲的吧…</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Spark/" rel="tag"># Spark</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Spark学习笔记之运行流程/" rel="next" title="Spark学习笔记之运行流程">
+                <i class="fa fa-chevron-left"></i> Spark学习笔记之运行流程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">zhangyang</p>
+              <p class="site-description motion-element" itemprop="description">不要温和地走进那个良夜</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">58</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#SparkSQL简介"><span class="nav-number">1.</span> <span class="nav-text">SparkSQL简介</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本特点"><span class="nav-number">1.1.</span> <span class="nav-text">基本特点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SparkSession"><span class="nav-number">1.2.</span> <span class="nav-text">SparkSession</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用SparkSQL"><span class="nav-number">2.</span> <span class="nav-text">使用SparkSQL</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#DataFrame"><span class="nav-number">2.1.</span> <span class="nav-text">DataFrame</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#读取和存储数据"><span class="nav-number">2.2.</span> <span class="nav-text">读取和存储数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Hive"><span class="nav-number">2.2.1.</span> <span class="nav-text">Hive</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Parquest"><span class="nav-number">2.2.2.</span> <span class="nav-text">Parquest</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#JSON"><span class="nav-number">2.2.3.</span> <span class="nav-text">JSON</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#基于RDD"><span class="nav-number">2.2.4.</span> <span class="nav-text">基于RDD</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UDF"><span class="nav-number">3.</span> <span class="nav-text">UDF</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SparkSQL-UDF"><span class="nav-number">3.1.</span> <span class="nav-text">SparkSQL UDF</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Hive-UDF"><span class="nav-number">3.2.</span> <span class="nav-text">Hive UDF</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SparkSQL性能调优"><span class="nav-number">4.</span> <span class="nav-text">SparkSQL性能调优</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhangyang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>

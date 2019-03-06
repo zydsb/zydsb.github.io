@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hive Python,">
+  <meta name="keywords" content="Spark,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="导语正则表达式的作用：    测试字符串内的模式   替换文本   基于模式匹配从字符串中提取子字符串    语法 正则表达式的各组成部分可以是单个字符、字符集、字符范围或在几个字符之间选择。 也可以是这些组成部分的任意组合。     写完第一步是需要测试的，这里提供一个在线测试网站RegexPlaner   以下是个人常用的(具体的看官方文档.aspx))  通过在一对分隔符之间放置表达式的各种">
-<meta name="keywords" content="Hive Python">
+<meta name="description" content="感恩博主扎心了，老铁 Spark中的基本概念 Application: 表示某个应用程序 Driver: main()函数，创建SparkContext。由SparkContext与ClusterManager通信，进行资源的申请，任务的分配和监控等。在程序执行完毕之后关闭SparkContext。 Excuter: 某个Application运行在一个节点的一个进程，负责运行某些Task，并将数">
+<meta name="keywords" content="Spark">
 <meta property="og:type" content="article">
-<meta property="og:title" content="正则表达式">
-<meta property="og:url" content="http://snailed.cn/正则表达式/index.html">
+<meta property="og:title" content="Spark学习笔记之运行流程">
+<meta property="og:url" content="http://snailed.cn/Spark学习笔记之运行流程/index.html">
 <meta property="og:site_name" content="| Yang |">
-<meta property="og:description" content="导语正则表达式的作用：    测试字符串内的模式   替换文本   基于模式匹配从字符串中提取子字符串    语法 正则表达式的各组成部分可以是单个字符、字符集、字符范围或在几个字符之间选择。 也可以是这些组成部分的任意组合。     写完第一步是需要测试的，这里提供一个在线测试网站RegexPlaner   以下是个人常用的(具体的看官方文档.aspx))  通过在一对分隔符之间放置表达式的各种">
+<meta property="og:description" content="感恩博主扎心了，老铁 Spark中的基本概念 Application: 表示某个应用程序 Driver: main()函数，创建SparkContext。由SparkContext与ClusterManager通信，进行资源的申请，任务的分配和监控等。在程序执行完毕之后关闭SparkContext。 Excuter: 某个Application运行在一个节点的一个进程，负责运行某些Task，并将数">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-11-19T16:07:32.323Z">
+<meta property="og:updated_time" content="2019-02-28T15:59:30.972Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="正则表达式">
-<meta name="twitter:description" content="导语正则表达式的作用：    测试字符串内的模式   替换文本   基于模式匹配从字符串中提取子字符串    语法 正则表达式的各组成部分可以是单个字符、字符集、字符范围或在几个字符之间选择。 也可以是这些组成部分的任意组合。     写完第一步是需要测试的，这里提供一个在线测试网站RegexPlaner   以下是个人常用的(具体的看官方文档.aspx))  通过在一对分隔符之间放置表达式的各种">
+<meta name="twitter:title" content="Spark学习笔记之运行流程">
+<meta name="twitter:description" content="感恩博主扎心了，老铁 Spark中的基本概念 Application: 表示某个应用程序 Driver: main()函数，创建SparkContext。由SparkContext与ClusterManager通信，进行资源的申请，任务的分配和监控等。在程序执行完毕之后关闭SparkContext。 Excuter: 某个Application运行在一个节点的一个进程，负责运行某些Task，并将数">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://snailed.cn/正则表达式/">
+  <link rel="canonical" href="http://snailed.cn/Spark学习笔记之运行流程/">
 
 
 
 
 
-  <title>正则表达式 | | Yang |</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>Spark学习笔记之运行流程 | | Yang |</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -233,7 +233,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/正则表达式/">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Spark学习笔记之运行流程/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhangyang">
@@ -250,7 +250,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">正则表达式</h1>
+          <h1 class="post-title" itemprop="name headline">Spark学习笔记之运行流程</h1>
         
 
         <div class="post-meta">
@@ -262,8 +262,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-20T00:03:56+08:00">
-                2018-11-20
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-28T23:14:33+08:00">
+                2019-02-28
               </time>
             
 
@@ -300,68 +300,19 @@
       
 
       
-        <h4 id="导语"><a href="#导语" class="headerlink" title="导语"></a>导语</h4><p>正则表达式的作用：  </p>
-<ul>
-<li>测试字符串内的模式  </li>
-<li>替换文本  </li>
-<li>基于模式匹配从字符串中提取子字符串  </li>
+        <p>感恩博主<a href="https://www.cnblogs.com/qingyunzong/p/8945933.html" target="_blank" rel="noopener">扎心了，老铁</a></p>
+<h3 id="Spark中的基本概念"><a href="#Spark中的基本概念" class="headerlink" title="Spark中的基本概念"></a>Spark中的基本概念</h3><ul>
+<li>Application: 表示某个应用程序</li>
+<li>Driver: main()函数，创建SparkContext。由SparkContext与ClusterManager通信，进行资源的申请，任务的分配和监控等。在程序执行完毕之后关闭SparkContext。</li>
+<li>Excuter: 某个Application运行在一个节点的一个进程，负责运行某些Task，并将数据存在内存或者磁盘上。在Spark on Yarn模式下，其进程名称为 CoarseGrainedExecutor Backend，一个CoarseGrainedExecutor Backend进程有且仅有一个executor对象，它负责将Task包装成taskRunner，并从线程池中抽取出一个空闲线程运行Task，这样，每个CoarseGrainedExecutorBackend能并行运行Task的数据就取决于分配给它的CPU的个数。</li>
+<li>Worker: 集群中可以运行Application的节点，在Spark on Yarn模式下指DataNode。</li>
+<li>Task: task是被提交到executor上的work单元，每一个stage都有一些task，一个task对应一个partition。</li>
+<li>Job: Job是由一系列tasks组成的并行计算任务，它是由action类型的函数激活的，换言之没有action，job不会被提交。</li>
+<li>Stage: 每一个job都被划分为几个小的set，这些set被称之为stages，它们之间是相互依赖的。</li>
+<li>DAGScheduler: 根据Job构建基于Stage的DAG，并提交Stage给TaskScheduler，其划分Stage的依据是RDD之间的依赖关系</li>
+<li>TaskScheduler: 将TaskSet提交给集群(worker)运行。</li>
 </ul>
-<h4 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h4><blockquote>
-<p>正则表达式的各组成部分可以是单个字符、字符集、字符范围或在几个字符之间选择。 也可以是这些组成部分的任意组合。   </p>
-</blockquote>
-<p>写完第一步是需要测试的，这里提供一个在线测试网站<a href="http://www.regexplanet.com/advanced/java/index.html" target="_blank" rel="noopener">RegexPlaner</a>  </p>
-<p>以下是个人常用的(具体的看<a href="https://msdn.microsoft.com/zh-cn/library/ae5bf541(v=vs.100" target="_blank" rel="noopener">官方文档</a>.aspx))</p>
-<ol>
-<li>通过在一对分隔符之间放置表达式的各种组成部分，就可以构建正则表达式  <pre><code>       /expression/  
-</code></pre></li>
-<li>最简单的正则表达式是与搜索字符串相比较的单个普通字符。 例如，单字符正则表达式 A 会始终匹配字母 A，无论其会出现在搜索字符串的哪个位置。  <pre><code>      /A/  
-      /a/  
-      /123/  
-</code></pre></li>
-<li><p>元字符    </p>
-<ul>
-<li><code>.</code>:匹配除换行符以外的任意字符  </li>
-<li><code>\w</code>:匹配字母或数字或下划线或汉字  </li>
-<li><code>\s</code>:匹配任意的空白符  </li>
-<li><code>\d</code>:匹配任意数字  </li>
-<li><code>\b</code>：匹配单词的开始和结束  </li>
-<li><code>^</code>:字符串的开始  </li>
-<li><code>￥</code>：字符串的结束        </li>
-<li>当然如果你字符串中本来就有这些符号，就可以使用\来进行转义<code>.</code>，如<code>*</code>就应该写成<br>E.G:<br><code>\ba\w*\b</code>匹配以字母a开头的单词——先是某个单词开始处(\b)，然后是字母a,然后是任意数量的字母或数字(\w)，最后是单词结束处(\b)。<br><code>\d+</code>匹配1个或更多连续的数字。这里的+是和<em>类似的元字符，不同的是</em>匹配重复任意次(可能是0次)，而+则匹配重复1次或更多次。<br>元字符<code>^</code>（和数字6在同一个键位上的符号）和<script type="math/tex">`都匹配一个位置，这和`\b`有点类似。`^`匹配你要用来查找的字符串的开头，`</script>匹配结尾。比如一个网站如果要求你填写的QQ号必须为5位到12位数字时，可以使用：<code>^\d{5,12}$</code>          </li>
-</ul>
-</li>
-<li><p>限定符  </p>
-<ul>
-<li><code>*</code>:匹配零次或多次前面的字符或子表达式  </li>
-<li><code>+</code>:  匹配一次或多次前面的字符或子表达式</li>
-<li><code>?</code>:匹配零次或一次</li>
-<li><code>{n}</code>:  匹配N次</li>
-<li><code>{n,}</code>:  匹配N或更多次</li>
-<li><code>{n,m}</code>:  匹配N到M次<br>E.G: <code>Linux\d+</code>:匹配Linux之后跟的一个或多个数字  </li>
-</ul>
-</li>
-<li><p>字符类<br>如果你想匹配没有预定义元字符的字符集合(比如元音字母a,e,i,o,u),你只需要在方括号里列出它们就行了，像[aeiou]就匹配任何一个英文元音字母，[.?!]匹配标点符号(.或?或!)。  </p>
-<ul>
-<li>[0-9]:匹配任意一个数字，类似于<code>\d</code>  </li>
-<li>[a-z]&amp;[A-Z]:匹配任意一个小写字母&amp;大写字母<br>E.G：<br><code>/(?0\d{2}[) -]?\d{8}</code>:就可以匹配(010)88886666，或022-22334455，或02912345678之类的。首先使用\对<code>(</code>进行转义，然后匹配一个或没有0，再接着两个数字，<code>[)-]</code>则匹配一次<code>) or -</code>这两个符号，最后再加上<code>\d{8}</code>匹配八位数字  </li>
-</ul>
-</li>
-<li><p>反义<br>有时需要查找不属于某个能简单定义的字符类的字符。比如想查找除了数字以外，其它任意字符都行的情况，这时需要用到反义。  </p>
-<ul>
-<li>\W:匹配任意不是字母，数字，下划线，汉字的字符  </li>
-<li>\S:匹配任意不是空白符的字符<br>…  </li>
-<li><sup><a href="#fn_z" id="reffn_z">z</a></sup>:匹配除了z以外的任意字符  </li>
-</ul>
-</li>
-<li><p>分支条件 .<br>正则表达式里的分枝条件指的是有几种规则，如果满足其中任意一种规则都应该当成匹配，具体方法是用<code>|</code>把不同的规则分隔开。<br>E.G:</p>
-<ul>
-<li><code>0\d{2}-\d{8}|0\d{3}-\d{7}</code>这个表达式能匹配两种以连字号分隔的电话号码：一种是三位区号，8位本地号(如010-12345678)，一种是4位区号，7位本地号(0376-2233445)    </li>
-<li><code>\d{5}-\d{4}|\d{5}</code>这个表达式用于匹配美国的邮政编码。美国邮编的规则是5位数字，或者用连字号间隔的9位数字。之所以要给出这个例子是因为它能说明一个问题：使用分枝条件时，要注意各个条件的顺序。如果你把它改成<code>\d{5}|\d{5}-\d{4}</code>的话，那么就只会匹配5位的邮编(以及9位邮编的前5位)。原因是匹配分枝条件时，将会从左到右地测试每个条件，如果满足了某个分枝的话，就不会去再管其它的条件了。    </li>
-</ul>
-</li>
-<li>分组<br>前面我们看到单个字符数字等可以重复，其实多个也是可以的，这就需要使用分组啦<br>E.G:<br><code>((2[0-4]\d|25[0-5]|[01]?\d\d?)\.){3}(2[0-4]\d|25[0-5]|[01]?\d\d?)</code>：匹配IP地址，自己领会~</li>
-</ol>
-
+<h3 id="Spark的基本流程"><a href="#Spark的基本流程" class="headerlink" title="Spark的基本流程"></a>Spark的基本流程</h3>
       
     </div>
     
@@ -378,7 +329,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Hive-Python/" rel="tag"># Hive Python</a>
+            <a href="/tags/Spark/" rel="tag"># Spark</a>
           
         </div>
       
@@ -391,8 +342,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/了解用户画像/" rel="next" title="了解用户画像">
-                <i class="fa fa-chevron-left"></i> 了解用户画像
+              <a href="/Spark学习笔记之累加器与广播变量/" rel="next" title="Spark学习笔记之累加器与广播变量">
+                <i class="fa fa-chevron-left"></i> Spark学习笔记之累加器与广播变量
               </a>
             
           </div>
@@ -401,8 +352,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/深入浅出SQL总结/" rel="prev" title="深入浅出SQL总结">
-                深入浅出SQL总结 <i class="fa fa-chevron-right"></i>
+              <a href="/Spark学习笔记之SparkSQL/" rel="prev" title="Spark学习笔记之SparkSQL">
+                Spark学习笔记之SparkSQL <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -526,7 +477,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#导语"><span class="nav-number">1.</span> <span class="nav-text">导语</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#语法"><span class="nav-number">2.</span> <span class="nav-text">语法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Spark中的基本概念"><span class="nav-number">1.</span> <span class="nav-text">Spark中的基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spark的基本流程"><span class="nav-number">2.</span> <span class="nav-text">Spark的基本流程</span></a></li></ol></div>
             
 
           </div>
