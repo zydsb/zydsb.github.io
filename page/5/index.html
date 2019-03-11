@@ -232,6 +232,149 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/理解MapReduce/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/理解MapReduce/" itemprop="url">理解MapReduce</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-09T14:30:38+08:00">
+                2018-12-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>MapReduce的核心思想是<strong>分而治之</strong>和<strong>并行处理</strong>。</p>
+<h3 id="举个栗子"><a href="#举个栗子" class="headerlink" title="举个栗子"></a>举个栗子</h3><p>假设我跟一个身高一米八体重一百八的大胖哥打架，我估计我有点危险，这个时候怎么办呢？打个电话叫兄弟赛，单挑是一个打一群，群殴是一群揍一个，MapReduce大概干的也是这个事儿~</p>
+<h3 id="键值对"><a href="#键值对" class="headerlink" title="键值对"></a>键值对</h3><h4 id="键值对的具体含义"><a href="#键值对的具体含义" class="headerlink" title="键值对的具体含义"></a>键值对的具体含义</h4><p>键值数据作为MapReduce操作的基础，让MapReduce变得十分强大。因为很多数据要么本身即是键值对的形式，要么可以以键值对的形式表示，其简洁而有力，所以我们有必要清晰一下键值对的特征：</p>
+<ul>
+<li>键必须是唯一的</li>
+<li>每个值必须与键相关联，但键可能没有值</li>
+<li>对键有明确的定义，比如是否区分大小写</li>
+</ul>
+<h4 id="MapReduce作为一系列键值变换"><a href="#MapReduce作为一系列键值变换" class="headerlink" title="MapReduce作为一系列键值变换"></a>MapReduce作为一系列键值变换</h4><p>有人这么描述MapReduce:</p>
+<pre><code>{K1,V1} -&gt; {K2,List&lt;V2&gt;} -&gt; {K3,V3}
+</code></pre><p>现在我们试图来理解一下：</p>
+<ul>
+<li>MapReduce作业中map方法的输入是一系列的键值对，我们称之为K1、V1</li>
+<li>map方法的输出是一系列键和与之对应的值的列表（其作为接下来reduce方法的输入），我们称之为K2、V2。注意一点是map方法输出的其实是一系列单个的键值对，需要shuffle方法组合成键与值列表</li>
+<li>reduce方法接受输入，输出K3、V3</li>
+</ul>
+<h3 id="MapReduce执行流程"><a href="#MapReduce执行流程" class="headerlink" title="MapReduce执行流程"></a>MapReduce执行流程</h3><p>直接看图写作文吧（图来自互联网）<br><img src="/images/MapReduceProgress.png" alt="MapReduce过程"></p>
+<h4 id="1-输入和拆分（Input-amp-Split）"><a href="#1-输入和拆分（Input-amp-Split）" class="headerlink" title="1.输入和拆分（Input&amp;Split）"></a>1.输入和拆分（Input&amp;Split）</h4><p>对数据内容进行分片处理，例如WordCount例子中便对每行内容拆分为单词。</p>
+<h4 id="2-迭代（iteration）"><a href="#2-迭代（iteration）" class="headerlink" title="2.迭代（iteration）"></a>2.迭代（iteration）</h4><p>遍历输入数据，并将之解析成key/value对，即{K1,V1}。</p>
+<h4 id="3-映射（map）"><a href="#3-映射（map）" class="headerlink" title="3.映射（map）"></a>3.映射（map）</h4><p>将输入key/value对映射成另外一些key/value对。MapReduce开始在机器上执行map方法，map()由我们定义。</p>
+<h4 id="4-洗牌过程（shuffle）"><a href="#4-洗牌过程（shuffle）" class="headerlink" title="4.洗牌过程（shuffle）"></a>4.洗牌过程（shuffle）</h4><p>依据 key 对中间数据进行分组(grouping)，输出{K2,List<v2>}。其中会有排序、合并、分区等操作，是一个很神奇的地方，需要专门学习一下。</v2></p>
+<h4 id="5-归约（reduce"><a href="#5-归约（reduce" class="headerlink" title="5.归约（reduce)"></a>5.归约（reduce)</h4><p>以组为单位对数据进行归约(reduce)，输出{K3,V3}。</p>
+<h4 id="6-迭代"><a href="#6-迭代" class="headerlink" title="6.迭代"></a>6.迭代</h4><p>输出文件到HDFS。</p>
+<h3 id="说点屁话"><a href="#说点屁话" class="headerlink" title="说点屁话"></a>说点屁话</h3><p>讲道理到现在直接写MR程序还真没干过，都是直接用Hive搞了，节约了大量的时间，但是理解工欲善其事必先利其器，学习一下MapReduce的各种知识，感觉还是蛮有必要的。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://snailed.cn/Hive-Serde/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1799,196 +1942,11 @@ a_3x+b_3y+c_3z=d_3\\\
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Markdown初体验/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/Markdown初体验/" itemprop="url">Markdown初体验</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-20T00:12:04+08:00">
-                2018-11-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="导语"><a href="#导语" class="headerlink" title="导语"></a>导语</h3><p>Markdown写习惯了看起来还是习惯很多。</p>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>  安装之类的十分简单，毕竟是轻量级的<em>标记语言</em>（以下仅推荐）。  </p>
-<ul>
-<li>Windows: MarkdownPad   </li>
-<li>IOS: Mou  </li>
-<li>Web: 简书  </li>
-<li>Linux: Sublime Text 3  </li>
-</ul>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><ol>
-<li>标题<br>一般使用Atx形式  <h3 id="red"><a href="#red" class="headerlink" title="red"></a>red</h3><h4 id="red-1"><a href="#red-1" class="headerlink" title="red"></a>red</h4><h5 id="red-2"><a href="#red-2" class="headerlink" title="red"></a>red</h5><pre><code>code:  
- ###red  
- ####red  
- #####red
-</code></pre></li>
-<li>列表  <ul>
-<li>有序列表  <ol>
-<li>red  </li>
-<li>blue<br><strong>数字序列+英文<code>.</code>+一个空格</strong></li>
-</ol>
-</li>
-<li>无序列表  <pre><code> + red   
- - blue  
- * yellow    
-</code></pre></li>
-</ul>
-</li>
-<li>引用<br> 使用<code>&gt;</code>符号，在句子的最开始处    </li>
-</ol>
-<blockquote>
-<p>岂曰无衣 与子同袍                                           </p>
-</blockquote>
-<ol>
-<li>代码区块<br> 使用连续三` 来标记，eg:    <pre><code> print(Hello Markdown)  
-</code></pre><pre><code>code:  
-```print(Hello Markdown)
-</code></pre><code>``  
-或者是使用</code>tab`键，四个缩进即可    </li>
-<li><p>分隔线  </p>
-<hr>
-<hr>
-<pre><code>code:  
- ---  
- ***
-</code></pre></li>
-<li>换行<br> 在换行处先敲两个空格再回车即可</li>
-<li>链接  <ul>
-<li>行内式<br><a href="www.baidu.com">百度</a>  <pre><code>    code:
-        [百度](www.baidu.com)
-</code></pre></li>
-<li>参考式<br>I love <a href="www.google.com">google</a>,not <a href="www.baidu.com">baidu</a>  </li>
-</ul>
-</li>
-</ol>
-<pre><code>          code:  
-              I love [google][1] ,not [baidu][2]  
-              [1]:www.google.com
-              [2]:www.baidu.com      
-</code></pre><ol>
-<li>强调<br>使用<code>*</code>或者<code>_</code>来标记<br><strong>山随平野尽，江入大荒流</strong><br><em>七月在野，八月在宇，九月在户，十月蟋蟀,入我床下</em><pre><code>  code:
-       **山随平野尽，江入大荒流**    
-        *七月在野，八月在宇，九月在户，十月蟋蟀,入我床下*  
-</code></pre></li>
-<li>图片<br>方法类似于<strong>链接</strong>    </li>
-</ol>
-<p>其实这个语法真的蛮简单的，排版出来也工整漂亮，hhh  ~<br><strong>友情提示：Web版和客户端版的解码有问题。所以最好别换着换着编辑,别问我怎么知道的。。昨晚眼睛有快写瞎了,今天打开一看，WCNMLGBD乱码=重写</strong>  　　</p>
-<p>以上，hiahia<br>这里是<a href="http://www.jianshu.com/p/075d7cac8fef" target="_blank" rel="noopener">我学习的Markdown的地方</a>。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2034,7 +1992,7 @@ a_3x+b_3y+c_3z=d_3\\\
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-count">61</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
