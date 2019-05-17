@@ -232,6 +232,192 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/ch08-数据可视化/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/ch08-数据可视化/" itemprop="url">ch08-数据可视化</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-09T01:39:04+08:00">
+                2019-01-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="关于数据可视化"><a href="#关于数据可视化" class="headerlink" title="关于数据可视化"></a>关于数据可视化</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">PREVIOUS_MAX_ROWS = pd.options.display.max_rows</span><br><span class="line">pd.options.display.max_rows = <span class="number">20</span></span><br><span class="line">np.random.seed(<span class="number">12345</span>)</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> matplotlib</span><br><span class="line">plt.rc(<span class="string">'figure'</span>, figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">np.set_printoptions(precision=<span class="number">4</span>, suppress=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="最简单的例子"><a href="#最简单的例子" class="headerlink" title="最简单的例子"></a>最简单的例子</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.plot(np.arange(<span class="number">10</span>))</span><br></pre></td></tr></table></figure>
+<pre><code>[&lt;matplotlib.lines.Line2D at 0x120132198&gt;]
+</code></pre><p><img src="output_3_1.png" alt="png"></p>
+<h2 id="Figure和Subplot"><a href="#Figure和Subplot" class="headerlink" title="Figure和Subplot"></a>Figure和Subplot</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fig = plt.figure()</span><br><span class="line">ax1 = fig.add_subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">1</span>)</span><br><span class="line">ax2 = fig.add_subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>)</span><br><span class="line">ax3 = fig.add_subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="output_5_0.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.plot(np.random.randn(<span class="number">50</span>).cumsum(),<span class="string">'k--'</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>[&lt;matplotlib.lines.Line2D at 0x120b7ad68&gt;]
+</code></pre><p><img src="output_6_1.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">_ = ax1.hist(np.random.randn(<span class="number">100</span>),bins=<span class="number">20</span>,color=<span class="string">'k'</span>,alpha=<span class="number">0.3</span>)</span><br><span class="line">ax2.scatter(np.arange(<span class="number">30</span>), np.arange(<span class="number">30</span>) + <span class="number">3</span> * np.random.randn(<span class="number">30</span>))</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;matplotlib.collections.PathCollection at 0x1203c5208&gt;
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fig</span><br></pre></td></tr></table></figure>
+<p><img src="output_8_0.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fig, axes = plt.subplots(<span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line">axes</span><br></pre></td></tr></table></figure>
+<pre><code>array([[&lt;matplotlib.axes._subplots.AxesSubplot object at 0x120a9bcc0&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x120f54c18&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x120f7b2e8&gt;],
+       [&lt;matplotlib.axes._subplots.AxesSubplot object at 0x120fa1438&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x120fc9b00&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x120ffc198&gt;]],
+      dtype=object)
+</code></pre><p><img src="output_9_1.png" alt="png"></p>
+<h3 id="调整subplot周围的间距"><a href="#调整subplot周围的间距" class="headerlink" title="调整subplot周围的间距"></a>调整subplot周围的间距</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">fig, axes = plt.subplots(<span class="number">2</span>, <span class="number">2</span>, sharex=<span class="keyword">True</span>, sharey=<span class="keyword">True</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">2</span>):</span><br><span class="line">        axes[i,j].hist(np.random.randn(<span class="number">500</span>), bins=<span class="number">50</span>, color=<span class="string">'k'</span>, alpha=<span class="number">0.5</span>)</span><br><span class="line">plt.subplots_adjust(wspace=<span class="number">0.1</span>,hspace=<span class="number">0.1</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="output_11_0.png" alt="png"></p>
+<h2 id="颜色、标记和类型"><a href="#颜色、标记和类型" class="headerlink" title="颜色、标记和类型"></a>颜色、标记和类型</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.figure()</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;Figure size 432x288 with 0 Axes&gt;
+
+
+
+
+&lt;Figure size 432x288 with 0 Axes&gt;
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> numpy.random <span class="keyword">import</span> randn</span><br><span class="line">plt.plot(randn(<span class="number">50</span>).cumsum(),linestyle=<span class="string">'--'</span>,color=<span class="string">'b'</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>[&lt;matplotlib.lines.Line2D at 0x1213f3a90&gt;]
+</code></pre><p><img src="output_14_1.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.plot(randn(<span class="number">30</span>).cumsum(), color=<span class="string">'k'</span>, linestyle=<span class="string">'dashed'</span>, marker=<span class="string">'o'</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>[&lt;matplotlib.lines.Line2D at 0x1213f8fd0&gt;]
+</code></pre><p><img src="output_15_1.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.plot(randn(<span class="number">30</span>).cumsum(),<span class="string">'ko--'</span>)   <span class="comment">#ko--是把参数组合在一起了.... color = 'k' marker = 'o' linestyle = '--'</span></span><br></pre></td></tr></table></figure>
+<pre><code>[&lt;matplotlib.lines.Line2D at 0x1214baf60&gt;]
+</code></pre><p><img src="output_16_1.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.close(<span class="string">'all'</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">data = np.random.randn(<span class="number">30</span>).cumsum()</span><br><span class="line">plt.plot(data, <span class="string">'k--'</span>, label=<span class="string">'Default'</span>)</span><br><span class="line">plt.plot(data, <span class="string">'k-'</span>, drawstyle=<span class="string">'steps-post'</span>, label=<span class="string">'steps-post'</span>)</span><br><span class="line">plt.legend(loc=<span class="string">'best'</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;matplotlib.legend.Legend at 0x1216ab9e8&gt;
+</code></pre><p><img src="output_18_1.png" alt="png"></p>
+<h2 id="刻度、标签和图例"><a href="#刻度、标签和图例" class="headerlink" title="刻度、标签和图例"></a>刻度、标签和图例</h2><h3 id="设置细节"><a href="#设置细节" class="headerlink" title="设置细节"></a>设置细节</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fig = plt.figure()</span><br><span class="line">ax = fig.add_subplot(<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>)</span><br><span class="line">ax.plot(randn(<span class="number">1000</span>).cumsum())</span><br></pre></td></tr></table></figure>
+<pre><code>[&lt;matplotlib.lines.Line2D at 0x1226302b0&gt;]
+</code></pre><p><img src="output_21_1.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ticks  = ax.set_xticks([<span class="number">0</span>,<span class="number">250</span>,<span class="number">500</span>,<span class="number">750</span>,<span class="number">1000</span>])</span><br><span class="line">labels = ax.set_xticklabels([<span class="string">'one'</span>, <span class="string">'two'</span>, <span class="string">'three'</span>, <span class="string">'four'</span>, <span class="string">'five'</span>],</span><br><span class="line">                            rotation=<span class="number">30</span>, fontsize=<span class="string">'small'</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ax.set_title(<span class="string">'My First Title of Matplotlib'</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>Text(0.5,1,&#39;My First Title of Matplotlib&#39;)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ax.set_xlabel(<span class="string">'Stage'</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>Text(0.5,3.2,&#39;Stage&#39;)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fig</span><br></pre></td></tr></table></figure>
+<p><img src="output_25_0.png" alt="png"></p>
+<h3 id="添加图例"><a href="#添加图例" class="headerlink" title="添加图例"></a>添加图例</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">fig = plt.figure()</span><br><span class="line">ax = fig.add_subplot(<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>)</span><br><span class="line">ax.plot(randn(<span class="number">100</span>).cumsum(), <span class="string">'k'</span>, label=<span class="string">'one'</span>)</span><br><span class="line">ax.plot(randn(<span class="number">100</span>).cumsum(), <span class="string">'k--'</span>, label=<span class="string">'two'</span>)</span><br><span class="line">ax.plot(randn(<span class="number">100</span>).cumsum(), <span class="string">'k.'</span>, label=<span class="string">'three'</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>[&lt;matplotlib.lines.Line2D at 0x1223a1940&gt;]
+</code></pre><p><img src="output_27_1.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ax.legend(loc=<span class="string">'best'</span>)</span><br><span class="line">fig</span><br></pre></td></tr></table></figure>
+<p><img src="output_28_0.png" alt="png"></p>
+<h2 id="注解以及在Subplot上绘图"><a href="#注解以及在Subplot上绘图" class="headerlink" title="注解以及在Subplot上绘图"></a>注解以及在Subplot上绘图</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br><span class="line"></span><br><span class="line">fig = plt.figure()</span><br><span class="line">ax = fig.add_subplot(<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">data = pd.read_csv(<span class="string">'examples/spx.csv'</span>, index_col=<span class="number">0</span>, parse_dates=<span class="keyword">True</span>)</span><br><span class="line">spx = data[<span class="string">'SPX'</span>]</span><br><span class="line"></span><br><span class="line">spx.plot(ax=ax, style=<span class="string">'k-'</span>)</span><br><span class="line"></span><br><span class="line">crisis_data = [</span><br><span class="line">    (datetime(<span class="number">2007</span>, <span class="number">10</span>, <span class="number">11</span>), <span class="string">'Peak of bull market'</span>),</span><br><span class="line">    (datetime(<span class="number">2008</span>, <span class="number">3</span>, <span class="number">12</span>), <span class="string">'Bear Stearns Fails'</span>),</span><br><span class="line">    (datetime(<span class="number">2008</span>, <span class="number">9</span>, <span class="number">15</span>), <span class="string">'Lehman Bankruptcy'</span>)</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> date, label <span class="keyword">in</span> crisis_data:</span><br><span class="line">    ax.annotate(label, xy=(date, spx.asof(date) + <span class="number">75</span>),</span><br><span class="line">                xytext=(date, spx.asof(date) + <span class="number">225</span>),</span><br><span class="line">                arrowprops=dict(facecolor=<span class="string">'black'</span>, headwidth=<span class="number">4</span>, width=<span class="number">2</span>,</span><br><span class="line">                                headlength=<span class="number">4</span>),</span><br><span class="line">                horizontalalignment=<span class="string">'left'</span>, verticalalignment=<span class="string">'top'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Zoom in on 2007-2010</span></span><br><span class="line">ax.set_xlim([<span class="string">'1/1/2007'</span>, <span class="string">'1/1/2011'</span>])</span><br><span class="line">ax.set_ylim([<span class="number">600</span>, <span class="number">1800</span>])</span><br><span class="line"></span><br><span class="line">ax.set_title(<span class="string">'Important dates in the 2008-2009 financial crisis'</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>Text(0.5,1,&#39;Important dates in the 2008-2009 financial crisis&#39;)
+</code></pre><p><img src="output_30_1.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">fig = plt.figure()</span><br><span class="line">ax = fig.add_subplot(<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">rect = plt.Rectangle((<span class="number">0.2</span>, <span class="number">0.75</span>), <span class="number">0.4</span>, <span class="number">0.15</span>, color=<span class="string">'k'</span>, alpha=<span class="number">0.3</span>)</span><br><span class="line">circ = plt.Circle((<span class="number">0.7</span>, <span class="number">0.2</span>), <span class="number">0.15</span>, color=<span class="string">'b'</span>, alpha=<span class="number">0.3</span>)</span><br><span class="line">pgon = plt.Polygon([[<span class="number">0.15</span>, <span class="number">0.15</span>], [<span class="number">0.35</span>, <span class="number">0.4</span>], [<span class="number">0.2</span>, <span class="number">0.6</span>]],</span><br><span class="line">                   color=<span class="string">'g'</span>, alpha=<span class="number">0.5</span>)</span><br><span class="line"></span><br><span class="line">ax.add_patch(rect)</span><br><span class="line">ax.add_patch(circ)</span><br><span class="line">ax.add_patch(pgon)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;matplotlib.patches.Polygon at 0x123523eb8&gt;
+</code></pre><p><img src="output_31_1.png" alt="png"></p>
+<h2 id="将图表保持为文件"><a href="#将图表保持为文件" class="headerlink" title="将图表保持为文件"></a>将图表保持为文件</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fig.savefig(<span class="string">'/Users/zhangyangfenbi.com/Desktop/demo.png'</span>)</span><br></pre></td></tr></table></figure>
+<h1 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h1><p>matplotlib实际上还是一个比较低级的工具，绘图都是组装起来的。书中介绍了pandas自带的绘图库，不过基于之前已经有了Seaborn，这个就不写pandas的了，后续把Seaborn的坑填上。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://snailed.cn/读《了不起的盖茨比》/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -9821,128 +10007,6 @@ array([1.2 , 3.25, 4.1 ])
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/读《自在独行》/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/读《自在独行》/" itemprop="url">读《自在独行》</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-25T00:40:07+08:00">
-                2018-12-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>不提爱情，我觉得自己在某些方面还是蛮孤独的，有时享受，有时难受。书中提到：<strong>好多人在说自己孤独，说自己孤独的人其实并不孤独。孤独不是受到冷落和遗弃，而是无知己，不被理解。真正的孤独者不言孤独，偶尔做些长啸，如我们看到的兽。</strong>一句话写出了所有的毛病。</p>
-<p>前面两章读起来很有味道，第三章之后便是草草翻阅，大概阅历是可以看的，但是风土人情是应当自己的去感受体会的，看书里面写再多，也不如去到靖边之类的地方住上几日，吃上一碗地地道道的羊肉泡馍。</p>
-<p>洒脱的人生态度很好，但是诸多见解还是无法认同。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -9993,7 +10057,7 @@ array([1.2 , 3.25, 4.1 ])
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-count">66</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -10006,7 +10070,7 @@ array([1.2 , 3.25, 4.1 ])
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">27</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
