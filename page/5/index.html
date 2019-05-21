@@ -232,6 +232,153 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/TF-IDF/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/TF-IDF/" itemprop="url">浅识TF-IDF</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-25T01:16:46+08:00">
+                2018-12-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="写在最前"><a href="#写在最前" class="headerlink" title="写在最前"></a>写在最前</h4><p>关于TF-IDF算法本是我九月组内分享会的内容，前段时间看《数学之美》的时候又重新看到。虽然在实战中使用的机会很少，但是不妨碍我们去感受去理解这些简洁却有力量的思想。</p>
+<h4 id="什么是TF和IDF"><a href="#什么是TF和IDF" class="headerlink" title="什么是TF和IDF"></a>什么是TF和IDF</h4><ul>
+<li>TF:词频(term frequency),即一个词语出现在一篇文章的频率，计算方式很简单：词频=某个词在文章中的出现次数/文章的总词数</li>
+<li>IDF:逆文本频率(inverse document frequency)，是一个词语的普遍重要性的度量，逆文本频率=log(语料库的文档总数/包含该词的文档数+1)</li>
+</ul>
+<p>TF-IDF = TF * IDF </p>
+<p>某一特定文件内的高词语频率，以及该词语在整个文件集合中的低文件频率，可以产生出高权重的TF-IDF。因此，TF-IDF倾向于过滤掉常见的词语，保留重要的词语。</p>
+<p>具体公式可以参见<a href="https://zh.wikipedia.org/wiki/Tf-idf" target="_blank" rel="noopener">维基百科</a></p>
+<h4 id="简单应用"><a href="#简单应用" class="headerlink" title="简单应用"></a>简单应用</h4><p>TF-IDF 思想及其简单，但是应用起来威力就很大，下面我们来看一个判断句子相关性的例子：</p>
+<ul>
+<li>str0:’今天中午的螃蟹真好吃’</li>
+<li>str1:’今天中午的大闸蟹真难吃’</li>
+</ul>
+<h5 id="分词"><a href="#分词" class="headerlink" title="分词"></a>分词</h5><p>首先我们需要对句子进行分词处理，网上有很多优秀的资源，比如<a href="https://github.com/fxsjy/jieba" target="_blank" rel="noopener">结巴中文分词</a>，这里我们从简~</p>
+<p>str0:[‘今天’,’中午’,’的’,’螃蟹’,’真’,’好吃’]<br>str1:[‘今天’,’中午’,’的’,’大闸蟹’,’真’,’难吃’]</p>
+<h5 id="构建词向量"><a href="#构建词向量" class="headerlink" title="构建词向量"></a>构建词向量</h5><p>对我们分词的结果取set(),那么我们可以得到[‘今天’,’中午’,’的’,’螃蟹’,’大闸蟹’,’真’,’好吃’,’难吃’]这个词组。我们分别对str0和str1构建词向量，结果为</p>
+<ul>
+<li>str0=[1,1,1,1,0,1,1,0]</li>
+<li>str1=[1,1,1,0,1,1,0,1]</li>
+</ul>
+<h5 id="计算相关性"><a href="#计算相关性" class="headerlink" title="计算相关性"></a>计算相关性</h5><p>数学上我们学过向量空间的余弦相似度，在这里就派上了大用场。最简单的例子，若两条直线的余弦为0，表示不相关；若为-1，则表示完全相反。即余弦相似度越大，其内容的相似度越高，其推广到多维空间也是成立的。</p>
+<p>公式和计算过程就省略一下,计算结果是0.677,相关系数还蛮高的</p>
+<p>更多内容参考<a href="https://www.cnblogs.com/chaosimple/archive/2013/06/28/3160839.html" target="_blank" rel="noopener">这里</a></p>
+<h5 id="更多应用"><a href="#更多应用" class="headerlink" title="更多应用"></a>更多应用</h5><ul>
+<li>论文检索</li>
+<li>新闻的分类</li>
+<li>用户画像</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://snailed.cn/读《自在独行》/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1767,189 +1914,6 @@ a_3x+b_3y+c_3z=d_3\\\
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/数据倾斜/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/数据倾斜/" itemprop="url">数据倾斜</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-06T00:43:39+08:00">
-                2018-12-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="什么是数据倾斜"><a href="#什么是数据倾斜" class="headerlink" title="什么是数据倾斜"></a>什么是数据倾斜</h4><p>最直白的语句来看数据倾斜就是数据里某一个key的值太多了，导致task处理其的时间远远超过其他任务，hadoop的常见现象就是任务卡在99%,迟迟不结束。我觉得可以理解为木桶原理，因为运行最慢的task拖慢了整个任务的运行时间。</p>
-<p>不过也可以这么解释：数据倾斜就是我们在计算数据的时候，数据的分散度不够，导致大量的数据集中到了一台或者几台机器上计算，这些数据的计算速度远远低于平均计算速度，导致整个计算过程过慢。</p>
-<p><strong>一般表现为某个任务Reduce阶段卡在99%不动，以及随之而来的种种诡异现象。</strong></p>
-<p>数据倾斜的问题并不是随着节点的增多而解决的，比如看个例子：</p>
-<ul>
-<li>公司 A : 1000万用户，10台64G服务器</li>
-<li>公司 B : 10亿用户，1000台64G服务器</li>
-</ul>
-<p>两个公司都部署了Hadoop集群。假设现在遇到了数据倾斜，发生什么？</p>
-<p>公司A的数据童鞋在做join的时候发生了数据倾斜，会导致有几百万用户的相关数据集中到了一台服务器上，几百万的用户数据，感觉64G还是轻松的。</p>
-<p>公司B的数据童鞋在做join的时候也发生了数据倾斜，可能会有1个亿的用户相关数据集中到了一台机器上了，一台机器估计就很难搞了，整个task会因为这个而卡住。</p>
-<h4 id="数据倾斜的原理"><a href="#数据倾斜的原理" class="headerlink" title="数据倾斜的原理"></a>数据倾斜的原理</h4><h5 id="数据倾斜产生的原因"><a href="#数据倾斜产生的原因" class="headerlink" title="数据倾斜产生的原因"></a>数据倾斜产生的原因</h5><p>我们在做数据运算的时候，肯定会使用到count,distinct,group by,join/等操作，这些都会触发Shuffle操作，一但出现Shuffle过程中天量相同Key值的数据拉到一个或者少数几个节点上，就容易踩坑。。。</p>
-<h5 id="Shuffle"><a href="#Shuffle" class="headerlink" title="Shuffle"></a>Shuffle</h5><p>Shuffle过程在Hadoop或者Spark中都是至关重要的，产生的原因也很清晰明了，如下图所示<br><img src="/images/数据倾斜.jpg" alt="shuffle过程"></p>
-<h5 id="比如说"><a href="#比如说" class="headerlink" title="比如说"></a>比如说</h5><ul>
-<li>两个开发同学分别设计了user(userid,ip)表和ip_log(ip,logtime)表，其中user.ip的值如果获取不到的话，则默认为null，对于获取不到ip的用户，则取ip_log.ip=0，在这样的情况下，当两个表做join操作的时候，就很有可能卡住（空值由一个reduce处理）</li>
-<li>业务上搞了大事，单个城市订单猛涨1000倍之类的。</li>
-</ul>
-<p>常见情况参见:</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>关键词</th>
-<th>情形</th>
-<th>后果</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>join</td>
-<td>其中一个表较小，但是key集中</td>
-<td>分发到某一个或几个Reduce上的数据远高于平均值</td>
-</tr>
-<tr>
-<td>join</td>
-<td>大表与大表，但是分桶的判断字段0值或空值过多</td>
-<td>一个reduce处理，极其慢</td>
-</tr>
-<tr>
-<td>group by</td>
-<td>group by维度过小，导致某值的数量过多</td>
-<td>某reduce耗时久</td>
-</tr>
-<tr>
-<td>count distinct</td>
-<td>某特殊值过多</td>
-<td>某reduce耗时久</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h4 id="数据倾斜解决"><a href="#数据倾斜解决" class="headerlink" title="数据倾斜解决"></a>数据倾斜解决</h4><h5 id="SQL调优"><a href="#SQL调优" class="headerlink" title="SQL调优"></a>SQL调优</h5><ul>
-<li>join数据量太大的时候，可以考虑先distinct去重</li>
-<li>大表Join大表，把空值的key变成一个字符串加上随机数，把倾斜的数据分到不同的reduce上，由于null值关联不上，处理后并不影响最终结果。（先对key做一层hash，先将数据打散让它的并行度变大，再汇集）</li>
-<li>join 操作中，使用 map join 在 map 端就先进行 join ，免得到reduce 时卡住</li>
-<li>能先进行 group 操作的时候先进行 group 操作，把 key 先进行一次 reduce,之后再进行 count 或者 distinct count 操作。</li>
-<li>特殊情况特殊处理，在业务逻辑优化效果的不大情况下，有些时候是可以将倾斜的数据单独拿出来处理。最后union回去。</li>
-</ul>
-<h5 id="参数调优"><a href="#参数调优" class="headerlink" title="参数调优"></a>参数调优</h5><ul>
-<li>set hive.map.aggr=true:在map中会做部分聚集操作，效率更高但需要更多的内存</li>
-<li>hive.groupby.skewindata=true：数据倾斜时负载均衡，当选项设定为true，生成的查询计划会有两个MRJob。第一个MRJob 中，Map的输出结果集合会随机分布到Reduce中，每个Reduce做部分聚合操作，并输出结果，这样处理的结果是相同的GroupBy Key有可能被分发到不同的Reduce中，从而达到负载均衡的目的；第二个MRJob再根据预处理的数据结果按照GroupBy Key分布到Reduce中（这个过程可以保证相同的GroupBy Key被分布到同一个Reduce中），最后完成最终的聚合操作。</li>
-<li>hive.auto.convert.join=true:自动开启mapjoin优化</li>
-<li>未完待续</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2000,7 +1964,7 @@ a_3x+b_3y+c_3z=d_3\\\
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">66</span>
+                  <span class="site-state-item-count">67</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
