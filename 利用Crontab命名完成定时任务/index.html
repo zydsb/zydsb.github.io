@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Linux,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="crontab是干啥的通过crontab命名，我们可以在固定的时间间隔执行指定的系统命名或者shell script脚本。时间间隔的单位分别是分、小时、日、月、周及以上任意组合，想定时跑啥就干啥+ crontab怎么用1.命名格式12crontab [-u user] filecrontab [-u user] [ -e | -l | -r ] 2.命令参数 -u : 设定某个用户的crontab">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="利用Crontab命名完成定时任务">
+<meta property="og:url" content="http://snailed.cn/利用Crontab命名完成定时任务/index.html">
+<meta property="og:site_name" content="| Yang |">
+<meta property="og:description" content="crontab是干啥的通过crontab命名，我们可以在固定的时间间隔执行指定的系统命名或者shell script脚本。时间间隔的单位分别是分、小时、日、月、周及以上任意组合，想定时跑啥就干啥+ crontab怎么用1.命名格式12crontab [-u user] filecrontab [-u user] [ -e | -l | -r ] 2.命令参数 -u : 设定某个用户的crontab">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-06-28T08:32:18.772Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="利用Crontab命名完成定时任务">
+<meta name="twitter:description" content="crontab是干啥的通过crontab命名，我们可以在固定的时间间隔执行指定的系统命名或者shell script脚本。时间间隔的单位分别是分、小时、日、月、周及以上任意组合，想定时跑啥就干啥+ crontab怎么用1.命名格式12crontab [-u user] filecrontab [-u user] [ -e | -l | -r ] 2.命令参数 -u : 设定某个用户的crontab">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://snailed.cn/利用Crontab命名完成定时任务/">
+
+
+
+
+
+  <title>利用Crontab命名完成定时任务 | | Yang |</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">| Yang |</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/利用Crontab命名完成定时任务/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">利用Crontab命名完成定时任务</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-27T16:57:32+08:00">
+                2019-06-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="crontab是干啥的"><a href="#crontab是干啥的" class="headerlink" title="crontab是干啥的"></a>crontab是干啥的</h3><p>通过crontab命名，我们可以在固定的时间间隔执行指定的系统命名或者shell script脚本。时间间隔的单位分别是分、小时、日、月、周及以上任意组合，想定时跑啥就干啥+</p>
+<h3 id="crontab怎么用"><a href="#crontab怎么用" class="headerlink" title="crontab怎么用"></a>crontab怎么用</h3><h4 id="1-命名格式"><a href="#1-命名格式" class="headerlink" title="1.命名格式"></a>1.命名格式</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">crontab [-u user] file</span><br><span class="line">crontab [-u user] [ -e | -l | -r ]</span><br></pre></td></tr></table></figure>
+<h4 id="2-命令参数"><a href="#2-命令参数" class="headerlink" title="2.命令参数"></a>2.命令参数</h4><ul>
+<li>-u : 设定某个用户的crontab服务</li>
+<li>file : 表示命令文件，crontab会执行这个命名文件，如果没有文件，则接受标准输入（键盘）上键入的命令，并将它们载入crontab</li>
+<li>-e : 编辑crontab文件内容</li>
+<li>-l : 显示crontab文件内容</li>
+<li>-r : 从/var/spool/cron目录中删除某个用户的crontab文件，如果不指定用户，则默认删除当前用户的crontab文件。</li>
+<li>-i : 在删除用户的crontab文件时给确认提示</li>
+</ul>
+<h4 id="3-文件格式"><a href="#3-文件格式" class="headerlink" title="3.文件格式"></a>3.文件格式</h4><p>分 时 日 月 星期 要运行的命令</p>
+<ul>
+<li>第一列：分钟0-59</li>
+<li>第二列：小时0-23(0表示子夜)</li>
+<li>第3列：日1～31</li>
+<li>第4列：月1～12</li>
+<li>第5列：星期0～7（0和7表示星期天）</li>
+<li>第六列：要运行的命令</li>
+</ul>
+<h4 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h4><p>编辑<code>-e</code>,显示<code>-l</code>,新建删除一般用不着，需要用的时候看~</p>
+<h4 id="使用实例"><a href="#使用实例" class="headerlink" title="使用实例"></a>使用实例</h4><h5 id="1-每分钟执行一个命令"><a href="#1-每分钟执行一个命令" class="headerlink" title="1.每分钟执行一个命令"></a>1.每分钟执行一个命令</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* * * * * myCommand</span><br></pre></td></tr></table></figure>
+<h5 id="2-每小时的第3和第15分钟执行"><a href="#2-每小时的第3和第15分钟执行" class="headerlink" title="2.每小时的第3和第15分钟执行"></a>2.每小时的第3和第15分钟执行</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3,15 * * * * myCommand</span><br></pre></td></tr></table></figure>
+<h5 id="3-在上午8点到11点的第3和第15分钟执行"><a href="#3-在上午8点到11点的第3和第15分钟执行" class="headerlink" title="3.在上午8点到11点的第3和第15分钟执行"></a>3.在上午8点到11点的第3和第15分钟执行</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3,15 8-11 * * * myCommand</span><br></pre></td></tr></table></figure>
+<h5 id="4-每天18-00至23-00之间每隔30分钟执行我的脚本"><a href="#4-每天18-00至23-00之间每隔30分钟执行我的脚本" class="headerlink" title="4.每天18 : 00至23 : 00之间每隔30分钟执行我的脚本"></a>4.每天18 : 00至23 : 00之间每隔30分钟执行我的脚本</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*/30 18-23 * * * cd /home/xxx;sh xxx.sh</span><br></pre></td></tr></table></figure>
+<h3 id="crontab的坑"><a href="#crontab的坑" class="headerlink" title="crontab的坑"></a>crontab的坑</h3><h4 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h4><p>有时候我们使用crontab去执行一个定时任务，发现在shell里面手动执行是没有问题的，但是无法自动执行。导致这种问题的原因一般是crontab文件中没有配置环境变量造成的。</p>
+<p>在crontab文件中定义多个调度任务时，需要特别注环境变量的设置，因为我们手动执行某个任务时，是在当前shell环境下进行的，程序当然能找到环境变量，而系统自动执行任务调度时，是不会加载任何环境变量的，因此，就需要在crontab文件中指定任务运行所需的所有环境变量，这样，系统执行任务调度时就没有问题了</p>
+<p><strong>不要假定cron知道所需要的特殊环境，它其实并不知道</strong>，我们使用的时候，需要注意以下三点：</p>
+<ol>
+<li>脚本执行中文件路径要写全局路径</li>
+<li>脚本执行要用到java或其他环境变量时，通过source命令引入环境变量 — 这个还没用过</li>
+<li>当手动执行脚本OK，但是crontab死活不执行时,很可能是环境变量惹的祸<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env bash</span><br><span class="line">export JAVA_HOME=&apos;/usr/java/xxx&apos;</span><br><span class="line">export HADOOP_HOME=&apos;/home/maintain/hadoop/xxxx&apos;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><strong>第三点真的是踩的陨石巨坑！！！</strong></p>
+<h4 id="清理邮件日志"><a href="#清理邮件日志" class="headerlink" title="清理邮件日志"></a>清理邮件日志</h4><p>每条任务调度执行完毕，系统都会将任务输出信息通过电子邮件的形式发送给当前系统用户，这样日积月累，日志信息会非常大，可能会影响系统的正常运行，因此对每条任务进行重定向处理很重要，比如可以这么设置，忽略日志输出：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* * * * * date &gt; /logs/time.log 2&gt;&amp;1</span><br></pre></td></tr></table></figure></p>
+<p>“/logs/time.log 2&gt;&amp;1”表示先将标准输出重定向到/dev/null，然后将标准错误重定向到标准输出</p>
+<h4 id="其他问题"><a href="#其他问题" class="headerlink" title="其他问题"></a>其他问题</h4><ul>
+<li>在crontab中%是有特殊含义的，表示换行的意思。如果要用的话必须进行转义%，如经常用的date ‘+%Y%m%d’在crontab里是不会执行的，应该换成date ‘+%Y%m%d’</li>
+<li>当crontab失效时，可以尝试/etc/init.d/crond restart解决问题。或者查看日志看某个job有没有执行/报错tail -f /var/log/cron。</li>
+<li>不要乱删。。。</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/哈巴装备清单/" rel="next" title="哈巴装备清单">
+                <i class="fa fa-chevron-left"></i> 哈巴装备清单
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">zhangyang</p>
+              <p class="site-description motion-element" itemprop="description">不要温和地走进那个良夜</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#crontab是干啥的"><span class="nav-number">1.</span> <span class="nav-text">crontab是干啥的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#crontab怎么用"><span class="nav-number">2.</span> <span class="nav-text">crontab怎么用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-命名格式"><span class="nav-number">2.1.</span> <span class="nav-text">1.命名格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-命令参数"><span class="nav-number">2.2.</span> <span class="nav-text">2.命令参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-文件格式"><span class="nav-number">2.3.</span> <span class="nav-text">3.文件格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常用方法"><span class="nav-number">2.4.</span> <span class="nav-text">常用方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用实例"><span class="nav-number">2.5.</span> <span class="nav-text">使用实例</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-每分钟执行一个命令"><span class="nav-number">2.5.1.</span> <span class="nav-text">1.每分钟执行一个命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-每小时的第3和第15分钟执行"><span class="nav-number">2.5.2.</span> <span class="nav-text">2.每小时的第3和第15分钟执行</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-在上午8点到11点的第3和第15分钟执行"><span class="nav-number">2.5.3.</span> <span class="nav-text">3.在上午8点到11点的第3和第15分钟执行</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-每天18-00至23-00之间每隔30分钟执行我的脚本"><span class="nav-number">2.5.4.</span> <span class="nav-text">4.每天18 : 00至23 : 00之间每隔30分钟执行我的脚本</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#crontab的坑"><span class="nav-number">3.</span> <span class="nav-text">crontab的坑</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#环境变量"><span class="nav-number">3.1.</span> <span class="nav-text">环境变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#清理邮件日志"><span class="nav-number">3.2.</span> <span class="nav-text">清理邮件日志</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其他问题"><span class="nav-number">3.3.</span> <span class="nav-text">其他问题</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhangyang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
