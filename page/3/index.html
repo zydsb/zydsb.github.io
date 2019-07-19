@@ -232,6 +232,288 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Spark学习笔记之累加器与广播变量/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Spark学习笔记之累加器与广播变量/" itemprop="url">Spark学习笔记之累加器与广播变量</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-28T00:13:06+08:00">
+                2019-02-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>在我们与Spark的交互中，我们的操作在远程节点运行时，Spark操作的实际上是这个函数所用变量的一个独立副本。这些变量会被复制到每台机器上，并且这些变量在远程机器上所有更新不会被传递回驱动程序。同时，跨任务的读写变量是很低效的。</p>
+<p>Spark为两种较为常见情况的提供了共享变量：广播变量和累加器</p>
+<h3 id="累加器"><a href="#累加器" class="headerlink" title="累加器"></a>累加器</h3><p>常见用途是在调试时对作业的执行过程中的事件进行计数</p>
+<p>代码示例<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义一个累加器</span></span><br><span class="line">blackLines = sc.accumulator(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">extractlines</span><span class="params">(line)</span>:</span></span><br><span class="line">    <span class="keyword">global</span> blackLines</span><br><span class="line">    <span class="keyword">if</span> line == <span class="string">"\'\'\,"</span>:</span><br><span class="line">        blackLines += <span class="number">1</span> </span><br><span class="line">    <span class="keyword">return</span> line.split(<span class="string">' '</span>)</span><br><span class="line"></span><br><span class="line">textRDD.flatMap(extractlines)</span><br><span class="line">print(<span class="string">'blackline %s'</span>%(blackLines))</span><br></pre></td></tr></table></figure></p>
+<p><strong>注意事项</strong></p>
+<ul>
+<li>累加器在Driver端定义赋初始值，累加器只能在Driver端读取最后的值，在Excutor端更新。</li>
+</ul>
+<h3 id="广播变量"><a href="#广播变量" class="headerlink" title="广播变量"></a>广播变量</h3><p>如果我们要在分布式计算里面分发大对象，例如：字典，集合，黑白名单等，这个都会由Driver端进行分发，一般来讲，如果这个变量不是广播变量，那么每个task就会分发一份，这在task数目十分多的情况下Driver的带宽会成为系统的瓶颈，而且会大量消耗task服务器上的资源，如果将这个变量声明为广播变量，那么这个值只会被发送到各节点一次，使用BitTorrent的通信机制。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># 定义一个广播变量</span></span><br><span class="line">a = <span class="string">'xxx'</span></span><br><span class="line">broadcast = sc.broadcast(a)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 还原一个广播变量</span></span><br><span class="line">b = broadcast.value</span><br></pre></td></tr></table></figure>
+<p><strong>变量一旦被定义为一个广播变量，那么这个变量只能读，不能修改</strong></p>
+<p>注意事项：</p>
+<ul>
+<li><p>不能将一个RDD使用广播变量广播出去，可以广播RDD的结果</p>
+</li>
+<li><p>广播变量只能在Driver端定义，不能在Executor端定义。</p>
+</li>
+<li><p>在Driver端可以修改广播变量的值，在Executor端无法修改广播变量的值。</p>
+</li>
+<li><p>果executor端用到了Driver的变量，如果不使用广播变量在Executor有多少task就有多少Driver端的变量副本。</p>
+</li>
+<li><p>如果Executor端用到了Driver的变量，如果使用广播变量在每个Executor中只有一份Driver端的变量副本。</p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Spark学习笔记之RDD依赖/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Spark学习笔记之RDD依赖/" itemprop="url">Spark学习笔记之RDD依赖</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-26T23:58:39+08:00">
+                2019-02-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="依赖关系"><a href="#依赖关系" class="headerlink" title="依赖关系"></a>依赖关系</h3><p>RDD是一个粗粒度的数据集，什么都可以往里面放，而且前面我们知道了转化操作会生成新的RDD，由此形成了RDD之间就形成了前后依赖关系，RDD和它依赖的父RDD（s）的关系有两种不同的类型，即窄依赖（narrow dependency）和宽依赖（wide dependency），如下图。</p>
+<p><img src="rdd_dependcy.png" alt="RDD依赖"></p>
+<p>从图中可知：</p>
+<p><strong>窄依赖</strong>：指每个父RDD的一个Partition最多被一个子RDD的Partition所使用，比如filter,union,map等操作都会产生窄依赖，也有说法是‘独生子女’</p>
+<p><strong>宽依赖</strong>：指一个父RDD的一个Partition被多个子RDD的Partition所使用，比如groupByKey(),reduceByKey(),sortByKey()等都会产生宽依赖，超生。</p>
+<p>对于join操作有两种情况：</p>
+<ul>
+<li>如果两个RDD在进行join操作时，一个RDD的partition仅仅和另一个RDD中已知个数的Partition进行join，那么这种类型的join操作就是窄依赖，如图中左半部分的join操作</li>
+<li>其它情况的join操作就是宽依赖，由于是需要父RDD的所有partition进行join的转换，这就涉及到了shuffle，因此这种类型的join操作也是宽依赖</li>
+</ul>
+<p>总结一下：</p>
+<blockquote>
+<p>我们使用父RDD的Partition被子RDD的Partition所使用的个数来决定依赖关系，即：如果父RDD的一个Partition被子RDD的一个Partition所使用就是窄依赖，否则的话就是宽依赖。同时一个子RDD的Partition可以依赖多个父RDD的Partition,只要关系数量确定，也为窄依赖。<br>具体解释为：即子RDD的partition对父RDD依赖的Partition的数量不会随着RDD数据规模的改变而改变。即无论是有100T的数据量还是1P的数据量，在窄依赖中，子RDD所依赖的父RDD的partition的个数是确定的，而宽依赖是shuffle级别的，数据量越大，那么子RDD所依赖的父RDD的个数就越多，从而子RDD所依赖的父RDD的partition的个数也会变得越来越多。</p>
+</blockquote>
+<h3 id="数据流图"><a href="#数据流图" class="headerlink" title="数据流图"></a>数据流图</h3><p>Spark根据RDD之间的依赖关系来为计算任务生成不同的阶段。由于窄依赖间的依赖关系是确定的，其转换处理可以在同一个线程里完成，因此窄依赖会被Spark划分到同一个Stage里面；宽依赖则只能等父RDD的shuffle流程处理完之后，在下一个stage才能开始接下来的计算。</p>
+<p><img src="RDD_DAG.png" alt="RDD数据流"></p>
+<p><strong>因此Spark划分stage的思路是:</strong>从后往前推，遇到宽依赖就断开划分为一个新的Stage，遇到窄依赖就将这个RDD加入该stage中。</p>
+<blockquote>
+<p>因此如图所示，A为一个单独的Stage,CDEF均为窄依赖，为一个stage,BF为一个stage</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://snailed.cn/Spark学习笔记之RDD/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1536,275 +1818,6 @@ Freq: D, dtype: float64
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/记一次失眠/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/记一次失眠/" itemprop="url">记一次失眠</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-17T02:01:21+08:00">
-                2019-01-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>负重前行啊…</p>
-<p>希望时间可以抚平伤痛。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Scrapy初体验/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/Scrapy初体验/" itemprop="url">Scrapy初体验</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-16T11:46:15+08:00">
-                2019-01-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>我是<code>pip3 install Scrapy</code>一梭子完事，但是看文档貌似还要搞搞xcode…</p>
-<p>可以参考官方文档<a href="https://scrapy-chs.readthedocs.io/zh_CN/1.0/intro/install.html" target="_blank" rel="noopener">Scrapy安装指南</a></p>
-<h2 id="初始化项目"><a href="#初始化项目" class="headerlink" title="初始化项目"></a>初始化项目</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy startproject douban_book</span><br></pre></td></tr></table></figure>
-<p>scrapy会自动初始化一个目录，里面有一些必须的文件，其结构如下：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── README.md</span><br><span class="line">├── __init__.py</span><br><span class="line">├── __pycache__</span><br><span class="line">├── items.py</span><br><span class="line">├── middlewares.py</span><br><span class="line">├── pipelines.py</span><br><span class="line">├── settings.py</span><br><span class="line">└── spiders</span><br><span class="line">    ├── __init__.py</span><br><span class="line">    └── __pycache__</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>scrapy.cfg: 项目的配置文件</li>
-<li>items.py: 项目的目标文件</li>
-<li>pipelines.py: 项目的管道文件</li>
-<li>settings.py: 项目的设置文件</li>
-<li>spiders: 爬虫代码目录</li>
-</ul>
-<h2 id="构建项目"><a href="#构建项目" class="headerlink" title="构建项目"></a>构建项目</h2><h3 id="定义数据"><a href="#定义数据" class="headerlink" title="定义数据"></a>定义数据</h3><p>首先我们需要定义我们想要抓取什么数据，编辑<code>item.py</code>，Item定义结构化数据字段，用来保存爬取到的数据，有点像Python中的dict，但是提供了一些额外的保护减少错误。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DoubanBookItem</span><span class="params">(scrapy.Item)</span>:</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># define the fields for your item here like:</span></span><br><span class="line">    <span class="comment"># name = scrapy.Field()</span></span><br><span class="line">    title = scrapy.Field()  <span class="comment">#书名</span></span><br><span class="line">    link = scrapy.Field()  <span class="comment">#链接</span></span><br><span class="line">    author = scrapy.Field()  <span class="comment">#作者</span></span><br><span class="line">    score = scrapy.Field()  <span class="comment">#评分</span></span><br><span class="line">    scoreNum = scrapy.Field() <span class="comment">#评论人数 </span></span><br><span class="line">    press = scrapy.Field()  <span class="comment">#出版社</span></span><br><span class="line">    isbn = scrapy.Field()  <span class="comment">#isbn</span></span><br><span class="line">    price = scrapy.Field()  <span class="comment">#价格</span></span><br><span class="line">    publishyear = scrapy.Field()  <span class="comment">#出版年</span></span><br><span class="line">    authordesc = scrapy.Field()  <span class="comment">#作者简介</span></span><br><span class="line">    bookdesc = scrapy.Field()  <span class="comment">#书简介</span></span><br><span class="line">    label = scrapy.Field() <span class="comment">#标签</span></span><br><span class="line">    pagecount = scrapy.Field() <span class="comment">#字数</span></span><br><span class="line">    imgurl = scrapy.Field() <span class="comment">#图片链接</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="编写爬虫"><a href="#编写爬虫" class="headerlink" title="编写爬虫"></a>编写爬虫</h3><h4 id="爬数据"><a href="#爬数据" class="headerlink" title="爬数据"></a>爬数据</h4><p>我们需要用scrapy.Spider类创建一个子类，并为其确定三个强制的属性。</p>
-<ul>
-<li>name = “” ：这个爬虫的识别名称，必须是唯一的，在不同的爬虫必须定义不同的名字。</li>
-<li>allow_domains = [] 是搜索的域名范围，也就是爬虫的约束区域，规定爬虫只爬取这个域名下的网页，不存在的URL会被忽略</li>
-<li>start_urls = () ：爬取的URL元祖/列表。爬虫从这里开始抓取数据,并根据子url继续往下爬。</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">name = <span class="string">"douban_book"</span></span><br><span class="line">allowed_domains = [<span class="string">"douban.com"</span>] <span class="comment">#搜索的域名范围，也就是爬虫的约束区域</span></span><br><span class="line">start_urls = [<span class="string">'https://book.douban.com/subject/25794620/'</span>]</span><br></pre></td></tr></table></figure>
-<h4 id="取数据"><a href="#取数据" class="headerlink" title="取数据"></a>取数据</h4><p>parse()方法解析数据，这里运用了<code>XPATH</code>,虽然以前用的<code>BeautifulSoup4</code>，不过都是解析啦 这个问题不大。<br>chrome浏览器提供检查-&gt;选中元素-&gt;copy-&gt;XPATH的快捷方式获取这个，我写的时候一边写一边测试的。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#举个栗子</span></span><br><span class="line"> title = response.xpath(<span class="string">"//div[@id='wrapper']/h1/span/text()"</span>).extract()  </span><br><span class="line"> link = response.url</span><br><span class="line"> imgurl = response.xpath(<span class="string">"//div[@id='mainpic']/a[@class='nbg']/@href"</span>).extract_first()</span><br></pre></td></tr></table></figure></p>
-<h3 id="存储数据"><a href="#存储数据" class="headerlink" title="存储数据"></a>存储数据</h3><p>现在我们已经获取我们想要的数据了，下一步就是把他们存下来，可以存成csv文件，或者直接存到数据库里。这里选择保存到MySQL。</p>
-<p>在pipelines.py里定义<code>process_item()</code>方法，在这里可以对数据做一定的处理，比如缺失值异常值之类的，然后存入数据库。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">process_item</span><span class="params">(self, item, spider)</span>:</span></span><br><span class="line">    rep = re.compile(<span class="string">'\n| '</span>)</span><br><span class="line">    title = item.get(<span class="string">'title'</span>,<span class="string">'N/A'</span>)</span><br><span class="line">    author_tmp = item.get(<span class="string">'author'</span>,<span class="string">'N/A'</span>)</span><br><span class="line">    <span class="comment">#省略一部分</span></span><br><span class="line">    sql = <span class="string">"replace into book_info (title,author,score,press,isbn,price,publishyear,label,pagecount) values (%s,%s,%s,%s,%s,%s,%s,%s,%s)"</span></span><br><span class="line">    self.cursor.execute(sql,(title,author,score,press,isbn,price,publishyear,label,pagecount))</span><br><span class="line">    self.conn.commit()</span><br></pre></td></tr></table></figure>
-<p>最终结果如下：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">         id: 75</span><br><span class="line">      title: 沉默的大多数</span><br><span class="line">     author: 王小波</span><br><span class="line">      score: 9.1</span><br><span class="line">   scorenum: 0</span><br><span class="line">      press: 中国青年出版社</span><br><span class="line">       isbn: 9787500627098</span><br><span class="line">      price: 27.0000</span><br><span class="line">publishyear: 1997-10</span><br><span class="line">      label: 王小波,杂文,沉默的大多数,思想,随笔,中国文学,文学,中国</span><br><span class="line">  pagecount: 555</span><br></pre></td></tr></table></figure></p>
-<h3 id="ToDo"><a href="#ToDo" class="headerlink" title="ToDo"></a>ToDo</h3><ul>
-<li>页面解析并不是很好，经常缺数据</li>
-<li>加入redis</li>
-<li>会被封IP，需要加ip池</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1855,7 +1868,7 @@ Freq: D, dtype: float64
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">76</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
