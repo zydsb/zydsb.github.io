@@ -232,6 +232,189 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/数据倾斜/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/数据倾斜/" itemprop="url">数据倾斜</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-06T00:43:39+08:00">
+                2018-12-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="什么是数据倾斜"><a href="#什么是数据倾斜" class="headerlink" title="什么是数据倾斜"></a>什么是数据倾斜</h4><p>最直白的语句来看数据倾斜就是数据里某一个key的值太多了，导致task处理其的时间远远超过其他任务，hadoop的常见现象就是任务卡在99%,迟迟不结束。我觉得可以理解为木桶原理，因为运行最慢的task拖慢了整个任务的运行时间。</p>
+<p>不过也可以这么解释：数据倾斜就是我们在计算数据的时候，数据的分散度不够，导致大量的数据集中到了一台或者几台机器上计算，这些数据的计算速度远远低于平均计算速度，导致整个计算过程过慢。</p>
+<p><strong>一般表现为某个任务Reduce阶段卡在99%不动，以及随之而来的种种诡异现象。</strong></p>
+<p>数据倾斜的问题并不是随着节点的增多而解决的，比如看个例子：</p>
+<ul>
+<li>公司 A : 1000万用户，10台64G服务器</li>
+<li>公司 B : 10亿用户，1000台64G服务器</li>
+</ul>
+<p>两个公司都部署了Hadoop集群。假设现在遇到了数据倾斜，发生什么？</p>
+<p>公司A的数据童鞋在做join的时候发生了数据倾斜，会导致有几百万用户的相关数据集中到了一台服务器上，几百万的用户数据，感觉64G还是轻松的。</p>
+<p>公司B的数据童鞋在做join的时候也发生了数据倾斜，可能会有1个亿的用户相关数据集中到了一台机器上了，一台机器估计就很难搞了，整个task会因为这个而卡住。</p>
+<h4 id="数据倾斜的原理"><a href="#数据倾斜的原理" class="headerlink" title="数据倾斜的原理"></a>数据倾斜的原理</h4><h5 id="数据倾斜产生的原因"><a href="#数据倾斜产生的原因" class="headerlink" title="数据倾斜产生的原因"></a>数据倾斜产生的原因</h5><p>我们在做数据运算的时候，肯定会使用到count,distinct,group by,join/等操作，这些都会触发Shuffle操作，一但出现Shuffle过程中天量相同Key值的数据拉到一个或者少数几个节点上，就容易踩坑。。。</p>
+<h5 id="Shuffle"><a href="#Shuffle" class="headerlink" title="Shuffle"></a>Shuffle</h5><p>Shuffle过程在Hadoop或者Spark中都是至关重要的，产生的原因也很清晰明了，如下图所示<br><img src="/images/数据倾斜.jpg" alt="shuffle过程"></p>
+<h5 id="比如说"><a href="#比如说" class="headerlink" title="比如说"></a>比如说</h5><ul>
+<li>两个开发同学分别设计了user(userid,ip)表和ip_log(ip,logtime)表，其中user.ip的值如果获取不到的话，则默认为null，对于获取不到ip的用户，则取ip_log.ip=0，在这样的情况下，当两个表做join操作的时候，就很有可能卡住（空值由一个reduce处理）</li>
+<li>业务上搞了大事，单个城市订单猛涨1000倍之类的。</li>
+</ul>
+<p>常见情况参见:</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>关键词</th>
+<th>情形</th>
+<th>后果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>join</td>
+<td>其中一个表较小，但是key集中</td>
+<td>分发到某一个或几个Reduce上的数据远高于平均值</td>
+</tr>
+<tr>
+<td>join</td>
+<td>大表与大表，但是分桶的判断字段0值或空值过多</td>
+<td>一个reduce处理，极其慢</td>
+</tr>
+<tr>
+<td>group by</td>
+<td>group by维度过小，导致某值的数量过多</td>
+<td>某reduce耗时久</td>
+</tr>
+<tr>
+<td>count distinct</td>
+<td>某特殊值过多</td>
+<td>某reduce耗时久</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="数据倾斜解决"><a href="#数据倾斜解决" class="headerlink" title="数据倾斜解决"></a>数据倾斜解决</h4><h5 id="SQL调优"><a href="#SQL调优" class="headerlink" title="SQL调优"></a>SQL调优</h5><ul>
+<li>join数据量太大的时候，可以考虑先distinct去重</li>
+<li>大表Join大表，把空值的key变成一个字符串加上随机数，把倾斜的数据分到不同的reduce上，由于null值关联不上，处理后并不影响最终结果。（先对key做一层hash，先将数据打散让它的并行度变大，再汇集）</li>
+<li>join 操作中，使用 map join 在 map 端就先进行 join ，免得到reduce 时卡住</li>
+<li>能先进行 group 操作的时候先进行 group 操作，把 key 先进行一次 reduce,之后再进行 count 或者 distinct count 操作。</li>
+<li>特殊情况特殊处理，在业务逻辑优化效果的不大情况下，有些时候是可以将倾斜的数据单独拿出来处理。最后union回去。</li>
+</ul>
+<h5 id="参数调优"><a href="#参数调优" class="headerlink" title="参数调优"></a>参数调优</h5><ul>
+<li>set hive.map.aggr=true:在map中会做部分聚集操作，效率更高但需要更多的内存</li>
+<li>hive.groupby.skewindata=true：数据倾斜时负载均衡，当选项设定为true，生成的查询计划会有两个MRJob。第一个MRJob 中，Map的输出结果集合会随机分布到Reduce中，每个Reduce做部分聚合操作，并输出结果，这样处理的结果是相同的GroupBy Key有可能被分发到不同的Reduce中，从而达到负载均衡的目的；第二个MRJob再根据预处理的数据结果按照GroupBy Key分布到Reduce中（这个过程可以保证相同的GroupBy Key被分布到同一个Reduce中），最后完成最终的聚合操作。</li>
+<li>hive.auto.convert.join=true:自动开启mapjoin优化</li>
+<li>未完待续</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://snailed.cn/Hive-分析窗口函数/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1651,141 +1834,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/K-means简述/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/K-means简述/" itemprop="url">K-means简述</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-19T12:06:54+08:00">
-                2018-11-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>K-means算法是聚类算法中最简单的一种，但是里面包含的思想却不一般。K-means属于无监督学习，以往的回归、朴素贝叶斯、SVM等都是有类别标签y的，也就是说样例中已经给出了样例的分类。而聚类的样本中却没有给定y，只有特征x，假设宇宙星空中的点集可以表现成（X，Y，Z），聚类的目的就是为X找到潜在的Y，并将同类别的Y放在一起  </p>
-<h3 id="算法描述"><a href="#算法描述" class="headerlink" title="算法描述"></a>算法描述</h3><p><img src="http://upload-images.jianshu.io/upload_images/5115722-8d44e5307220a167.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="算法具体过程"></p>
-<ol>
-<li>随机选取K个点作为质点  </li>
-<li>对于每一个样本点X，将其归类为距离质心点最近的类别  </li>
-<li>更新每个类别的质心点为隶属于该类别所有点的平均值  </li>
-<li>重复步骤二三，直至质心不变或变化很小  </li>
-</ol>
-<p><img src="http://upload-images.jianshu.io/upload_images/5115722-c4446e11823ec528.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="聚类效果"></p>
-<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>1.K-means算法的第一个问题就是如何保证收敛，因为前面算法的结束条件就是收敛，下面我们来描述一下：<br>定义畸变函数J（c，u）  ,表示每个样本点到其质心的距离平方和<br><img src="http://upload-images.jianshu.io/upload_images/5115722-811474cc69d39d39.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="J函数"><br> 此时我们的重点是研究如何研究是J函数最小，假设J函数没有函数达到最小值，那样我们就可以先固定每个类的质心，调整每个样例所属的类别来让J函数减小，或者固定类别，调整质心也可以使J减小。这两个过程就是内循环中使J函数减小的过程，当J函数最小时，u，c也同时收敛。  </p>
-<p>由于畸变函数J是非凸函数，意味着我们不能保证取得的最小值是全局最小值，也就是说k-means对质心初始位置的选取比较感冒，但一般情况下k-means达到的局部最优已经满足需求。但如果你怕陷入局部最优，那么可以选取不同的初始值跑多遍k-means，然后取其中最小的J对应的u  </p>
-<blockquote>
-<p>凸优化有个非常重要的定理，即任何局部最优解即为全局最优解。  </p>
-</blockquote>
-<p><strong>EM思想：</strong>这里只是指出EM的思想，E步就是估计隐含类别y的期望值，M步调整其他参数使得在给定类别y的情况下，极大似然估计P(x,y)能够达到极大值。然后在其他参数确定的情况下，重新估计y，周而复始，直至收敛。其实总体还是一个迭代优化的过程。</p>
-<p>缺点：K-means算法有两个缺点，第一、该方法对K个质心初始位置的选择比较感冒，一般而言k-means算法只能达到局部最优，因此K个质心初始位置不同，则达到的局部最优解也会不一样；第二、K值一般要根据先验知识，事先给定。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1836,7 +1884,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-count">77</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1849,7 +1897,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-count">30</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
