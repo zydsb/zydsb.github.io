@@ -304,13 +304,13 @@
 <p>我们可以使用<code>ls</code>、<code>grep</code>、<code>wc</code>这三个常用的命名来组合统计出我们想要的信息</p>
 <ol>
 <li><p>统计文件夹中的文件（不包括子目录）</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span>ls -l | grep '^-' | wc -l</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">ls -l | grep <span class="string">'^-'</span> | wc -l</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>统计文件夹中的文件（包括子目录）</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span>ls -lR | grep '^-' | wc -l</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">ls -lR | grep <span class="string">'^-'</span> | wc -l</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>统计文件夹中的目录（包括子目录）</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span>ls -lR | grep '^d' | wc -l</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">ls -lR | grep <span class="string">'^d'</span> | wc -l</span></span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <p><strong>命令解析</strong></p>
@@ -430,7 +430,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">77</span>
+                  <span class="site-state-item-count">78</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

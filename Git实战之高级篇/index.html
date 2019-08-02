@@ -318,11 +318,11 @@
 <h4 id="Git-Rebase"><a href="#Git-Rebase" class="headerlink" title="Git Rebase"></a>Git Rebase</h4><p>当你知道你所需要的提交记录（并且还知道这些提交记录的哈希值）时, 用cherry-pick再好不过了。但是很乱的时候，就可以用交互式的<code>git rebase</code>来解决，帮你从一系列的提交中找到你想要的。</p>
 <p>交互式rebase指的是使用带参数<code>--interactive</code>的<code>rebase</code>命令, 简写为<code>-i</code></p>
 <p>参数详情待添加，平时<code>git rebase -i</code>之后<code>-f</code>参数用得最多。</p>
-<h3 id="提交的技巧"><a href="#提交的技巧" class="headerlink" title="提交的技巧"></a>提交的技巧</h3><h4 id="Git-Rebase-1"><a href="#Git-Rebase-1" class="headerlink" title="Git Rebase"></a>Git Rebase</h4><p>假设我们在<code>newImage</code>分支上进行一次提交，然后又基于它创建了<code>cpation</code>分支，然后又提交了一次，这个时候我们想对之前的提交记录有一些小小的调整，emmm还是很常见的，我们可以这么来<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> git rebase -i HEAD~2</span><br><span class="line"><span class="meta">$</span> git commit --amend</span><br><span class="line"><span class="meta">$</span> git rebase -i HEAD~2</span><br><span class="line"><span class="meta">$</span> git rebase caption maste</span><br></pre></td></tr></table></figure></p>
+<h3 id="提交的技巧"><a href="#提交的技巧" class="headerlink" title="提交的技巧"></a>提交的技巧</h3><h4 id="Git-Rebase-1"><a href="#Git-Rebase-1" class="headerlink" title="Git Rebase"></a>Git Rebase</h4><p>假设我们在<code>newImage</code>分支上进行一次提交，然后又基于它创建了<code>cpation</code>分支，然后又提交了一次，这个时候我们想对之前的提交记录有一些小小的调整，emmm还是很常见的，我们可以这么来<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git rebase -i HEAD~2</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git commit --amend</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git rebase -i HEAD~2</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git rebase caption maste</span></span><br></pre></td></tr></table></figure></p>
 <p><img src="gitrebase2.png" alt="效果图"></p>
 <h4 id="Git-Cherry-pick-1"><a href="#Git-Cherry-pick-1" class="headerlink" title="Git Cherry-pick"></a>Git Cherry-pick</h4><p>当然我们也可以直接使用<code>git cherry-pick xxx</code>达到我们的目的。</p>
 <h4 id="Git-Tags"><a href="#Git-Tags" class="headerlink" title="Git Tags"></a>Git Tags</h4><p>分支很容易被人为移动，且当有新的提交时，它也会移动。<code>Tags</code>便是永远指向某个提交的标识。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> git checkout c1</span><br><span class="line"><span class="meta">$</span> git tag v0</span><br><span class="line"><span class="meta">$</span> git checkout c2</span><br><span class="line"><span class="meta">$</span> git tag v1</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git checkout c1</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git tag v0</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git checkout c2</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git tag v1</span></span><br></pre></td></tr></table></figure>
 <p><img src="gittag.png" alt="Tags"></p>
 <h4 id="Git-Describe"><a href="#Git-Describe" class="headerlink" title="Git Describe"></a>Git Describe</h4><p>由于标签在代码库中有“锚点”的作用，Git设计了<code>git describe</code>的命令来描述离标签最近的点。</p>
 <p>pass</p>
@@ -445,7 +445,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">77</span>
+                  <span class="site-state-item-count">78</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
