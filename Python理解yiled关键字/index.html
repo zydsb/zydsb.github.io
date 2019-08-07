@@ -70,7 +70,7 @@
 
 
 
-  <meta name="keywords" content="Git,">
+  <meta name="keywords" content="Python,">
 
 
 
@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="Git Clone无需多说 Git FetchGit远程仓库其实就是为我们提供“从远程仓库传输数据以及从远程仓库获取数据”的功能，既然我们能与远程仓库同步，那么我们也可以拿到任何已经被Git管理的更新。 git fetch做了两件事：  从远程仓库下载本地仓库缺失的记录 更新远程分支指针  其实就是把远程分支更新成了远程仓库相应分支最新的状态。 Git Pullgit pull进行先抓取更新再合并">
-<meta name="keywords" content="Git">
+<meta name="description" content="一直对Python的yield关键字有点迷糊，今天整理下相关的知识。 迭代的概念Python是一门极其灵活的语言，其很多数据里都包含了其他类型的元素。而我们在实际使用的时候，经常需要逐个地取出元素。逐个获取元素的过程，就是迭代。 Python的 list，tuple，string等顺序类型，还包括 dict，set等也都是。就是如果我们可以从一个对象中，逐个地获取元素，那么这个对象是「可迭代的」。">
+<meta name="keywords" content="Python">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Git实战之远程篇">
-<meta property="og:url" content="http://snailed.cn/Git实战之远程篇/index.html">
+<meta property="og:title" content="Python理解yiled关键字">
+<meta property="og:url" content="http://snailed.cn/Python理解yiled关键字/index.html">
 <meta property="og:site_name" content="| Yang |">
-<meta property="og:description" content="Git Clone无需多说 Git FetchGit远程仓库其实就是为我们提供“从远程仓库传输数据以及从远程仓库获取数据”的功能，既然我们能与远程仓库同步，那么我们也可以拿到任何已经被Git管理的更新。 git fetch做了两件事：  从远程仓库下载本地仓库缺失的记录 更新远程分支指针  其实就是把远程分支更新成了远程仓库相应分支最新的状态。 Git Pullgit pull进行先抓取更新再合并">
+<meta property="og:description" content="一直对Python的yield关键字有点迷糊，今天整理下相关的知识。 迭代的概念Python是一门极其灵活的语言，其很多数据里都包含了其他类型的元素。而我们在实际使用的时候，经常需要逐个地取出元素。逐个获取元素的过程，就是迭代。 Python的 list，tuple，string等顺序类型，还包括 dict，set等也都是。就是如果我们可以从一个对象中，逐个地获取元素，那么这个对象是「可迭代的」。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-03-11T06:32:57.581Z">
+<meta property="og:updated_time" content="2019-08-07T16:01:21.235Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Git实战之远程篇">
-<meta name="twitter:description" content="Git Clone无需多说 Git FetchGit远程仓库其实就是为我们提供“从远程仓库传输数据以及从远程仓库获取数据”的功能，既然我们能与远程仓库同步，那么我们也可以拿到任何已经被Git管理的更新。 git fetch做了两件事：  从远程仓库下载本地仓库缺失的记录 更新远程分支指针  其实就是把远程分支更新成了远程仓库相应分支最新的状态。 Git Pullgit pull进行先抓取更新再合并">
+<meta name="twitter:title" content="Python理解yiled关键字">
+<meta name="twitter:description" content="一直对Python的yield关键字有点迷糊，今天整理下相关的知识。 迭代的概念Python是一门极其灵活的语言，其很多数据里都包含了其他类型的元素。而我们在实际使用的时候，经常需要逐个地取出元素。逐个获取元素的过程，就是迭代。 Python的 list，tuple，string等顺序类型，还包括 dict，set等也都是。就是如果我们可以从一个对象中，逐个地获取元素，那么这个对象是「可迭代的」。">
 
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://snailed.cn/Git实战之远程篇/">
+  <link rel="canonical" href="http://snailed.cn/Python理解yiled关键字/">
 
 
 
 
 
-  <title>Git实战之远程篇 | | Yang |</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>Python理解yiled关键字 | | Yang |</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -245,7 +245,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Git实战之远程篇/">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Python理解yiled关键字/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhangyang">
@@ -262,7 +262,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Git实战之远程篇</h2>
+          <h2 class="post-title" itemprop="name headline">Python理解yiled关键字</h2>
         
 
         <div class="post-meta">
@@ -274,8 +274,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-08T20:08:49+08:00">
-                2019-03-08
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-07T19:12:17+08:00">
+                2019-08-07
               </time>
             
 
@@ -312,17 +312,26 @@
       
 
       
-        <h3 id="Git-Clone"><a href="#Git-Clone" class="headerlink" title="Git Clone"></a>Git Clone</h3><p>无需多说</p>
-<h3 id="Git-Fetch"><a href="#Git-Fetch" class="headerlink" title="Git Fetch"></a>Git Fetch</h3><p>Git远程仓库其实就是为我们提供“从远程仓库传输数据以及从远程仓库获取数据”的功能，既然我们能与远程仓库同步，那么我们也可以拿到任何已经被Git管理的更新。</p>
-<p><code>git fetch</code>做了两件事：</p>
-<ul>
-<li>从远程仓库下载本地仓库缺失的记录</li>
-<li>更新远程分支指针</li>
-</ul>
-<p>其实就是把远程分支更新成了远程仓库相应分支最新的状态。</p>
-<h3 id="Git-Pull"><a href="#Git-Pull" class="headerlink" title="Git Pull"></a>Git Pull</h3><p><code>git pull</code>进行先抓取更新再合并到本地分支的工作，实际上也就是<code>git fetch + git merge</code></p>
-<h3 id="Git难题"><a href="#Git难题" class="headerlink" title="Git难题"></a>Git难题</h3><p>假如说我们周一<code>git pull</code>了一下仓库，然后开始搞一个新功能，周五上线的时候，发现同事已经写了很多代码，还改了你用到的api，然后你的新功能 跪了，这个应该咋办呢？</p>
-<p><strong>先更新本地仓库的远程分支，然后再rebase相关提交到最新的提交记录下，然后再push到远程仓库</strong></p>
+        <p>一直对Python的<code>yield</code>关键字有点迷糊，今天整理下相关的知识。</p>
+<h3 id="迭代的概念"><a href="#迭代的概念" class="headerlink" title="迭代的概念"></a>迭代的概念</h3><p>Python是一门极其灵活的语言，其很多数据里都包含了其他类型的元素。而我们在实际使用的时候，经常需要逐个地取出元素。<strong>逐个获取元素的过程，就是迭代</strong>。</p>
+<p>Python的 <code>list</code>，<code>tuple</code>，<code>string</code>等顺序类型，还包括 <code>dict</code>，<code>set</code>等也都是。就是如果我们可以从一个对象中，逐个地获取元素，那么这个对象是「可迭代的」。</p>
+<p>至于迭代器则是抽象的一个数据流，是只允许迭代一次的对象。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">	print(i)</span><br></pre></td></tr></table></figure>
+<h3 id="生成器和yield关键字"><a href="#生成器和yield关键字" class="headerlink" title="生成器和yield关键字"></a>生成器和yield关键字</h3><blockquote>
+<p>生成器函数是一种特殊的函数，而生成器则是特殊的迭代器。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gen</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">yield</span> <span class="number">1</span></span><br><span class="line"></span><br><span class="line">print(type(func))   <span class="comment"># &lt;class 'function'&gt;</span></span><br><span class="line">print(type(gen))    <span class="comment"># &lt;class 'function'&gt;</span></span><br><span class="line"></span><br><span class="line">print(type(func())) <span class="comment"># &lt;class 'int'&gt;</span></span><br><span class="line">print(type(gen()))  <span class="comment"># &lt;class 'generator'&gt;</span></span><br></pre></td></tr></table></figure>
+<p>最重要的差异是二者返回的类型是不一样的，生成器函数返回一个迭代器。</p>
+<h3 id="yield"><a href="#yield" class="headerlink" title="yield"></a>yield</h3><p><code>yield</code>关键字仅用户定义生成器函数。与普通函数不同的是，生成器函数是惰性计算的，只有在返回的生成器调用成员方法时，相应函数中的代码才会被执行。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">square</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line">        <span class="keyword">yield</span> x ** <span class="number">2</span></span><br><span class="line">square_gen = square()</span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> square_gen:</span><br><span class="line">    print(x)</span><br></pre></td></tr></table></figure>
+<p>由前面可知，<code>square_gen</code>表示一个迭代器对象，for 循环会调用迭代器对象的 <code>next()</code> 函数，将生成器中的下一个值赋值给 x , 然后再继续循环，直到终止。</p>
+<h3 id="yield的好处"><a href="#yield的好处" class="headerlink" title="yield的好处"></a>yield的好处</h3><p><strong>节省时间空间上的开销</strong>。Python 之所以要提供这样的解决方案，是因为在很多时候，我们只是需要逐个顺序访问容器内的元素。大多数时候，我们不需要一口气获取容器内所有的元素。</p>
+<h3 id="实战一下"><a href="#实战一下" class="headerlink" title="实战一下"></a>实战一下</h3><p>生成斐波那契数列<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gen_fib</span><span class="params">(n_max)</span>:</span></span><br><span class="line">    n,a,b = <span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> n &lt; n_max:</span><br><span class="line">        <span class="keyword">yield</span> b </span><br><span class="line">        a , b = b , a+b </span><br><span class="line">        n += <span class="number">1</span> </span><br><span class="line">fib = [x <span class="keyword">for</span> x <span class="keyword">in</span> gen_fib(<span class="number">10</span>)]  </span><br><span class="line">fib <span class="comment"># [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li><a href="https://liam.page/2017/06/30/understanding-yield-in-python/" target="_blank" rel="noopener">Python 中的黑暗角落（一）：理解 yield 关键字</a></li>
+<li><a href="https://www.liaoxuefeng.com/wiki/1016959663602400/1017316949097888" target="_blank" rel="noopener">廖雪峰的官方网站</a></li>
+</ol>
+<p>感恩 始终 这位大佬，跟着走一遍打了一遍！</p>
 
       
     </div>
@@ -340,7 +349,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Git/" rel="tag"># Git</a>
+            <a href="/tags/Python/" rel="tag"># Python</a>
           
         </div>
       
@@ -353,8 +362,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/Git实战之高级篇/" rel="next" title="Git实战之高级篇">
-                <i class="fa fa-chevron-left"></i> Git实战之高级篇
+              <a href="/Python模块hashlib/" rel="next" title="Python模块hashlib">
+                <i class="fa fa-chevron-left"></i> Python模块hashlib
               </a>
             
           </div>
@@ -362,10 +371,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/AboutMe/" rel="prev" title="AboutMe">
-                AboutMe <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -490,7 +495,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Git-Clone"><span class="nav-number">1.</span> <span class="nav-text">Git Clone</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Git-Fetch"><span class="nav-number">2.</span> <span class="nav-text">Git Fetch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Git-Pull"><span class="nav-number">3.</span> <span class="nav-text">Git Pull</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Git难题"><span class="nav-number">4.</span> <span class="nav-text">Git难题</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#迭代的概念"><span class="nav-number">1.</span> <span class="nav-text">迭代的概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生成器和yield关键字"><span class="nav-number">2.</span> <span class="nav-text">生成器和yield关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#yield"><span class="nav-number">3.</span> <span class="nav-text">yield</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#yield的好处"><span class="nav-number">4.</span> <span class="nav-text">yield的好处</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实战一下"><span class="nav-number">5.</span> <span class="nav-text">实战一下</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>

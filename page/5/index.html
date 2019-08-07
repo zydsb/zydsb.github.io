@@ -244,6 +244,213 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/seaborn-liner/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/seaborn-liner/" itemprop="url">seaborn-liner</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-10T19:14:43+08:00">
+                2019-01-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="可视化线性关系"><a href="#可视化线性关系" class="headerlink" title="可视化线性关系"></a>可视化线性关系</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">sns.set(color_codes=<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line">tips = sns.load_dataset(<span class="string">"tips"</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="绘制线性回归"><a href="#绘制线性回归" class="headerlink" title="绘制线性回归"></a>绘制线性回归</h2><blockquote>
+<p>Two main functions in seaborn are used to visualize a linear relationship as determined through regression. These functions, regplot() and lmplot() are closely related, and share much of their core functionality. It is important to understand the ways they differ, however, so that you can quickly choose the correct tool for particular job.</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#先看一个最简单的例子</span></span><br><span class="line"><span class="comment">#默认置信区间为95%</span></span><br><span class="line"></span><br><span class="line">sns.regplot(x=<span class="string">'total_bill'</span>,y=<span class="string">'tip'</span>,data=tips)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x110f64d68&gt;
+</code></pre><p><img src="output_3_1.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.lmplot(x=<span class="string">'total_bill'</span>,y=<span class="string">'tip'</span>,data=tips)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x110f15780&gt;
+</code></pre><p><img src="output_4_1.png" alt="png"></p>
+<p>regplot()可以接受更加灵活的输入，lmplot()接受整形输入，同时regplot()也拥有部分lmplot()的功能。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.lmplot(x=<span class="string">'size'</span>,y=<span class="string">'tip'</span>,data=tips)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x112574400&gt;
+</code></pre><p><img src="output_6_1.png" alt="png"></p>
+<h2 id="Fitting-different-kinds-of-models（拟合不同的模型）"><a href="#Fitting-different-kinds-of-models（拟合不同的模型）" class="headerlink" title="Fitting different kinds of models（拟合不同的模型）"></a>Fitting different kinds of models（拟合不同的模型）</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">anscombe = sns.load_dataset(<span class="string">"anscombe"</span>)</span><br><span class="line">anscombe.head()</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>dataset</th>
+      <th>x</th>
+      <th>y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>I</td>
+      <td>10.0</td>
+      <td>8.04</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>I</td>
+      <td>8.0</td>
+      <td>6.95</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>I</td>
+      <td>13.0</td>
+      <td>7.58</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>I</td>
+      <td>9.0</td>
+      <td>8.81</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>I</td>
+      <td>11.0</td>
+      <td>8.33</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.lmplot(x=<span class="string">'x'</span>,y=<span class="string">'y'</span>,data=anscombe.query(<span class="string">"dataset == 'I'"</span>),ci=<span class="keyword">None</span>,scatter_kws=&#123;<span class="string">"s"</span>: <span class="number">80</span>&#125;)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x1a1e166978&gt;
+</code></pre><p><img src="output_9_1.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sns.lmplot(x=<span class="string">"x"</span>, y=<span class="string">"y"</span>, data=anscombe.query(<span class="string">"dataset == 'II'"</span>),</span><br><span class="line">           ci=<span class="keyword">None</span>, scatter_kws=&#123;<span class="string">"s"</span>: <span class="number">80</span>&#125;)</span><br></pre></td></tr></table></figure>
+<p><img src="output_10_0.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#上一个明明显拟合不到位，我们可以猜测这是一个多项式回归，利用order参数调用numpy.polyfit()</span></span><br><span class="line">sns.lmplot(x=<span class="string">"x"</span>, y=<span class="string">"y"</span>, data=anscombe.query(<span class="string">"dataset == 'II'"</span>),order = <span class="number">2</span> ,</span><br><span class="line">           ci=<span class="keyword">None</span>, scatter_kws=&#123;<span class="string">"s"</span>: <span class="number">80</span>&#125;)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x1a1e3b3cc0&gt;
+</code></pre><p><img src="output_11_1.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sns.lmplot(x=<span class="string">"x"</span>, y=<span class="string">"y"</span>, data=anscombe.query(<span class="string">"dataset == 'III'"</span>),</span><br><span class="line">           ci=<span class="keyword">None</span>, scatter_kws=&#123;<span class="string">"s"</span>: <span class="number">80</span>&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">## 存在异常值</span></span><br></pre></td></tr></table></figure>
+<p><img src="output_12_0.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 不同的损失函数来减轻相对较大的残差</span></span><br><span class="line">sns.lmplot(x=<span class="string">"x"</span>, y=<span class="string">"y"</span>, data=anscombe.query(<span class="string">"dataset == 'III'"</span>),</span><br><span class="line">           robust=<span class="keyword">True</span>, ci=<span class="keyword">None</span>, scatter_kws=&#123;<span class="string">"s"</span>: <span class="number">80</span>&#125;);</span><br></pre></td></tr></table></figure>
+<p><img src="output_13_0.png" alt="png"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://snailed.cn/seaborn-distribution/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -10465,133 +10672,6 @@ array([1.2 , 3.25, 4.1 ])
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/About-Application/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/About-Application/" itemprop="url">关于查询的执行过程</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-29T12:21:30+08:00">
-                2018-12-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="写在最前"><a href="#写在最前" class="headerlink" title="写在最前"></a>写在最前</h3><p>前文提到过查询的优化问题，这里我们了解下怎么更精准地去找到到底是哪里出了问题。</p>
-<h3 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h3><p>这里我们在<code>hive shell</code>里面执行任务时的日志信息，里面可以获取很多信息，这里我们先看一下Application，Task ，Job和Stage这几个概念，这里借鉴一下Spark的…<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Application：User program built on Spark. Consists of a driver program and executors on the cluster.</span><br><span class="line">Task：A unit of work that will be sent to one executor</span><br><span class="line">Job：A parallel computation consisting of multiple tasks that gets spawned in response to a Spark action (e.g. save, collect); you&apos;ll see this term used in the driver&apos;s logs.</span><br><span class="line">Stage：Each job gets divided into smaller sets of tasks called stages that depend on each other (similar to the map and reduce stages in MapReduce); you&apos;ll see this term used in the driver&apos;s logs.</span><br></pre></td></tr></table></figure></p>
-<p>更直观地感受就是去看一下shell里输出的日志信息，里面都是有用的。这里画了一下图，助于理解<br><img src="/images/Application.png" alt="结构"></p>
-<h3 id="执行"><a href="#执行" class="headerlink" title="执行"></a>执行</h3><ul>
-<li>如果发现查询过程中效率很低，这个时候先观察日志，到底是哪一步慢了，至少细化到Stage粒度</li>
-<li>explain yourfile.hql，查看hive的执行计划</li>
-</ul>
-<p>这里就不贴实际的代码和输出的信息了，在公司环境上搞的，还是稳健一点比较好。<br>虽然对Spark了解不多，但感觉对其优化应该也是这么一个思路吧，后面该开始了解一下Spark了。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -10644,7 +10724,7 @@ array([1.2 , 3.25, 4.1 ])
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">80</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

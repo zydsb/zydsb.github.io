@@ -244,6 +244,145 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Python理解yiled关键字/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Python理解yiled关键字/" itemprop="url">Python理解yiled关键字</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-07T19:12:17+08:00">
+                2019-08-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>一直对Python的<code>yield</code>关键字有点迷糊，今天整理下相关的知识。</p>
+<h3 id="迭代的概念"><a href="#迭代的概念" class="headerlink" title="迭代的概念"></a>迭代的概念</h3><p>Python是一门极其灵活的语言，其很多数据里都包含了其他类型的元素。而我们在实际使用的时候，经常需要逐个地取出元素。<strong>逐个获取元素的过程，就是迭代</strong>。</p>
+<p>Python的 <code>list</code>，<code>tuple</code>，<code>string</code>等顺序类型，还包括 <code>dict</code>，<code>set</code>等也都是。就是如果我们可以从一个对象中，逐个地获取元素，那么这个对象是「可迭代的」。</p>
+<p>至于迭代器则是抽象的一个数据流，是只允许迭代一次的对象。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">	print(i)</span><br></pre></td></tr></table></figure>
+<h3 id="生成器和yield关键字"><a href="#生成器和yield关键字" class="headerlink" title="生成器和yield关键字"></a>生成器和yield关键字</h3><blockquote>
+<p>生成器函数是一种特殊的函数，而生成器则是特殊的迭代器。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gen</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">yield</span> <span class="number">1</span></span><br><span class="line"></span><br><span class="line">print(type(func))   <span class="comment"># &lt;class 'function'&gt;</span></span><br><span class="line">print(type(gen))    <span class="comment"># &lt;class 'function'&gt;</span></span><br><span class="line"></span><br><span class="line">print(type(func())) <span class="comment"># &lt;class 'int'&gt;</span></span><br><span class="line">print(type(gen()))  <span class="comment"># &lt;class 'generator'&gt;</span></span><br></pre></td></tr></table></figure>
+<p>最重要的差异是二者返回的类型是不一样的，生成器函数返回一个迭代器。</p>
+<h3 id="yield"><a href="#yield" class="headerlink" title="yield"></a>yield</h3><p><code>yield</code>关键字仅用户定义生成器函数。与普通函数不同的是，生成器函数是惰性计算的，只有在返回的生成器调用成员方法时，相应函数中的代码才会被执行。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">square</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line">        <span class="keyword">yield</span> x ** <span class="number">2</span></span><br><span class="line">square_gen = square()</span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> square_gen:</span><br><span class="line">    print(x)</span><br></pre></td></tr></table></figure>
+<p>由前面可知，<code>square_gen</code>表示一个迭代器对象，for 循环会调用迭代器对象的 <code>next()</code> 函数，将生成器中的下一个值赋值给 x , 然后再继续循环，直到终止。</p>
+<h3 id="yield的好处"><a href="#yield的好处" class="headerlink" title="yield的好处"></a>yield的好处</h3><p><strong>节省时间空间上的开销</strong>。Python 之所以要提供这样的解决方案，是因为在很多时候，我们只是需要逐个顺序访问容器内的元素。大多数时候，我们不需要一口气获取容器内所有的元素。</p>
+<h3 id="实战一下"><a href="#实战一下" class="headerlink" title="实战一下"></a>实战一下</h3><p>生成斐波那契数列<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gen_fib</span><span class="params">(n_max)</span>:</span></span><br><span class="line">    n,a,b = <span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> n &lt; n_max:</span><br><span class="line">        <span class="keyword">yield</span> b </span><br><span class="line">        a , b = b , a+b </span><br><span class="line">        n += <span class="number">1</span> </span><br><span class="line">fib = [x <span class="keyword">for</span> x <span class="keyword">in</span> gen_fib(<span class="number">10</span>)]  </span><br><span class="line">fib <span class="comment"># [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li><a href="https://liam.page/2017/06/30/understanding-yield-in-python/" target="_blank" rel="noopener">Python 中的黑暗角落（一）：理解 yield 关键字</a></li>
+<li><a href="https://www.liaoxuefeng.com/wiki/1016959663602400/1017316949097888" target="_blank" rel="noopener">廖雪峰的官方网站</a></li>
+</ol>
+<p>感恩 始终 这位大佬，跟着走一遍打了一遍！</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://snailed.cn/Python模块hashlib/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -733,13 +872,13 @@
 <p>我们可以使用<code>ls</code>、<code>grep</code>、<code>wc</code>这三个常用的命名来组合统计出我们想要的信息</p>
 <ol>
 <li><p>统计文件夹中的文件（不包括子目录）</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">ls -l | grep <span class="string">'^-'</span> | wc -l</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span>ls -l | grep '^-' | wc -l</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>统计文件夹中的文件（包括子目录）</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">ls -lR | grep <span class="string">'^-'</span> | wc -l</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span>ls -lR | grep '^-' | wc -l</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>统计文件夹中的目录（包括子目录）</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">ls -lR | grep <span class="string">'^d'</span> | wc -l</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span>ls -lR | grep '^d' | wc -l</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <p><strong>命令解析</strong></p>
@@ -1568,173 +1707,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/哈巴装备清单/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/哈巴装备清单/" itemprop="url">哈巴装备清单</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-19T14:20:20+08:00">
-                2019-06-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>必备用品</p>
-</blockquote>
-<ul>
-<li>大包 - 小鹰48L </li>
-<li>冲顶包 - 北风之神金牛座</li>
-<li>硬壳 - 乌孙2.0</li>
-<li>抓绒|薄款羽绒 - 考虑优衣库小马甲</li>
-<li>速干衣</li>
-<li>速干裤</li>
-<li>保暖裤 - 秋裤</li>
-<li>登山鞋 - 赞贝拉</li>
-<li>羊毛袜 - timberland</li>
-<li>睡袋 - 冰焰基础款640g</li>
-<li>保温杯 - 膳魔师470ml</li>
-<li>登山杖 - mbc201</li>
-<li>保温帽 </li>
-<li>炉头</li>
-<li>头灯</li>
-<li>魔术头巾</li>
-<li>锅具</li>
-<li>气罐 - 目的地购买</li>
-<li>食物</li>
-</ul>
-<blockquote>
-<p>可以租用</p>
-</blockquote>
-<ul>
-<li>雪套</li>
-<li>雪镜 - 防雾、透光度S2较为适宜，近视眼者请戴上镜框眼镜。</li>
-<li>手套 - 抓绒保暖、防水性能好。</li>
-<li>冰爪</li>
-<li>冰镐</li>
-</ul>
-<blockquote>
-<p>随身用品</p>
-</blockquote>
-<ul>
-<li>身份证</li>
-<li>手机</li>
-<li>充电器</li>
-<li>防晒霜</li>
-<li>现金 - 多准备点</li>
-<li>药品 - 感冒药，创口贴</li>
-<li>充电宝</li>
-<li><del>相机</del></li>
-<li><del>暖宝宝</del></li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1787,7 +1759,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">80</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

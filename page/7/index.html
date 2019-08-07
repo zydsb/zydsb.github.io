@@ -244,6 +244,154 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Hive-Serde/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Hive-Serde/" itemprop="url">Hive-Serde</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-09T13:59:36+08:00">
+                2018-12-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>SerDe是Serialize/Deserialize的简称，即序列化和和反序列化</p>
+<h3 id="序列化的作用"><a href="#序列化的作用" class="headerlink" title="序列化的作用"></a>序列化的作用</h3><ul>
+<li><p>序列化是对象转化为字节序列的过程 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Row object --&gt; Serializer --&gt; &lt;key, value&gt; --&gt; OutputFileFormat --&gt; HDFS files</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>反序列化是字节序列恢复为对象的过程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HDFS files --&gt; InputFileFormat --&gt; &lt;key, value&gt; --&gt; Deserializer --&gt; Row object</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>我们对对象序列化主要用于：</p>
+<ul>
+<li>对象的持久化</li>
+<li>对象的网络传送</li>
+</ul>
+</li>
+</ul>
+<p>Hive的反序列化是吧k-v数据反序列化成为Table里的列值，而不需要转化，为海量数据处理节省大量时间。 </p>
+<p>SerDe说明hive如何去处理一条记录，包括Serialize/Deserilize两个功能， Serialize把hive使用的java object转换成能写入hdfs的字节序列，或者其他系统能识别的流文件。Deserilize把字符串或者二进制流转换成hive能识别的java object对象。比如：select语句会用到Deserialize对象， 把hdfs数据解析出来；insert语句会使用Serilize，数据写入hdfs系统，需要把数据序列化。</p>
+<h3 id="SerDe的使用"><a href="#SerDe的使用" class="headerlink" title="SerDe的使用"></a>SerDe的使用</h3><p>Hive建表的时候可以使用自定义的SerDe或者Hive内置的SerDe类型指定数据的序列化和反序列化的方式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">--指定*.RequestSerde做Serde</span><br><span class="line"></span><br><span class="line">create table xxx</span><br><span class="line">(</span><br><span class="line"> userid  string ,</span><br><span class="line"> nickname string ,</span><br><span class="line"> xxx and so on </span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">PARTITIONED BY (</span><br><span class="line">  `year` string,</span><br><span class="line">  `month` string,</span><br><span class="line">  `day` string)</span><br><span class="line">ROW FORMAT SERDE</span><br><span class="line">  &apos;com.fenbi.ape.hive.serde.RequestSerde&apos;</span><br><span class="line">STORED AS INPUTFORMAT</span><br><span class="line">  &apos;org.apache.hadoop.mapred.TextInputFormat&apos;</span><br><span class="line">OUTPUTFORMAT</span><br><span class="line">  &apos;org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat&apos;</span><br><span class="line">LOCATION</span><br><span class="line">  &apos;hdfs://f04/log/tutor&apos;</span><br></pre></td></tr></table></figure>
+<h3 id="SerDe内置类型"><a href="#SerDe内置类型" class="headerlink" title="SerDe内置类型"></a>SerDe内置类型</h3><ul>
+<li>Avro </li>
+<li>ORC </li>
+<li>RegEx</li>
+<li>ThrifT</li>
+<li>Parquet</li>
+<li>CSV</li>
+<li>JsonSerDe</li>
+</ul>
+<h3 id="自定义类型"><a href="#自定义类型" class="headerlink" title="自定义类型"></a>自定义类型</h3><p><em>定义一个类，继承抽象类AbstractSerDe</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2018-10-18</span><br><span class="line">demo code to be added</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://snailed.cn/Markdown中的数学公式/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1848,182 +1996,6 @@ a_3x+b_3y+c_3z=d_3\\\
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/深入浅出SQL总结/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/深入浅出SQL总结/" itemprop="url">深入浅出SQL总结</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-20T00:08:49+08:00">
-                2018-11-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><blockquote>
-<p>SQL语法是不区分大小写的，但是命名的时候最好注意规范，语法规定用<code>_</code>来代替空格  </p>
-</blockquote>
-<p>我是用《深入浅出SQL》这本书来学习的，网上可以查<a href="http://www.w3school.com.cn/sql/sql_insert.asp" target="_blank" rel="noopener">W3School</a>~</p>
-<h4 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h4><h5 id="语句"><a href="#语句" class="headerlink" title="语句"></a>语句</h5><ol>
-<li><strong>CREATE</strong>  <pre><code>    creatr database my_db;
-    use my_db;
-    create table my_info
-      (
-        my_id int not null auto_increment,
-        my_name char(50),
-        primary key(my_id)
-      )
-</code></pre></li>
-<li><p><strong>DROP</strong>   </p>
-<pre><code>       drop table my_name           
-</code></pre></li>
-<li><p><strong>INSERT</strong>   </p>
-<pre><code>       insert into table  my_info(col0,col1...) values(&#39;num0&#39;,&#39;num1&#39;...)
-</code></pre></li>
-<li><strong>SELECT</strong>  <pre><code>       select * from  tavle_name where ..  
-</code></pre><blockquote>
-<p>select 展开讲太多了，最重要的还是灵活运用子查询和各种连接</p>
-</blockquote>
-</li>
-<li><p><strong>UPDATE</strong>    </p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">update table table_name  </span><br><span class="line">         set col = </span><br><span class="line">             case  </span><br><span class="line">                 when condition0 then reslut0  </span><br><span class="line">                 when condition1 then result1</span><br><span class="line">              end;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>DELETE</strong>  </p>
-<pre><code>              delete table_name from where conditon
-</code></pre></li>
-<li><strong>SHOW</strong>    <pre><code>                show databases/tables
-</code></pre></li>
-<li><strong>ALTER</strong>    <pre><code>       ```
-                      alter table table_name
-                       add col...，
-                       rename to ...，  
-                       change...，
-                       modify...，  
-                       drop ..
-                       ```  
-</code></pre>其实就是对表进行修改</li>
-</ol>
-<h5 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h5><p><strong>USE</strong>:接下来的操作都在某个db中进行<br><strong>DESC</strong>：显示db的结构 /在<code>order by</code>中代表逆序<br><strong>NULL</strong>:不是值，代表未被定义的值<br><strong>DEFAULT</strong>:缺省值<br><strong>LIKE</strong>:查找部分文本字符串  , <strong><code>%</code>  </strong>：替换符<br><strong>BETWEEN</strong>:在…之间（&lt;=&amp;&amp;&gt;=）<br><strong>AFTER</strong>:把某列放在另一列之后<br><strong>RIGHT(),LEFT()</strong>:选出指定数量的字符<br>                select right(‘location’,2) from my_table<br><strong>ORDER BY(),GROUP BY()</strong>:按…排序，按…分组<br><strong>MIN(),MAX(),AVG(),SUM(),COUNT()</strong>:其中<code>count()</code>作用是返回指定列中的元素<br><strong>DINSTINCT</strong>：查询列中出现过的不重复元素<br><strong>LIMIT</strong>:查询结果的数量 <code>limit m,n #从m开始一共查询n个</code><br><strong>T.x -&gt; T.y</strong>:在关系表T中，y列函数依赖x列<br><strong>having</strong>:对已经排序的结果进行限制，常和<code>group by</code>等关键词组合使用</p>
-<ul>
-<li><strong>数据模式</strong><ul>
-<li>一对一  </li>
-<li>一对多  </li>
-<li>多对多  </li>
-</ul>
-</li>
-<li><strong>ACID</strong>:原子性，一致性，隔离性，持久性    </li>
-<li><strong>RDBMS的规范</strong>：<br><strong>1NF</strong>：数据具有原子性，有主键<br><strong>2NF</strong>：任何非关键列完全依赖关键列（不存在部分函数依赖）<br><strong>3NF</strong>：任何非关键列不以来其他非关键列（不存在传递函数依赖）  <blockquote>
-<p>字符一般加引号，列名不加</p>
-</blockquote>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2076,7 +2048,7 @@ a_3x+b_3y+c_3z=d_3\\\
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">80</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
