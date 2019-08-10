@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://snailed.cn/%E4%BA%86%E8%A7%A3MongoDB/</loc>
+    
+    <lastmod>2019-08-10T09:12:28.613Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://snailed.cn/Pymysql%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/</loc>
     
     <lastmod>2019-08-10T08:48:23.785Z</lastmod>

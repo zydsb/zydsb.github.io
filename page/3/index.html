@@ -242,6 +242,128 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/AboutMe/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/AboutMe/" itemprop="url">AboutMe</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-12T22:37:21+08:00">
+                2019-03-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>我觉得我是一个什么样的人呢？</p>
+<p>我想成为一个什么样的人呢？</p>
+<p>我不知道，我觉得我需要一个契机。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://snailed.cn/Git实战之远程篇/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1571,144 +1693,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/入坑tmux/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/入坑tmux/" itemprop="url">入坑tmux</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-02T11:06:06+08:00">
-                2019-02-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="写在最前"><a href="#写在最前" class="headerlink" title="写在最前"></a>写在最前</h3><p>18年3月刚来贵司实习的时候，jy就推荐了一些shell方面好用的工具，比如<code>Iterm2</code>,<code>zsh</code>,<code>tmux</code>之类的，还有<code>14pt Source Code Pro Semibold Italic</code>这款很好看的字体，<code>autojump</code>,<code>the_sliver_seracher</code>等神器。除了<code>tmux</code>，最开始体验的时候那反人类的复制滚屏模式劝退了我，其他用得不要太爽呀~</p>
-<p>前几天觉得工作上需要在shell里面开的窗口越来越多了，得从工具上来一波更新，于是实战了一下<code>tmux</code>，这次感觉好多了，记录分享一下。</p>
-<h3 id="Tmux"><a href="#Tmux" class="headerlink" title="Tmux"></a>Tmux</h3><p>tmux主要优点有下面三个：</p>
-<ul>
-<li>强大的分屏支持: tmux窗口中，新开的pane，默认进入到之前的路径，如果是ssh连接，登录状态也依旧保持</li>
-<li>保护现场 : 下班回家连上服务器就可以很快回到操作现场，简洁省事</li>
-<li>会话共享 : 将tmux会话的地址分享给他人，这样他们就可以通过 SSH 接入该会话(我应该是用不到这个了）</li>
-</ul>
-<h4 id="安装tmux"><a href="#安装tmux" class="headerlink" title="安装tmux"></a>安装tmux</h4><p>在Mac上安装<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 先安装Homebrew，有则跳过</span></span><br><span class="line">ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"</span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装tmux</span></span><br><span class="line">brew install tmux</span><br></pre></td></tr></table></figure></p>
-<p>在Linux上安装<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install tmux</span><br></pre></td></tr></table></figure></p>
-<h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4><p>session-window-pane:一个session有多个窗口，一个窗口有多个面板</p>
-<p>多任务神器，用过就知道</p>
-<h4 id="直达使用"><a href="#直达使用" class="headerlink" title="直达使用"></a>直达使用</h4><p>我们先创建一个名为local的session，用第一个命令即可<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tmux new -s local # 创建一个名为local的session</span><br><span class="line">tmux kill-session -t local # 关闭绘画</span><br><span class="line">tmux kill-server #关闭服务器，所有会话被关闭</span><br></pre></td></tr></table></figure></p>
-<p>此时我们可以看到底部默认的小绿条，我理解这就是tmux的状态栏了嘛。tmux已经默认为我们创建好了一个window,这个时候就可以去执行切分pane之类的操作了。我这里随便举个栗子：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 默认所有操作都加了前缀，tmux的快捷键也都是加了前缀才会生效</span></span><br><span class="line">, # 重命名当前window</span><br><span class="line">- # 横切窗口，默认进入当前目录</span><br><span class="line">| # 竖切窗口，默认进入当前目录</span><br><span class="line">c # 新建window</span><br><span class="line">hjkl # 切换窗口，类似vim操作</span><br><span class="line">t # 显示时钟</span><br></pre></td></tr></table></figure></p>
-<p>我随便截图一下表示效果</p>
-<p><img src="snapshot.png" alt="我的Tmux"></p>
-<h4 id="tmux设置"><a href="#tmux设置" class="headerlink" title="tmux设置"></a>tmux设置</h4><p>这里直接附上我的<code>.tmux.conf</code>文件，不过基本也是来自网上大佬的<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">设置前缀为Ctrl + x</span></span><br><span class="line">set -g prefix C-x</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">解除Ctrl+b 与前缀的对应关系</span></span><br><span class="line">unbind C-b</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">up</span></span><br><span class="line">bind-key k select-pane -U</span><br><span class="line"><span class="meta">#</span><span class="bash">down</span></span><br><span class="line">bind-key j select-pane -D</span><br><span class="line"><span class="meta">#</span><span class="bash">left</span></span><br><span class="line">bind-key h select-pane -L</span><br><span class="line"><span class="meta">#</span><span class="bash">right</span></span><br><span class="line">bind-key l select-pane -R</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 绑定快捷键为r</span></span><br><span class="line">bind r source-file ~/.tmux.conf \; display-message "Config reloaded.."</span><br><span class="line"></span><br><span class="line">unbind '"'</span><br><span class="line">bind - splitw -v -c '#&#123;pane_current_path&#125;' # 垂直方向新增面板，默认进入当前目录</span><br><span class="line">unbind %</span><br><span class="line">bind | splitw -h -c '#&#123;pane_current_path&#125;' # 水平方向新增面板，默认进入当前目录</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 绑定Ctrl+hjkl键为面板上下左右调整边缘的快捷指令</span></span><br><span class="line">bind -r ^k resizep -U 5 # 绑定Ctrl+k为往↑调整面板边缘10个单元格</span><br><span class="line">bind -r ^j resizep -D 5 # 绑定Ctrl+j为往↓调整面板边缘10个单元格</span><br><span class="line">bind -r ^h resizep -L 5 # 绑定Ctrl+h为往←调整面板边缘10个单元格</span><br><span class="line">bind -r ^l resizep -R 5 # 绑定Ctrl+l为往→调整面板边缘10个单元格</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 开启鼠标</span></span><br><span class="line">set-option -g mouse on</span><br></pre></td></tr></table></figure></p>
-<p>这里要感恩网上大佬分享的教程<a href="http://louiszhai.github.io/2017/09/30/tmux/" target="_blank" rel="noopener">Tmux使用手册</a></p>
-<h3 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h3><p>复制滚屏模式直到现在都还有点不习惯，不过还好开启了鼠标支持，后面再来吐槽。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1761,7 +1745,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">81</span>
+                  <span class="site-state-item-count">82</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
