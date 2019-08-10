@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+<meta name="google-site-verification" content="YLpc_1hHqiCamrFbtaqc1SquC8Sqv0AtOvhE2V37oHw">
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Python,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="写代码的时候，操作数据库是必须的。之前都是能用就可以，今天得好好总结一下，这里用 pymysql 举例。 什么是Pymysql纯 Python 实现的一个 MySQL 客户端协议，兼容几乎所有的 MySQL 数据库。 简单使用安装1pip install pymysql 具体例子先来看看官网给我们的例子，插入&amp;amp;查询一条记录1234567891011121314151617181920212">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Pymysql简单使用">
+<meta property="og:url" content="http://snailed.cn/Pymysql简单使用/index.html">
+<meta property="og:site_name" content="| Yang |">
+<meta property="og:description" content="写代码的时候，操作数据库是必须的。之前都是能用就可以，今天得好好总结一下，这里用 pymysql 举例。 什么是Pymysql纯 Python 实现的一个 MySQL 客户端协议，兼容几乎所有的 MySQL 数据库。 简单使用安装1pip install pymysql 具体例子先来看看官网给我们的例子，插入&amp;amp;查询一条记录1234567891011121314151617181920212">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-08-10T08:48:23.785Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Pymysql简单使用">
+<meta name="twitter:description" content="写代码的时候，操作数据库是必须的。之前都是能用就可以，今天得好好总结一下，这里用 pymysql 举例。 什么是Pymysql纯 Python 实现的一个 MySQL 客户端协议，兼容几乎所有的 MySQL 数据库。 简单使用安装1pip install pymysql 具体例子先来看看官网给我们的例子，插入&amp;amp;查询一条记录1234567891011121314151617181920212">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://snailed.cn/Pymysql简单使用/">
+
+
+
+
+
+  <title>Pymysql简单使用 | | Yang |</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">| Yang |</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Pymysql简单使用/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Pymysql简单使用</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-10T15:59:24+08:00">
+                2019-08-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>写代码的时候，操作数据库是必须的。之前都是能用就可以，今天得好好总结一下，这里用 pymysql 举例。</p>
+<h4 id="什么是Pymysql"><a href="#什么是Pymysql" class="headerlink" title="什么是Pymysql"></a>什么是Pymysql</h4><p>纯 Python 实现的一个 MySQL 客户端协议，兼容几乎所有的 MySQL 数据库。</p>
+<h4 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a>简单使用</h4><h5 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install pymysql</span><br></pre></td></tr></table></figure>
+<h5 id="具体例子"><a href="#具体例子" class="headerlink" title="具体例子"></a>具体例子</h5><p>先来看看官网给我们的例子，插入&amp;查询一条记录<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"></span><br><span class="line"><span class="comment"># 建表</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">CREATE TABLE `users` (</span></span><br><span class="line"><span class="string">    `id` int(11) NOT NULL AUTO_INCREMENT,</span></span><br><span class="line"><span class="string">    `email` varchar(255) COLLATE utf8_bin NOT NULL,</span></span><br><span class="line"><span class="string">    `password` varchar(255) COLLATE utf8_bin NOT NULL,</span></span><br><span class="line"><span class="string">    PRIMARY KEY (`id`)</span></span><br><span class="line"><span class="string">) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin</span></span><br><span class="line"><span class="string">AUTO_INCREMENT=1 ;</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># connecition 信息</span></span><br><span class="line">connection = pymysql.connect(host = <span class="string">'localhost'</span>,</span><br><span class="line">                             user = <span class="string">'root'</span>,</span><br><span class="line">                             password = <span class="string">'xxx'</span>,</span><br><span class="line">                             db = <span class="string">'demo'</span>,</span><br><span class="line">                             charset = <span class="string">'utf8mb4'</span>,</span><br><span class="line">                             cursorclass=pymysql.cursors.DictCursor</span><br><span class="line">                            )</span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="comment"># 使用 with 的好处在于 with 结束后会自动关闭 cursor</span></span><br><span class="line">    <span class="comment"># 插入数据</span></span><br><span class="line">    <span class="keyword">with</span> connection.cursor() <span class="keyword">as</span> cursor:</span><br><span class="line">        sql = <span class="string">"insert into users (`email`,`password`) values (%s,%s)"</span></span><br><span class="line">        cursor.execute(sql,(<span class="string">'zy@xx.com'</span>,<span class="string">'123456'</span>))</span><br><span class="line">        <span class="comment"># 连接默认不开启 autocommit，所以需要我们自己去 commit</span></span><br><span class="line">    connection.commit()</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 查询数据   </span></span><br><span class="line">    <span class="keyword">with</span> connection.cursor() <span class="keyword">as</span> cursor:</span><br><span class="line">        sql = <span class="string">'select `id` , `email` , `password` from `users` where `email` = %s '</span></span><br><span class="line">        cursor.execute(sql,(<span class="string">'zy@xx.com'</span>))</span><br><span class="line">        res = cursor.fetchone() <span class="comment"># 这里已经提交了</span></span><br><span class="line">        print(res)</span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line">    connection.close()</span><br></pre></td></tr></table></figure></p>
+<p>输出则是：<code>(1, &#39;zy@xx.com&#39;, &#39;123456&#39;)</code></p>
+<h5 id="连接对象"><a href="#连接对象" class="headerlink" title="连接对象"></a>连接对象</h5><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pymysql.connections.Connection(host=None, user=None, password='', database=None, port=0, unix_socket=None, charset='', sql_mode=None, read_default_file=None, conv=None, use_unicode=None, client_flag=0, cursorclass=&lt;class 'pymysql.cursors.Cursor'&gt;, init_command=None, connect_timeout=10, ssl=None, read_default_group=None, compress=None, named_pipe=None, autocommit=False, db=None, passwd=None, local_infile=False, max_allowed_packet=16777216, defer_connect=False, auth_plugin_map=None, read_timeout=None, write_timeout=None, bind_address=None, binary_prefix=False, program_name=None, server_public_key=None)</span><br></pre></td></tr></table></figure>
+<p>初始化 connection 对象时有很多参数，这里我们说几个比较常用的，具体信息可以参考官方文档</p>
+<ul>
+<li>host - 数据库服务器地址</li>
+<li>user - 用户名</li>
+<li>password ( passwd ) - 密码，默认为空字符串</li>
+<li>database ( db ) - 操作的数据库</li>
+<li>port - MySQL使用的端口，默认3306</li>
+<li>charset - 想要使用的数据库编码</li>
+<li>cursorclass - 默认的游标类型</li>
+<li>connect_timeout - 连接超时时间</li>
+<li>autocommit - 是否自动提交，默认为否</li>
+<li>local_infile - 是否允许可以load本地数据</li>
+</ul>
+<p>一般我们使用 <code>cursor()</code> 和 <code>commit()</code> 方法</p>
+<h5 id="获取游标"><a href="#获取游标" class="headerlink" title="获取游标"></a>获取游标</h5><p><code>cursor=connection.cursor()</code>，有了 cursor 对象之后我们才可以进行各种增删改查等数据库操作，其对我们最重要的方法是 <code>execute()</code> 和 <code>fetch()</code> 方法，因为我们所有对数据的操作都是通过他们执行的。<code>size</code> 在 <code>fetchmany()</code></p>
+<p>cursor 可以通过创建时指定类型，有</p>
+<ul>
+<li>Cursor - 元组类型</li>
+<li>SSCursor - 无缓冲元组类型</li>
+<li>DictCursor - 字典类型</li>
+<li>SSDictCursor - 无缓冲字典类型</li>
+</ul>
+<h5 id="增删改查"><a href="#增删改查" class="headerlink" title="增删改查"></a>增删改查</h5><h6 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据"></a>查询数据</h6><p>还是之前的例子<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> connection.cursor() <span class="keyword">as</span> cursor:</span><br><span class="line">    sql = <span class="string">'select `id` , `email` , `password` from `users` where `email` = %s '</span></span><br><span class="line">    cursor.execute(sql,(<span class="string">'zy@xx.com'</span>))</span><br><span class="line">    res = cursor.fetchone()</span><br></pre></td></tr></table></figure></p>
+<p>不过还有几个其他的方法：</p>
+<ul>
+<li><code>fetchall()</code> -  取回全部数据</li>
+<li><code>fetchmany(size)</code> - 取回一部分数据,由 size 决定</li>
+</ul>
+<p>两者都返回一个 <code>list</code> 对象，不过我以为会是一个生成器的…</p>
+<h6 id="增删改数据"><a href="#增删改数据" class="headerlink" title="增删改数据"></a>增删改数据</h6><p>使用 <code>cursor.execute()</code>，方法，这个写好 sql 就好，不过这些操作都需要 <code>cursor.commit()</code> 操作才会生效。还有一个 <code>cursor.executemany()</code> 的方法，使用极少极少。</p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><ol>
+<li><a href="https://pypi.org/project/PyMySQL/#documentation" target="_blank" rel="noopener">PyMySQL-PyPi</a></li>
+<li><a href="https://pymysql.readthedocs.io/en/latest/" target="_blank" rel="noopener">PyMySQL官方文档</a></li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Python理解yiled关键字/" rel="next" title="Python理解yiled关键字">
+                <i class="fa fa-chevron-left"></i> Python理解yiled关键字
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/timg.gif" alt="zhangyang">
+            
+              <p class="site-author-name" itemprop="name">zhangyang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">81</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是Pymysql"><span class="nav-number">1.</span> <span class="nav-text">什么是Pymysql</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#简单使用"><span class="nav-number">2.</span> <span class="nav-text">简单使用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#安装"><span class="nav-number">2.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#具体例子"><span class="nav-number">2.2.</span> <span class="nav-text">具体例子</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#连接对象"><span class="nav-number">2.3.</span> <span class="nav-text">连接对象</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#获取游标"><span class="nav-number">2.4.</span> <span class="nav-text">获取游标</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#增删改查"><span class="nav-number">2.5.</span> <span class="nav-text">增删改查</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#查询数据"><span class="nav-number">2.5.1.</span> <span class="nav-text">查询数据</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#增删改数据"><span class="nav-number">2.5.2.</span> <span class="nav-text">增删改数据</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhangyang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
