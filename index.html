@@ -322,7 +322,7 @@
 </ul>
 <p>此外还有两个重要概率:</p>
 <ul>
-<li>$\alpha$ - 感染概率（一个节点能感染的节点与所有节点的比值）</li>
+<li>$\alpha$ - 感染概率(这个是重点，不同应用场景对此定义不同)</li>
 <li>$\beta$ - 免疫概率</li>
 </ul>
 <p>在基于以下假设的情况下(时间为$t$):</p>
@@ -333,7 +333,9 @@
 </ol>
 <p>在瞬时时刻$t$，我们就可以得到下面这个方程：</p>
 <script type="math/tex; mode=display">\begin{cases}
-\mathrm{dx}\\
+ \frac{\rm{d}S}{\rm{d}t} = - \alpha \cdot S(t) \cdot  I(t) \\
+ \frac{\rm{d}I}{\rm{d}t} = \alpha \cdot S(t) \cdot  I(t) - \beta \cdot I(t) \\
+ \frac{\rm{d}R}{\rm{d}t} = \beta \cdot I(t) \\
 
 \end{cases}</script>
           

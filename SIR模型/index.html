@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="SIR模型是一种传播模型，是信息传播过程中抽象的表述。 模型简述这是最经典的传染病模型之一，整个模型简洁有力。  $S$ - 易感染者( susceptibles ) $I$ - 已感染者( infectives ) $R$ - 已免疫者( recovered )   此外还有两个重要概率:  $\alpha$ - 感染概率（一个节点能感染的节点与所有节点的比值） $\beta$ - 免疫概率">
+<meta name="description" content="SIR模型是一种传播模型，是信息传播过程中抽象的表述。 模型简述这是最经典的传染病模型之一，整个模型简洁有力。  $S$ - 易感染者( susceptibles ) $I$ - 已感染者( infectives ) $R$ - 已免疫者( recovered )   此外还有两个重要概率:  $\alpha$ - 感染概率(这个是重点，不同应用场景对此定义不同) $\beta$ - 免疫概率">
 <meta name="keywords" content="Model">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SIR模型">
 <meta property="og:url" content="http://snailed.cn/SIR模型/index.html">
 <meta property="og:site_name" content="| Yang |">
-<meta property="og:description" content="SIR模型是一种传播模型，是信息传播过程中抽象的表述。 模型简述这是最经典的传染病模型之一，整个模型简洁有力。  $S$ - 易感染者( susceptibles ) $I$ - 已感染者( infectives ) $R$ - 已免疫者( recovered )   此外还有两个重要概率:  $\alpha$ - 感染概率（一个节点能感染的节点与所有节点的比值） $\beta$ - 免疫概率">
+<meta property="og:description" content="SIR模型是一种传播模型，是信息传播过程中抽象的表述。 模型简述这是最经典的传染病模型之一，整个模型简洁有力。  $S$ - 易感染者( susceptibles ) $I$ - 已感染者( infectives ) $R$ - 已免疫者( recovered )   此外还有两个重要概率:  $\alpha$ - 感染概率(这个是重点，不同应用场景对此定义不同) $\beta$ - 免疫概率">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-08-15T03:23:59.590Z">
+<meta property="og:updated_time" content="2019-08-15T03:40:54.022Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SIR模型">
-<meta name="twitter:description" content="SIR模型是一种传播模型，是信息传播过程中抽象的表述。 模型简述这是最经典的传染病模型之一，整个模型简洁有力。  $S$ - 易感染者( susceptibles ) $I$ - 已感染者( infectives ) $R$ - 已免疫者( recovered )   此外还有两个重要概率:  $\alpha$ - 感染概率（一个节点能感染的节点与所有节点的比值） $\beta$ - 免疫概率">
+<meta name="twitter:description" content="SIR模型是一种传播模型，是信息传播过程中抽象的表述。 模型简述这是最经典的传染病模型之一，整个模型简洁有力。  $S$ - 易感染者( susceptibles ) $I$ - 已感染者( infectives ) $R$ - 已免疫者( recovered )   此外还有两个重要概率:  $\alpha$ - 感染概率(这个是重点，不同应用场景对此定义不同) $\beta$ - 免疫概率">
 
 
 
@@ -319,7 +319,7 @@
 </ul>
 <p>此外还有两个重要概率:</p>
 <ul>
-<li>$\alpha$ - 感染概率（一个节点能感染的节点与所有节点的比值）</li>
+<li>$\alpha$ - 感染概率(这个是重点，不同应用场景对此定义不同)</li>
 <li>$\beta$ - 免疫概率</li>
 </ul>
 <p>在基于以下假设的情况下(时间为$t$):</p>
@@ -330,7 +330,9 @@
 </ol>
 <p>在瞬时时刻$t$，我们就可以得到下面这个方程：</p>
 <script type="math/tex; mode=display">\begin{cases}
-\mathrm{dx}\\
+ \frac{\rm{d}S}{\rm{d}t} = - \alpha \cdot S(t) \cdot  I(t) \\
+ \frac{\rm{d}I}{\rm{d}t} = \alpha \cdot S(t) \cdot  I(t) - \beta \cdot I(t) \\
+ \frac{\rm{d}R}{\rm{d}t} = \beta \cdot I(t) \\
 
 \end{cases}</script>
       
