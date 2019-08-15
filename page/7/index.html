@@ -242,6 +242,149 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/小球称重问题/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/小球称重问题/" itemprop="url">小球称重问题</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-14T02:12:12+08:00">
+                2018-12-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>有 12 个球，外形相同，其中一个小球的质量与其他 11 个不同，给一个天平，需要几次把这个小球找出来并且求出这个小球是比其他的轻还是重?</p>
+<h3 id="思考轨迹"><a href="#思考轨迹" class="headerlink" title="思考轨迹"></a>思考轨迹</h3><p>首先想到的当然是分组称重这样的解法：</p>
+<ul>
+<li>均分为三组，每组四个</li>
+<li>取任意两组称重，若天平平衡，则剩下一组含有特殊小球，两次称重可以找出；若失去平衡，那就麻烦了。。。。</li>
+</ul>
+<p>这样是不稳定的。</p>
+<p>想了一阵，心里面的答案感觉肯定还是三个，但是并没想到怎么解。</p>
+<p>后上网看了下，涨了姿势:</p>
+<ul>
+<li>有12个小球，分别有重和不重两种状态，即有24种可能，那么信息熵为$H(x)=24 \cdot {1 \over 24} \cdot \log_2{24}  \approx 4.58bit $</li>
+<li>我们每一次称重存在三种状态，即轻、重、平衡，那么每一次称重的熵为$H(x)=3 \cdot {1 \over 3} \cdot \log_2{3}  \approx 1.58bit $</li>
+<li>所以理论上称重次数为${4.58 \over 1.58} \approx 3$,三次即可找出小球</li>
+</ul>
+<p>100个，1000个也是同理，从信息论的角度来看只是熵大小的差别。</p>
+<p>同理，给定称重次数N，也可以反推回去最多可以称多少个小球。（$n = \frac {3^N-3}{2}$）</p>
+<h3 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h3><p>概括一下就是：</p>
+<ul>
+<li>分为三组</li>
+<li>平衡Pass，若不平衡，则引入三个正常球替换三个球</li>
+<li>…</li>
+</ul>
+<h3 id="final"><a href="#final" class="headerlink" title="final"></a>final</h3><p>在金勇的博客上看到这个问题，于此写下回答。</p>
+<p>在解决很多常规想法看起来不好确定的问题的时候，从熵的角度去看会很有用。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://snailed.cn/杂谈20181213/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -980,147 +1123,147 @@
 </thead>
 <tbody>
 <tr>
-<td><script type="math/tex">\alpha</script></td>
+<td><code>\alpha</code></td>
 <td>$\alpha$</td>
-<td><script type="math/tex">A</script></td>
+<td><code>A</code></td>
 <td>$A$</td>
 </tr>
 <tr>
-<td><script type="math/tex">\beta</script></td>
+<td><code>\beta</code></td>
 <td>$\beta$</td>
-<td><script type="math/tex">B</script></td>
+<td><code>B</code></td>
 <td>$B$</td>
 </tr>
 <tr>
-<td><script type="math/tex">\gamma</script></td>
+<td><code>\gamma</code></td>
 <td>$\gamma$</td>
-<td><script type="math/tex">\Gamma</script></td>
+<td><code>\Gamma</code></td>
 <td>$\Gamma$</td>
 </tr>
 <tr>
-<td><script type="math/tex">\delta</script></td>
+<td><code>\delta</code></td>
 <td>$\delta$</td>
-<td><script type="math/tex">\Delta</script></td>
+<td><code>\Delta</code></td>
 <td>$\delta$</td>
 </tr>
 <tr>
-<td><script type="math/tex">\epsilon</script></td>
+<td><code>\epsilon</code></td>
 <td>$\epsilon$</td>
-<td><script type="math/tex">E</script></td>
+<td><code>E</code></td>
 <td>$E$</td>
 </tr>
 <tr>
-<td><script type="math/tex">\zeta</script></td>
+<td><code>\zeta</code></td>
 <td>$\zeta$</td>
-<td><script type="math/tex">Z</script></td>
+<td><code>Z</code></td>
 <td>$Z$</td>
 </tr>
 <tr>
-<td><script type="math/tex">\eta</script></td>
+<td><code>\eta</code></td>
 <td>$\eta$</td>
-<td><script type="math/tex">\H</script></td>
+<td><code>H</code></td>
 <td>$H$</td>
 </tr>
 <tr>
-<td><script type="math/tex">\theta</script></td>
+<td><code>\theta</code></td>
 <td>$\theta$</td>
-<td><script type="math/tex">\Theta</script></td>
+<td><code>\Theta</code></td>
 <td>$\Theta$</td>
 </tr>
 <tr>
-<td><script type="math/tex">\iota</script></td>
+<td><code>\iota</code></td>
 <td>$\iota$</td>
-<td><script type="math/tex">I</script></td>
+<td><code>I</code></td>
 <td>$I$</td>
 </tr>
 <tr>
-<td><script type="math/tex">\kappa</script></td>
+<td><code>\kappa</code></td>
 <td>$\kappa$</td>
-<td><script type="math/tex">K</script></td>
+<td><code>K</code></td>
 <td>$K$</td>
 </tr>
 <tr>
-<td><script type="math/tex">\lambda</script></td>
+<td><code>\lambda</code></td>
 <td>$\lambda$</td>
-<td><script type="math/tex">\Lambda</script></td>
+<td><code>\Lambda</code></td>
 <td>$\Lambda$</td>
 </tr>
 <tr>
-<td><script type="math/tex">\nu</script></td>
+<td><code>\nu</code></td>
 <td>$\nu$</td>
-<td><script type="math/tex">N</script></td>
+<td><code>N</code></td>
 <td>$N$</td>
 </tr>
 <tr>
-<td><script type="math/tex">\mu</script></td>
+<td><code>\mu</code></td>
 <td>$\mu$</td>
-<td><script type="math/tex">M</script></td>
+<td><code>M</code></td>
 <td>$M$</td>
 </tr>
 <tr>
-<td><script type="math/tex">\xi</script></td>
+<td><code>\xi</code></td>
 <td>$\xi$</td>
-<td><script type="math/tex">\Xi</script></td>
+<td><code>\Xi</code></td>
 <td>$\Xi$</td>
 </tr>
 <tr>
-<td><script type="math/tex">o</script></td>
+<td><code>o</code></td>
 <td>$o$</td>
-<td><script type="math/tex">O</script></td>
+<td><code>O</code></td>
 <td>$O$</td>
 </tr>
 <tr>
-<td><script type="math/tex">\pi</script></td>
+<td><code>\pi</code></td>
 <td>$\pi$</td>
-<td><script type="math/tex">\Pi</script></td>
+<td><code>\Pi</code></td>
 <td>$\Pi$</td>
 </tr>
 <tr>
-<td><script type="math/tex">\rho</script></td>
+<td><code>\rho</code></td>
 <td>$\rho$</td>
-<td><script type="math/tex">P</script></td>
+<td><code>P</code></td>
 <td>$P$</td>
 </tr>
 <tr>
-<td><script type="math/tex">\sigma</script></td>
+<td><code>\sigma</code></td>
 <td>$\sigma$</td>
-<td><script type="math/tex">\Sigma</script></td>
+<td><code>\Sigma</code></td>
 <td>$\Sigma$</td>
 </tr>
 <tr>
-<td><script type="math/tex">\tau</script></td>
+<td><code>\tau</code></td>
 <td>$\tau$</td>
-<td><script type="math/tex">T</script></td>
+<td><code>T</code></td>
 <td>$T$</td>
 </tr>
 <tr>
-<td><script type="math/tex">\upsilon</script></td>
+<td><code>\upsilon</code></td>
 <td>$\upsilon$</td>
-<td><script type="math/tex">\Upsilon</script></td>
+<td><code>\Upsilon</code></td>
 <td>$\Upsilon$</td>
 </tr>
 <tr>
-<td><script type="math/tex">\phi</script></td>
+<td><code>\phi</code></td>
 <td>$\phi$</td>
-<td><script type="math/tex">\Phi</script></td>
+<td><code>\Phi</code></td>
 <td>$\Phi$</td>
 </tr>
 <tr>
-<td><script type="math/tex">\chi</script></td>
+<td><code>\chi</code></td>
 <td>$\chi$</td>
-<td><script type="math/tex">X</script></td>
+<td><code>X</code></td>
 <td>$X$</td>
 </tr>
 <tr>
-<td><script type="math/tex">\psi</script></td>
+<td><code>\psi</code></td>
 <td>$\psi$</td>
-<td><script type="math/tex">\Psi</script></td>
+<td><code>\Psi</code></td>
 <td>$\Psi$</td>
 </tr>
 <tr>
-<td><script type="math/tex">\omega</script></td>
+<td><code>\omega</code></td>
 <td>$\omega$</td>
-<td><script type="math/tex">\Omega</script></td>
+<td><code>\Omega</code></td>
 <td>$\Omega$</td>
 </tr>
 </tbody>
@@ -1898,129 +2041,6 @@ a_3x+b_3y+c_3z=d_3\\\
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Seaborn/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/Seaborn/" itemprop="url">Seaborn</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-20T00:44:52+08:00">
-                2018-11-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>明晚来更新，不然这周不喝可乐了！</p>
-<p>2018-11-20,这周没有可乐喝了。。。sad </p>
-<p>不过今天了解了下序列化和反序列化的东西，后面写出来一下</p>
-<p>zhangyang chishibani!</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2073,7 +2093,7 @@ a_3x+b_3y+c_3z=d_3\\\
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">83</span>
+                  <span class="site-state-item-count">84</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2086,7 +2106,7 @@ a_3x+b_3y+c_3z=d_3\\\
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
