@@ -242,6 +242,695 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/读《追风筝的人》/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/读《追风筝的人》/" itemprop="url">读《追风筝的人》</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-30T00:17:56+08:00">
+                2019-01-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>看完了《追风筝的人》的前半部分，有些压抑呀</p>
+<p>少年之间的友谊，自私懦弱的少爷，忠心聪明的仆人，伊斯兰旗帜飘扬的中东…</p>
+<p>那句“为你，千千万万遍”看得我很难受，休息两天再继续看吧。</p>
+<p>update 20190215</p>
+<p>在20190202天津飞往重庆的路上，一口气读完了剩下的部分，是真的好看，最后拯救孩子看得我眼角有点热。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/ch10-时间序列/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/ch10-时间序列/" itemprop="url">ch10-时间序列</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-24T22:32:59+08:00">
+                2019-01-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">np.random.seed(<span class="number">12345</span>)</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">plt.rc(<span class="string">'figure'</span>, figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">PREVIOUS_MAX_ROWS = pd.options.display.max_rows</span><br><span class="line">pd.options.display.max_rows = <span class="number">20</span></span><br><span class="line">np.set_printoptions(precision=<span class="number">4</span>, suppress=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="日期和时间数据类型及工具"><a href="#日期和时间数据类型及工具" class="headerlink" title="日期和时间数据类型及工具"></a>日期和时间数据类型及工具</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br><span class="line">now = datetime.now()</span><br><span class="line">now</span><br></pre></td></tr></table></figure>
+<pre><code>datetime.datetime(2019, 1, 15, 0, 30, 21, 654285)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">now.year,now.month,now.day</span><br></pre></td></tr></table></figure>
+<pre><code>(2019, 1, 15)
+</code></pre><blockquote>
+<p>datetime以毫秒格式存储日期和时间，也就是我们常用的timestamp</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">delta = datetime(<span class="number">2011</span>,<span class="number">1</span>,<span class="number">7</span>) - datetime(<span class="number">2008</span>,<span class="number">6</span>,<span class="number">24</span>,<span class="number">8</span>,<span class="number">15</span>)</span><br><span class="line">delta</span><br></pre></td></tr></table></figure>
+<pre><code>datetime.timedelta(926, 56700)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">delta.days</span><br></pre></td></tr></table></figure>
+<pre><code>926
+</code></pre><blockquote>
+<p>可以给datatime对象+-一个或者多个timedelta</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> timedelta</span><br><span class="line">start = datetime(<span class="number">2011</span>,<span class="number">1</span>,<span class="number">7</span>)</span><br><span class="line">start + timedelta(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>datetime.datetime(2011, 1, 8, 0, 0)
+</code></pre><h2 id="字符串和datetime的相互转换"><a href="#字符串和datetime的相互转换" class="headerlink" title="字符串和datetime的相互转换"></a>字符串和datetime的相互转换</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">stamp = datetime(<span class="number">2011</span>,<span class="number">1</span>,<span class="number">3</span>)</span><br><span class="line">stamp</span><br></pre></td></tr></table></figure>
+<pre><code>datetime.datetime(2011, 1, 3, 0, 0)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">str(stamp)</span><br></pre></td></tr></table></figure>
+<pre><code>&#39;2011-01-03 00:00:00&#39;
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stamp.strftime(<span class="string">'%Y-%m-%d'</span>)   <span class="comment">#跟hive类似</span></span><br></pre></td></tr></table></figure>
+<pre><code>&#39;2011-01-03&#39;
+</code></pre><blockquote>
+<p>dateutil很强</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> dateutil.parser <span class="keyword">import</span> parse</span><br><span class="line"></span><br><span class="line">parse(<span class="string">'2011-01-13'</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>datetime.datetime(2011, 1, 13, 0, 0)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">parse(<span class="string">'6/12/2015'</span>,dayfirst=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>datetime.datetime(2015, 12, 6, 0, 0)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">parse(<span class="string">'Jan 31, 1997 10:45 PM'</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>datetime.datetime(1997, 1, 31, 22, 45)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">datestrs = [<span class="string">'2011-07-06 12:00:00'</span>, <span class="string">'2011-08-06 00:00:00'</span>]</span><br><span class="line">pd.to_datetime(datestrs)</span><br></pre></td></tr></table></figure>
+<pre><code>DatetimeIndex([&#39;2011-07-06 12:00:00&#39;, &#39;2011-08-06 00:00:00&#39;], dtype=&#39;datetime64[ns]&#39;, freq=None)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">idx = pd.to_datetime(datestrs + [<span class="keyword">None</span>])</span><br><span class="line">idx</span><br></pre></td></tr></table></figure>
+<pre><code>DatetimeIndex([&#39;2011-07-06 12:00:00&#39;, &#39;2011-08-06 00:00:00&#39;, &#39;NaT&#39;], dtype=&#39;datetime64[ns]&#39;, freq=None)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">idx.isnull()</span><br></pre></td></tr></table></figure>
+<pre><code>array([False, False,  True])
+</code></pre><h2 id="时间序列基础"><a href="#时间序列基础" class="headerlink" title="时间序列基础"></a>时间序列基础</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dates = [datetime(<span class="number">2011</span>, <span class="number">1</span>, <span class="number">2</span>), datetime(<span class="number">2011</span>, <span class="number">1</span>, <span class="number">5</span>),</span><br><span class="line">         datetime(<span class="number">2011</span>, <span class="number">1</span>, <span class="number">7</span>), datetime(<span class="number">2011</span>, <span class="number">1</span>, <span class="number">8</span>),</span><br><span class="line">         datetime(<span class="number">2011</span>, <span class="number">1</span>, <span class="number">10</span>), datetime(<span class="number">2011</span>, <span class="number">1</span>, <span class="number">12</span>)]</span><br><span class="line">ts = pd.Series(np.random.randn(<span class="number">6</span>), index=dates)</span><br><span class="line">ts</span><br></pre></td></tr></table></figure>
+<pre><code>2011-01-02   -0.204708
+2011-01-05    0.478943
+2011-01-07   -0.519439
+2011-01-08   -0.555730
+2011-01-10    1.965781
+2011-01-12    1.393406
+dtype: float64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">type(ts)</span><br></pre></td></tr></table></figure>
+<pre><code>pandas.core.series.Series
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts.index</span><br></pre></td></tr></table></figure>
+<pre><code>DatetimeIndex([&#39;2011-01-02&#39;, &#39;2011-01-05&#39;, &#39;2011-01-07&#39;, &#39;2011-01-08&#39;,
+               &#39;2011-01-10&#39;, &#39;2011-01-12&#39;],
+              dtype=&#39;datetime64[ns]&#39;, freq=None)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts+ts[::<span class="number">2</span>]</span><br></pre></td></tr></table></figure>
+<pre><code>2011-01-02   -0.409415
+2011-01-05         NaN
+2011-01-07   -1.038877
+2011-01-08         NaN
+2011-01-10    3.931561
+2011-01-12         NaN
+dtype: float64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts.index.dtype</span><br></pre></td></tr></table></figure>
+<pre><code>dtype(&#39;&lt;M8[ns]&#39;)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">stamp = ts.index[<span class="number">0</span>]</span><br><span class="line">stamp</span><br></pre></td></tr></table></figure>
+<pre><code>Timestamp(&#39;2011-01-02 00:00:00&#39;)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#传入一个被解释为日期的字符串</span></span><br><span class="line">ts[<span class="string">'2011-01-08'</span>]</span><br></pre></td></tr></table></figure>
+<pre><code>-0.55573030434749
+</code></pre><blockquote>
+<p>长序列可以之传入年 月等</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">long_ts = pd.Series(np.random.randn(<span class="number">1000</span>),index = pd.date_range(<span class="string">'1/1/2000'</span>,periods=<span class="number">1000</span>))</span><br><span class="line">long_ts.head()</span><br></pre></td></tr></table></figure>
+<pre><code>2000-01-01   -1.613474
+2000-01-02   -0.573966
+2000-01-03    0.424894
+2000-01-04    1.257544
+2000-01-05   -1.065343
+Freq: D, dtype: float64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">long_ts[<span class="string">'2001'</span>]</span><br></pre></td></tr></table></figure>
+<pre><code>2001-01-01    0.590119
+2001-01-02   -1.219580
+2001-01-03    0.272788
+2001-01-04   -2.691584
+2001-01-05    1.567780
+2001-01-06    0.265030
+2001-01-07   -0.929412
+2001-01-08    0.885587
+2001-01-09   -1.557180
+2001-01-10   -2.252237
+                ...   
+2001-12-22   -0.586346
+2001-12-23    0.910428
+2001-12-24   -0.573878
+2001-12-25   -0.387236
+2001-12-26   -0.857498
+2001-12-27   -0.875737
+2001-12-28   -0.075322
+2001-12-29    0.325148
+2001-12-30    1.699576
+2001-12-31   -0.027604
+Freq: D, Length: 365, dtype: float64
+</code></pre><h2 id="日期的范围，频率以及移动"><a href="#日期的范围，频率以及移动" class="headerlink" title="日期的范围，频率以及移动"></a>日期的范围，频率以及移动</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts.resample(<span class="string">'D'</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>DatetimeIndexResampler [freq=&lt;Day&gt;, axis=0, closed=left, label=left, convention=start, base=0]
+</code></pre><h3 id="生成日期范围"><a href="#生成日期范围" class="headerlink" title="生成日期范围"></a>生成日期范围</h3><blockquote>
+<p>pd.date_range()</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.date_range(<span class="string">'1/1/2011'</span>,periods=<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>DatetimeIndex([&#39;2011-01-01&#39;, &#39;2011-01-02&#39;, &#39;2011-01-03&#39;, &#39;2011-01-04&#39;,
+               &#39;2011-01-05&#39;, &#39;2011-01-06&#39;, &#39;2011-01-07&#39;, &#39;2011-01-08&#39;,
+               &#39;2011-01-09&#39;, &#39;2011-01-10&#39;],
+              dtype=&#39;datetime64[ns]&#39;, freq=&#39;D&#39;)
+</code></pre><h3 id="频率和日期偏移量"><a href="#频率和日期偏移量" class="headerlink" title="频率和日期偏移量"></a>频率和日期偏移量</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pandas.tseries.offsets <span class="keyword">import</span> Hour, Minute</span><br><span class="line">hour = Hour()</span><br><span class="line">hour</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;Hour&gt;
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.date_range(<span class="string">'2000-01-01'</span>, <span class="string">'2000-01-03 23:59'</span>, freq=<span class="string">'4h'</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>DatetimeIndex([&#39;2000-01-01 00:00:00&#39;, &#39;2000-01-01 04:00:00&#39;,
+               &#39;2000-01-01 08:00:00&#39;, &#39;2000-01-01 12:00:00&#39;,
+               &#39;2000-01-01 16:00:00&#39;, &#39;2000-01-01 20:00:00&#39;,
+               &#39;2000-01-02 00:00:00&#39;, &#39;2000-01-02 04:00:00&#39;,
+               &#39;2000-01-02 08:00:00&#39;, &#39;2000-01-02 12:00:00&#39;,
+               &#39;2000-01-02 16:00:00&#39;, &#39;2000-01-02 20:00:00&#39;,
+               &#39;2000-01-03 00:00:00&#39;, &#39;2000-01-03 04:00:00&#39;,
+               &#39;2000-01-03 08:00:00&#39;, &#39;2000-01-03 12:00:00&#39;,
+               &#39;2000-01-03 16:00:00&#39;, &#39;2000-01-03 20:00:00&#39;],
+              dtype=&#39;datetime64[ns]&#39;, freq=&#39;4H&#39;)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hour(<span class="number">2</span>) + Minute(<span class="number">30</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;150 * Minutes&gt;
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.date_range(<span class="string">'2000-01-01'</span>, periods=<span class="number">10</span>, freq=<span class="string">'1h30min'</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>DatetimeIndex([&#39;2000-01-01 00:00:00&#39;, &#39;2000-01-01 01:30:00&#39;,
+               &#39;2000-01-01 03:00:00&#39;, &#39;2000-01-01 04:30:00&#39;,
+               &#39;2000-01-01 06:00:00&#39;, &#39;2000-01-01 07:30:00&#39;,
+               &#39;2000-01-01 09:00:00&#39;, &#39;2000-01-01 10:30:00&#39;,
+               &#39;2000-01-01 12:00:00&#39;, &#39;2000-01-01 13:30:00&#39;],
+              dtype=&#39;datetime64[ns]&#39;, freq=&#39;90T&#39;)
+</code></pre><h3 id="WOM日期"><a href="#WOM日期" class="headerlink" title="WOM日期"></a>WOM日期</h3><blockquote>
+<p>WOM(Week of Month)，获得诸如‘每月第三个星期五’之类的日期</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rng = pd.date_range(<span class="string">'1/1/2012'</span>,<span class="string">'9/1/2012'</span>,freq=<span class="string">'WOM-3FRI'</span>)</span><br><span class="line">rng</span><br></pre></td></tr></table></figure>
+<pre><code>DatetimeIndex([&#39;2012-01-20&#39;, &#39;2012-02-17&#39;, &#39;2012-03-16&#39;, &#39;2012-04-20&#39;,
+               &#39;2012-05-18&#39;, &#39;2012-06-15&#39;, &#39;2012-07-20&#39;, &#39;2012-08-17&#39;],
+              dtype=&#39;datetime64[ns]&#39;, freq=&#39;WOM-3FRI&#39;)
+</code></pre><h2 id="移动数据"><a href="#移动数据" class="headerlink" title="移动数据"></a>移动数据</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ts = pd.Series(np.random.randn(<span class="number">4</span>),</span><br><span class="line">               index=pd.date_range(<span class="string">'1/1/2000'</span>, periods=<span class="number">4</span>, freq=<span class="string">'M'</span>))</span><br><span class="line">ts</span><br></pre></td></tr></table></figure>
+<pre><code>2000-01-31    0.597205
+2000-02-29    0.039901
+2000-03-31   -0.757430
+2000-04-30    1.698482
+Freq: M, dtype: float64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts.shift(<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>2000-01-31         NaN
+2000-02-29         NaN
+2000-03-31    0.597205
+2000-04-30    0.039901
+Freq: M, dtype: float64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts.shift(<span class="number">-2</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>2000-01-31   -0.757430
+2000-02-29    1.698482
+2000-03-31         NaN
+2000-04-30         NaN
+Freq: M, dtype: float64
+</code></pre><h2 id="时区处理"><a href="#时区处理" class="headerlink" title="时区处理"></a>时区处理</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pytz</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pytz.common_timezones[<span class="number">-5</span>:]</span><br></pre></td></tr></table></figure>
+<pre><code>[&#39;US/Eastern&#39;, &#39;US/Hawaii&#39;, &#39;US/Mountain&#39;, &#39;US/Pacific&#39;, &#39;UTC&#39;]
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tz=pytz.timezone(<span class="string">'UTC'</span>)</span><br><span class="line">tz</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;UTC&gt;
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rng = pd.date_range(<span class="string">'3/9/2012 9:30'</span>, periods=<span class="number">6</span>, freq=<span class="string">'D'</span>)</span><br><span class="line">ts = pd.Series(np.random.randn(len(rng)), index=rng)</span><br><span class="line">ts</span><br></pre></td></tr></table></figure>
+<pre><code>2012-03-09 09:30:00   -0.434694
+2012-03-10 09:30:00    0.516461
+2012-03-11 09:30:00   -0.153220
+2012-03-12 09:30:00   -0.452038
+2012-03-13 09:30:00    0.777409
+2012-03-14 09:30:00   -0.163869
+Freq: D, dtype: float64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.date_range(<span class="string">'3/9/2012 9:30'</span>, periods=<span class="number">10</span>, freq=<span class="string">'D'</span>, tz=<span class="string">'UTC'</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>DatetimeIndex([&#39;2012-03-09 09:30:00+00:00&#39;, &#39;2012-03-10 09:30:00+00:00&#39;,
+               &#39;2012-03-11 09:30:00+00:00&#39;, &#39;2012-03-12 09:30:00+00:00&#39;,
+               &#39;2012-03-13 09:30:00+00:00&#39;, &#39;2012-03-14 09:30:00+00:00&#39;,
+               &#39;2012-03-15 09:30:00+00:00&#39;, &#39;2012-03-16 09:30:00+00:00&#39;,
+               &#39;2012-03-17 09:30:00+00:00&#39;, &#39;2012-03-18 09:30:00+00:00&#39;],
+              dtype=&#39;datetime64[ns, UTC]&#39;, freq=&#39;D&#39;)
+</code></pre><h2 id="时期及其算术运算"><a href="#时期及其算术运算" class="headerlink" title="时期及其算术运算"></a>时期及其算术运算</h2><p>to be add</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/记一次失眠/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/记一次失眠/" itemprop="url">记一次失眠</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-17T02:01:21+08:00">
+                2019-01-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>负重前行啊…</p>
+<p>希望时间可以抚平伤痛。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Scrapy初体验/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Scrapy初体验/" itemprop="url">Scrapy初体验</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-16T11:46:15+08:00">
+                2019-01-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>我是<code>pip3 install Scrapy</code>一梭子完事，但是看文档貌似还要搞搞xcode…</p>
+<p>可以参考官方文档<a href="https://scrapy-chs.readthedocs.io/zh_CN/1.0/intro/install.html" target="_blank" rel="noopener">Scrapy安装指南</a></p>
+<h2 id="初始化项目"><a href="#初始化项目" class="headerlink" title="初始化项目"></a>初始化项目</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy startproject douban_book</span><br></pre></td></tr></table></figure>
+<p>scrapy会自动初始化一个目录，里面有一些必须的文件，其结构如下：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── README.md</span><br><span class="line">├── __init__.py</span><br><span class="line">├── __pycache__</span><br><span class="line">├── items.py</span><br><span class="line">├── middlewares.py</span><br><span class="line">├── pipelines.py</span><br><span class="line">├── settings.py</span><br><span class="line">└── spiders</span><br><span class="line">    ├── __init__.py</span><br><span class="line">    └── __pycache__</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>scrapy.cfg: 项目的配置文件</li>
+<li>items.py: 项目的目标文件</li>
+<li>pipelines.py: 项目的管道文件</li>
+<li>settings.py: 项目的设置文件</li>
+<li>spiders: 爬虫代码目录</li>
+</ul>
+<h2 id="构建项目"><a href="#构建项目" class="headerlink" title="构建项目"></a>构建项目</h2><h3 id="定义数据"><a href="#定义数据" class="headerlink" title="定义数据"></a>定义数据</h3><p>首先我们需要定义我们想要抓取什么数据，编辑<code>item.py</code>，Item定义结构化数据字段，用来保存爬取到的数据，有点像Python中的dict，但是提供了一些额外的保护减少错误。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DoubanBookItem</span><span class="params">(scrapy.Item)</span>:</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># define the fields for your item here like:</span></span><br><span class="line">    <span class="comment"># name = scrapy.Field()</span></span><br><span class="line">    title = scrapy.Field()  <span class="comment">#书名</span></span><br><span class="line">    link = scrapy.Field()  <span class="comment">#链接</span></span><br><span class="line">    author = scrapy.Field()  <span class="comment">#作者</span></span><br><span class="line">    score = scrapy.Field()  <span class="comment">#评分</span></span><br><span class="line">    scoreNum = scrapy.Field() <span class="comment">#评论人数 </span></span><br><span class="line">    press = scrapy.Field()  <span class="comment">#出版社</span></span><br><span class="line">    isbn = scrapy.Field()  <span class="comment">#isbn</span></span><br><span class="line">    price = scrapy.Field()  <span class="comment">#价格</span></span><br><span class="line">    publishyear = scrapy.Field()  <span class="comment">#出版年</span></span><br><span class="line">    authordesc = scrapy.Field()  <span class="comment">#作者简介</span></span><br><span class="line">    bookdesc = scrapy.Field()  <span class="comment">#书简介</span></span><br><span class="line">    label = scrapy.Field() <span class="comment">#标签</span></span><br><span class="line">    pagecount = scrapy.Field() <span class="comment">#字数</span></span><br><span class="line">    imgurl = scrapy.Field() <span class="comment">#图片链接</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="编写爬虫"><a href="#编写爬虫" class="headerlink" title="编写爬虫"></a>编写爬虫</h3><h4 id="爬数据"><a href="#爬数据" class="headerlink" title="爬数据"></a>爬数据</h4><p>我们需要用scrapy.Spider类创建一个子类，并为其确定三个强制的属性。</p>
+<ul>
+<li>name = “” ：这个爬虫的识别名称，必须是唯一的，在不同的爬虫必须定义不同的名字。</li>
+<li>allow_domains = [] 是搜索的域名范围，也就是爬虫的约束区域，规定爬虫只爬取这个域名下的网页，不存在的URL会被忽略</li>
+<li>start_urls = () ：爬取的URL元祖/列表。爬虫从这里开始抓取数据,并根据子url继续往下爬。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">name = <span class="string">"douban_book"</span></span><br><span class="line">allowed_domains = [<span class="string">"douban.com"</span>] <span class="comment">#搜索的域名范围，也就是爬虫的约束区域</span></span><br><span class="line">start_urls = [<span class="string">'https://book.douban.com/subject/25794620/'</span>]</span><br></pre></td></tr></table></figure>
+<h4 id="取数据"><a href="#取数据" class="headerlink" title="取数据"></a>取数据</h4><p>parse()方法解析数据，这里运用了<code>XPATH</code>,虽然以前用的<code>BeautifulSoup4</code>，不过都是解析啦 这个问题不大。<br>chrome浏览器提供检查-&gt;选中元素-&gt;copy-&gt;XPATH的快捷方式获取这个，我写的时候一边写一边测试的。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#举个栗子</span></span><br><span class="line"> title = response.xpath(<span class="string">"//div[@id='wrapper']/h1/span/text()"</span>).extract()  </span><br><span class="line"> link = response.url</span><br><span class="line"> imgurl = response.xpath(<span class="string">"//div[@id='mainpic']/a[@class='nbg']/@href"</span>).extract_first()</span><br></pre></td></tr></table></figure></p>
+<h3 id="存储数据"><a href="#存储数据" class="headerlink" title="存储数据"></a>存储数据</h3><p>现在我们已经获取我们想要的数据了，下一步就是把他们存下来，可以存成csv文件，或者直接存到数据库里。这里选择保存到MySQL。</p>
+<p>在pipelines.py里定义<code>process_item()</code>方法，在这里可以对数据做一定的处理，比如缺失值异常值之类的，然后存入数据库。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">process_item</span><span class="params">(self, item, spider)</span>:</span></span><br><span class="line">    rep = re.compile(<span class="string">'\n| '</span>)</span><br><span class="line">    title = item.get(<span class="string">'title'</span>,<span class="string">'N/A'</span>)</span><br><span class="line">    author_tmp = item.get(<span class="string">'author'</span>,<span class="string">'N/A'</span>)</span><br><span class="line">    <span class="comment">#省略一部分</span></span><br><span class="line">    sql = <span class="string">"replace into book_info (title,author,score,press,isbn,price,publishyear,label,pagecount) values (%s,%s,%s,%s,%s,%s,%s,%s,%s)"</span></span><br><span class="line">    self.cursor.execute(sql,(title,author,score,press,isbn,price,publishyear,label,pagecount))</span><br><span class="line">    self.conn.commit()</span><br></pre></td></tr></table></figure>
+<p>最终结果如下：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">         id: 75</span><br><span class="line">      title: 沉默的大多数</span><br><span class="line">     author: 王小波</span><br><span class="line">      score: 9.1</span><br><span class="line">   scorenum: 0</span><br><span class="line">      press: 中国青年出版社</span><br><span class="line">       isbn: 9787500627098</span><br><span class="line">      price: 27.0000</span><br><span class="line">publishyear: 1997-10</span><br><span class="line">      label: 王小波,杂文,沉默的大多数,思想,随笔,中国文学,文学,中国</span><br><span class="line">  pagecount: 555</span><br></pre></td></tr></table></figure></p>
+<h3 id="ToDo"><a href="#ToDo" class="headerlink" title="ToDo"></a>ToDo</h3><ul>
+<li>页面解析并不是很好，经常缺数据</li>
+<li>加入redis</li>
+<li>会被封IP，需要加ip池</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://snailed.cn/ch09-Example/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -2900,1139 +3589,6 @@ Categories (4, interval[float64]): [(-2.845, -1.307] &lt; (-1.307, 0.225] &lt; (
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/seaborn-categorical/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/seaborn-categorical/" itemprop="url">seaborn-categorical</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-10T19:10:48+08:00">
-                2019-01-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="分类数据可视化"><a href="#分类数据可视化" class="headerlink" title="分类数据可视化"></a>分类数据可视化</h1><p>In seaborn, there are several different ways to visualize a relationship involving categorical data. Similar to the relationship between relplot() and either scatterplot() or lineplot(), there are two ways to make these plots. There are a number of axes-level functions for plotting categorical data in different ways and a figure-level interface, catplot(), that gives unified higher-level access to them.</p>
-<blockquote>
-<p>catplot()</p>
-</blockquote>
-<p>Categorical scatterplots:</p>
-<ul>
-<li>stripplot() (with kind=”strip”; the default)</li>
-<li>swarmplot() (with kind=”swarm”)</li>
-</ul>
-<p>Categorical distribution plots:</p>
-<ul>
-<li>boxplot() (with kind=”box”)</li>
-<li>violinplot() (with kind=”violin”)</li>
-<li>boxenplot() (with kind=”boxen”)</li>
-</ul>
-<p>Categorical estimate plots:</p>
-<ul>
-<li>pointplot() (with kind=”point”)</li>
-<li>barplot() (with kind=”bar”)</li>
-<li>countplot() (with kind=”count”)</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">sns.set(style=<span class="string">"ticks"</span>, color_codes=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure>
-<h2 id="分类散点图"><a href="#分类散点图" class="headerlink" title="分类散点图"></a>分类散点图</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tips = sns.load_dataset(<span class="string">"tips"</span>)</span><br><span class="line">tips.head()</span><br></pre></td></tr></table></figure>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>total_bill</th>
-      <th>tip</th>
-      <th>sex</th>
-      <th>smoker</th>
-      <th>day</th>
-      <th>time</th>
-      <th>size</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>16.99</td>
-      <td>1.01</td>
-      <td>Female</td>
-      <td>No</td>
-      <td>Sun</td>
-      <td>Dinner</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>10.34</td>
-      <td>1.66</td>
-      <td>Male</td>
-      <td>No</td>
-      <td>Sun</td>
-      <td>Dinner</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>21.01</td>
-      <td>3.50</td>
-      <td>Male</td>
-      <td>No</td>
-      <td>Sun</td>
-      <td>Dinner</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>23.68</td>
-      <td>3.31</td>
-      <td>Male</td>
-      <td>No</td>
-      <td>Sun</td>
-      <td>Dinner</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>24.59</td>
-      <td>3.61</td>
-      <td>Female</td>
-      <td>No</td>
-      <td>Sun</td>
-      <td>Dinner</td>
-      <td>4</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.catplot(x=<span class="string">'day'</span>,y=<span class="string">'total_bill'</span>,data=tips)</span><br></pre></td></tr></table></figure>
-<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x1a156aa940&gt;
-</code></pre><p><img src="output_5_1.png" alt="png"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#The jitter parameter controls the magnitude of jitter or disables it altogether:</span></span><br><span class="line">sns.catplot(x=<span class="string">"day"</span>, y=<span class="string">"total_bill"</span>, jitter=<span class="keyword">False</span>, data=tips);</span><br></pre></td></tr></table></figure>
-<p><img src="output_6_0.png" alt="png"></p>
-<blockquote>
-<p>beeswarm，即swarmplot()</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.catplot(x=<span class="string">"day"</span>, y=<span class="string">"total_bill"</span>, kind=<span class="string">"swarm"</span>, data=tips);</span><br></pre></td></tr></table></figure>
-<p><img src="output_8_0.png" alt="png"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#也支持hue参数进行分类，但是不支持style</span></span><br><span class="line">sns.catplot(x=<span class="string">"day"</span>, y=<span class="string">"total_bill"</span>, kind=<span class="string">"swarm"</span>,hue=<span class="string">'sex'</span>,data=tips);</span><br></pre></td></tr></table></figure>
-<p><img src="output_9_0.png" alt="png"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#也可以在轴上对一个参数进行分类,参数order</span></span><br><span class="line">sns.catplot(x=<span class="string">'smoker'</span>,y=<span class="string">'tip'</span>,order=[<span class="string">'Yes'</span>,<span class="string">'No'</span>],data=tips)</span><br></pre></td></tr></table></figure>
-<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x1a2196da58&gt;
-</code></pre><p><img src="output_10_1.png" alt="png"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># x,y轴是很自由的，换一种展现方式</span></span><br><span class="line">sns.catplot(x=<span class="string">'tip'</span>,y=<span class="string">'smoker'</span>,order=[<span class="string">'Yes'</span>,<span class="string">'No'</span>],data=tips)</span><br></pre></td></tr></table></figure>
-<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x1a21ae6f28&gt;
-</code></pre><p><img src="output_11_1.png" alt="png"></p>
-<h2 id="分类分布图"><a href="#分类分布图" class="headerlink" title="分类分布图"></a>分类分布图</h2><h3 id="箱线图"><a href="#箱线图" class="headerlink" title="箱线图"></a>箱线图</h3><blockquote>
-<p>The first is the familiar boxplot(). This kind of plot shows the three quartile values of the distribution along with extreme values. The “whiskers” extend to points that lie within 1.5 IQRs of the lower and upper quartile, and then observations that fall outside this range are displayed independently. This means that each value in the boxplot corresponds to an actual observation in the data.</p>
-</blockquote>
-<p>‘晶须’延伸到1.5IQR(第一四分位和第三四分位的距离)，然后显示范围之外的独立点。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.catplot(x=<span class="string">'day'</span>,y=<span class="string">'total_bill'</span>,kind=<span class="string">'box'</span>,data=tips)</span><br></pre></td></tr></table></figure>
-<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x1a21bafda0&gt;
-</code></pre><p><img src="output_14_1.png" alt="png"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.catplot(x=<span class="string">'day'</span>,y=<span class="string">'total_bill'</span>,kind=<span class="string">'box'</span>,hue=<span class="string">'sex'</span>,data=tips)</span><br></pre></td></tr></table></figure>
-<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x1a21975d30&gt;
-</code></pre><p><img src="output_15_1.png" alt="png"></p>
-<blockquote>
-<p>A related function, boxenplot(), draws a plot that is similar to a box plot but optimized for showing more information about the shape of the distribution. It is best suited for larger datasets:</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.catplot(x=<span class="string">'day'</span>,y=<span class="string">'total_bill'</span>,kind=<span class="string">'boxen'</span>,hue=<span class="string">'sex'</span>,data=tips)</span><br></pre></td></tr></table></figure>
-<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x1a21ba7128&gt;
-</code></pre><p><img src="output_17_1.png" alt="png"></p>
-<h3 id="Violinplots"><a href="#Violinplots" class="headerlink" title="Violinplots"></a>Violinplots</h3><blockquote>
-<p>which combines a boxplot with the kernel density estimation procedure described in the distributions tutorial.</p>
-</blockquote>
-<p>内核密度估计过程？</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.catplot(x=<span class="string">'total_bill'</span>,y=<span class="string">'day'</span>,kind=<span class="string">'violin'</span>,data=tips)</span><br></pre></td></tr></table></figure>
-<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x1a220c1cf8&gt;
-</code></pre><p><img src="output_19_1.png" alt="png"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sns.catplot(x=<span class="string">"day"</span>, y=<span class="string">"total_bill"</span>, hue=<span class="string">"sex"</span>,</span><br><span class="line">            kind=<span class="string">"violin"</span>, split=<span class="keyword">True</span>, data=tips);</span><br></pre></td></tr></table></figure>
-<p><img src="output_20_0.png" alt="png"></p>
-<h2 id="分类估计图"><a href="#分类估计图" class="headerlink" title="分类估计图"></a>分类估计图</h2><blockquote>
-<p>For other applications, rather than showing the distribution within each category, you might want to show an estimate of the central tendency of the values. Seaborn has two main ways to show this information. Importantly, the basic API for these functions is identical to that for the ones discussed above.</p>
-</blockquote>
-<h4 id="Bar-plots"><a href="#Bar-plots" class="headerlink" title="Bar plots"></a>Bar plots</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">titanic = sns.load_dataset(<span class="string">"titanic"</span>)</span><br><span class="line">titanic.head()</span><br></pre></td></tr></table></figure>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>survived</th>
-      <th>pclass</th>
-      <th>sex</th>
-      <th>age</th>
-      <th>sibsp</th>
-      <th>parch</th>
-      <th>fare</th>
-      <th>embarked</th>
-      <th>class</th>
-      <th>who</th>
-      <th>adult_male</th>
-      <th>deck</th>
-      <th>embark_town</th>
-      <th>alive</th>
-      <th>alone</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>0</td>
-      <td>3</td>
-      <td>male</td>
-      <td>22.0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>7.2500</td>
-      <td>S</td>
-      <td>Third</td>
-      <td>man</td>
-      <td>True</td>
-      <td>NaN</td>
-      <td>Southampton</td>
-      <td>no</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1</td>
-      <td>1</td>
-      <td>female</td>
-      <td>38.0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>71.2833</td>
-      <td>C</td>
-      <td>First</td>
-      <td>woman</td>
-      <td>False</td>
-      <td>C</td>
-      <td>Cherbourg</td>
-      <td>yes</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>1</td>
-      <td>3</td>
-      <td>female</td>
-      <td>26.0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>7.9250</td>
-      <td>S</td>
-      <td>Third</td>
-      <td>woman</td>
-      <td>False</td>
-      <td>NaN</td>
-      <td>Southampton</td>
-      <td>yes</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>1</td>
-      <td>1</td>
-      <td>female</td>
-      <td>35.0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>53.1000</td>
-      <td>S</td>
-      <td>First</td>
-      <td>woman</td>
-      <td>False</td>
-      <td>C</td>
-      <td>Southampton</td>
-      <td>yes</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>0</td>
-      <td>3</td>
-      <td>male</td>
-      <td>35.0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>8.0500</td>
-      <td>S</td>
-      <td>Third</td>
-      <td>man</td>
-      <td>True</td>
-      <td>NaN</td>
-      <td>Southampton</td>
-      <td>no</td>
-      <td>True</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.catplot(x=<span class="string">'sex'</span>,y=<span class="string">'survived'</span>,kind=<span class="string">'bar'</span>,hue=<span class="string">'class'</span>,data=titanic)</span><br></pre></td></tr></table></figure>
-<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x110b9ecf8&gt;
-</code></pre><p><img src="output_24_1.png" alt="png"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.catplot(x=<span class="string">'deck'</span>,kind=<span class="string">'count'</span>,palette=<span class="string">'ch:.25'</span>,data=titanic)</span><br></pre></td></tr></table></figure>
-<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x1a23085cc0&gt;
-</code></pre><p><img src="output_25_1.png" alt="png"></p>
-<h4 id="Point-plots"><a href="#Point-plots" class="headerlink" title="Point plots"></a>Point plots</h4><blockquote>
-<p>An alternative style for visualizing the same information is offered by the pointplot() function. This function also encodes the value of the estimate with height on the other axis, but rather than showing a full bar, it plots the point estimate and confidence interval. Additionally, pointplot() connects points from the same hue category. This makes it easy to see how the main relationship is changing as a function of the hue semantic, because your eyes are quite good at picking up on differences of slopes:</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.catplot(x=<span class="string">'sex'</span>,y=<span class="string">'survived'</span>,kind=<span class="string">'point'</span>,hue=<span class="string">'class'</span>,data=titanic)</span><br></pre></td></tr></table></figure>
-<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x1a230770b8&gt;
-</code></pre><p><img src="output_27_1.png" alt="png"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#当然也可以标记得更好,刻画palette,markers,linestyles等参数</span></span><br><span class="line">sns.catplot(x=<span class="string">'class'</span>,y=<span class="string">'survived'</span>,kind=<span class="string">'point'</span>,hue=<span class="string">'sex'</span>,data=titanic</span><br><span class="line">           ,palette=&#123;<span class="string">'male'</span>:<span class="string">'g'</span>,<span class="string">'female'</span>:<span class="string">'m'</span>&#125;</span><br><span class="line">           ,markers=[<span class="string">'^'</span>,<span class="string">'o'</span>],linestyles=[<span class="string">'-'</span>,<span class="string">'--'</span>])</span><br></pre></td></tr></table></figure>
-<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x1a23683278&gt;
-</code></pre><p><img src="output_28_1.png" alt="png"></p>
-<h3 id="绘制‘宽格式’数据"><a href="#绘制‘宽格式’数据" class="headerlink" title="绘制‘宽格式’数据"></a>绘制‘宽格式’数据</h3><blockquote>
-<p>While using “long-form” or “tidy” data is preferred, these functions can also by applied to “wide-form” data in a variety of formats, including pandas DataFrames or two-dimensional numpy arrays. These objects should be passed directly to the data parameter:</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">iris = sns.load_dataset(<span class="string">"iris"</span>)</span><br><span class="line">sns.catplot(data=iris, orient=<span class="string">"h"</span>, kind=<span class="string">"box"</span>)</span><br></pre></td></tr></table></figure>
-<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x1a23843da0&gt;
-</code></pre><p><img src="output_30_1.png" alt="png"></p>
-<h3 id="多面板分类图"><a href="#多面板分类图" class="headerlink" title="多面板分类图"></a>多面板分类图</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sns.catplot(x=<span class="string">"day"</span>, y=<span class="string">"total_bill"</span>, hue=<span class="string">"smoker"</span>,</span><br><span class="line">            col=<span class="string">"time"</span>, aspect=<span class="number">.6</span>,</span><br><span class="line">            kind=<span class="string">"swarm"</span>, data=tips);</span><br></pre></td></tr></table></figure>
-<p><img src="output_32_0.png" alt="png"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">g = sns.catplot(x=<span class="string">"fare"</span>, y=<span class="string">"survived"</span>, row=<span class="string">"class"</span>,</span><br><span class="line">                kind=<span class="string">"box"</span>, orient=<span class="string">"h"</span>, height=<span class="number">1.5</span>, aspect=<span class="number">4</span>,</span><br><span class="line">                data=titanic.query(<span class="string">"fare &gt; 0"</span>))</span><br><span class="line">g.set(xscale=<span class="string">"log"</span>);</span><br></pre></td></tr></table></figure>
-<p><img src="output_33_0.png" alt="png"></p>
-<h2 id="补充一下"><a href="#补充一下" class="headerlink" title="补充一下"></a>补充一下</h2><blockquote>
-<p>seaborn.catplot(x=None, y=None, hue=None, data=None, row=None, col=None, col_wrap=None, estimator=<function mean="">, ci=95, n_boot=1000, units=None, order=None, hue_order=None, row_order=None, col_order=None, kind=’strip’, height=5, aspect=1, orient=None, color=None, palette=None, legend=True, legend_out=True, sharex=True, sharey=True, margin_titles=False, facet_kws=None)</function></p>
-</blockquote>
-<ul>
-<li>x,y:变量名</li>
-<li>data:数据集名</li>
-<li>row,col:对分类的变量显示进行控制</li>
-<li>col_wrap:控制一行最多显示几个</li>
-<li>estimator:每个分类中进行矢量到标量的映射</li>
-<li>ci:置信区间</li>
-<li>n_boot:计算置信区间时使用的引导迭代次数<br>.. </li>
-<li>order,hue_order:对分类进行排序</li>
-<li>row_order,col_ordrt:行列进行排序</li>
-<li>kind:使用哪种绘图方式(“point”, “bar”, “strip”, “swarm”, “box”, “violin”, or “boxen”)</li>
-<li>size:每个面板的高度</li>
-<li>aspect:纵横比</li>
-<li>orient:方向</li>
-<li>color:颜色</li>
-<li>palette:调色板</li>
-<li>legned:hue的信息面板</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Seaborn-relationships/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/Seaborn-relationships/" itemprop="url">Seaborn-relationships</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-09T23:27:39+08:00">
-                2019-01-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="写在最前"><a href="#写在最前" class="headerlink" title="写在最前"></a>写在最前</h1><blockquote>
-<p>Seaborn is a Python data visualization library based on matplotlib. It provides a high-level interface for drawing attractive and informative statistical graphics.</p>
-</blockquote>
-<p>内容来自于<a href="https://seaborn.pydata.org/tutorial.html" target="_blank" rel="noopener">Seaborn官方教程</a></p>
-<h2 id="可视化统计关系"><a href="#可视化统计关系" class="headerlink" title="可视化统计关系"></a>可视化统计关系</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line">%matplotlib inline</span><br><span class="line">sns.set(style=<span class="string">"darkgrid"</span>)</span><br></pre></td></tr></table></figure>
-<ul>
-<li>replot()</li>
-<li>lineplot()</li>
-<li>scatterplot()</li>
-</ul>
-<h3 id="用散点图关联变量"><a href="#用散点图关联变量" class="headerlink" title="用散点图关联变量"></a>用散点图关联变量</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tips = sns.load_dataset(<span class="string">"tips"</span>)   <span class="comment"># load_dateset()是从在线存储库加载数据集，极大方便了练习</span></span><br><span class="line">tips.head()</span><br></pre></td></tr></table></figure>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>total_bill</th>
-      <th>tip</th>
-      <th>sex</th>
-      <th>smoker</th>
-      <th>day</th>
-      <th>time</th>
-      <th>size</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>16.99</td>
-      <td>1.01</td>
-      <td>Female</td>
-      <td>No</td>
-      <td>Sun</td>
-      <td>Dinner</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>10.34</td>
-      <td>1.66</td>
-      <td>Male</td>
-      <td>No</td>
-      <td>Sun</td>
-      <td>Dinner</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>21.01</td>
-      <td>3.50</td>
-      <td>Male</td>
-      <td>No</td>
-      <td>Sun</td>
-      <td>Dinner</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>23.68</td>
-      <td>3.31</td>
-      <td>Male</td>
-      <td>No</td>
-      <td>Sun</td>
-      <td>Dinner</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>24.59</td>
-      <td>3.61</td>
-      <td>Female</td>
-      <td>No</td>
-      <td>Sun</td>
-      <td>Dinner</td>
-      <td>4</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.relplot(x=<span class="string">"total_bill"</span>, y=<span class="string">"tip"</span>, data=tips)</span><br></pre></td></tr></table></figure>
-<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x1a1ff4a4e0&gt;
-</code></pre><p><img src="output_7_1.png" alt="png"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.relplot(x=<span class="string">"total_bill"</span>, y=<span class="string">"tip"</span>,hue=<span class="string">'size'</span>, data=tips) <span class="comment">#hue参数对输入的变量进行分组，生成的不同的颜色</span></span><br></pre></td></tr></table></figure>
-<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x1a1fbbdc88&gt;
-</code></pre><p><img src="output_8_1.png" alt="png"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.relplot(x=<span class="string">"total_bill"</span>, y=<span class="string">"tip"</span>,hue=<span class="string">'size'</span>,size=<span class="string">'size'</span>,sizes=(<span class="number">15</span>,<span class="number">100</span>),data=tips)  <span class="comment"># size,sizes一般搭配使用</span></span><br></pre></td></tr></table></figure>
-<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x1a203be5f8&gt;
-</code></pre><p><img src="output_9_1.png" alt="png"></p>
-<blockquote>
-<p>下面这个分组画图感觉会很有用,col参数决定行，row参数决定列</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.relplot(x=<span class="string">"total_bill"</span>, y=<span class="string">"tip"</span>,hue=<span class="string">'size'</span>,size=<span class="string">'size'</span>,sizes=(<span class="number">15</span>,<span class="number">50</span>),col=<span class="string">'time'</span>,data=tips)</span><br></pre></td></tr></table></figure>
-<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x1a205eb1d0&gt;
-</code></pre><p><img src="output_11_1.png" alt="png"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.relplot(x=<span class="string">"total_bill"</span>, y=<span class="string">"tip"</span>,hue=<span class="string">'size'</span>,size=<span class="string">'size'</span>,sizes=(<span class="number">15</span>,<span class="number">50</span>),col=<span class="string">'time'</span>,row=<span class="string">'sex'</span>,data=tips)</span><br></pre></td></tr></table></figure>
-<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x1a209b8ef0&gt;
-</code></pre><p><img src="output_12_1.png" alt="png"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.relplot(x=<span class="string">"total_bill"</span>, y=<span class="string">"tip"</span>,hue=<span class="string">'time'</span>,col =<span class="string">'time'</span>,palette = [<span class="string">'b'</span>,<span class="string">'r'</span>],data=tips) <span class="comment">#指定绘图的颜色</span></span><br></pre></td></tr></table></figure>
-<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x1a21a2b390&gt;
-</code></pre><p><img src="output_13_1.png" alt="png"></p>
-<h3 id="线图表示连续性"><a href="#线图表示连续性" class="headerlink" title="线图表示连续性"></a>线图表示连续性</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">#lineplot()函数的很多参数其实和replot()一致，hue|size|col之类的，可以参考</span></span><br><span class="line"></span><br><span class="line">df = pd.DataFrame(dict(time=np.arange(<span class="number">500</span>),value=np.random.randn(<span class="number">500</span>).cumsum()))</span><br><span class="line">sns.relplot(x=<span class="string">'time'</span>,y=<span class="string">'value'</span>,kind=<span class="string">'line'</span>,data=df)</span><br></pre></td></tr></table></figure>
-<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x1a22642c88&gt;
-</code></pre><p><img src="output_15_1.png" alt="png"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.lineplot(x=<span class="string">'time'</span>,y=<span class="string">'value'</span>,data=df)</span><br></pre></td></tr></table></figure>
-<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a22879c18&gt;
-</code></pre><p><img src="output_16_1.png" alt="png"></p>
-<h3 id="聚合和表示不确定性"><a href="#聚合和表示不确定性" class="headerlink" title="聚合和表示不确定性"></a>聚合和表示不确定性</h3><p>如果<code>x</code>变量出现多次，那么seaborn会通过绘制平均值周围的其和95％置信区间来聚合每个值的多个测量值</p>
-<blockquote>
-<p>这个对于不同的数据集是需要适应其变化的，假设是时间密集型的数据集，那么就需要禁用他们</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fmri = sns.load_dataset(<span class="string">"fmri"</span>)</span><br><span class="line">sns.relplot(x=<span class="string">"timepoint"</span>, y=<span class="string">"signal"</span>, kind=<span class="string">"line"</span>, data=fmri)</span><br></pre></td></tr></table></figure>
-<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x1a229c42b0&gt;
-</code></pre><p><img src="output_19_1.png" alt="png"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#特别是对于较大的数据，可以通过绘制标准偏差而不是置信区间来表示每个时间点的分布扩散</span></span><br><span class="line">sns.relplot(x=<span class="string">"timepoint"</span>, y=<span class="string">"signal"</span>, kind=<span class="string">"line"</span>,ci=<span class="string">'sd'</span>,data=fmri)</span><br></pre></td></tr></table></figure>
-<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x1a22b6ce10&gt;
-</code></pre><p><img src="output_20_1.png" alt="png"></p>
-<h3 id="用语义映射绘制数据子集"><a href="#用语义映射绘制数据子集" class="headerlink" title="用语义映射绘制数据子集"></a>用语义映射绘制数据子集</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fmri.head()</span><br></pre></td></tr></table></figure>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>subject</th>
-      <th>timepoint</th>
-      <th>event</th>
-      <th>region</th>
-      <th>signal</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>s13</td>
-      <td>18</td>
-      <td>stim</td>
-      <td>parietal</td>
-      <td>-0.017552</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>s5</td>
-      <td>14</td>
-      <td>stim</td>
-      <td>parietal</td>
-      <td>-0.080883</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>s12</td>
-      <td>18</td>
-      <td>stim</td>
-      <td>parietal</td>
-      <td>-0.081033</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>s11</td>
-      <td>18</td>
-      <td>stim</td>
-      <td>parietal</td>
-      <td>-0.046134</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>s10</td>
-      <td>18</td>
-      <td>stim</td>
-      <td>parietal</td>
-      <td>-0.037970</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.relplot(x=<span class="string">"timepoint"</span>, y=<span class="string">"signal"</span>, hue=<span class="string">"event"</span>, kind=<span class="string">"line"</span>, data=fmri);</span><br></pre></td></tr></table></figure>
-<p><img src="output_23_0.png" alt="png"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.lineplot(x=<span class="string">'timepoint'</span>,y=<span class="string">'signal'</span>,hue=<span class="string">'region'</span>,style=<span class="string">'event'</span>,data=fmri)</span><br></pre></td></tr></table></figure>
-<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a23077320&gt;
-</code></pre><p><img src="output_24_1.png" alt="png"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#标识子集</span></span><br><span class="line">sns.relplot(x=<span class="string">"timepoint"</span>, y=<span class="string">"signal"</span>, hue=<span class="string">"region"</span>, style=<span class="string">"event"</span>,</span><br><span class="line">            dashes=<span class="keyword">False</span>, markers=<span class="keyword">True</span>, kind=<span class="string">"line"</span>, marker =<span class="keyword">True</span>,data=fmri);</span><br></pre></td></tr></table></figure>
-<p><img src="output_25_0.png" alt="png"></p>
-<blockquote>
-<p>还可以单独绘制每个采样单位，而无需通过语义区分它们。这可以避免使图例混乱</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sns.relplot(x=<span class="string">"timepoint"</span>, y=<span class="string">"signal"</span>, hue=<span class="string">"region"</span>,</span><br><span class="line">            units=<span class="string">"subject"</span>, estimator=<span class="keyword">None</span>,</span><br><span class="line">            kind=<span class="string">"line"</span>, data=fmri.query(<span class="string">"event == 'stim'"</span>))</span><br></pre></td></tr></table></figure>
-<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x1a234eef98&gt;
-</code></pre><p><img src="output_27_1.png" alt="png"></p>
-<blockquote>
-<p>默认<code>lineplot()</code>的色彩映射和图例的处理还取决于色调语义是分类还是数字</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dots = sns.load_dataset(<span class="string">"dots"</span>).query(<span class="string">"align == 'dots'"</span>)</span><br><span class="line">sns.relplot(x=<span class="string">"time"</span>, y=<span class="string">"firing_rate"</span>,</span><br><span class="line">            hue=<span class="string">"coherence"</span>, style=<span class="string">"choice"</span>,</span><br><span class="line">            kind=<span class="string">"line"</span>, data=dots)</span><br></pre></td></tr></table></figure>
-<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x1a2370e7b8&gt;
-</code></pre><p><img src="output_29_1.png" alt="png"></p>
-<h3 id="用日期数据绘图"><a href="#用日期数据绘图" class="headerlink" title="用日期数据绘图"></a>用日期数据绘图</h3><p>线图通常用于可视化与实际日期和时间相关的数据。这些函数以原始格式将数据传递给底层的matplotlib函数，因此他们可以利用matplotlib在tick标签中设置日期格式的功能。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">df = pd.DataFrame(dict(time=pd.date_range(<span class="string">"2017-1-1"</span>, periods=<span class="number">500</span>),</span><br><span class="line">                       value=np.random.randn(<span class="number">500</span>).cumsum()))</span><br><span class="line">g = sns.relplot(x=<span class="string">"time"</span>, y=<span class="string">"value"</span>, kind=<span class="string">"line"</span>, data=df)</span><br><span class="line">g.fig.autofmt_xdate()</span><br></pre></td></tr></table></figure>
-<p><img src="output_32_0.png" alt="png"></p>
-<h3 id="Showing-multiple-relationships-with-facets"><a href="#Showing-multiple-relationships-with-facets" class="headerlink" title="Showing multiple relationships with facets"></a>Showing multiple relationships with facets</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sns.relplot(x=<span class="string">"timepoint"</span>, y=<span class="string">"signal"</span>, hue=<span class="string">"subject"</span>,</span><br><span class="line">            col=<span class="string">"region"</span>, row=<span class="string">"event"</span>, height=<span class="number">3</span>,</span><br><span class="line">            kind=<span class="string">"line"</span>, estimator=<span class="keyword">None</span>, data=fmri);</span><br></pre></td></tr></table></figure>
-<p><img src="output_34_0.png" alt="png"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sns.relplot(x=<span class="string">"timepoint"</span>, y=<span class="string">"signal"</span>, hue=<span class="string">"event"</span>, style=<span class="string">"event"</span>,</span><br><span class="line">            col=<span class="string">"subject"</span>, col_wrap=<span class="number">5</span>,</span><br><span class="line">            height=<span class="number">3</span>, aspect=<span class="number">.75</span>, linewidth=<span class="number">2.5</span>,</span><br><span class="line">            kind=<span class="string">"line"</span>, data=fmri.query(<span class="string">"region == 'frontal'"</span>));</span><br></pre></td></tr></table></figure>
-<p><img src="output_35_0.png" alt="png"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/ch08-数据可视化/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/ch08-数据可视化/" itemprop="url">ch08-数据可视化</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-09T01:39:04+08:00">
-                2019-01-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="关于数据可视化"><a href="#关于数据可视化" class="headerlink" title="关于数据可视化"></a>关于数据可视化</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">PREVIOUS_MAX_ROWS = pd.options.display.max_rows</span><br><span class="line">pd.options.display.max_rows = <span class="number">20</span></span><br><span class="line">np.random.seed(<span class="number">12345</span>)</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> matplotlib</span><br><span class="line">plt.rc(<span class="string">'figure'</span>, figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">np.set_printoptions(precision=<span class="number">4</span>, suppress=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure>
-<h2 id="最简单的例子"><a href="#最简单的例子" class="headerlink" title="最简单的例子"></a>最简单的例子</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.plot(np.arange(<span class="number">10</span>))</span><br></pre></td></tr></table></figure>
-<pre><code>[&lt;matplotlib.lines.Line2D at 0x120132198&gt;]
-</code></pre><p><img src="output_3_1.png" alt="png"></p>
-<h2 id="Figure和Subplot"><a href="#Figure和Subplot" class="headerlink" title="Figure和Subplot"></a>Figure和Subplot</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fig = plt.figure()</span><br><span class="line">ax1 = fig.add_subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">1</span>)</span><br><span class="line">ax2 = fig.add_subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>)</span><br><span class="line">ax3 = fig.add_subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="output_5_0.png" alt="png"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.plot(np.random.randn(<span class="number">50</span>).cumsum(),<span class="string">'k--'</span>)</span><br></pre></td></tr></table></figure>
-<pre><code>[&lt;matplotlib.lines.Line2D at 0x120b7ad68&gt;]
-</code></pre><p><img src="output_6_1.png" alt="png"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">_ = ax1.hist(np.random.randn(<span class="number">100</span>),bins=<span class="number">20</span>,color=<span class="string">'k'</span>,alpha=<span class="number">0.3</span>)</span><br><span class="line">ax2.scatter(np.arange(<span class="number">30</span>), np.arange(<span class="number">30</span>) + <span class="number">3</span> * np.random.randn(<span class="number">30</span>))</span><br></pre></td></tr></table></figure>
-<pre><code>&lt;matplotlib.collections.PathCollection at 0x1203c5208&gt;
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fig</span><br></pre></td></tr></table></figure>
-<p><img src="output_8_0.png" alt="png"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fig, axes = plt.subplots(<span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line">axes</span><br></pre></td></tr></table></figure>
-<pre><code>array([[&lt;matplotlib.axes._subplots.AxesSubplot object at 0x120a9bcc0&gt;,
-        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x120f54c18&gt;,
-        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x120f7b2e8&gt;],
-       [&lt;matplotlib.axes._subplots.AxesSubplot object at 0x120fa1438&gt;,
-        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x120fc9b00&gt;,
-        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x120ffc198&gt;]],
-      dtype=object)
-</code></pre><p><img src="output_9_1.png" alt="png"></p>
-<h3 id="调整subplot周围的间距"><a href="#调整subplot周围的间距" class="headerlink" title="调整subplot周围的间距"></a>调整subplot周围的间距</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">fig, axes = plt.subplots(<span class="number">2</span>, <span class="number">2</span>, sharex=<span class="keyword">True</span>, sharey=<span class="keyword">True</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">2</span>):</span><br><span class="line">        axes[i,j].hist(np.random.randn(<span class="number">500</span>), bins=<span class="number">50</span>, color=<span class="string">'k'</span>, alpha=<span class="number">0.5</span>)</span><br><span class="line">plt.subplots_adjust(wspace=<span class="number">0.1</span>,hspace=<span class="number">0.1</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="output_11_0.png" alt="png"></p>
-<h2 id="颜色、标记和类型"><a href="#颜色、标记和类型" class="headerlink" title="颜色、标记和类型"></a>颜色、标记和类型</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.figure()</span><br></pre></td></tr></table></figure>
-<pre><code>&lt;Figure size 432x288 with 0 Axes&gt;
-
-
-
-
-&lt;Figure size 432x288 with 0 Axes&gt;
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> numpy.random <span class="keyword">import</span> randn</span><br><span class="line">plt.plot(randn(<span class="number">50</span>).cumsum(),linestyle=<span class="string">'--'</span>,color=<span class="string">'b'</span>)</span><br></pre></td></tr></table></figure>
-<pre><code>[&lt;matplotlib.lines.Line2D at 0x1213f3a90&gt;]
-</code></pre><p><img src="output_14_1.png" alt="png"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.plot(randn(<span class="number">30</span>).cumsum(), color=<span class="string">'k'</span>, linestyle=<span class="string">'dashed'</span>, marker=<span class="string">'o'</span>)</span><br></pre></td></tr></table></figure>
-<pre><code>[&lt;matplotlib.lines.Line2D at 0x1213f8fd0&gt;]
-</code></pre><p><img src="output_15_1.png" alt="png"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.plot(randn(<span class="number">30</span>).cumsum(),<span class="string">'ko--'</span>)   <span class="comment">#ko--是把参数组合在一起了.... color = 'k' marker = 'o' linestyle = '--'</span></span><br></pre></td></tr></table></figure>
-<pre><code>[&lt;matplotlib.lines.Line2D at 0x1214baf60&gt;]
-</code></pre><p><img src="output_16_1.png" alt="png"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.close(<span class="string">'all'</span>)</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">data = np.random.randn(<span class="number">30</span>).cumsum()</span><br><span class="line">plt.plot(data, <span class="string">'k--'</span>, label=<span class="string">'Default'</span>)</span><br><span class="line">plt.plot(data, <span class="string">'k-'</span>, drawstyle=<span class="string">'steps-post'</span>, label=<span class="string">'steps-post'</span>)</span><br><span class="line">plt.legend(loc=<span class="string">'best'</span>)</span><br></pre></td></tr></table></figure>
-<pre><code>&lt;matplotlib.legend.Legend at 0x1216ab9e8&gt;
-</code></pre><p><img src="output_18_1.png" alt="png"></p>
-<h2 id="刻度、标签和图例"><a href="#刻度、标签和图例" class="headerlink" title="刻度、标签和图例"></a>刻度、标签和图例</h2><h3 id="设置细节"><a href="#设置细节" class="headerlink" title="设置细节"></a>设置细节</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fig = plt.figure()</span><br><span class="line">ax = fig.add_subplot(<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>)</span><br><span class="line">ax.plot(randn(<span class="number">1000</span>).cumsum())</span><br></pre></td></tr></table></figure>
-<pre><code>[&lt;matplotlib.lines.Line2D at 0x1226302b0&gt;]
-</code></pre><p><img src="output_21_1.png" alt="png"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ticks  = ax.set_xticks([<span class="number">0</span>,<span class="number">250</span>,<span class="number">500</span>,<span class="number">750</span>,<span class="number">1000</span>])</span><br><span class="line">labels = ax.set_xticklabels([<span class="string">'one'</span>, <span class="string">'two'</span>, <span class="string">'three'</span>, <span class="string">'four'</span>, <span class="string">'five'</span>],</span><br><span class="line">                            rotation=<span class="number">30</span>, fontsize=<span class="string">'small'</span>)</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ax.set_title(<span class="string">'My First Title of Matplotlib'</span>)</span><br></pre></td></tr></table></figure>
-<pre><code>Text(0.5,1,&#39;My First Title of Matplotlib&#39;)
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ax.set_xlabel(<span class="string">'Stage'</span>)</span><br></pre></td></tr></table></figure>
-<pre><code>Text(0.5,3.2,&#39;Stage&#39;)
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fig</span><br></pre></td></tr></table></figure>
-<p><img src="output_25_0.png" alt="png"></p>
-<h3 id="添加图例"><a href="#添加图例" class="headerlink" title="添加图例"></a>添加图例</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">fig = plt.figure()</span><br><span class="line">ax = fig.add_subplot(<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>)</span><br><span class="line">ax.plot(randn(<span class="number">100</span>).cumsum(), <span class="string">'k'</span>, label=<span class="string">'one'</span>)</span><br><span class="line">ax.plot(randn(<span class="number">100</span>).cumsum(), <span class="string">'k--'</span>, label=<span class="string">'two'</span>)</span><br><span class="line">ax.plot(randn(<span class="number">100</span>).cumsum(), <span class="string">'k.'</span>, label=<span class="string">'three'</span>)</span><br></pre></td></tr></table></figure>
-<pre><code>[&lt;matplotlib.lines.Line2D at 0x1223a1940&gt;]
-</code></pre><p><img src="output_27_1.png" alt="png"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ax.legend(loc=<span class="string">'best'</span>)</span><br><span class="line">fig</span><br></pre></td></tr></table></figure>
-<p><img src="output_28_0.png" alt="png"></p>
-<h2 id="注解以及在Subplot上绘图"><a href="#注解以及在Subplot上绘图" class="headerlink" title="注解以及在Subplot上绘图"></a>注解以及在Subplot上绘图</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br><span class="line"></span><br><span class="line">fig = plt.figure()</span><br><span class="line">ax = fig.add_subplot(<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">data = pd.read_csv(<span class="string">'examples/spx.csv'</span>, index_col=<span class="number">0</span>, parse_dates=<span class="keyword">True</span>)</span><br><span class="line">spx = data[<span class="string">'SPX'</span>]</span><br><span class="line"></span><br><span class="line">spx.plot(ax=ax, style=<span class="string">'k-'</span>)</span><br><span class="line"></span><br><span class="line">crisis_data = [</span><br><span class="line">    (datetime(<span class="number">2007</span>, <span class="number">10</span>, <span class="number">11</span>), <span class="string">'Peak of bull market'</span>),</span><br><span class="line">    (datetime(<span class="number">2008</span>, <span class="number">3</span>, <span class="number">12</span>), <span class="string">'Bear Stearns Fails'</span>),</span><br><span class="line">    (datetime(<span class="number">2008</span>, <span class="number">9</span>, <span class="number">15</span>), <span class="string">'Lehman Bankruptcy'</span>)</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> date, label <span class="keyword">in</span> crisis_data:</span><br><span class="line">    ax.annotate(label, xy=(date, spx.asof(date) + <span class="number">75</span>),</span><br><span class="line">                xytext=(date, spx.asof(date) + <span class="number">225</span>),</span><br><span class="line">                arrowprops=dict(facecolor=<span class="string">'black'</span>, headwidth=<span class="number">4</span>, width=<span class="number">2</span>,</span><br><span class="line">                                headlength=<span class="number">4</span>),</span><br><span class="line">                horizontalalignment=<span class="string">'left'</span>, verticalalignment=<span class="string">'top'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Zoom in on 2007-2010</span></span><br><span class="line">ax.set_xlim([<span class="string">'1/1/2007'</span>, <span class="string">'1/1/2011'</span>])</span><br><span class="line">ax.set_ylim([<span class="number">600</span>, <span class="number">1800</span>])</span><br><span class="line"></span><br><span class="line">ax.set_title(<span class="string">'Important dates in the 2008-2009 financial crisis'</span>)</span><br></pre></td></tr></table></figure>
-<pre><code>Text(0.5,1,&#39;Important dates in the 2008-2009 financial crisis&#39;)
-</code></pre><p><img src="output_30_1.png" alt="png"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">fig = plt.figure()</span><br><span class="line">ax = fig.add_subplot(<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">rect = plt.Rectangle((<span class="number">0.2</span>, <span class="number">0.75</span>), <span class="number">0.4</span>, <span class="number">0.15</span>, color=<span class="string">'k'</span>, alpha=<span class="number">0.3</span>)</span><br><span class="line">circ = plt.Circle((<span class="number">0.7</span>, <span class="number">0.2</span>), <span class="number">0.15</span>, color=<span class="string">'b'</span>, alpha=<span class="number">0.3</span>)</span><br><span class="line">pgon = plt.Polygon([[<span class="number">0.15</span>, <span class="number">0.15</span>], [<span class="number">0.35</span>, <span class="number">0.4</span>], [<span class="number">0.2</span>, <span class="number">0.6</span>]],</span><br><span class="line">                   color=<span class="string">'g'</span>, alpha=<span class="number">0.5</span>)</span><br><span class="line"></span><br><span class="line">ax.add_patch(rect)</span><br><span class="line">ax.add_patch(circ)</span><br><span class="line">ax.add_patch(pgon)</span><br></pre></td></tr></table></figure>
-<pre><code>&lt;matplotlib.patches.Polygon at 0x123523eb8&gt;
-</code></pre><p><img src="output_31_1.png" alt="png"></p>
-<h2 id="将图表保持为文件"><a href="#将图表保持为文件" class="headerlink" title="将图表保持为文件"></a>将图表保持为文件</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fig.savefig(<span class="string">'/Users/zhangyangfenbi.com/Desktop/demo.png'</span>)</span><br></pre></td></tr></table></figure>
-<h1 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h1><p>matplotlib实际上还是一个比较低级的工具，绘图都是组装起来的。书中介绍了pandas自带的绘图库，不过基于之前已经有了Seaborn，这个就不写pandas的了，后续把Seaborn的坑填上。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/读《了不起的盖茨比》/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/读《了不起的盖茨比》/" itemprop="url">读《了不起的盖茨比》</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-08T23:09:55+08:00">
-                2019-01-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="写在最前"><a href="#写在最前" class="headerlink" title="写在最前"></a>写在最前</h2><p>记得去年看村上春树的《挪威的森林》的时候，永泽在和渡边君交谈中说到</p>
-<blockquote>
-<p>若是诵读三遍《了不起的盖茨比》的人，倒像是可以成为我的朋友。</p>
-</blockquote>
-<p>当时有在想是什么书这么屌，以后找个时间看一看。今晚看完了这本书，小小记录一下，虽然我这样的普通青年没有读出啥火花就是了。。。</p>
-<h2 id="内容简介"><a href="#内容简介" class="headerlink" title="内容简介"></a>内容简介</h2><p>内容来自<a href="https://zh.wikipedia.org/wiki/%E4%BA%86%E4%B8%8D%E8%B5%B7%E7%9A%84%E7%9B%96%E8%8C%A8%E6%AF%94" target="_blank" rel="noopener">维基百科</a>:</p>
-<p>小说主要事件发生在1922年夏。耶鲁大学毕业生、一战老兵尼克·卡拉威（也是小说叙述人）从中西部来到纽约，卖债券过活。他在长岛的西卵村租住了一间小屋，与盖茨比为邻。杰·盖茨比是一个年轻、神秘的百万富翁，经常举办豪华宴会，却很少出头露面；有许多人到他那里去吃喝，他始终是一个孤独的人。尼克驱车到东卵村拜访表妹黛西·费伊·布坎南，她丈夫汤姆·布坎南也是尼克的大学同学。他们将尼克介绍给乔丹·贝克小姐，她是位充满魅力却略带自私的青年高尔夫球手；尼克认为自己爱上了她。她告诉尼克，汤姆有外遇，叫默特尔·威尔逊，住在“灰烬谷”：西卵村和纽约城之间的工业垃圾场。不久，尼克和汤姆、默特尔前往他们幽会的公寓，举行放荡的狂欢会。默特尔几度提起黛西的名字，汤姆在愤怒中打扁了默特尔的鼻子。</p>
-<p>夏季某日，尼克收到盖茨比宴会的邀请函。他在宴会上碰见乔丹·贝克，而且终于见到盖茨比，发现盖茨比竟然在战争中与他同在一个师服役。尼克从乔丹那里得知盖茨比在1917年与黛西坠入爱河，但因为他要去参军，黛西终于嫁给了汤姆•布坎南。复员后，他赚了很多钱，在长岛买下豪宅，里眺望海湾对面黛西的家，希望“再续前缘”。盖茨比奢华的生活方式与放荡的狂欢会不过是为了吸引黛西，让她回心转意。盖茨比要尼克安排他与黛西见面。尼克邀请黛西到家品茶，隐瞒了盖茨比的到场。在尴尬的见面之后，盖茨比和黛西重温旧情。他们再次相连，但汤姆很快对此产生怀疑。在饭局上，黛西对盖茨比言辞甜蜜，毫不掩饰，汤姆的怀疑得到了证实。虽然汤姆自己也有情妇，但他还是对妻子的出轨倍感愤怒。汤姆逼迫大家前往纽约市，在广场酒店的套房里与盖茨比对峙，告诉他二人间的故事是盖茨比所不能领悟的。不仅如此，他揭露盖茨比贩卖私酒，从事其它见不得人的勾当，才得到了今日的财富。黛西感觉自己无法承受，只想离开，汤姆叫盖茨比驱车送她回家。</p>
-<p>尼克、乔丹、汤姆驱车回家时经过“灰烬谷”，发现汤姆的情妇默特尔被盖茨比的车撞死了。事后，尼克从盖茨比那里得知是黛西在开车，但盖茨比不愿揭发自己的爱人。默特尔的丈夫乔治误以为车主就是自己妻子的情人，对此展开搜索。汤姆误导乔治，后者发现车主是盖茨比后，来到豪宅，开枪行凶，随后自尽。尼克为盖茨比举办葬礼，结束了与乔丹的关系，看破了东部的生活方式，回到了中西部的老家。</p>
-<h2 id="一点点感受"><a href="#一点点感受" class="headerlink" title="一点点感受"></a>一点点感受</h2><p>这本书具体的价值或者说其代表的深层意义不是我可以评价的，不过这个故事我读起来还是觉得很精彩的，有回味。</p>
-<p>下面摘几个点：</p>
-<h3 id="中国也合适"><a href="#中国也合适" class="headerlink" title="中国也合适"></a>中国也合适</h3><p>这个故事完全可以放到现在的中国…二三线城市小富二代，看着从不知道哪里出来的暴发户、一线城市富一代和白富美之间的故事。</p>
-<p>关于爱情，关于理想，关于阶级…</p>
-<h3 id="首与尾"><a href="#首与尾" class="headerlink" title="首与尾"></a>首与尾</h3><blockquote>
-<p>在我年纪轻轻，资历尚浅的那些年里，父亲曾给我一句忠告，直到今天，这句话仍在我心间萦绕。<br>“每当你想批评别人的时候，”他对我说，“要记住，这世上并不是所有人，都有你拥有的那些优势”</p>
-</blockquote>
-<p>Don’t judge.</p>
-<blockquote>
-<p>我们奋力前行，小舟逆水而上，不断地被浪潮推回到过去。</p>
-</blockquote>
-<p>那个年代，这个年代，这个世界会好吗？</p>
-<p>会好的！</p>
-<h2 id="立Flag"><a href="#立Flag" class="headerlink" title="立Flag"></a>立Flag</h2><p>有机会读一读英文版…</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -4085,7 +3641,7 @@ Categories (4, interval[float64]): [(-2.845, -1.307] &lt; (-1.307, 0.225] &lt; (
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">84</span>
+                  <span class="site-state-item-count">88</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -4098,7 +3654,7 @@ Categories (4, interval[float64]): [(-2.845, -1.307] &lt; (-1.307, 0.225] &lt; (
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-count">33</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

@@ -242,6 +242,603 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Seaborn中文乱码问题解决/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Seaborn中文乱码问题解决/" itemprop="url">Seaborn中文乱码问题解决</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-01T15:19:58+08:00">
+                2019-08-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>试了好多方法，亲测这个Mac+Anaconda下有效。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns </span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"></span><br><span class="line">plt.rcParams[<span class="string">'font.family'</span>] = [<span class="string">'Arial Unicode MS'</span>] <span class="comment">#用来正常显示中文标签</span></span><br><span class="line">plt.rcParams[<span class="string">'axes.unicode_minus'</span>] = <span class="keyword">False</span> <span class="comment">#用来正常显示负号</span></span><br><span class="line"></span><br><span class="line">sns.set_style(<span class="string">'whitegrid'</span>,&#123;<span class="string">'font.sans-serif'</span>:[<span class="string">'Arial Unicode MS'</span>,<span class="string">'Arial'</span>]&#125;)</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/浅识RSA算法/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/浅识RSA算法/" itemprop="url">浅识RSA算法</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-26T15:05:34+08:00">
+                2019-07-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="RSA的历史"><a href="#RSA的历史" class="headerlink" title="RSA的历史"></a>RSA的历史</h4><p>RSA加密算法是一种非对称加密算法，在互联网领域里被广泛使用。RSA是1977年由罗纳德·李维斯特（Ron Rivest）、阿迪·萨莫尔（Adi Shamir）和伦纳德·阿德曼（Leonard Adleman）一起提出的。当时他们三人都在麻省理工学院工作。RSA就是他们三人姓氏开头字母拼在一起组成的。</p>
+<h4 id="RSA的具体原理"><a href="#RSA的具体原理" class="headerlink" title="RSA的具体原理"></a>RSA的具体原理</h4><p>RSA主要利用了极大整数的因数分解的难度来保证算法的可靠性。</p>
+<h5 id="产生公钥和私钥"><a href="#产生公钥和私钥" class="headerlink" title="产生公钥和私钥"></a>产生公钥和私钥</h5><ol>
+<li>随便选择两个大的质数$p$和$q$，计算$N=p \cdot q$</li>
+<li>利用欧拉函数，求得$r=\varphi((N)=\varphi((p) \cdot \varphi((q) = (p-1) \cdot (q-1) $</li>
+<li>选择一个数$e$，满足$1 &lt; e &lt; r$且$e$与$r$互质，取$e$关于$d$的模逆元$d$,满足$ed \equiv {1 \bmod {r}}$</li>
+<li>销毁$p$和$p$</li>
+</ol>
+<p>现在$(N,e)$是公钥，$(N,d)$是私钥。</p>
+<h5 id="加密消息"><a href="#加密消息" class="headerlink" title="加密消息"></a>加密消息</h5><p>假设Alice想要给Bob发送一条信息$m$，那么Alice有两步需要做：</p>
+<ul>
+<li>把$m$按照一定规则转化成非负整数$n$，如果太长可以分几段加密</li>
+<li>将$n$加密为$c$<script type="math/tex; mode=display">c \equiv { n^e\bmod N}</script></li>
+</ul>
+<p>然后就可以把$c$发送给Bob了。</p>
+<h5 id="解密消息"><a href="#解密消息" class="headerlink" title="解密消息"></a>解密消息</h5><p>Bob接受到消息之后，就可以利用密钥$d$来解码</p>
+<script type="math/tex; mode=display">n \equiv {c^d  \bmod N}</script><p>取到$n$之后，就可以按照约定的$m$转换成$n$的规则，倒回去得到$m$。</p>
+<h5 id="相关数学知识"><a href="#相关数学知识" class="headerlink" title="相关数学知识"></a>相关数学知识</h5><ul>
+<li><a href="https://zh.wikipedia.org/zh-hant/%E7%B4%A0%E6%95%B0" target="_blank" rel="noopener">质数</a> </li>
+<li><a href="https://zh.wikipedia.org/wiki/%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0" target="_blank" rel="noopener">欧拉函数</a></li>
+<li><a href="https://zh.wikipedia.org/wiki/%E6%89%A9%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95" target="_blank" rel="noopener">拓展欧几里得算法</a></li>
+<li><a href="https://zh.wikipedia.org/wiki/%E6%A8%A1%E5%8F%8D%E5%85%83%E7%B4%A0" target="_blank" rel="noopener">模逆元</a></li>
+</ul>
+<h4 id="RSA的简单实现"><a href="#RSA的简单实现" class="headerlink" title="RSA的简单实现"></a>RSA的简单实现</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">###朴素欧几里得算法</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gcb</span><span class="params">(a,b)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> b == <span class="number">0</span> :</span><br><span class="line">        <span class="keyword">return</span> a </span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(b,a%b)</span><br><span class="line">        <span class="keyword">return</span> gcb(b , a%b)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### 拓展欧几里得算法</span></span><br><span class="line"><span class="comment">### 根据１所述，设a,b的最大公约数为gcd(a,b),则存在整数x,y使得gcd(a,b)＝ax+by。扩展欧几里得则是用来求出这个x,y的，并且同时可以求出a,b的最大公约数</span></span><br><span class="line"><span class="comment">###  $$ \begin&#123;cases&#125; x_1=y_2 \\ y_1=x_2-(n/m) \cdot y_2 \end&#123;cases&#125; $$</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">ex_gcb</span><span class="params">(a,b)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> b == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>,<span class="number">0</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        x,y = ex_gcb(b,a%b)</span><br><span class="line">        <span class="keyword">return</span> y,(x-(a//b)*y)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ex_gcb(<span class="number">43</span>,<span class="number">23</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>(-8, 15)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">###  蒙哥马利幂模运算</span></span><br><span class="line"><span class="comment">### (a*b)%n = (a%n*b%n)%n</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#整数转化为二进制</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">int2Bin</span><span class="params">(n)</span>:</span></span><br><span class="line">    binlist=[]</span><br><span class="line">    <span class="keyword">while</span> n!=<span class="number">0</span>:</span><br><span class="line">        binlist.append(n%<span class="number">2</span>)</span><br><span class="line">        n &gt;&gt;= <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> binlist</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 蒙哥马利幂模运算 a^d%n </span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">modExp</span><span class="params">(a,d,n)</span>:</span></span><br><span class="line">    binlist = int2bin(d)</span><br><span class="line">    res = <span class="number">1</span>  </span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> binlist:</span><br><span class="line">        <span class="keyword">if</span> i :</span><br><span class="line">            res = ( res * a ) % n </span><br><span class="line">        a = ( a * a ) % n</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">modExp(<span class="number">2</span>,<span class="number">16</span>,<span class="number">7</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>2
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 检测大整数是否是素数,如果是素数,就返回True,否则返回False</span></span><br><span class="line"><span class="comment"># 来自网上大佬的代码</span></span><br><span class="line"><span class="comment"># 素数生成逻辑 还是有点问题</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rabin_miller</span><span class="params">(num)</span>:</span></span><br><span class="line">    s = num - <span class="number">1</span></span><br><span class="line">    t = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> s % <span class="number">2</span> == <span class="number">0</span>:</span><br><span class="line">        s = s // <span class="number">2</span></span><br><span class="line">        t += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> trials <span class="keyword">in</span> range(<span class="number">5</span>):</span><br><span class="line">        a = random.randrange(<span class="number">2</span>, num - <span class="number">1</span>)</span><br><span class="line">        v = pow(a, s, num)</span><br><span class="line">        <span class="keyword">if</span> v != <span class="number">1</span>:</span><br><span class="line">            i = <span class="number">0</span></span><br><span class="line">            <span class="keyword">while</span> v != (num - <span class="number">1</span>):</span><br><span class="line">                <span class="keyword">if</span> i == t - <span class="number">1</span>:</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    i = i + <span class="number">1</span></span><br><span class="line">                    v = (v ** <span class="number">2</span>) % num</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_prime</span><span class="params">(num)</span>:</span></span><br><span class="line">    <span class="comment"># 排除0,1和负数</span></span><br><span class="line">    <span class="keyword">if</span> num &lt; <span class="number">2</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 创建小素数的列表,可以大幅加快速度</span></span><br><span class="line">    <span class="comment"># 如果是小素数,那么直接返回true</span></span><br><span class="line">    small_primes = [<span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">11</span>, <span class="number">13</span>, <span class="number">17</span>, <span class="number">19</span>, <span class="number">23</span>, <span class="number">29</span>, <span class="number">31</span>, <span class="number">37</span>, <span class="number">41</span>, <span class="number">43</span>, <span class="number">47</span>, <span class="number">53</span>, <span class="number">59</span>, <span class="number">61</span>, <span class="number">67</span>, <span class="number">71</span>, <span class="number">73</span>, <span class="number">79</span>, <span class="number">83</span>, <span class="number">89</span>, <span class="number">97</span>, <span class="number">101</span>, <span class="number">103</span>, <span class="number">107</span>, <span class="number">109</span>, <span class="number">113</span>, <span class="number">127</span>, <span class="number">131</span>, <span class="number">137</span>, <span class="number">139</span>, <span class="number">149</span>, <span class="number">151</span>, <span class="number">157</span>, <span class="number">163</span>, <span class="number">167</span>, <span class="number">173</span>, <span class="number">179</span>, <span class="number">181</span>, <span class="number">191</span>, <span class="number">193</span>, <span class="number">197</span>, <span class="number">199</span>, <span class="number">211</span>, <span class="number">223</span>, <span class="number">227</span>, <span class="number">229</span>, <span class="number">233</span>, <span class="number">239</span>, <span class="number">241</span>, <span class="number">251</span>, <span class="number">257</span>, <span class="number">263</span>, <span class="number">269</span>, <span class="number">271</span>, <span class="number">277</span>, <span class="number">281</span>, <span class="number">283</span>, <span class="number">293</span>, <span class="number">307</span>, <span class="number">311</span>, <span class="number">313</span>, <span class="number">317</span>, <span class="number">331</span>, <span class="number">337</span>, <span class="number">347</span>, <span class="number">349</span>, <span class="number">353</span>, <span class="number">359</span>, <span class="number">367</span>, <span class="number">373</span>, <span class="number">379</span>, <span class="number">383</span>, <span class="number">389</span>, <span class="number">397</span>, <span class="number">401</span>, <span class="number">409</span>, <span class="number">419</span>, <span class="number">421</span>, <span class="number">431</span>, <span class="number">433</span>, <span class="number">439</span>, <span class="number">443</span>, <span class="number">449</span>, <span class="number">457</span>, <span class="number">461</span>, <span class="number">463</span>, <span class="number">467</span>, <span class="number">479</span>, <span class="number">487</span>, <span class="number">491</span>, <span class="number">499</span>, <span class="number">503</span>, <span class="number">509</span>, <span class="number">521</span>, <span class="number">523</span>, <span class="number">541</span>, <span class="number">547</span>, <span class="number">557</span>, <span class="number">563</span>, <span class="number">569</span>, <span class="number">571</span>, <span class="number">577</span>, <span class="number">587</span>, <span class="number">593</span>, <span class="number">599</span>, <span class="number">601</span>, <span class="number">607</span>, <span class="number">613</span>, <span class="number">617</span>, <span class="number">619</span>, <span class="number">631</span>, <span class="number">641</span>, <span class="number">643</span>, <span class="number">647</span>, <span class="number">653</span>, <span class="number">659</span>, <span class="number">661</span>, <span class="number">673</span>, <span class="number">677</span>, <span class="number">683</span>, <span class="number">691</span>, <span class="number">701</span>, <span class="number">709</span>, <span class="number">719</span>, <span class="number">727</span>, <span class="number">733</span>, <span class="number">739</span>, <span class="number">743</span>, <span class="number">751</span>, <span class="number">757</span>, <span class="number">761</span>, <span class="number">769</span>, <span class="number">773</span>, <span class="number">787</span>, <span class="number">797</span>, <span class="number">809</span>, <span class="number">811</span>, <span class="number">821</span>, <span class="number">823</span>, <span class="number">827</span>, <span class="number">829</span>, <span class="number">839</span>, <span class="number">853</span>, <span class="number">857</span>, <span class="number">859</span>, <span class="number">863</span>, <span class="number">877</span>, <span class="number">881</span>, <span class="number">883</span>, <span class="number">887</span>, <span class="number">907</span>, <span class="number">911</span>, <span class="number">919</span>, <span class="number">929</span>, <span class="number">937</span>, <span class="number">941</span>, <span class="number">947</span>, <span class="number">953</span>, <span class="number">967</span>, <span class="number">971</span>, <span class="number">977</span>, <span class="number">983</span>, <span class="number">991</span>, <span class="number">997</span>]</span><br><span class="line">    <span class="keyword">if</span> num <span class="keyword">in</span> small_primes:</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 如果大数是这些小素数的倍数,那么就是合数,返回false</span></span><br><span class="line">    <span class="keyword">for</span> prime <span class="keyword">in</span> small_primes:</span><br><span class="line">        <span class="keyword">if</span> num % prime == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 如果这样没有分辨出来,就一定是大整数,那么就调用rabin算法</span></span><br><span class="line">    <span class="keyword">return</span> rabin_miller(num)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 得到大整数,默认位数为1024</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_prime</span><span class="params">(key_size=<span class="number">1024</span>)</span>:</span></span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        num = random.randrange(<span class="number">2</span>**(key_size<span class="number">-1</span>), <span class="number">2</span>**key_size)</span><br><span class="line">        <span class="keyword">if</span> is_prime(num):</span><br><span class="line">            <span class="keyword">return</span> num</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">get_prime(<span class="number">1024</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>162678631691829774667522629535073160955825399182602693661545242792106676238539472548234877060876228787484523858207867783251387491999600134388980090439045215608645863076210778718260527620108430686424624076200773582708629154239529895125774945352642184329001660453968578704168280059308704550631900163173081902239
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gen_key</span><span class="params">(p,q)</span>:</span></span><br><span class="line">    N = p * q  <span class="comment"># 计算N</span></span><br><span class="line">    r = (p<span class="number">-1</span>) * (q<span class="number">-1</span>) <span class="comment"># 计算r </span></span><br><span class="line">    e = <span class="number">65537</span> <span class="comment"># 取e</span></span><br><span class="line">    d,x = ex_gcb(e,r) <span class="comment">### ed \equiv &#123; 1 \pmod r&#125; -&gt; ed + yn = 1 ，类似于扩展欧几里得形式</span></span><br><span class="line">    d = abs(d)</span><br><span class="line">    <span class="keyword">return</span> e,d,N</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">encrypt</span><span class="params">(m,N,e)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> modExp(m,e,N)</span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">decrypt</span><span class="params">(c,N,d)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> modExp(c,d,N)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 测试整体过程</span></span><br><span class="line"></span><br><span class="line">p,q = get_prime(<span class="number">1024</span>),get_prime(<span class="number">1024</span>)</span><br><span class="line">m = <span class="number">1995101219950817</span></span><br><span class="line">e,d,N = gen_key(p,q)</span><br><span class="line"></span><br><span class="line">enc = encrypt(m,N,e)</span><br><span class="line">res = decrypt(enc,N,d)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> res == m :</span><br><span class="line">    print(<span class="string">'解密成功'</span>)</span><br><span class="line">    print(<span class="string">'密文是%d'</span>%(enc))</span><br><span class="line">    print(<span class="string">'明文是%d'</span>%(res))</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    print(<span class="string">'加密失败'</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>解密成功
+密文是14005144118830483850652822657072015923931651283373191007705567320344608498783170654858772312139590781517022245572740058228425238815700795267975461803686242362890194249947123896021635220125683107528036663909234677369590244069330529163467280287893994970335492795549817696086606381221855273000994999391165045098621373956100419478927732414261552853418860553749988881775967955441571219829233196014735356284125413142119509579602440902130879271195998880056144148006467107689489924816408971514890284627704928072054400838999570987152631984324906697106158618432179795774465341559150912656124918370457081515488677503660447595363
+明文是1995101219950817
+</code></pre><h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><ul>
+<li><a href="https://zh.wikipedia.org/wiki/RSA%E5%8A%A0%E5%AF%86%E6%BC%94%E7%AE%97%E6%B3%95" target="_blank" rel="noopener">RSA算法</a> </li>
+<li><a href="https://axhiao.github.io/2015/05/29/extended-Euclidean-algorithm.html" target="_blank" rel="noopener">欧几里得算法求模反元素</a></li>
+<li><a href="https://axhiao.github.io/2015/05/30/rsa.html" target="_blank" rel="noopener">加密和RSA算法</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Linux下统计文件夹里的文件数目/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Linux下统计文件夹里的文件数目/" itemprop="url">Linux下统计文件夹里的文件数目</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-26T14:35:45+08:00">
+                2019-07-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>有时候我们不仅仅要看文件的大小，还需要统计下文件夹里文件数目，这里记录一下。</p>
+<p>我们可以使用<code>ls</code>、<code>grep</code>、<code>wc</code>这三个常用的命名来组合统计出我们想要的信息</p>
+<ol>
+<li><p>统计文件夹中的文件（不包括子目录）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">ls -l | grep <span class="string">'^-'</span> | wc -l</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>统计文件夹中的文件（包括子目录）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">ls -lR | grep <span class="string">'^-'</span> | wc -l</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>统计文件夹中的目录（包括子目录）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">ls -lR | grep <span class="string">'^d'</span> | wc -l</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><strong>命令解析</strong></p>
+<ul>
+<li>ls : <code>ls -l</code>长列表输出该目录下文件信息(注意这里的文件是指目录、链接、设备文件等)，每一行对应一个文件或目录，<code>ls -lR</code>是列出所有文件，包括子目录。</li>
+<li>grep : <code>grep &#39;^-&#39;</code>表示只保留一般文件，<code>grep &#39;^d&#39;</code>表示只保留目录</li>
+<li>wc : <code>wc -l</code>统计过滤之后的文件行数</li>
+</ul>
+<p>参考：<a href="http://noahsnail.com/2017/02/07/2017-02-07-Linux%E7%BB%9F%E8%AE%A1%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B%E7%9A%84%E6%96%87%E4%BB%B6%E6%95%B0%E7%9B%AE/" target="_blank" rel="noopener">SnailTyan的博客</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/2019观影记录/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019观影记录/" itemprop="url">2019观影记录</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-19T18:01:07+08:00">
+                2019-07-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="《流浪地球》"><a href="#《流浪地球》" class="headerlink" title="《流浪地球》"></a>《流浪地球》</h4><p>9分</p>
+<p>虽然剧情，台词之类的有点尴尬，但是特效牛逼，情怀满分，诚意满满呀，回去的路上还读完了原著~</p>
+<p>带着地球去流浪，硬核的外表之下残酷却又浪漫。</p>
+<h4 id="《飞驰人生》"><a href="#《飞驰人生》" class="headerlink" title="《飞驰人生》"></a>《飞驰人生》</h4><p>7.5分</p>
+<p>开心地笑一笑就好啦~</p>
+<h4 id="《天注定》"><a href="#《天注定》" class="headerlink" title="《天注定》"></a>《天注定》</h4><p>真实，是真的真实</p>
+<h4 id="《血钻》"><a href="#《血钻》" class="headerlink" title="《血钻》"></a>《血钻》</h4><p>沉重的话题..</p>
+<h4 id="《太空救援》"><a href="#《太空救援》" class="headerlink" title="《太空救援》"></a>《太空救援》</h4><p>毛子的诚意之作，根据历史真实事件改编。很棒</p>
+<h4 id="《星际穿越》"><a href="#《星际穿越》" class="headerlink" title="《星际穿越》"></a>《星际穿越》</h4><p>好看好看好看</p>
+<h4 id="《大佛普拉斯》"><a href="#《大佛普拉斯》" class="headerlink" title="《大佛普拉斯》"></a>《大佛普拉斯》</h4><blockquote>
+<p>人生真的好孤独呀，我们作为朋友，你却一点都不了解我；我们作为爱人，你却想要杀掉我；我们作为亲人，你却让我闭嘴。<br>就让我做一个追逐海浪的人好了，没有故乡，在世界上仅剩的一张摇篮上，抱着你的遗像，用沉默祝福你，用愤怒度化你，用夏天的雨纪念你。</p>
+</blockquote>
+<p>底层的黑白与上层的彩色，让我们说什么好呢。</p>
+<p>片中金句：</p>
+<p>我想现在虽然是太空时代<br>人类早就可以坐太空船去月球<br>但永远无法探索别人内心的宇宙</p>
+<h4 id="《地心引力》"><a href="#《地心引力》" class="headerlink" title="《地心引力》"></a>《地心引力》</h4><p>没《太空救援》好看</p>
+<h4 id="《隐秘而伟大》"><a href="#《隐秘而伟大》" class="headerlink" title="《隐秘而伟大》"></a>《隐秘而伟大》</h4><p>还是多好玩的..</p>
+<h4 id="《垫底辣妹》"><a href="#《垫底辣妹》" class="headerlink" title="《垫底辣妹》"></a>《垫底辣妹》</h4><p>挺励志的</p>
+<h4 id="《妇联4》"><a href="#《妇联4》" class="headerlink" title="《妇联4》"></a>《妇联4》</h4><p>我竟然看了两遍。。</p>
+<h4 id="《极品职业》"><a href="#《极品职业》" class="headerlink" title="《极品职业》"></a>《极品职业》</h4><p>喜剧与犯罪，国内有龙虾刑警</p>
+<h4 id="《铁拳男人》"><a href="#《铁拳男人》" class="headerlink" title="《铁拳男人》"></a>《铁拳男人》</h4><p>告诉了我一个真正的男人应该是什么样的</p>
+<h4 id="《雷神3》"><a href="#《雷神3》" class="headerlink" title="《雷神3》"></a>《雷神3》</h4><p>补课</p>
+<h4 id="《钢铁侠3》"><a href="#《钢铁侠3》" class="headerlink" title="《钢铁侠3》"></a>《钢铁侠3》</h4><p>补课</p>
+<h4 id="《Free-Solo》"><a href="#《Free-Solo》" class="headerlink" title="《Free.Solo》"></a>《Free.Solo》</h4><p>震撼。</p>
+<p>做自己感兴趣的事情并以此养活自己，再和喜欢的人在一起，这才是真正的幸福呀。</p>
+<h4 id="《使徒行者》"><a href="#《使徒行者》" class="headerlink" title="《使徒行者》"></a>《使徒行者》</h4><p>贪玩蓝月巨头齐聚？</p>
+<p>好兄弟。</p>
+<h4 id="《隐藏人物》"><a href="#《隐藏人物》" class="headerlink" title="《隐藏人物》"></a>《隐藏人物》</h4><p>告诉我们男女是平等的，不同肤色的人也是平等的。</p>
+<p>我觉得不同地域的人也是平等的，真正不平等是知识，是修养，是内心…</p>
+<h4 id="《复仇者联盟》"><a href="#《复仇者联盟》" class="headerlink" title="《复仇者联盟》"></a>《复仇者联盟》</h4><p>复习</p>
+<h4 id="《追龙》"><a href="#《追龙》" class="headerlink" title="《追龙》"></a>《追龙》</h4><p>五亿探长雷洛与跛豪</p>
+<h4 id="《瘦身男女》"><a href="#《瘦身男女》" class="headerlink" title="《瘦身男女》"></a>《瘦身男女》</h4><p>以前的港片真的耐看，是风格的原因吧。</p>
+<h4 id="《逃学威龙》"><a href="#《逃学威龙》" class="headerlink" title="《逃学威龙》"></a>《逃学威龙》</h4><p>要是不知道看啥，看星爷的片是不会错的</p>
+<h4 id="《钢铁侠2》"><a href="#《钢铁侠2》" class="headerlink" title="《钢铁侠2》"></a>《钢铁侠2》</h4><p>陪阿昆复习</p>
+<h4 id="《复仇者联盟3》"><a href="#《复仇者联盟3》" class="headerlink" title="《复仇者联盟3》"></a>《复仇者联盟3》</h4><p>复习</p>
+<h4 id="《百万美元宝贝》"><a href="#《百万美元宝贝》" class="headerlink" title="《百万美元宝贝》"></a>《百万美元宝贝》</h4><p>需要看一下</p>
+<h4 id="《垂直极限》"><a href="#《垂直极限》" class="headerlink" title="《垂直极限》"></a>《垂直极限》</h4><p>户外大片</p>
+<h4 id="《蚁人1》"><a href="#《蚁人1》" class="headerlink" title="《蚁人1》"></a>《蚁人1》</h4><p>pass</p>
+<h4 id="《蚁人2》"><a href="#《蚁人2》" class="headerlink" title="《蚁人2》"></a>《蚁人2》</h4><p>pass</p>
+<h4 id="《二十二》"><a href="#《二十二》" class="headerlink" title="《二十二》"></a>《二十二》</h4><p>唉</p>
+<h4 id="《国家破产之日》"><a href="#《国家破产之日》" class="headerlink" title="《国家破产之日》"></a>《国家破产之日》</h4><p>国家破产，只有七天</p>
+<h4 id="《过春天》"><a href="#《过春天》" class="headerlink" title="《过春天》"></a>《过春天》</h4><p>为啥电影里的青春都这么叛逆</p>
+<h4 id="《狮子王》"><a href="#《狮子王》" class="headerlink" title="《狮子王》"></a>《狮子王》</h4><p>转眼两年，u are more than you have became</p>
+<h4 id="《恶人传》"><a href="#《恶人传》" class="headerlink" title="《恶人传》"></a>《恶人传》</h4><p>拳拳到肉，爽片。</p>
+<p>不过逻辑还是有小瑕疵，瑕不掩瑜。</p>
+<h4 id="《哪吒》"><a href="#《哪吒》" class="headerlink" title="《哪吒》"></a>《哪吒》</h4><p>好到我想去二刷，下一部《姜子牙》的钱我先放这儿了。</p>
+<h4 id="《寿司之神》"><a href="#《寿司之神》" class="headerlink" title="《寿司之神》"></a>《寿司之神》</h4><p>2019-07-30晚上看</p>
+<h4 id="《蝙蝠侠：黑暗骑士》"><a href="#《蝙蝠侠：黑暗骑士》" class="headerlink" title="《蝙蝠侠：黑暗骑士》"></a>《蝙蝠侠：黑暗骑士》</h4><p>牛逼</p>
+<h4 id="《猜火车》"><a href="#《猜火车》" class="headerlink" title="《猜火车》"></a>《猜火车》</h4><p>青春是五颜六色的。</p>
+<p>莫名其妙的悲伤，无处安放的彷徨，自由自在的颓废。</p>
+<p>个性，情感，想法。</p>
+<h4 id="《钢琴家》"><a href="#《钢琴家》" class="headerlink" title="《钢琴家》"></a>《钢琴家》</h4><p>待看</p>
+<h4 id="《飞跃疯人院》"><a href="#《飞跃疯人院》" class="headerlink" title="《飞跃疯人院》"></a>《飞跃疯人院》</h4><p>待看</p>
+<h4 id="《海蒂与爷爷》"><a href="#《海蒂与爷爷》" class="headerlink" title="《海蒂与爷爷》"></a>《海蒂与爷爷》</h4><p>这也太TM治愈了吧！！</p>
+<h4 id="《寄生虫》"><a href="#《寄生虫》" class="headerlink" title="《寄生虫》"></a>《寄生虫》</h4><p>待看</p>
+<h4 id="《海盗电台》"><a href="#《海盗电台》" class="headerlink" title="《海盗电台》"></a>《海盗电台》</h4><p>很👍地一部音乐片。</p>
+<p>自由、民权、性解放、同性恋等很多点都被提到了。 不评价且尊重个体的差异，是我觉得大部分解放运动的根本要求。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://snailed.cn/2019读书记录/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1155,524 +1752,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/读娱乐至死/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/读娱乐至死/" itemprop="url">读娱乐至死</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-26T23:54:37+08:00">
-                2019-05-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>媒介影响了文化的沟通方式</p>
-<p>媒介影响了人们的思维方式</p>
-<p>从文字到图片到视频，给出的信息越来越丰富，越来越精确，一方面促进了沟通的效率，但是也导致人们的思考空间越来越少。</p>
-<p>读的时候随手写了点东西，粘贴如下：<br><img src="读娱乐至死.jpeg" alt="小感"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/计算广告/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/计算广告/" itemprop="url">计算广告</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-20T13:04:08+08:00">
-                2019-05-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>主要记录下关于计算广告的一些基础知识与个人觉得很有用的东西。</p>
-<h3 id="计算广告的发展脉络"><a href="#计算广告的发展脉络" class="headerlink" title="计算广告的发展脉络"></a>计算广告的发展脉络</h3><h4 id="品牌广告"><a href="#品牌广告" class="headerlink" title="品牌广告"></a>品牌广告</h4><h4 id="效果广告"><a href="#效果广告" class="headerlink" title="效果广告"></a>效果广告</h4><h4 id="广告联盟"><a href="#广告联盟" class="headerlink" title="广告联盟"></a>广告联盟</h4><h3 id="基本名词"><a href="#基本名词" class="headerlink" title="基本名词"></a>基本名词</h3><h4 id="eCPM"><a href="#eCPM" class="headerlink" title="eCPM"></a>eCPM</h4><h4 id="计费方式"><a href="#计费方式" class="headerlink" title="计费方式"></a>计费方式</h4><ul>
-<li>CPM</li>
-<li>CPC</li>
-<li>CPA</li>
-<li>CPS</li>
-<li>oCPM<br>…</li>
-</ul>
-<h3 id="关键技术"><a href="#关键技术" class="headerlink" title="关键技术"></a>关键技术</h3><h4 id="数据处理"><a href="#数据处理" class="headerlink" title="数据处理"></a>数据处理</h4><h4 id="计算模型"><a href="#计算模型" class="headerlink" title="计算模型"></a>计算模型</h4><ul>
-<li>最大熵</li>
-<li>贝叶斯概率</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/我想去的地方/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/我想去的地方/" itemprop="url">我想去的地方</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-18T02:01:33+08:00">
-                2019-05-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>今晚又想当一个背包客了，去浪迹天涯。</p>
-<p>未来十年，我想要走遍中国顶级的户外线路，包括但不限于以下路线：</p>
-<ul>
-<li>洛克线 - 消失的地平线</li>
-<li>鳌太 - 强驴的考核之路</li>
-<li>乌孙古道  </li>
-<li>夏特古道</li>
-<li>冈仁波齐转山 </li>
-<li>墨脱</li>
-<li>狼塔c+v</li>
-<li>长穿毕</li>
-<li>雨崩</li>
-<li>珠峰东坡</li>
-</ul>
-<p><strong>想看两不厌，只有敬亭山</strong></p>
-<p>2019-07-01</p>
-<p>哈巴+梅里，路过雨崩</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/读《愿生命从容》/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/读《愿生命从容》/" itemprop="url">读《愿生命从容》</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-12T00:22:32+08:00">
-                2019-05-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>太久没有更新博客了，前一个月忙其他事情， 学习的时间变少了…</p>
-<p>这段时间正在学习php和重学Python，此不提。</p>
-<p>贵司七月要请周国平来搞讲座课，为了了解下，读了其散文集《愿生命从容》。读毕，对其前三节观点还是很有认同感的，后面的一些东西我经验不够，暂时不提。</p>
-<ul>
-<li>善良 - 来自于人与人之间的同情，要做一个善良的人</li>
-<li>丰富 - 精神世界的乐趣远大于肉体的享受，大概是要有一个有趣的灵魂的意思吧：）</li>
-<li>高贵 - 人与人之间的尊重，不仅仅限于对个人的尊重，而是对每个人做的每件事，都应当客观地尊重。纵然其有好有坏，自然会有其或好或坏的结果</li>
-</ul>
-<p>纵观下来，有很浓的鸡汤味，不过偶尔的鸡汤，还是很乐意接受的。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1725,7 +1804,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">84</span>
+                  <span class="site-state-item-count">88</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1738,7 +1817,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-count">33</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
