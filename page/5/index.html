@@ -242,6 +242,393 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/入坑tmux/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/入坑tmux/" itemprop="url">入坑tmux</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-02T11:06:06+08:00">
+                2019-02-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="写在最前"><a href="#写在最前" class="headerlink" title="写在最前"></a>写在最前</h3><p>18年3月刚来贵司实习的时候，jy就推荐了一些shell方面好用的工具，比如<code>Iterm2</code>,<code>zsh</code>,<code>tmux</code>之类的，还有<code>14pt Source Code Pro Semibold Italic</code>这款很好看的字体，<code>autojump</code>,<code>the_sliver_seracher</code>等神器。除了<code>tmux</code>，最开始体验的时候那反人类的复制滚屏模式劝退了我，其他用得不要太爽呀~</p>
+<p>前几天觉得工作上需要在shell里面开的窗口越来越多了，得从工具上来一波更新，于是实战了一下<code>tmux</code>，这次感觉好多了，记录分享一下。</p>
+<h3 id="Tmux"><a href="#Tmux" class="headerlink" title="Tmux"></a>Tmux</h3><p>tmux主要优点有下面三个：</p>
+<ul>
+<li>强大的分屏支持: tmux窗口中，新开的pane，默认进入到之前的路径，如果是ssh连接，登录状态也依旧保持</li>
+<li>保护现场 : 下班回家连上服务器就可以很快回到操作现场，简洁省事</li>
+<li>会话共享 : 将tmux会话的地址分享给他人，这样他们就可以通过 SSH 接入该会话(我应该是用不到这个了）</li>
+</ul>
+<h4 id="安装tmux"><a href="#安装tmux" class="headerlink" title="安装tmux"></a>安装tmux</h4><p>在Mac上安装<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 先安装Homebrew，有则跳过</span></span><br><span class="line">ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"</span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装tmux</span></span><br><span class="line">brew install tmux</span><br></pre></td></tr></table></figure></p>
+<p>在Linux上安装<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install tmux</span><br></pre></td></tr></table></figure></p>
+<h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4><p>session-window-pane:一个session有多个窗口，一个窗口有多个面板</p>
+<p>多任务神器，用过就知道</p>
+<h4 id="直达使用"><a href="#直达使用" class="headerlink" title="直达使用"></a>直达使用</h4><p>我们先创建一个名为local的session，用第一个命令即可<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tmux new -s local # 创建一个名为local的session</span><br><span class="line">tmux kill-session -t local # 关闭绘画</span><br><span class="line">tmux kill-server #关闭服务器，所有会话被关闭</span><br></pre></td></tr></table></figure></p>
+<p>此时我们可以看到底部默认的小绿条，我理解这就是tmux的状态栏了嘛。tmux已经默认为我们创建好了一个window,这个时候就可以去执行切分pane之类的操作了。我这里随便举个栗子：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 默认所有操作都加了前缀，tmux的快捷键也都是加了前缀才会生效</span></span><br><span class="line">, # 重命名当前window</span><br><span class="line">- # 横切窗口，默认进入当前目录</span><br><span class="line">| # 竖切窗口，默认进入当前目录</span><br><span class="line">c # 新建window</span><br><span class="line">hjkl # 切换窗口，类似vim操作</span><br><span class="line">t # 显示时钟</span><br></pre></td></tr></table></figure></p>
+<p>我随便截图一下表示效果</p>
+<p><img src="snapshot.png" alt="我的Tmux"></p>
+<h4 id="tmux设置"><a href="#tmux设置" class="headerlink" title="tmux设置"></a>tmux设置</h4><p>这里直接附上我的<code>.tmux.conf</code>文件，不过基本也是来自网上大佬的<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">设置前缀为Ctrl + x</span></span><br><span class="line">set -g prefix C-x</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">解除Ctrl+b 与前缀的对应关系</span></span><br><span class="line">unbind C-b</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">up</span></span><br><span class="line">bind-key k select-pane -U</span><br><span class="line"><span class="meta">#</span><span class="bash">down</span></span><br><span class="line">bind-key j select-pane -D</span><br><span class="line"><span class="meta">#</span><span class="bash">left</span></span><br><span class="line">bind-key h select-pane -L</span><br><span class="line"><span class="meta">#</span><span class="bash">right</span></span><br><span class="line">bind-key l select-pane -R</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 绑定快捷键为r</span></span><br><span class="line">bind r source-file ~/.tmux.conf \; display-message "Config reloaded.."</span><br><span class="line"></span><br><span class="line">unbind '"'</span><br><span class="line">bind - splitw -v -c '#&#123;pane_current_path&#125;' # 垂直方向新增面板，默认进入当前目录</span><br><span class="line">unbind %</span><br><span class="line">bind | splitw -h -c '#&#123;pane_current_path&#125;' # 水平方向新增面板，默认进入当前目录</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 绑定Ctrl+hjkl键为面板上下左右调整边缘的快捷指令</span></span><br><span class="line">bind -r ^k resizep -U 5 # 绑定Ctrl+k为往↑调整面板边缘10个单元格</span><br><span class="line">bind -r ^j resizep -D 5 # 绑定Ctrl+j为往↓调整面板边缘10个单元格</span><br><span class="line">bind -r ^h resizep -L 5 # 绑定Ctrl+h为往←调整面板边缘10个单元格</span><br><span class="line">bind -r ^l resizep -R 5 # 绑定Ctrl+l为往→调整面板边缘10个单元格</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 开启鼠标</span></span><br><span class="line">set-option -g mouse on</span><br></pre></td></tr></table></figure></p>
+<p>这里要感恩网上大佬分享的教程<a href="http://louiszhai.github.io/2017/09/30/tmux/" target="_blank" rel="noopener">Tmux使用手册</a></p>
+<h3 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h3><p>复制滚屏模式直到现在都还有点不习惯，不过还好开启了鼠标支持，后面再来吐槽。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/utf8编码坑/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/utf8编码坑/" itemprop="url">utf8编码坑</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-01T01:40:32+08:00">
+                2019-02-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="保存文件是出现乱码"><a href="#保存文件是出现乱码" class="headerlink" title="保存文件是出现乱码"></a>保存文件是出现乱码</h3><p>文件缺失BOM的锅，用<code>utf_8_sig</code>解决…具体编码怎么回事参见<a href="https://segmentfault.com/a/1190000004321605" target="_blank" rel="noopener">BOM</a><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.to_csv(<span class="string">"file"</span>,encoding=<span class="string">"utf_8_sig"</span>)</span><br></pre></td></tr></table></figure></p>
+<h3 id="mysql-utf8mb4"><a href="#mysql-utf8mb4" class="headerlink" title="mysql-utf8mb4"></a>mysql-utf8mb4</h3><p>MySQL的字符设置….注意一下</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/浅草キッド/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/浅草キッド/" itemprop="url">浅草キッド</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-30T01:08:50+08:00">
+                2019-01-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="back"><a href="#back" class="headerlink" title="back"></a>back</h4><p>早已忘了是什么时候知道北野武这个名字的，只是知道他很屌，后来看了《菊次郎的夏天》《战场上的圣诞快乐》等电影才稍微有了多一点的了解。</p>
+<p>记得《战场上的圣诞快乐》的结局里，随着坂本龙一的mcml渐渐响起，屏幕上是北野武那张大脸，他用英文说出“Merry Christmas，Lawrence.”,眼角有点湿润…</p>
+<p><img src="byw.jpg" alt="北野武"></p>
+<p>前段时间听到这一首《浅草キッド》,被打中了啊</p>
+<p><a href="https://music.163.com/#/song?id=433675" target="_blank" rel="noopener">浅草キッド-网易云</a><br><a href="https://www.bilibili.com/video/av14632564/" target="_blank" rel="noopener">浅草キッド-Bilibili</a></p>
+<h4 id="歌词"><a href="#歌词" class="headerlink" title="歌词"></a>歌词</h4><p>お前と会った 仲見世の<br>与你相见在仲见世<br>煮込みしかない 鯨屋で<br>那间只有煮菜的鲸肉店<br>夢を語ったチュー八イの<br>我们谈论梦想<br>泡にはじけた 約束は<br>汽酒泡沫里消失的约定<br>灯的消元た 浅草の<br>在灯火暗去的浅草<br>コ夕ツ１つの アパートで<br>只有一个被炉的公寓</p>
+<p>同じ背広を初めて買って<br>第一次买了同样的西装<br>同じ形の ちょうたい作り<br>做了同样的蝴蝶结领带<br>同じ靴まで 買う金はなく<br>却没钱买同样的鞋<br>いつも笑いのネ夕にして<br>这一直被我们当做笑料<br>いつか売れると信じてた<br>什么时候走红 我们期待着<br>客が2人の 演芸場で<br>在只有两个观众的剧场里</p>
+<p>夢を托した100円を<br>把托付着梦想的一百元硬币<br>投げて真面目に拝んでる<br>投出去，一本正经地祈祷<br>顔に浮かんだ幼児の<br>你脸上浮现孩童般的纯真<br>無垢な心に またほれて<br>我再次被你吸引</p>
+<p>１人訪ねたアパートで<br>独自去探访你的公寓<br>グラス傾け懐かしむ<br>相碰的酒杯间<br>そんな時代もあったねと<br>怀念从前我们也有那样的时代啊<br>笑い背中が揺れている<br>你抖着肩膀笑起来<br>夢は棄てたと 言わないで<br>不要说 我们已抛弃梦想<br>他にあてなき ２人なのに<br>我们本是 没有其他人可以依靠的两个人<br>夢は棄てたと 言わないで<br>不要说 我们已抛弃梦想<br>他に道無き ２人なのに<br>我们本是 没有其他人可以依靠的两个人</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://snailed.cn/看《天注定》/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -3040,485 +3427,11 @@ Categories (4, interval[float64]): [(-2.845, -1.307] &lt; (-1.307, 0.225] &lt; (
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/读《人间失格》/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/读《人间失格》/" itemprop="url">读《人间失格》</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-13T22:47:16+08:00">
-                2019-01-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="写在最前"><a href="#写在最前" class="headerlink" title="写在最前"></a>写在最前</h2><p>记得很早之前看过一部电影《被嫌弃的松子的一生》，心里面觉得松子的可怜又可悲，末了再补上一句可怜之人必有可恨之处。电影里面松子遇到一个落魄的作家，偶像是太宰治，打她骂她辱她，却又爱她。</p>
-<p>前几天看到太宰治的《人间失格》，想读一读。</p>
-<h2 id="作者背景"><a href="#作者背景" class="headerlink" title="作者背景"></a>作者背景</h2><p>太宰治（1909－1948）：</p>
-<p>本名津岛修治，青森县人，父亲津岛原右卫门曾任众议院议员和贵族院议员，经营银行、铁路。太宰治是日本战后“无赖派”文学的代表作家，思想消沉、幻灭，不满现实的人生，几度自杀未果。一九三五年，他的短篇《逆行》入围第一届芥川奖，后因出版多部带有哀切的抒情作品而深受注目。一九三九年，他的《女生徒》获第四届北村透谷奖。一九四八年，他以《如是我闻》再度震惊文坛，并开始创作《人间失格》，书成之后，旋即投水自杀，结束了其灿烂多感而又凄美悲凉的一生。</p>
-<p>如第一手札开篇所说：</p>
-<blockquote>
-<p>我这一生，尽是可耻之事。</p>
-</blockquote>
-<h2 id="小感想"><a href="#小感想" class="headerlink" title="小感想"></a>小感想</h2><p>读《人间失格》的时候，心里面有点难受的感觉，但是也很理智地认识到这是这个我们不能帮助别人去改变的。日本独有的社会，个人特有的性格，造就了叶藏这个边缘人。写这个的时候BGM是《曾经我也想过一了百了》，心里面有些东西描述不出来，就算了吧。</p>
-<p>大庭叶藏的悲剧不在于不能合群，不在于交友不慎，不在于吸毒，也不在于性关系混乱，而在于他本身失去了自我，这也是为什么叫《人间失格》吧。’生而为人，我很抱歉’，说得很到位了。</p>
-<p>最后的最后看到作者这段话，想摘抄一下：</p>
-<blockquote>
-<p>天使从空中飞过，听从神的旨意隐去双翅，像乘着降落伞一般飘落到世界的各个角落。我落在北国的学原，你落在南国的蜜柑田，而这群少年落在了上野公园。我们之间的差别仅仅如此。少年们啊，无论你们今后度过多少岁月，都请不要介意自己的容貌，不要吸食香烟，若非节日，也别喝酒。长大后，请多加爱惜那性格内向，不爱浓妆的姑娘。</p>
-</blockquote>
-<p>此去黄泉无所愿，请君昂首直向前。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/读《菜根谭》/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/读《菜根谭》/" itemprop="url">读《菜根谭》</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-11T00:32:26+08:00">
-                2019-01-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="写在最前"><a href="#写在最前" class="headerlink" title="写在最前"></a>写在最前</h2><p>还是读点书修身养性比较好。</p>
-<h2 id="小记"><a href="#小记" class="headerlink" title="小记"></a>小记</h2><p>《菜根谭》是一本语录体的书，可以想起来就读一点或者是放枕边，现在这里觉得好的对的就记录一下。虽然都是些大道理，但做人是要有方向的嘛。</p>
-<h3 id="处事篇"><a href="#处事篇" class="headerlink" title="处事篇"></a>处事篇</h3><blockquote>
-<p>君子之心事，天青日白，不可使人不知；君子之才华，玉韫珠藏，不知使人易知。</p>
-</blockquote>
-<p>心事看人，才华还是需要留一手的。</p>
-<blockquote>
-<p>快意回首 拂心莫停<br>恩里由来生害，故快意时须早回首；败后或反成功，辜拂心处莫便放手。</p>
-</blockquote>
-<p>跳出舒适区，披荆斩棘。</p>
-<blockquote>
-<p>不恶小人 礼待君子</p>
-</blockquote>
-<p>难</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/seaborn-liner/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/seaborn-liner/" itemprop="url">seaborn-liner</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-10T19:14:43+08:00">
-                2019-01-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="可视化线性关系"><a href="#可视化线性关系" class="headerlink" title="可视化线性关系"></a>可视化线性关系</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">sns.set(color_codes=<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line">tips = sns.load_dataset(<span class="string">"tips"</span>)</span><br></pre></td></tr></table></figure>
-<h2 id="绘制线性回归"><a href="#绘制线性回归" class="headerlink" title="绘制线性回归"></a>绘制线性回归</h2><blockquote>
-<p>Two main functions in seaborn are used to visualize a linear relationship as determined through regression. These functions, regplot() and lmplot() are closely related, and share much of their core functionality. It is important to understand the ways they differ, however, so that you can quickly choose the correct tool for particular job.</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#先看一个最简单的例子</span></span><br><span class="line"><span class="comment">#默认置信区间为95%</span></span><br><span class="line"></span><br><span class="line">sns.regplot(x=<span class="string">'total_bill'</span>,y=<span class="string">'tip'</span>,data=tips)</span><br></pre></td></tr></table></figure>
-<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x110f64d68&gt;
-</code></pre><p><img src="output_3_1.png" alt="png"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.lmplot(x=<span class="string">'total_bill'</span>,y=<span class="string">'tip'</span>,data=tips)</span><br></pre></td></tr></table></figure>
-<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x110f15780&gt;
-</code></pre><p><img src="output_4_1.png" alt="png"></p>
-<p>regplot()可以接受更加灵活的输入，lmplot()接受整形输入，同时regplot()也拥有部分lmplot()的功能。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.lmplot(x=<span class="string">'size'</span>,y=<span class="string">'tip'</span>,data=tips)</span><br></pre></td></tr></table></figure>
-<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x112574400&gt;
-</code></pre><p><img src="output_6_1.png" alt="png"></p>
-<h2 id="Fitting-different-kinds-of-models（拟合不同的模型）"><a href="#Fitting-different-kinds-of-models（拟合不同的模型）" class="headerlink" title="Fitting different kinds of models（拟合不同的模型）"></a>Fitting different kinds of models（拟合不同的模型）</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">anscombe = sns.load_dataset(<span class="string">"anscombe"</span>)</span><br><span class="line">anscombe.head()</span><br></pre></td></tr></table></figure>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>dataset</th>
-      <th>x</th>
-      <th>y</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>I</td>
-      <td>10.0</td>
-      <td>8.04</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>I</td>
-      <td>8.0</td>
-      <td>6.95</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>I</td>
-      <td>13.0</td>
-      <td>7.58</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>I</td>
-      <td>9.0</td>
-      <td>8.81</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>I</td>
-      <td>11.0</td>
-      <td>8.33</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.lmplot(x=<span class="string">'x'</span>,y=<span class="string">'y'</span>,data=anscombe.query(<span class="string">"dataset == 'I'"</span>),ci=<span class="keyword">None</span>,scatter_kws=&#123;<span class="string">"s"</span>: <span class="number">80</span>&#125;)</span><br></pre></td></tr></table></figure>
-<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x1a1e166978&gt;
-</code></pre><p><img src="output_9_1.png" alt="png"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sns.lmplot(x=<span class="string">"x"</span>, y=<span class="string">"y"</span>, data=anscombe.query(<span class="string">"dataset == 'II'"</span>),</span><br><span class="line">           ci=<span class="keyword">None</span>, scatter_kws=&#123;<span class="string">"s"</span>: <span class="number">80</span>&#125;)</span><br></pre></td></tr></table></figure>
-<p><img src="output_10_0.png" alt="png"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#上一个明明显拟合不到位，我们可以猜测这是一个多项式回归，利用order参数调用numpy.polyfit()</span></span><br><span class="line">sns.lmplot(x=<span class="string">"x"</span>, y=<span class="string">"y"</span>, data=anscombe.query(<span class="string">"dataset == 'II'"</span>),order = <span class="number">2</span> ,</span><br><span class="line">           ci=<span class="keyword">None</span>, scatter_kws=&#123;<span class="string">"s"</span>: <span class="number">80</span>&#125;)</span><br></pre></td></tr></table></figure>
-<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x1a1e3b3cc0&gt;
-</code></pre><p><img src="output_11_1.png" alt="png"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sns.lmplot(x=<span class="string">"x"</span>, y=<span class="string">"y"</span>, data=anscombe.query(<span class="string">"dataset == 'III'"</span>),</span><br><span class="line">           ci=<span class="keyword">None</span>, scatter_kws=&#123;<span class="string">"s"</span>: <span class="number">80</span>&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">## 存在异常值</span></span><br></pre></td></tr></table></figure>
-<p><img src="output_12_0.png" alt="png"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 不同的损失函数来减轻相对较大的残差</span></span><br><span class="line">sns.lmplot(x=<span class="string">"x"</span>, y=<span class="string">"y"</span>, data=anscombe.query(<span class="string">"dataset == 'III'"</span>),</span><br><span class="line">           robust=<span class="keyword">True</span>, ci=<span class="keyword">None</span>, scatter_kws=&#123;<span class="string">"s"</span>: <span class="number">80</span>&#125;);</span><br></pre></td></tr></table></figure>
-<p><img src="output_13_0.png" alt="png"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -3566,7 +3479,7 @@ Categories (4, interval[float64]): [(-2.845, -1.307] &lt; (-1.307, 0.225] &lt; (
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">89</span>
+                  <span class="site-state-item-count">92</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -3579,7 +3492,7 @@ Categories (4, interval[float64]): [(-2.845, -1.307] &lt; (-1.307, 0.225] &lt; (
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-count">35</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

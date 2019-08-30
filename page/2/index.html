@@ -242,6 +242,538 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/MongoDB/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/MongoDB/" itemprop="url">MongoDB</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-10T23:44:23+08:00">
+                2019-08-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>MongoDB 是由 C++ 编写的文档类型非关系数据库，是一个基于分布式文件系统的开源数据库系统。其内容以 BSON 的形式存储（类似JSON对象），字段值非常灵活，可以是其他文档，数组及文档数组等。</p>
+<h3 id="非关系数据库"><a href="#非关系数据库" class="headerlink" title="非关系数据库"></a>非关系数据库</h3><p>非关系型数据库也叫 NoSQL ，表示 not only sql。</p>
+<blockquote>
+<p>2009年初，Johan Oskarsson 举办了一场关于开源分布式数据库的讨论，Eric Evans 在这次讨论中提出了 NoSQL 一词，用于指代那些非关系型的，分布式的，且一般不保证遵循ACID原则的数据存储系统。Eric Evans 使用 NoSQL 这个词，并不是因为字面上的“没有 SQL ”的意思，他只是觉得很多经典的关系型数据库名字都叫“ xxSQL ”,所以为了表示跟这些关系型数据库在定位上的截然不同，就是用了“ NoSQL “一词</p>
+</blockquote>
+<p>非关系型数据库提出了「以键值对存储，不确定结构」这种灵活的存储方式，由此也带来了和关系型数据库很多的不同：</p>
+<ul>
+<li>模式自由 - 不需要定义表结构</li>
+<li>逆规范化 - 不遵循范式要求，去掉完整性约束，减少表之间的依赖</li>
+<li>弹性可拓展 - 可以动态地增删节点</li>
+<li>弱事务 - 不支持ACID特性，不过可以保证事务的最终一致性</li>
+<li>多副本异步复制 - 数据快速写入一个节点，其余节点通过读取写入的日志来实现异步复制</li>
+</ul>
+<h3 id="MongoDB"><a href="#MongoDB" class="headerlink" title="MongoDB"></a>MongoDB</h3><p>优点有很多，高可用高性能易拓展面向文档等</p>
+<h4 id="安装与启动"><a href="#安装与启动" class="headerlink" title="安装与启动"></a>安装与启动</h4><p>Mac OS 下安装<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install mongodb</span><br></pre></td></tr></table></figure></p>
+<p>启动 mongodb<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">进入到安装目录</span></span><br><span class="line">cd &lt;mongodb installation dir&gt;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 开启进程</span></span><br><span class="line">./bin/mongod</span><br><span class="line"><span class="meta">#</span><span class="bash">开启shell客户端</span></span><br><span class="line">./bin/mongo</span><br></pre></td></tr></table></figure></p>
+<h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4><p>参考关系型数据库（ RDBMS ）的概念来理解，详情可以参见<a href="http://www.mongoing.com/docs/reference/sql-comparison.html" target="_blank" rel="noopener">SQL到MongoDB映射表</a></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>MySQL</th>
+<th>MongoDB</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>database</td>
+<td>database</td>
+</tr>
+<tr>
+<td>table</td>
+<td>collection</td>
+</tr>
+<tr>
+<td>row</td>
+<td>document</td>
+</tr>
+<tr>
+<td>column</td>
+<td>field</td>
+</tr>
+<tr>
+<td>index</td>
+<td>index</td>
+</tr>
+<tr>
+<td>primary key</td>
+<td>primary key</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="开始操作吧"><a href="#开始操作吧" class="headerlink" title="开始操作吧"></a>开始操作吧</h4><h5 id="创建数据库和集合"><a href="#创建数据库和集合" class="headerlink" title="创建数据库和集合"></a>创建数据库和集合</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; use test</span><br><span class="line">switched to db test</span><br><span class="line">&gt; db</span><br><span class="line">test</span><br><span class="line">&gt; db.createCollection(<span class="string">"users"</span>)</span><br><span class="line">&#123; <span class="string">"ok"</span> : <span class="number">1</span> &#125;</span><br></pre></td></tr></table></figure>
+<h6 id="插入数据"><a href="#插入数据" class="headerlink" title="插入数据"></a>插入数据</h6><p><code>db.collection.insertOne()</code>  - 插入单条数据<br><code>db.collection.insertMany()</code> - 插入多条数据</p>
+<p>实践一下<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 插入单条</span></span><br><span class="line">&gt; user.insertOne(&#123;<span class="string">"name"</span>:<span class="string">"zhangyang"</span>,<span class="string">"email"</span>:<span class="string">"zy@123.com"</span>&#125;)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="string">"acknowledged"</span> : true,</span><br><span class="line">	<span class="string">"insertedId"</span> : ObjectId(<span class="string">"5d4f0623fc2a443cf5808e28"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 插入多条</span></span><br><span class="line">&gt; info = [&#123;<span class="string">"name"</span>:<span class="string">"yang"</span>,<span class="string">"email"</span>:<span class="string">"yang@123.com"</span>&#125;,&#123;<span class="string">"name"</span>:<span class="string">"peikun"</span>,<span class="string">"email"</span>:<span class="string">"pk@123.com"</span>&#125;]</span><br><span class="line">[</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="string">"name"</span> : <span class="string">"yang"</span>,</span><br><span class="line">		<span class="string">"email"</span> : <span class="string">"yang@123.com"</span></span><br><span class="line">	&#125;,</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="string">"name"</span> : <span class="string">"peikun"</span>,</span><br><span class="line">		<span class="string">"email"</span> : <span class="string">"pk@123.com"</span></span><br><span class="line">	&#125;</span><br><span class="line">]</span><br><span class="line">&gt; user.insertMany(info)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="string">"acknowledged"</span> : true,</span><br><span class="line">	<span class="string">"insertedIds"</span> : [</span><br><span class="line">		ObjectId(<span class="string">"5d4f06ebfc2a443cf5808e29"</span>),</span><br><span class="line">		ObjectId(<span class="string">"5d4f06ebfc2a443cf5808e2a"</span>)</span><br><span class="line">	]</span><br><span class="line">&#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure></p>
+<h6 id="查询操作"><a href="#查询操作" class="headerlink" title="查询操作"></a>查询操作</h6><p><code>db.collection.find()</code> - 读取文档的方法，<a href="http://www.mongoing.com/docs/reference/method/db.collection.find.html#db.collection.find" target="_blank" rel="noopener">官方文档</a>讲得很细</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 指定字段查询</span></span><br><span class="line">&gt; user.find(&#123;<span class="string">"name"</span>:<span class="string">"yang"</span>&#125;)</span><br><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"5d4f06ebfc2a443cf5808e29"</span>), <span class="string">"name"</span> : <span class="string">"yang"</span>, <span class="string">"email"</span> : <span class="string">"yang@123.com"</span> &#125;</span><br><span class="line"><span class="comment"># 相当于 select * from user limit 2</span></span><br><span class="line">&gt; user.find().limit(<span class="number">2</span>)</span><br><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"5d4f0623fc2a443cf5808e28"</span>), <span class="string">"name"</span> : <span class="string">"zhangyang"</span>, <span class="string">"email"</span> : <span class="string">"zy@123.com"</span> &#125;</span><br><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"5d4f06ebfc2a443cf5808e29"</span>), <span class="string">"name"</span> : <span class="string">"yang"</span>, <span class="string">"email"</span> : <span class="string">"yang@123.com"</span> &#125;</span><br><span class="line"><span class="comment"># in 条件限制</span></span><br><span class="line">&gt; user.find(&#123;<span class="string">"name"</span>:&#123;<span class="string">"$in"</span>:[<span class="string">"peikun"</span>,<span class="string">"yang"</span>]&#125;&#125;)</span><br><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"5d4f06ebfc2a443cf5808e29"</span>), <span class="string">"name"</span> : <span class="string">"yang"</span>, <span class="string">"email"</span> : <span class="string">"yang@123.com"</span> &#125;</span><br><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"5d4f06ebfc2a443cf5808e2a"</span>), <span class="string">"name"</span> : <span class="string">"peikun"</span>, <span class="string">"email"</span> : <span class="string">"pk@123.com"</span> &#125;</span><br></pre></td></tr></table></figure>
+<p>这里要附上比较符号表</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$lt</td>
+<td>小于</td>
+</tr>
+<tr>
+<td>$gt</td>
+<td>大于</td>
+<td></td>
+</tr>
+<tr>
+<td>$ne</td>
+<td>不等于</td>
+</tr>
+<tr>
+<td>$lte</td>
+<td>小于等于</td>
+</tr>
+<tr>
+<td>$gte</td>
+<td>大于等于</td>
+</tr>
+<tr>
+<td>$in</td>
+<td>包括</td>
+</tr>
+<tr>
+<td>$nin</td>
+<td>不包括</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>还有通过正则表达式的方式查询<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; user.find(&#123;<span class="string">"name"</span>:&#123;<span class="string">"$regex"</span>:<span class="string">"yang$"</span>&#125;&#125;)</span><br><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"5d4f0623fc2a443cf5808e28"</span>), <span class="string">"name"</span> : <span class="string">"zhangyang"</span>, <span class="string">"email"</span> : <span class="string">"zy@123.com"</span> &#125;</span><br><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"5d4f06ebfc2a443cf5808e29"</span>), <span class="string">"name"</span> : <span class="string">"yang"</span>, <span class="string">"email"</span> : <span class="string">"yang@123.com"</span> &#125;</span><br></pre></td></tr></table></figure></p>
+<h6 id="更新操作"><a href="#更新操作" class="headerlink" title="更新操作"></a>更新操作</h6><p><code>db.collection.updateOne()</code> - 即使可能有多个文档通过过滤条件匹配到，但是也最多也只更新一个文档。<br><code>db.collection.updateMany()</code> -     更新所有通过过滤条件匹配到的文档。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 先查一下 原始数据</span></span><br><span class="line">&gt; condition = &#123;<span class="string">"name"</span>:<span class="string">"zhangyang"</span>&#125;</span><br><span class="line">&#123; <span class="string">"name"</span> : <span class="string">"zhangyang"</span> &#125;</span><br><span class="line">&gt; user.find(condition).pretty()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="string">"_id"</span> : ObjectId(<span class="string">"5d4f0623fc2a443cf5808e28"</span>),</span><br><span class="line">	<span class="string">"name"</span> : <span class="string">"zhangyang"</span>,</span><br><span class="line">	<span class="string">"email"</span> : <span class="string">"zy@123.com"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 调用 update() 方法</span></span><br><span class="line">&gt; user.updateOne(condition,&#123;<span class="string">"$set"</span>:&#123;<span class="string">"email"</span>:<span class="string">"zhangyang@123.com"</span>&#125;&#125;)</span><br><span class="line">&#123; <span class="string">"acknowledged"</span> : true, <span class="string">"matchedCount"</span> : <span class="number">1</span>, <span class="string">"modifiedCount"</span> : <span class="number">1</span> &#125;</span><br><span class="line">&gt; user.find(condition).pretty()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="string">"_id"</span> : ObjectId(<span class="string">"5d4f0623fc2a443cf5808e28"</span>),</span><br><span class="line">	<span class="string">"name"</span> : <span class="string">"zhangyang"</span>,</span><br><span class="line">	<span class="string">"email"</span> : <span class="string">"zhangyang@123.com"</span></span><br><span class="line">&#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+<h6 id="删除文档"><a href="#删除文档" class="headerlink" title="删除文档"></a>删除文档</h6><p><code>db.collection.remove()</code> - 删除符合条件的所有<br><code>db.collection.deleteOne()</code> - 即使可能有多个文档通过过滤条件匹配到，但是也最多也只删除一个文档。<br><code>db.collection.deleteMany()</code> - 删除所有匹配指定过滤条件的文档。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&gt; condition = &#123;<span class="string">"name"</span>:<span class="string">"zhangyang"</span>&#125;</span><br><span class="line">&#123; <span class="string">"name"</span> : <span class="string">"zhangyang"</span> &#125;</span><br><span class="line">&gt; user.find(condition).pretty()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="string">"_id"</span> : ObjectId(<span class="string">"5d4f0623fc2a443cf5808e28"</span>),</span><br><span class="line">	<span class="string">"name"</span> : <span class="string">"zhangyang"</span>,</span><br><span class="line">	<span class="string">"email"</span> : <span class="string">"zhangyang@123.com"</span></span><br><span class="line">&#125;</span><br><span class="line">&gt; user.remove(condition)</span><br><span class="line">WriteResult(&#123; <span class="string">"nRemoved"</span> : <span class="number">1</span> &#125;)</span><br><span class="line">&gt; user.find(condition)</span><br><span class="line">&gt;   <span class="comment"># 此时并没有输出</span></span><br></pre></td></tr></table></figure>
+<h6 id="创建索引"><a href="#创建索引" class="headerlink" title="创建索引"></a>创建索引</h6><p><code>db.collection.createIndex()</code> - 使用B树数据结构</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p>感恩为以下内容付出努力的人！</p>
+<ol>
+<li><a href="https://www.cnblogs.com/feng0815/p/8722651.html" target="_blank" rel="noopener">非关系型数据库（nosql）介绍</a></li>
+<li><a href="https://www.mongodb.org" target="_blank" rel="noopener">MongoDB官网</a></li>
+<li><a href="http://www.mongoing.com/docs/" target="_blank" rel="noopener">MongoDB中文文档</a></li>
+<li><a href="http://www.mongoing.com/" target="_blank" rel="noopener">MongoDB中文社区</a></li>
+<li><a href="https://juejin.im/post/5addbd0e518825671f2f62ee" target="_blank" rel="noopener">Python操作MongoDB</a></li>
+<li><a href="https://www.runoob.com/mongodb/mongodb-tutorial.html" target="_blank" rel="noopener">MongoDB教程</a></li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Pymysql简单使用/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Pymysql简单使用/" itemprop="url">Pymysql简单使用</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-10T15:59:24+08:00">
+                2019-08-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>写代码的时候，操作数据库是必须的。之前都是能用就可以，今天得好好总结一下，这里用 pymysql 举例。</p>
+<h4 id="什么是Pymysql"><a href="#什么是Pymysql" class="headerlink" title="什么是Pymysql"></a>什么是Pymysql</h4><p>纯 Python 实现的一个 MySQL 客户端协议，兼容几乎所有的 MySQL 数据库。</p>
+<h4 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a>简单使用</h4><h5 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install pymysql</span><br></pre></td></tr></table></figure>
+<h5 id="具体例子"><a href="#具体例子" class="headerlink" title="具体例子"></a>具体例子</h5><p>先来看看官网给我们的例子，插入&amp;查询一条记录<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"></span><br><span class="line"><span class="comment"># 建表</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">CREATE TABLE `users` (</span></span><br><span class="line"><span class="string">    `id` int(11) NOT NULL AUTO_INCREMENT,</span></span><br><span class="line"><span class="string">    `email` varchar(255) COLLATE utf8_bin NOT NULL,</span></span><br><span class="line"><span class="string">    `password` varchar(255) COLLATE utf8_bin NOT NULL,</span></span><br><span class="line"><span class="string">    PRIMARY KEY (`id`)</span></span><br><span class="line"><span class="string">) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin</span></span><br><span class="line"><span class="string">AUTO_INCREMENT=1 ;</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># connecition 信息</span></span><br><span class="line">connection = pymysql.connect(host = <span class="string">'localhost'</span>,</span><br><span class="line">                             user = <span class="string">'root'</span>,</span><br><span class="line">                             password = <span class="string">'xxx'</span>,</span><br><span class="line">                             db = <span class="string">'demo'</span>,</span><br><span class="line">                             charset = <span class="string">'utf8mb4'</span>,</span><br><span class="line">                             cursorclass=pymysql.cursors.DictCursor</span><br><span class="line">                            )</span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="comment"># 使用 with 的好处在于 with 结束后会自动关闭 cursor</span></span><br><span class="line">    <span class="comment"># 插入数据</span></span><br><span class="line">    <span class="keyword">with</span> connection.cursor() <span class="keyword">as</span> cursor:</span><br><span class="line">        sql = <span class="string">"insert into users (`email`,`password`) values (%s,%s)"</span></span><br><span class="line">        cursor.execute(sql,(<span class="string">'zy@xx.com'</span>,<span class="string">'123456'</span>))</span><br><span class="line">        <span class="comment"># 连接默认不开启 autocommit，所以需要我们自己去 commit</span></span><br><span class="line">    connection.commit()</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 查询数据   </span></span><br><span class="line">    <span class="keyword">with</span> connection.cursor() <span class="keyword">as</span> cursor:</span><br><span class="line">        sql = <span class="string">'select `id` , `email` , `password` from `users` where `email` = %s '</span></span><br><span class="line">        cursor.execute(sql,(<span class="string">'zy@xx.com'</span>))</span><br><span class="line">        res = cursor.fetchone() <span class="comment"># 这里已经提交了</span></span><br><span class="line">        print(res)</span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line">    connection.close()</span><br></pre></td></tr></table></figure></p>
+<p>输出则是：<code>(1, &#39;zy@xx.com&#39;, &#39;123456&#39;)</code></p>
+<h5 id="连接对象"><a href="#连接对象" class="headerlink" title="连接对象"></a>连接对象</h5><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pymysql.connections.Connection(host=None, user=None, password='', database=None, port=0, unix_socket=None, charset='', sql_mode=None, read_default_file=None, conv=None, use_unicode=None, client_flag=0, cursorclass=&lt;class 'pymysql.cursors.Cursor'&gt;, init_command=None, connect_timeout=10, ssl=None, read_default_group=None, compress=None, named_pipe=None, autocommit=False, db=None, passwd=None, local_infile=False, max_allowed_packet=16777216, defer_connect=False, auth_plugin_map=None, read_timeout=None, write_timeout=None, bind_address=None, binary_prefix=False, program_name=None, server_public_key=None)</span><br></pre></td></tr></table></figure>
+<p>初始化 connection 对象时有很多参数，这里我们说几个比较常用的，具体信息可以参考官方文档</p>
+<ul>
+<li>host - 数据库服务器地址</li>
+<li>user - 用户名</li>
+<li>password ( passwd ) - 密码，默认为空字符串</li>
+<li>database ( db ) - 操作的数据库</li>
+<li>port - MySQL使用的端口，默认3306</li>
+<li>charset - 想要使用的数据库编码</li>
+<li>cursorclass - 默认的游标类型</li>
+<li>connect_timeout - 连接超时时间</li>
+<li>autocommit - 是否自动提交，默认为否</li>
+<li>local_infile - 是否允许可以load本地数据</li>
+</ul>
+<p>一般我们使用 <code>cursor()</code> 和 <code>commit()</code> 方法</p>
+<h5 id="获取游标"><a href="#获取游标" class="headerlink" title="获取游标"></a>获取游标</h5><p><code>cursor=connection.cursor()</code>，有了 cursor 对象之后我们才可以进行各种增删改查等数据库操作，其对我们最重要的方法是 <code>execute()</code> 和 <code>fetch()</code> 方法，因为我们所有对数据的操作都是通过他们执行的。<code>size</code> 在 <code>fetchmany()</code></p>
+<p>cursor 可以通过创建时指定类型，有</p>
+<ul>
+<li>Cursor - 元组类型</li>
+<li>SSCursor - 无缓冲元组类型</li>
+<li>DictCursor - 字典类型</li>
+<li>SSDictCursor - 无缓冲字典类型</li>
+</ul>
+<h5 id="增删改查"><a href="#增删改查" class="headerlink" title="增删改查"></a>增删改查</h5><h6 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据"></a>查询数据</h6><p>还是之前的例子<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> connection.cursor() <span class="keyword">as</span> cursor:</span><br><span class="line">    sql = <span class="string">'select `id` , `email` , `password` from `users` where `email` = %s '</span></span><br><span class="line">    cursor.execute(sql,(<span class="string">'zy@xx.com'</span>))</span><br><span class="line">    res = cursor.fetchone()</span><br></pre></td></tr></table></figure></p>
+<p>不过还有几个其他的方法：</p>
+<ul>
+<li><code>fetchall()</code> -  取回全部数据</li>
+<li><code>fetchmany(size)</code> - 取回一部分数据,由 size 决定</li>
+</ul>
+<p>两者都返回一个 <code>list</code> 对象，不过我以为会是一个生成器的…</p>
+<h6 id="增删改数据"><a href="#增删改数据" class="headerlink" title="增删改数据"></a>增删改数据</h6><p>使用 <code>cursor.execute()</code>，方法，这个写好 sql 就好，不过这些操作都需要 <code>cursor.commit()</code> 操作才会生效。还有一个 <code>cursor.executemany()</code> 的方法，使用极少极少。</p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><ol>
+<li><a href="https://pypi.org/project/PyMySQL/#documentation" target="_blank" rel="noopener">PyMySQL-PyPi</a></li>
+<li><a href="https://pymysql.readthedocs.io/en/latest/" target="_blank" rel="noopener">PyMySQL官方文档</a></li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Python理解yiled关键字/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Python理解yiled关键字/" itemprop="url">Python理解yiled关键字</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-07T19:12:17+08:00">
+                2019-08-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>一直对Python的<code>yield</code>关键字有点迷糊，今天整理下相关的知识。</p>
+<h3 id="迭代的概念"><a href="#迭代的概念" class="headerlink" title="迭代的概念"></a>迭代的概念</h3><p>Python是一门极其灵活的语言，其很多数据里都包含了其他类型的元素。而我们在实际使用的时候，经常需要逐个地取出元素。<strong>逐个获取元素的过程，就是迭代</strong>。</p>
+<p>Python的 <code>list</code>，<code>tuple</code>，<code>string</code>等顺序类型，还包括 <code>dict</code>，<code>set</code>等也都是。就是如果我们可以从一个对象中，逐个地获取元素，那么这个对象是「可迭代的」。</p>
+<p>至于迭代器则是抽象的一个数据流，是只允许迭代一次的对象。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">	print(i)</span><br></pre></td></tr></table></figure>
+<h3 id="生成器和yield关键字"><a href="#生成器和yield关键字" class="headerlink" title="生成器和yield关键字"></a>生成器和yield关键字</h3><blockquote>
+<p>生成器函数是一种特殊的函数，而生成器则是特殊的迭代器。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gen</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">yield</span> <span class="number">1</span></span><br><span class="line"></span><br><span class="line">print(type(func))   <span class="comment"># &lt;class 'function'&gt;</span></span><br><span class="line">print(type(gen))    <span class="comment"># &lt;class 'function'&gt;</span></span><br><span class="line"></span><br><span class="line">print(type(func())) <span class="comment"># &lt;class 'int'&gt;</span></span><br><span class="line">print(type(gen()))  <span class="comment"># &lt;class 'generator'&gt;</span></span><br></pre></td></tr></table></figure>
+<p>最重要的差异是二者返回的类型是不一样的，生成器函数返回一个迭代器。</p>
+<h3 id="yield"><a href="#yield" class="headerlink" title="yield"></a>yield</h3><p><code>yield</code>关键字仅用户定义生成器函数。与普通函数不同的是，生成器函数是惰性计算的，只有在返回的生成器调用成员方法时，相应函数中的代码才会被执行。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">square</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line">        <span class="keyword">yield</span> x ** <span class="number">2</span></span><br><span class="line">square_gen = square()</span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> square_gen:</span><br><span class="line">    print(x)</span><br></pre></td></tr></table></figure>
+<p>由前面可知，<code>square_gen</code>表示一个迭代器对象，for 循环会调用迭代器对象的 <code>next()</code> 函数，将生成器中的下一个值赋值给 x , 然后再继续循环，直到终止。</p>
+<h3 id="yield的好处"><a href="#yield的好处" class="headerlink" title="yield的好处"></a>yield的好处</h3><p><strong>节省时间空间上的开销</strong>。Python 之所以要提供这样的解决方案，是因为在很多时候，我们只是需要逐个顺序访问容器内的元素。大多数时候，我们不需要一口气获取容器内所有的元素。</p>
+<h3 id="实战一下"><a href="#实战一下" class="headerlink" title="实战一下"></a>实战一下</h3><p>生成斐波那契数列<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gen_fib</span><span class="params">(n_max)</span>:</span></span><br><span class="line">    n,a,b = <span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> n &lt; n_max:</span><br><span class="line">        <span class="keyword">yield</span> b </span><br><span class="line">        a , b = b , a+b </span><br><span class="line">        n += <span class="number">1</span> </span><br><span class="line">fib = [x <span class="keyword">for</span> x <span class="keyword">in</span> gen_fib(<span class="number">10</span>)]  </span><br><span class="line">fib <span class="comment"># [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li><a href="https://liam.page/2017/06/30/understanding-yield-in-python/" target="_blank" rel="noopener">Python 中的黑暗角落（一）：理解 yield 关键字</a></li>
+<li><a href="https://www.liaoxuefeng.com/wiki/1016959663602400/1017316949097888" target="_blank" rel="noopener">廖雪峰的官方网站</a></li>
+</ol>
+<p>感恩 始终 这位大佬，跟着走一遍打了一遍！</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://snailed.cn/Python模块hashlib/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1301,471 +1833,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/哈巴攀登笔记/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/哈巴攀登笔记/" itemprop="url">哈巴攀登笔记</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-07T22:30:55+08:00">
-                2019-07-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="衣食住行的情况"><a href="#衣食住行的情况" class="headerlink" title="衣食住行的情况"></a>衣食住行的情况</h2><h3 id="出行"><a href="#出行" class="headerlink" title="出行"></a>出行</h3><p>周五晚航班从北京出发，周六一早到达丽江，然后乘坐到香格里拉的大巴在虎跳峡镇下车（中午），乘坐哈巴村民的往返于虎跳峡镇的面包车去往哈巴村，过了中虎跳的那一段路很险，下午四点左右到达哈巴村。</p>
-<h3 id="住宿"><a href="#住宿" class="headerlink" title="住宿"></a>住宿</h3><p>第一晚住哈巴村如玉酒店，150一个标间，感觉还挺爽的。</p>
-<p>第二天上大本营，不过我们重装上去的，是自己搭的帐篷。以后雨季在外面搭帐篷睡觉，要好好评估下是否必要，这次体验不太好，主要有两点：1. 装备重；2. 收拾不好收拾,湿且重。</p>
-<h3 id="食物"><a href="#食物" class="headerlink" title="食物"></a>食物</h3><p>这次食物带少了，是个大问题。以后食物要按照超过20%的准备，而且要大概规划好每一顿吃些啥。这次水倒是准备得刚刚好，正常徒步，我的水量是1.2L到1.5L左右，可以准备两瓶矿泉水和一瓶功能饮料。</p>
-<h3 id="衣服"><a href="#衣服" class="headerlink" title="衣服"></a>衣服</h3><p>大叶迷彩的冲锋衣很好用，凯乐石的裤子也不错，优衣库的小马甲很到位，这一趟装备都很给力，一点没出岔子。</p>
-<p>常用穿法（可以hold住大多数环境）：</p>
-<ul>
-<li>厚羊毛袜 + 高帮运动鞋 （实战表示，一点味道都灭有）</li>
-<li>徒步长裤 + 护膝 + 秋裤（晚上钻睡袋用）</li>
-<li>速干 + 羽绒小马甲 + 羽绒衣 + 冲锋衣</li>
-<li>魔术头巾（脖子上吸汗 + 隔离速干衣） + 手表 + 帽子（华山五块钱的毛线帽。。。还真挺好用） +  户外眼镜</li>
-</ul>
-<h2 id="攀登细节"><a href="#攀登细节" class="headerlink" title="攀登细节"></a>攀登细节</h2><p>在哈巴村找到老三（三哥）作为向导，300一天。</p>
-<p>第一天早上9点出发大本营，晃悠接近六个小时之后到达大本营。哈巴的大本营十分好，个人基本可以只带衣服和冲顶用的装备即可，在大本营吃住都不成问题，晚上七八点的时候，外面雾气朦胧，我们在里面围着火塘烧柴火烤火，也是一种很好的体验了。<br><img src="WechatIMG190.jpeg" alt="烤火"><br>第二天早上02：40起床，吃过向导准备好的早饭，给保温杯装上热水，03：30迎着小雨，出发了。依次经过密林-&gt;大石坡-&gt;碎石坡-&gt;白石坡-&gt;绝望坡（冰坡)-&gt;月亮湾之后，09：06登顶成功。在山顶呆了半个多小时之后，09：48开始下撤，14：15到达大本营，吃过午饭之后15：30继续下撤，18：07下撤到哈巴村（重装下撤是真的坑。。。）<br><img src="WechatIMG191.jpeg" alt="山路夜行"><br><img src="WechatIMG188.jpeg" alt="坡0"><br><img src="WechatIMG193.jpeg" alt="坡1"><br><img src="WechatIMG192.jpeg" alt="冰坡"><br><img src="WechatIMG197.jpeg" alt="山顶的旺仔"><br><img src="WechatIMG196.jpeg" alt="下撤的路上"><br>洗澡吃肉喝酒睡觉。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/利用Crontab命名完成定时任务/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/利用Crontab命名完成定时任务/" itemprop="url">利用Crontab命名完成定时任务</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-27T16:57:32+08:00">
-                2019-06-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="crontab是干啥的"><a href="#crontab是干啥的" class="headerlink" title="crontab是干啥的"></a>crontab是干啥的</h3><p>通过crontab命名，我们可以在固定的时间间隔执行指定的系统命名或者shell script脚本。时间间隔的单位分别是分、小时、日、月、周及以上任意组合，想定时跑啥就干啥+</p>
-<h3 id="crontab怎么用"><a href="#crontab怎么用" class="headerlink" title="crontab怎么用"></a>crontab怎么用</h3><h4 id="1-命名格式"><a href="#1-命名格式" class="headerlink" title="1.命名格式"></a>1.命名格式</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">crontab [-u user] file</span><br><span class="line">crontab [-u user] [ -e | -l | -r ]</span><br></pre></td></tr></table></figure>
-<h4 id="2-命令参数"><a href="#2-命令参数" class="headerlink" title="2.命令参数"></a>2.命令参数</h4><ul>
-<li>-u : 设定某个用户的crontab服务</li>
-<li>file : 表示命令文件，crontab会执行这个命名文件，如果没有文件，则接受标准输入（键盘）上键入的命令，并将它们载入crontab</li>
-<li>-e : 编辑crontab文件内容</li>
-<li>-l : 显示crontab文件内容</li>
-<li>-r : 从/var/spool/cron目录中删除某个用户的crontab文件，如果不指定用户，则默认删除当前用户的crontab文件。</li>
-<li>-i : 在删除用户的crontab文件时给确认提示</li>
-</ul>
-<h4 id="3-文件格式"><a href="#3-文件格式" class="headerlink" title="3.文件格式"></a>3.文件格式</h4><p>分 时 日 月 星期 要运行的命令</p>
-<ul>
-<li>第一列：分钟0-59</li>
-<li>第二列：小时0-23(0表示子夜)</li>
-<li>第3列：日1～31</li>
-<li>第4列：月1～12</li>
-<li>第5列：星期0～7（0和7表示星期天）</li>
-<li>第六列：要运行的命令</li>
-</ul>
-<h4 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h4><p>编辑<code>-e</code>,显示<code>-l</code>,新建删除一般用不着，需要用的时候看~</p>
-<h4 id="使用实例"><a href="#使用实例" class="headerlink" title="使用实例"></a>使用实例</h4><h5 id="1-每分钟执行一个命令"><a href="#1-每分钟执行一个命令" class="headerlink" title="1.每分钟执行一个命令"></a>1.每分钟执行一个命令</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* * * * * myCommand</span><br></pre></td></tr></table></figure>
-<h5 id="2-每小时的第3和第15分钟执行"><a href="#2-每小时的第3和第15分钟执行" class="headerlink" title="2.每小时的第3和第15分钟执行"></a>2.每小时的第3和第15分钟执行</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3,15 * * * * myCommand</span><br></pre></td></tr></table></figure>
-<h5 id="3-在上午8点到11点的第3和第15分钟执行"><a href="#3-在上午8点到11点的第3和第15分钟执行" class="headerlink" title="3.在上午8点到11点的第3和第15分钟执行"></a>3.在上午8点到11点的第3和第15分钟执行</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3,15 8-11 * * * myCommand</span><br></pre></td></tr></table></figure>
-<h5 id="4-每天18-00至23-00之间每隔30分钟执行我的脚本"><a href="#4-每天18-00至23-00之间每隔30分钟执行我的脚本" class="headerlink" title="4.每天18 : 00至23 : 00之间每隔30分钟执行我的脚本"></a>4.每天18 : 00至23 : 00之间每隔30分钟执行我的脚本</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*/30 18-23 * * * cd /home/xxx;sh xxx.sh</span><br></pre></td></tr></table></figure>
-<h3 id="crontab的坑"><a href="#crontab的坑" class="headerlink" title="crontab的坑"></a>crontab的坑</h3><h4 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h4><p>有时候我们使用crontab去执行一个定时任务，发现在shell里面手动执行是没有问题的，但是无法自动执行。导致这种问题的原因一般是crontab文件中没有配置环境变量造成的。</p>
-<p>在crontab文件中定义多个调度任务时，需要特别注环境变量的设置，因为我们手动执行某个任务时，是在当前shell环境下进行的，程序当然能找到环境变量，而系统自动执行任务调度时，是不会加载任何环境变量的，因此，就需要在crontab文件中指定任务运行所需的所有环境变量，这样，系统执行任务调度时就没有问题了</p>
-<p><strong>不要假定cron知道所需要的特殊环境，它其实并不知道</strong>，我们使用的时候，需要注意以下三点：</p>
-<ol>
-<li>脚本执行中文件路径要写全局路径</li>
-<li>脚本执行要用到java或其他环境变量时，通过source命令引入环境变量 — 这个还没用过</li>
-<li>当手动执行脚本OK，但是crontab死活不执行时,很可能是环境变量惹的祸<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env bash</span><br><span class="line">export JAVA_HOME=&apos;/usr/java/xxx&apos;</span><br><span class="line">export HADOOP_HOME=&apos;/home/maintain/hadoop/xxxx&apos;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p><strong>第三点真的是踩的陨石巨坑！！！</strong></p>
-<h4 id="清理邮件日志"><a href="#清理邮件日志" class="headerlink" title="清理邮件日志"></a>清理邮件日志</h4><p>每条任务调度执行完毕，系统都会将任务输出信息通过电子邮件的形式发送给当前系统用户，这样日积月累，日志信息会非常大，可能会影响系统的正常运行，因此对每条任务进行重定向处理很重要，比如可以这么设置，忽略日志输出：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* * * * * date &gt; /logs/time.log 2&gt;&amp;1</span><br></pre></td></tr></table></figure></p>
-<p>“/logs/time.log 2&gt;&amp;1”表示先将标准输出重定向到/dev/null，然后将标准错误重定向到标准输出</p>
-<h4 id="其他问题"><a href="#其他问题" class="headerlink" title="其他问题"></a>其他问题</h4><ul>
-<li>在crontab中%是有特殊含义的，表示换行的意思。如果要用的话必须进行转义%，如经常用的date ‘+%Y%m%d’在crontab里是不会执行的，应该换成date ‘+%Y%m%d’</li>
-<li>当crontab失效时，可以尝试/etc/init.d/crond restart解决问题。或者查看日志看某个job有没有执行/报错tail -f /var/log/cron。</li>
-<li>不要乱删。。。</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/哈巴装备清单/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/哈巴装备清单/" itemprop="url">哈巴装备清单</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-19T14:20:20+08:00">
-                2019-06-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>必备用品</p>
-</blockquote>
-<ul>
-<li>大包 - 小鹰48L </li>
-<li>冲顶包 - 北风之神金牛座</li>
-<li>硬壳 - 乌孙2.0</li>
-<li>抓绒|薄款羽绒 - 考虑优衣库小马甲</li>
-<li>速干衣</li>
-<li>速干裤</li>
-<li>保暖裤 - 秋裤</li>
-<li>登山鞋 - 赞贝拉</li>
-<li>羊毛袜 - timberland</li>
-<li>睡袋 - 冰焰基础款640g</li>
-<li>保温杯 - 膳魔师470ml</li>
-<li>登山杖 - mbc201</li>
-<li>保温帽 </li>
-<li>炉头</li>
-<li>头灯</li>
-<li>魔术头巾</li>
-<li>锅具</li>
-<li>气罐 - 目的地购买</li>
-<li>食物</li>
-</ul>
-<blockquote>
-<p>可以租用</p>
-</blockquote>
-<ul>
-<li>雪套</li>
-<li>雪镜 - 防雾、透光度S2较为适宜，近视眼者请戴上镜框眼镜。</li>
-<li>手套 - 抓绒保暖、防水性能好。</li>
-<li>冰爪</li>
-<li>冰镐</li>
-</ul>
-<blockquote>
-<p>随身用品</p>
-</blockquote>
-<ul>
-<li>身份证</li>
-<li>手机</li>
-<li>充电器</li>
-<li>防晒霜</li>
-<li>现金 - 多准备点</li>
-<li>药品 - 感冒药，创口贴</li>
-<li>充电宝</li>
-<li><del>相机</del></li>
-<li><del>暖宝宝</del></li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1813,7 +1885,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">89</span>
+                  <span class="site-state-item-count">92</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1826,7 +1898,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-count">35</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
