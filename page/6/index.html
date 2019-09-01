@@ -242,6 +242,1457 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/ch09-GroupBy/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/ch09-GroupBy/" itemprop="url">ch09-GroupBy</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-14T00:57:10+08:00">
+                2019-01-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="GroupBy技术"><a href="#GroupBy技术" class="headerlink" title="GroupBy技术"></a>GroupBy技术</h1><p>split-&gt;apply-&gt;combine</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">df = pd.DataFrame(&#123;<span class="string">'key1'</span> : [<span class="string">'a'</span>, <span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'b'</span>, <span class="string">'a'</span>],</span><br><span class="line">                   <span class="string">'key2'</span> : [<span class="string">'one'</span>, <span class="string">'two'</span>, <span class="string">'one'</span>, <span class="string">'two'</span>, <span class="string">'one'</span>],</span><br><span class="line">                   <span class="string">'data1'</span> : np.random.randn(<span class="number">5</span>),</span><br><span class="line">                   <span class="string">'data2'</span> : np.random.randn(<span class="number">5</span>)&#125;)</span><br><span class="line">df</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>key1</th>
+      <th>key2</th>
+      <th>data1</th>
+      <th>data2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>a</td>
+      <td>one</td>
+      <td>1.587125</td>
+      <td>-0.517650</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>a</td>
+      <td>two</td>
+      <td>0.206854</td>
+      <td>1.503013</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>b</td>
+      <td>one</td>
+      <td>1.074688</td>
+      <td>-1.310088</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>b</td>
+      <td>two</td>
+      <td>0.306591</td>
+      <td>2.236456</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>a</td>
+      <td>one</td>
+      <td>0.462624</td>
+      <td>0.643336</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#利用key1进行分组求data1的平均值</span></span><br><span class="line">grouped = df[<span class="string">'data1'</span>].groupby(df[<span class="string">'key1'</span>])</span><br><span class="line">grouped  <span class="comment">#一个groupby对象</span></span><br></pre></td></tr></table></figure>
+<pre><code>&lt;pandas.core.groupby.groupby.SeriesGroupBy object at 0x10637ba20&gt;
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grouped.mean()</span><br></pre></td></tr></table></figure>
+<pre><code>key1
+a    0.752201
+b    0.690639
+Name: data1, dtype: float64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grouped.describe()</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>50%</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+    <tr>
+      <th>key1</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>3.0</td>
+      <td>0.752201</td>
+      <td>0.734288</td>
+      <td>0.206854</td>
+      <td>0.334739</td>
+      <td>0.462624</td>
+      <td>1.024874</td>
+      <td>1.587125</td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>2.0</td>
+      <td>0.690639</td>
+      <td>0.543127</td>
+      <td>0.306591</td>
+      <td>0.498615</td>
+      <td>0.690639</td>
+      <td>0.882664</td>
+      <td>1.074688</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">means = df[<span class="string">'data1'</span>].groupby([df[<span class="string">'key1'</span>],df[<span class="string">'key2'</span>]]).mean()</span><br><span class="line">means</span><br></pre></td></tr></table></figure>
+<pre><code>key1  key2
+a     one     1.024874
+      two     0.206854
+b     one     1.074688
+      two     0.306591
+Name: data1, dtype: float64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">means.unstack()</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>key2</th>
+      <th>one</th>
+      <th>two</th>
+    </tr>
+    <tr>
+      <th>key1</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>1.024874</td>
+      <td>0.206854</td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>1.074688</td>
+      <td>0.306591</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">states = np.array([<span class="string">'Ohio'</span>, <span class="string">'California'</span>, <span class="string">'California'</span>, <span class="string">'Ohio'</span>, <span class="string">'Ohio'</span>])</span><br><span class="line">years = np.array([<span class="number">2005</span>, <span class="number">2005</span>, <span class="number">2006</span>, <span class="number">2005</span>, <span class="number">2006</span>])</span><br><span class="line">df[<span class="string">'data1'</span>].groupby([states, years]).mean()</span><br></pre></td></tr></table></figure>
+<pre><code>California  2005    0.206854
+            2006    1.074688
+Ohio        2005    0.946858
+            2006    0.462624
+Name: data1, dtype: float64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.groupby(<span class="string">'key1'</span>).mean()</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>data1</th>
+      <th>data2</th>
+    </tr>
+    <tr>
+      <th>key1</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>0.752201</td>
+      <td>0.542900</td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>0.690639</td>
+      <td>0.463184</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.groupby([<span class="string">'key1'</span>,<span class="string">'key2'</span>]).mean()</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>data1</th>
+      <th>data2</th>
+    </tr>
+    <tr>
+      <th>key1</th>
+      <th>key2</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="2" valign="top">a</th>
+      <th>one</th>
+      <td>1.024874</td>
+      <td>0.062843</td>
+    </tr>
+    <tr>
+      <th>two</th>
+      <td>0.206854</td>
+      <td>1.503013</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">b</th>
+      <th>one</th>
+      <td>1.074688</td>
+      <td>-1.310088</td>
+    </tr>
+    <tr>
+      <th>two</th>
+      <td>0.306591</td>
+      <td>2.236456</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+<h2 id="对分组进行迭代"><a href="#对分组进行迭代" class="headerlink" title="对分组进行迭代"></a>对分组进行迭代</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#GroupBy对象支持迭代，可以产生一组二元元组</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> name,group <span class="keyword">in</span> df.groupby(<span class="string">'key1'</span>):</span><br><span class="line">    print(name)</span><br><span class="line">    print(group)</span><br></pre></td></tr></table></figure>
+<pre><code>a
+  key1 key2     data1     data2
+0    a  one  1.587125 -0.517650
+1    a  two  0.206854  1.503013
+4    a  one  0.462624  0.643336
+b
+  key1 key2     data1     data2
+2    b  one  1.074688 -1.310088
+3    b  two  0.306591  2.236456
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#多个键则返回由键值组成的元组</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> name,group <span class="keyword">in</span> df.groupby([<span class="string">'key1'</span>,<span class="string">'key2'</span>]):</span><br><span class="line">    print(name)</span><br><span class="line">    print(group)</span><br></pre></td></tr></table></figure>
+<pre><code>(&#39;a&#39;, &#39;one&#39;)
+  key1 key2     data1     data2
+0    a  one  1.587125 -0.517650
+4    a  one  0.462624  0.643336
+(&#39;a&#39;, &#39;two&#39;)
+  key1 key2     data1     data2
+1    a  two  0.206854  1.503013
+(&#39;b&#39;, &#39;one&#39;)
+  key1 key2     data1     data2
+2    b  one  1.074688 -1.310088
+(&#39;b&#39;, &#39;two&#39;)
+  key1 key2     data1     data2
+3    b  two  0.306591  2.236456
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#造个字典</span></span><br><span class="line">pieces = dict(list(df.groupby(<span class="string">'key1'</span>)))</span><br><span class="line">pieces[<span class="string">'b'</span>]</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>key1</th>
+      <th>key2</th>
+      <th>data1</th>
+      <th>data2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2</th>
+      <td>b</td>
+      <td>one</td>
+      <td>1.074688</td>
+      <td>-1.310088</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>b</td>
+      <td>two</td>
+      <td>0.306591</td>
+      <td>2.236456</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+<h2 id="选取一个或者一列"><a href="#选取一个或者一列" class="headerlink" title="选取一个或者一列"></a>选取一个或者一列</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">'data1'</span>].groupby(df[<span class="string">'key1'</span>]).describe()</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>50%</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+    <tr>
+      <th>key1</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>3.0</td>
+      <td>0.752201</td>
+      <td>0.734288</td>
+      <td>0.206854</td>
+      <td>0.334739</td>
+      <td>0.462624</td>
+      <td>1.024874</td>
+      <td>1.587125</td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>2.0</td>
+      <td>0.690639</td>
+      <td>0.543127</td>
+      <td>0.306591</td>
+      <td>0.498615</td>
+      <td>0.690639</td>
+      <td>0.882664</td>
+      <td>1.074688</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.groupby([<span class="string">'key1'</span>])[<span class="string">'data1'</span>].describe()  <span class="comment">#单独选取‘data1’这一列</span></span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>50%</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+    <tr>
+      <th>key1</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>3.0</td>
+      <td>0.752201</td>
+      <td>0.734288</td>
+      <td>0.206854</td>
+      <td>0.334739</td>
+      <td>0.462624</td>
+      <td>1.024874</td>
+      <td>1.587125</td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>2.0</td>
+      <td>0.690639</td>
+      <td>0.543127</td>
+      <td>0.306591</td>
+      <td>0.498615</td>
+      <td>0.690639</td>
+      <td>0.882664</td>
+      <td>1.074688</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+<h2 id="通过字典或Series进行分组"><a href="#通过字典或Series进行分组" class="headerlink" title="通过字典或Series进行分组"></a>通过字典或Series进行分组</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">people = pd.DataFrame(np.random.randn(<span class="number">5</span>, <span class="number">5</span>),</span><br><span class="line">                      columns=[<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>, <span class="string">'e'</span>],</span><br><span class="line">                      index=[<span class="string">'Joe'</span>, <span class="string">'Steve'</span>, <span class="string">'Wes'</span>, <span class="string">'Jim'</span>, <span class="string">'Travis'</span>])</span><br><span class="line">people.iloc[<span class="number">2</span>:<span class="number">3</span>, [<span class="number">1</span>, <span class="number">2</span>]] = np.nan <span class="comment"># Add a few NA values</span></span><br><span class="line">people</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>a</th>
+      <th>b</th>
+      <th>c</th>
+      <th>d</th>
+      <th>e</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Joe</th>
+      <td>-0.323368</td>
+      <td>-0.768278</td>
+      <td>-0.169238</td>
+      <td>0.308583</td>
+      <td>-0.459496</td>
+    </tr>
+    <tr>
+      <th>Steve</th>
+      <td>-0.597247</td>
+      <td>-0.301618</td>
+      <td>-0.439395</td>
+      <td>-1.482591</td>
+      <td>-0.019049</td>
+    </tr>
+    <tr>
+      <th>Wes</th>
+      <td>0.100330</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.457292</td>
+      <td>1.192268</td>
+    </tr>
+    <tr>
+      <th>Jim</th>
+      <td>-0.223226</td>
+      <td>-0.196377</td>
+      <td>2.264969</td>
+      <td>-0.982435</td>
+      <td>-1.851675</td>
+    </tr>
+    <tr>
+      <th>Travis</th>
+      <td>-1.245037</td>
+      <td>-0.080968</td>
+      <td>-0.509985</td>
+      <td>0.928633</td>
+      <td>-0.474299</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mapping = &#123;<span class="string">'a'</span>: <span class="string">'red'</span>, <span class="string">'b'</span>: <span class="string">'red'</span>, <span class="string">'c'</span>: <span class="string">'blue'</span>,</span><br><span class="line">           <span class="string">'d'</span>: <span class="string">'blue'</span>, <span class="string">'e'</span>: <span class="string">'red'</span>, <span class="string">'f'</span> : <span class="string">'orange'</span>&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">by_columns = people.groupby(mapping,axis=<span class="number">1</span>) <span class="comment">#要和轴长度一致</span></span><br><span class="line">by_columns.sum()</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>blue</th>
+      <th>red</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Joe</th>
+      <td>0.139345</td>
+      <td>-1.551143</td>
+    </tr>
+    <tr>
+      <th>Steve</th>
+      <td>-1.921986</td>
+      <td>-0.917914</td>
+    </tr>
+    <tr>
+      <th>Wes</th>
+      <td>0.457292</td>
+      <td>1.292598</td>
+    </tr>
+    <tr>
+      <th>Jim</th>
+      <td>1.282534</td>
+      <td>-2.271279</td>
+    </tr>
+    <tr>
+      <th>Travis</th>
+      <td>0.418648</td>
+      <td>-1.800303</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+<h2 id="通过函数进行分组"><a href="#通过函数进行分组" class="headerlink" title="通过函数进行分组"></a>通过函数进行分组</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">people.groupby(len).sum()</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>a</th>
+      <th>b</th>
+      <th>c</th>
+      <th>d</th>
+      <th>e</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>3</th>
+      <td>-0.446265</td>
+      <td>-0.964655</td>
+      <td>2.095731</td>
+      <td>-0.216560</td>
+      <td>-1.118904</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>-0.597247</td>
+      <td>-0.301618</td>
+      <td>-0.439395</td>
+      <td>-1.482591</td>
+      <td>-0.019049</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>-1.245037</td>
+      <td>-0.080968</td>
+      <td>-0.509985</td>
+      <td>0.928633</td>
+      <td>-0.474299</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+<h2 id="根据索引级别分组"><a href="#根据索引级别分组" class="headerlink" title="根据索引级别分组"></a>根据索引级别分组</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">columns = pd.MultiIndex.from_arrays([[<span class="string">'US'</span>, <span class="string">'US'</span>, <span class="string">'US'</span>, <span class="string">'JP'</span>, <span class="string">'JP'</span>],</span><br><span class="line">                                    [<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">1</span>, <span class="number">3</span>]],</span><br><span class="line">                                    names=[<span class="string">'cty'</span>, <span class="string">'tenor'</span>])</span><br><span class="line">hier_df = pd.DataFrame(np.random.randn(<span class="number">4</span>, <span class="number">5</span>), columns=columns)</span><br><span class="line">hier_df</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th>cty</th>
+      <th colspan="3" halign="left">US</th>
+      <th colspan="2" halign="left">JP</th>
+    </tr>
+    <tr>
+      <th>tenor</th>
+      <th>1</th>
+      <th>3</th>
+      <th>5</th>
+      <th>1</th>
+      <th>3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>-0.297194</td>
+      <td>0.028656</td>
+      <td>1.206242</td>
+      <td>1.330768</td>
+      <td>-0.267134</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.104323</td>
+      <td>-1.416412</td>
+      <td>-0.602244</td>
+      <td>-0.442782</td>
+      <td>-0.654808</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1.199846</td>
+      <td>1.050484</td>
+      <td>0.077949</td>
+      <td>-0.214932</td>
+      <td>1.186233</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.214656</td>
+      <td>0.337322</td>
+      <td>-0.324943</td>
+      <td>1.581862</td>
+      <td>0.821636</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+<h1 id="数据聚合"><a href="#数据聚合" class="headerlink" title="数据聚合"></a>数据聚合</h1><p>主要讲sum(),count()等函数计算时到底发生了什么，我们也可以使用自己定义的聚合函数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grouped = df.groupby(<span class="string">'key1'</span>)</span><br><span class="line">grouped[<span class="string">'data1'</span>].quantile(<span class="number">0.9</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>key1
+a    1.362225
+b    0.997878
+Name: data1, dtype: float64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grouped.describe().stack().head()</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>data1</th>
+      <th>data2</th>
+    </tr>
+    <tr>
+      <th>key1</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="5" valign="top">a</th>
+      <th>count</th>
+      <td>3.000000</td>
+      <td>3.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>0.752201</td>
+      <td>0.542900</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.734288</td>
+      <td>1.014069</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>0.206854</td>
+      <td>-0.517650</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>0.334739</td>
+      <td>0.062843</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+<h1 id="分组运算和转换"><a href="#分组运算和转换" class="headerlink" title="分组运算和转换"></a>分组运算和转换</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#pass transform()</span></span><br></pre></td></tr></table></figure>
+<h2 id="apply-一般性的‘拆分-应用-合并’"><a href="#apply-一般性的‘拆分-应用-合并’" class="headerlink" title="apply:一般性的‘拆分-应用-合并’"></a>apply:一般性的‘拆分-应用-合并’</h2><p>最一般化的GroupBy方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tips = pd.read_csv(<span class="string">'examples/tips.csv'</span>)</span><br><span class="line">tips[<span class="string">'tip_pct'</span>] = tips[<span class="string">'tip'</span>] / tips[<span class="string">'total_bill'</span>]</span><br><span class="line">tips[:<span class="number">6</span>]</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>total_bill</th>
+      <th>tip</th>
+      <th>smoker</th>
+      <th>day</th>
+      <th>time</th>
+      <th>size</th>
+      <th>tip_pct</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>16.99</td>
+      <td>1.01</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>2</td>
+      <td>0.059447</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>10.34</td>
+      <td>1.66</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>3</td>
+      <td>0.160542</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>21.01</td>
+      <td>3.50</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>3</td>
+      <td>0.166587</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>23.68</td>
+      <td>3.31</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>2</td>
+      <td>0.139780</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>24.59</td>
+      <td>3.61</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>4</td>
+      <td>0.146808</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>25.29</td>
+      <td>4.71</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>4</td>
+      <td>0.186240</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grouped = tips.groupby([<span class="string">'day'</span>, <span class="string">'smoker'</span>])</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grouped_pct = grouped[<span class="string">'tip_pct'</span>]</span><br><span class="line">grouped_pct.agg(<span class="string">'mean'</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>day   smoker
+Fri   No        0.151650
+      Yes       0.174783
+Sat   No        0.158048
+      Yes       0.147906
+Sun   No        0.160113
+      Yes       0.187250
+Thur  No        0.160298
+      Yes       0.163863
+Name: tip_pct, dtype: float64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grouped_pct.agg([<span class="string">'mean'</span>, <span class="string">'std'</span>])</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>mean</th>
+      <th>std</th>
+    </tr>
+    <tr>
+      <th>day</th>
+      <th>smoker</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="2" valign="top">Fri</th>
+      <th>No</th>
+      <td>0.151650</td>
+      <td>0.028123</td>
+    </tr>
+    <tr>
+      <th>Yes</th>
+      <td>0.174783</td>
+      <td>0.051293</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">Sat</th>
+      <th>No</th>
+      <td>0.158048</td>
+      <td>0.039767</td>
+    </tr>
+    <tr>
+      <th>Yes</th>
+      <td>0.147906</td>
+      <td>0.061375</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">Sun</th>
+      <th>No</th>
+      <td>0.160113</td>
+      <td>0.042347</td>
+    </tr>
+    <tr>
+      <th>Yes</th>
+      <td>0.187250</td>
+      <td>0.154134</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">Thur</th>
+      <th>No</th>
+      <td>0.160298</td>
+      <td>0.038774</td>
+    </tr>
+    <tr>
+      <th>Yes</th>
+      <td>0.163863</td>
+      <td>0.039389</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grouped_pct.agg([(<span class="string">'foo'</span>, <span class="string">'mean'</span>), (<span class="string">'bar'</span>, np.std)])  <span class="comment">#传入tuple</span></span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>foo</th>
+      <th>bar</th>
+    </tr>
+    <tr>
+      <th>day</th>
+      <th>smoker</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="2" valign="top">Fri</th>
+      <th>No</th>
+      <td>0.151650</td>
+      <td>0.028123</td>
+    </tr>
+    <tr>
+      <th>Yes</th>
+      <td>0.174783</td>
+      <td>0.051293</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">Sat</th>
+      <th>No</th>
+      <td>0.158048</td>
+      <td>0.039767</td>
+    </tr>
+    <tr>
+      <th>Yes</th>
+      <td>0.147906</td>
+      <td>0.061375</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">Sun</th>
+      <th>No</th>
+      <td>0.160113</td>
+      <td>0.042347</td>
+    </tr>
+    <tr>
+      <th>Yes</th>
+      <td>0.187250</td>
+      <td>0.154134</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">Thur</th>
+      <th>No</th>
+      <td>0.160298</td>
+      <td>0.038774</td>
+    </tr>
+    <tr>
+      <th>Yes</th>
+      <td>0.163863</td>
+      <td>0.039389</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">functions = [<span class="string">'count'</span>, <span class="string">'mean'</span>, <span class="string">'max'</span>]</span><br><span class="line">result = grouped[<span class="string">'tip_pct'</span>, <span class="string">'total_bill'</span>].agg(functions)</span><br><span class="line">result</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th colspan="3" halign="left">tip_pct</th>
+      <th colspan="3" halign="left">total_bill</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>max</th>
+      <th>count</th>
+      <th>mean</th>
+      <th>max</th>
+    </tr>
+    <tr>
+      <th>day</th>
+      <th>smoker</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="2" valign="top">Fri</th>
+      <th>No</th>
+      <td>4</td>
+      <td>0.151650</td>
+      <td>0.187735</td>
+      <td>4</td>
+      <td>18.420000</td>
+      <td>22.75</td>
+    </tr>
+    <tr>
+      <th>Yes</th>
+      <td>15</td>
+      <td>0.174783</td>
+      <td>0.263480</td>
+      <td>15</td>
+      <td>16.813333</td>
+      <td>40.17</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">Sat</th>
+      <th>No</th>
+      <td>45</td>
+      <td>0.158048</td>
+      <td>0.291990</td>
+      <td>45</td>
+      <td>19.661778</td>
+      <td>48.33</td>
+    </tr>
+    <tr>
+      <th>Yes</th>
+      <td>42</td>
+      <td>0.147906</td>
+      <td>0.325733</td>
+      <td>42</td>
+      <td>21.276667</td>
+      <td>50.81</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">Sun</th>
+      <th>No</th>
+      <td>57</td>
+      <td>0.160113</td>
+      <td>0.252672</td>
+      <td>57</td>
+      <td>20.506667</td>
+      <td>48.17</td>
+    </tr>
+    <tr>
+      <th>Yes</th>
+      <td>19</td>
+      <td>0.187250</td>
+      <td>0.710345</td>
+      <td>19</td>
+      <td>24.120000</td>
+      <td>45.35</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">Thur</th>
+      <th>No</th>
+      <td>45</td>
+      <td>0.160298</td>
+      <td>0.266312</td>
+      <td>45</td>
+      <td>17.113111</td>
+      <td>41.19</td>
+    </tr>
+    <tr>
+      <th>Yes</th>
+      <td>17</td>
+      <td>0.163863</td>
+      <td>0.241255</td>
+      <td>17</td>
+      <td>19.190588</td>
+      <td>43.11</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+<h3 id="分位数和桶分析"><a href="#分位数和桶分析" class="headerlink" title="分位数和桶分析"></a>分位数和桶分析</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#和pandas的cut|qcut结合</span></span><br><span class="line"></span><br><span class="line">frame = pd.DataFrame(&#123;<span class="string">'data1'</span>: np.random.randn(<span class="number">1000</span>),</span><br><span class="line">                      <span class="string">'data2'</span>: np.random.randn(<span class="number">1000</span>)&#125;)</span><br><span class="line">quartiles = pd.cut(frame.data1, <span class="number">4</span>)</span><br><span class="line">quartiles[:<span class="number">10</span>]</span><br></pre></td></tr></table></figure>
+<pre><code>0    (-2.845, -1.307]
+1      (0.225, 1.757]
+2      (0.225, 1.757]
+3      (0.225, 1.757]
+4     (-1.307, 0.225]
+5      (0.225, 1.757]
+6      (0.225, 1.757]
+7     (-1.307, 0.225]
+8       (1.757, 3.29]
+9     (-1.307, 0.225]
+Name: data1, dtype: category
+Categories (4, interval[float64]): [(-2.845, -1.307] &lt; (-1.307, 0.225] &lt; (0.225, 1.757] &lt; (1.757, 3.29]]
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_stats</span><span class="params">(group)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> &#123;<span class="string">'min'</span>: group.min(), <span class="string">'max'</span>: group.max(),</span><br><span class="line">            <span class="string">'count'</span>: group.count(), <span class="string">'mean'</span>: group.mean()&#125;</span><br><span class="line">grouped = frame.data2.groupby(quartiles)</span><br><span class="line">grouped.apply(get_stats).unstack()</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>count</th>
+      <th>max</th>
+      <th>mean</th>
+      <th>min</th>
+    </tr>
+    <tr>
+      <th>data1</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>(-2.845, -1.307]</th>
+      <td>106.0</td>
+      <td>1.826602</td>
+      <td>0.117032</td>
+      <td>-2.382809</td>
+    </tr>
+    <tr>
+      <th>(-1.307, 0.225]</th>
+      <td>478.0</td>
+      <td>3.553988</td>
+      <td>0.079556</td>
+      <td>-2.690484</td>
+    </tr>
+    <tr>
+      <th>(0.225, 1.757]</th>
+      <td>379.0</td>
+      <td>2.647662</td>
+      <td>0.005168</td>
+      <td>-2.656434</td>
+    </tr>
+    <tr>
+      <th>(1.757, 3.29]</th>
+      <td>37.0</td>
+      <td>1.995249</td>
+      <td>0.024612</td>
+      <td>-1.838962</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p>后续补上</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://snailed.cn/读《人间失格》/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -5663,1074 +7114,6 @@ Name: 3, dtype: float64
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/ch06-IO/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/ch06-IO/" itemprop="url">ch06-IO</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-06T00:20:14+08:00">
-                2019-01-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="读写文本格式的数据"><a href="#读写文本格式的数据" class="headerlink" title="读写文本格式的数据"></a>读写文本格式的数据</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">np.random.seed(<span class="number">12345</span>)</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">plt.rc(<span class="string">'figure'</span>, figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">np.set_printoptions(precision=<span class="number">4</span>, suppress=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!pwd</span><br></pre></td></tr></table></figure>
-<pre><code>/Users/zhangyangfenbi.com/Desktop/code/conda_book
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!cat examples/ex1.csv</span><br></pre></td></tr></table></figure>
-<pre><code>a,b,c,d,message
-1,2,3,4,hello
-5,6,7,8,world
-9,10,11,12,foo
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">file_path = <span class="string">'examples/ex1.csv'</span></span><br><span class="line">df=pd.read_csv(file_path)</span><br><span class="line">df</span><br></pre></td></tr></table></figure>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>a</th>
-      <th>b</th>
-      <th>c</th>
-      <th>d</th>
-      <th>message</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>2</td>
-      <td>3</td>
-      <td>4</td>
-      <td>hello</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>5</td>
-      <td>6</td>
-      <td>7</td>
-      <td>8</td>
-      <td>world</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>9</td>
-      <td>10</td>
-      <td>11</td>
-      <td>12</td>
-      <td>foo</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#read_table也可以，不过分隔符不一样，需要重新指定</span></span><br><span class="line">pd.read_table(<span class="string">'examples/ex1.csv'</span>,sep=<span class="string">','</span>)</span><br></pre></td></tr></table></figure>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>a</th>
-      <th>b</th>
-      <th>c</th>
-      <th>d</th>
-      <th>message</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>2</td>
-      <td>3</td>
-      <td>4</td>
-      <td>hello</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>5</td>
-      <td>6</td>
-      <td>7</td>
-      <td>8</td>
-      <td>world</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>9</td>
-      <td>10</td>
-      <td>11</td>
-      <td>12</td>
-      <td>foo</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!cat examples/ex2.csv</span><br></pre></td></tr></table></figure>
-<pre><code>1,2,3,4,hello
-5,6,7,8,world
-9,10,11,12,foo
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#可以让pandas为其默认分配列名，或者自己定义列名</span></span><br><span class="line">df1=pd.read_csv(<span class="string">'examples/ex2.csv'</span>,header=<span class="keyword">None</span>)</span><br><span class="line">df1</span><br></pre></td></tr></table></figure>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>0</th>
-      <th>1</th>
-      <th>2</th>
-      <th>3</th>
-      <th>4</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>2</td>
-      <td>3</td>
-      <td>4</td>
-      <td>hello</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>5</td>
-      <td>6</td>
-      <td>7</td>
-      <td>8</td>
-      <td>world</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>9</td>
-      <td>10</td>
-      <td>11</td>
-      <td>12</td>
-      <td>foo</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df2=pd.read_csv(<span class="string">'examples/ex2.csv'</span>,names=[<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>,<span class="string">'d'</span>,<span class="string">'e'</span>])</span><br><span class="line">df2</span><br></pre></td></tr></table></figure>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>a</th>
-      <th>b</th>
-      <th>c</th>
-      <th>d</th>
-      <th>e</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>2</td>
-      <td>3</td>
-      <td>4</td>
-      <td>hello</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>5</td>
-      <td>6</td>
-      <td>7</td>
-      <td>8</td>
-      <td>world</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>9</td>
-      <td>10</td>
-      <td>11</td>
-      <td>12</td>
-      <td>foo</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df2=pd.read_csv(<span class="string">'examples/ex2.csv'</span>,names=[<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>,<span class="string">'d'</span>,<span class="string">'e'</span>],index_col=<span class="string">'e'</span>)</span><br><span class="line">df2</span><br></pre></td></tr></table></figure>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>a</th>
-      <th>b</th>
-      <th>c</th>
-      <th>d</th>
-    </tr>
-    <tr>
-      <th>e</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>hello</th>
-      <td>1</td>
-      <td>2</td>
-      <td>3</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>world</th>
-      <td>5</td>
-      <td>6</td>
-      <td>7</td>
-      <td>8</td>
-    </tr>
-    <tr>
-      <th>foo</th>
-      <td>9</td>
-      <td>10</td>
-      <td>11</td>
-      <td>12</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!cat examples/csv_mindex.csv</span><br></pre></td></tr></table></figure>
-<pre><code>key1,key2,value1,value2
-one,a,1,2
-one,b,3,4
-one,c,5,6
-one,d,7,8
-two,a,9,10
-two,b,11,12
-two,c,13,14
-two,d,15,16
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.read_csv(<span class="string">'examples/csv_mindex.csv'</span>,index_col=[<span class="string">'key1'</span>,<span class="string">'key2'</span>])</span><br></pre></td></tr></table></figure>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th></th>
-      <th>value1</th>
-      <th>value2</th>
-    </tr>
-    <tr>
-      <th>key1</th>
-      <th>key2</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th rowspan="4" valign="top">one</th>
-      <th>a</th>
-      <td>1</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>b</th>
-      <td>3</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>c</th>
-      <td>5</td>
-      <td>6</td>
-    </tr>
-    <tr>
-      <th>d</th>
-      <td>7</td>
-      <td>8</td>
-    </tr>
-    <tr>
-      <th rowspan="4" valign="top">two</th>
-      <th>a</th>
-      <td>9</td>
-      <td>10</td>
-    </tr>
-    <tr>
-      <th>b</th>
-      <td>11</td>
-      <td>12</td>
-    </tr>
-    <tr>
-      <th>c</th>
-      <td>13</td>
-      <td>14</td>
-    </tr>
-    <tr>
-      <th>d</th>
-      <td>15</td>
-      <td>16</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#</span></span><br><span class="line">list(open(<span class="string">'examples/ex3.txt'</span>))</span><br></pre></td></tr></table></figure>
-<pre><code>[&#39;            A         B         C\n&#39;,
- &#39;aaa -0.264438 -1.026059 -0.619500\n&#39;,
- &#39;bbb  0.927272  0.302904 -0.032399\n&#39;,
- &#39;ccc -0.264273 -0.386314 -0.217601\n&#39;,
- &#39;ddd -0.871858 -0.348382  1.100491\n&#39;]
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#通过正则表达式去匹配并不是固定的分隔符</span></span><br><span class="line">res = pd.read_table(<span class="string">'examples/ex3.txt'</span>,sep=<span class="string">'\s+'</span>)</span><br><span class="line">res</span><br></pre></td></tr></table></figure>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>A</th>
-      <th>B</th>
-      <th>C</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>aaa</th>
-      <td>-0.264438</td>
-      <td>-1.026059</td>
-      <td>-0.619500</td>
-    </tr>
-    <tr>
-      <th>bbb</th>
-      <td>0.927272</td>
-      <td>0.302904</td>
-      <td>-0.032399</td>
-    </tr>
-    <tr>
-      <th>ccc</th>
-      <td>-0.264273</td>
-      <td>-0.386314</td>
-      <td>-0.217601</td>
-    </tr>
-    <tr>
-      <th>ddd</th>
-      <td>-0.871858</td>
-      <td>-0.348382</td>
-      <td>1.100491</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!cat examples/ex4.csv</span><br></pre></td></tr></table></figure>
-<pre><code># hey!
-a,b,c,d,message
-# just wanted to make things more difficult for you
-# who reads CSV files with computers, anyway?
-1,2,3,4,hello
-5,6,7,8,world
-9,10,11,12,foo
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#使用skiprows跳过指定行</span></span><br><span class="line">pd.read_csv(<span class="string">'examples/ex4.csv'</span>,skiprows=[<span class="number">0</span>,<span class="number">2</span>,<span class="number">3</span>])</span><br></pre></td></tr></table></figure>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>a</th>
-      <th>b</th>
-      <th>c</th>
-      <th>d</th>
-      <th>message</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>2</td>
-      <td>3</td>
-      <td>4</td>
-      <td>hello</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>5</td>
-      <td>6</td>
-      <td>7</td>
-      <td>8</td>
-      <td>world</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>9</td>
-      <td>10</td>
-      <td>11</td>
-      <td>12</td>
-      <td>foo</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!cat examples/ex5.csv</span><br></pre></td></tr></table></figure>
-<pre><code>something,a,b,c,d,message
-one,1,2,3,4,NA
-two,5,6,,8,world
-three,9,10,11,12,foo
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#pandas会对缺失值进行标识</span></span><br><span class="line">res1=pd.read_csv(<span class="string">'examples/ex5.csv'</span>)</span><br><span class="line">res1</span><br></pre></td></tr></table></figure>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>something</th>
-      <th>a</th>
-      <th>b</th>
-      <th>c</th>
-      <th>d</th>
-      <th>message</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>one</td>
-      <td>1</td>
-      <td>2</td>
-      <td>3.0</td>
-      <td>4</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>two</td>
-      <td>5</td>
-      <td>6</td>
-      <td>NaN</td>
-      <td>8</td>
-      <td>world</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>three</td>
-      <td>9</td>
-      <td>10</td>
-      <td>11.0</td>
-      <td>12</td>
-      <td>foo</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">res1.isnull()</span><br></pre></td></tr></table></figure>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>something</th>
-      <th>a</th>
-      <th>b</th>
-      <th>c</th>
-      <th>d</th>
-      <th>message</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>True</td>
-      <td>False</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">result = pd.read_csv(<span class="string">'examples/ex5.csv'</span>, na_values=[<span class="string">'NULL'</span>])</span><br><span class="line">result</span><br></pre></td></tr></table></figure>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>something</th>
-      <th>a</th>
-      <th>b</th>
-      <th>c</th>
-      <th>d</th>
-      <th>message</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>one</td>
-      <td>1</td>
-      <td>2</td>
-      <td>3.0</td>
-      <td>4</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>two</td>
-      <td>5</td>
-      <td>6</td>
-      <td>NaN</td>
-      <td>8</td>
-      <td>world</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>three</td>
-      <td>9</td>
-      <td>10</td>
-      <td>11.0</td>
-      <td>12</td>
-      <td>foo</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<h2 id="逐行读取文本文件"><a href="#逐行读取文本文件" class="headerlink" title="逐行读取文本文件"></a>逐行读取文本文件</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chunker = pd.read_csv(<span class="string">'examples/ex6.csv'</span>, chunksize=<span class="number">1000</span>)</span><br><span class="line">chunker</span><br></pre></td></tr></table></figure>
-<pre><code>&lt;pandas.io.parsers.TextFileReader at 0x10c0cc828&gt;
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">chunker = pd.read_csv(<span class="string">'examples/ex6.csv'</span>, chunksize=<span class="number">1000</span>)</span><br><span class="line"></span><br><span class="line">tot = pd.Series([])</span><br><span class="line"><span class="keyword">for</span> piece <span class="keyword">in</span> chunker:</span><br><span class="line">    tot = tot.add(piece[<span class="string">'key'</span>].value_counts(), fill_value=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">tot = tot.sort_values(ascending=<span class="keyword">False</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Top5</span></span><br><span class="line">tot[:<span class="number">5</span>]</span><br></pre></td></tr></table></figure>
-<pre><code>E    368.0
-X    364.0
-L    346.0
-O    343.0
-Q    340.0
-dtype: float64
-</code></pre><h2 id="将数据写出到文本格式"><a href="#将数据写出到文本格式" class="headerlink" title="将数据写出到文本格式"></a>将数据写出到文本格式</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data = pd.read_csv(<span class="string">'examples/ex5.csv'</span>)</span><br><span class="line">data</span><br></pre></td></tr></table></figure>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>something</th>
-      <th>a</th>
-      <th>b</th>
-      <th>c</th>
-      <th>d</th>
-      <th>message</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>one</td>
-      <td>1</td>
-      <td>2</td>
-      <td>3.0</td>
-      <td>4</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>two</td>
-      <td>5</td>
-      <td>6</td>
-      <td>NaN</td>
-      <td>8</td>
-      <td>world</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>three</td>
-      <td>9</td>
-      <td>10</td>
-      <td>11.0</td>
-      <td>12</td>
-      <td>foo</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pwd</span><br></pre></td></tr></table></figure>
-<pre><code>&#39;/Users/zhangyangfenbi.com/Desktop/code/conda_book&#39;
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.to_csv(<span class="string">'/Users/zhangyangfenbi.com/Desktop/tmp.csv'</span>)</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!cat <span class="string">'/Users/zhangyangfenbi.com/Desktop/tmp.csv'</span></span><br></pre></td></tr></table></figure>
-<pre><code>,something,a,b,c,d,message
-0,one,1,2,3.0,4,
-1,two,5,6,,8,world
-2,three,9,10,11.0,12,foo
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">data.to_csv(sys.stdout, sep=<span class="string">'|'</span>)</span><br></pre></td></tr></table></figure>
-<pre><code>|something|a|b|c|d|message
-0|one|1|2|3.0|4|
-1|two|5|6||8|world
-2|three|9|10|11.0|12|foo
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.to_csv(sys.stdout, index=<span class="keyword">False</span>, header=<span class="keyword">False</span>)</span><br></pre></td></tr></table></figure>
-<pre><code>one,1,2,3.0,4,
-two,5,6,,8,world
-three,9,10,11.0,12,foo
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.to_csv(sys.stdout, index=<span class="keyword">False</span>, columns=[<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>])</span><br></pre></td></tr></table></figure>
-<pre><code>a,b,c
-1,2,3.0
-5,6,
-9,10,11.0
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dates = pd.date_range(<span class="string">'1/1/2000'</span>, periods=<span class="number">7</span>)</span><br><span class="line">ts = pd.Series(np.arange(<span class="number">7</span>), index=dates)</span><br><span class="line">ts.to_csv(<span class="string">'examples/tseries.csv'</span>)</span><br><span class="line">!cat examples/tseries.csv</span><br></pre></td></tr></table></figure>
-<pre><code>2000-01-01,0
-2000-01-02,1
-2000-01-03,2
-2000-01-04,3
-2000-01-05,4
-2000-01-06,5
-2000-01-07,6
-</code></pre><h2 id="手工处理分隔符"><a href="#手工处理分隔符" class="headerlink" title="手工处理分隔符"></a>手工处理分隔符</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> csv</span><br><span class="line">f = open(<span class="string">'examples/ex7.csv'</span>)</span><br><span class="line"></span><br><span class="line">reader = csv.reader(f)</span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> reader:</span><br><span class="line">    print(line)</span><br><span class="line">    </span><br><span class="line"><span class="comment">#writer省略</span></span><br></pre></td></tr></table></figure>
-<pre><code>[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]
-[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;]
-[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;]
-</code></pre><h2 id="Json数据"><a href="#Json数据" class="headerlink" title="Json数据"></a>Json数据</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Json格式已经成为一种通用的格式，主要用户http请求和应用程序之间发送数据</span></span><br><span class="line">obj = <span class="string">"""</span></span><br><span class="line"><span class="string">&#123;"name": "Wes",</span></span><br><span class="line"><span class="string"> "places_lived": ["United States", "Spain", "Germany"],</span></span><br><span class="line"><span class="string"> "pet": null,</span></span><br><span class="line"><span class="string"> "siblings": [&#123;"name": "Scott", "age": 30, "pets": ["Zeus", "Zuko"]&#125;,</span></span><br><span class="line"><span class="string">              &#123;"name": "Katie", "age": 38,</span></span><br><span class="line"><span class="string">               "pets": ["Sixes", "Stache", "Cisco"]&#125;]</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">"""</span></span><br></pre></td></tr></table></figure>
-<pre><code>str
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line">res = json.loads(obj)</span><br><span class="line">res</span><br></pre></td></tr></table></figure>
-<pre><code>{&#39;name&#39;: &#39;Wes&#39;,
- &#39;places_lived&#39;: [&#39;United States&#39;, &#39;Spain&#39;, &#39;Germany&#39;],
- &#39;pet&#39;: None,
- &#39;siblings&#39;: [{&#39;name&#39;: &#39;Scott&#39;, &#39;age&#39;: 30, &#39;pets&#39;: [&#39;Zeus&#39;, &#39;Zuko&#39;]},
-  {&#39;name&#39;: &#39;Katie&#39;, &#39;age&#39;: 38, &#39;pets&#39;: [&#39;Sixes&#39;, &#39;Stache&#39;, &#39;Cisco&#39;]}]}
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">asjson = json.dumps(res)</span><br><span class="line">asjson</span><br></pre></td></tr></table></figure>
-<pre><code>&#39;{&quot;name&quot;: &quot;Wes&quot;, &quot;places_lived&quot;: [&quot;United States&quot;, &quot;Spain&quot;, &quot;Germany&quot;], &quot;pet&quot;: null, &quot;siblings&quot;: [{&quot;name&quot;: &quot;Scott&quot;, &quot;age&quot;: 30, &quot;pets&quot;: [&quot;Zeus&quot;, &quot;Zuko&quot;]}, {&quot;name&quot;: &quot;Katie&quot;, &quot;age&quot;: 38, &quot;pets&quot;: [&quot;Sixes&quot;, &quot;Stache&quot;, &quot;Cisco&quot;]}]}&#39;
-</code></pre><h2 id="web信息收集"><a href="#web信息收集" class="headerlink" title="web信息收集"></a>web信息收集</h2><p>书中主要讲了lxml和urllib2<br>不过现在<strong>bs4</strong>和<strong>request</strong>这两个库用得比较多，这部分看一看就好。</p>
-<h2 id="二进制数据格式"><a href="#二进制数据格式" class="headerlink" title="二进制数据格式"></a>二进制数据格式</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">frame = pd.read_csv(<span class="string">'examples/ex1.csv'</span>)</span><br><span class="line">frame</span><br></pre></td></tr></table></figure>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>a</th>
-      <th>b</th>
-      <th>c</th>
-      <th>d</th>
-      <th>message</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>2</td>
-      <td>3</td>
-      <td>4</td>
-      <td>hello</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>5</td>
-      <td>6</td>
-      <td>7</td>
-      <td>8</td>
-      <td>world</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>9</td>
-      <td>10</td>
-      <td>11</td>
-      <td>12</td>
-      <td>foo</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">frame.to_pickle(<span class="string">'examples/frame_pickle_zhangyang'</span>)</span><br><span class="line">pd.read_pickle(<span class="string">'examples/frame_pickle_zhangyang'</span>)</span><br></pre></td></tr></table></figure>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>a</th>
-      <th>b</th>
-      <th>c</th>
-      <th>d</th>
-      <th>message</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>2</td>
-      <td>3</td>
-      <td>4</td>
-      <td>hello</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>5</td>
-      <td>6</td>
-      <td>7</td>
-      <td>8</td>
-      <td>world</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>9</td>
-      <td>10</td>
-      <td>11</td>
-      <td>12</td>
-      <td>foo</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<h2 id="HTML与web-api"><a href="#HTML与web-api" class="headerlink" title="HTML与web api"></a>HTML与web api</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">url = <span class="string">'https://api.github.com/repos/pandas-dev/pandas/issues'</span></span><br><span class="line">resp = requests.get(url)</span><br><span class="line">resp</span><br></pre></td></tr></table></figure>
-<pre><code>&lt;Response [200]&gt;
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">type(resp.text)</span><br></pre></td></tr></table></figure>
-<pre><code>str
-</code></pre><h2 id="使用数据库"><a href="#使用数据库" class="headerlink" title="使用数据库"></a>使用数据库</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sqlite3</span><br><span class="line"><span class="keyword">import</span> pymongo</span><br><span class="line"><span class="keyword">import</span> MySQLdb</span><br><span class="line"></span><br><span class="line"><span class="comment">## 链接MySQL数据库为例</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 打开数据库连接</span></span><br><span class="line">db = MySQLdb.connect(<span class="string">"localhost"</span>, <span class="string">"testuser"</span>, <span class="string">"test123"</span>, <span class="string">"TESTDB"</span>, charset=<span class="string">'utf8'</span> )</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用cursor()方法获取操作游标 </span></span><br><span class="line">cursor = db.cursor()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用execute方法执行SQL语句</span></span><br><span class="line">cursor.execute(<span class="string">"SELECT VERSION()"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 fetchone() 方法获取一条数据</span></span><br><span class="line">data = cursor.fetchone()</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> <span class="string">"Database version : %s "</span> % data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 关闭数据库连接</span></span><br><span class="line">db.close()</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -6783,7 +7166,7 @@ three,9,10,11.0,12,foo
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">92</span>
+                  <span class="site-state-item-count">93</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -6796,7 +7179,7 @@ three,9,10,11.0,12,foo
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
