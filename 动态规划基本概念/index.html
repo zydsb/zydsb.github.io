@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="算法,">
 
 
 
@@ -79,16 +79,18 @@
 
 
 
-<meta name="description" content="不要温和地走进那个良夜">
-<meta property="og:type" content="website">
-<meta property="og:title" content="| Yang |">
-<meta property="og:url" content="http://snailed.cn/tags/Math/index.html">
+<meta name="description" content="我们先看一个问题： 有一座高度是10级台阶的楼梯，从下往上走，每跨一步只能向上1级或者2级台阶。要求用程序来求出一共有多少种走法。 这个问题暴力求解是可以，但是不够美。我们从动态规划的角度来理解下。  动态规划（ DP ）是一种分阶段求解决策问题的数学思想。总结起来就是一句话，大事化小，小事化了。  问题建模 假如用户最后只差一步就可以走完整个楼梯，根据条件我们知道，这个时候会有两种情况出现  用">
+<meta name="keywords" content="算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="动态规划基本概念">
+<meta property="og:url" content="http://snailed.cn/动态规划基本概念/index.html">
 <meta property="og:site_name" content="| Yang |">
-<meta property="og:description" content="不要温和地走进那个良夜">
+<meta property="og:description" content="我们先看一个问题： 有一座高度是10级台阶的楼梯，从下往上走，每跨一步只能向上1级或者2级台阶。要求用程序来求出一共有多少种走法。 这个问题暴力求解是可以，但是不够美。我们从动态规划的角度来理解下。  动态规划（ DP ）是一种分阶段求解决策问题的数学思想。总结起来就是一句话，大事化小，小事化了。  问题建模 假如用户最后只差一步就可以走完整个楼梯，根据条件我们知道，这个时候会有两种情况出现  用">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-09-06T15:47:46.326Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="| Yang |">
-<meta name="twitter:description" content="不要温和地走进那个良夜">
+<meta name="twitter:title" content="动态规划基本概念">
+<meta name="twitter:description" content="我们先看一个问题： 有一座高度是10级台阶的楼梯，从下往上走，每跨一步只能向上1级或者2级台阶。要求用程序来求出一共有多少种走法。 这个问题暴力求解是可以，但是不够美。我们从动态规划的角度来理解下。  动态规划（ DP ）是一种分阶段求解决策问题的数学思想。总结起来就是一句话，大事化小，小事化了。  问题建模 假如用户最后只差一步就可以走完整个楼梯，根据条件我们知道，这个时候会有两种情况出现  用">
 
 
 
@@ -118,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://snailed.cn/tags/Math/">
+  <link rel="canonical" href="http://snailed.cn/动态规划基本概念/">
 
 
 
 
 
-  <title>Tag: Math | | Yang |</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>动态规划基本概念 | | Yang |</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -143,7 +145,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left ">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -227,104 +229,175 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block tag">
-
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h2>Math<small>Tag</small>
-        </h2>
-      </div>
-
-      
-        
 
   <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/动态规划基本概念/">
 
-      <h3 class="post-title">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/统计知识学习笔记-零/" itemprop="url">
-              
-                <span itemprop="name">统计知识学习笔记-零</span>
-              
-            </a>
         
-      </h3>
+          <h2 class="post-title" itemprop="name headline">动态规划基本概念</h2>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-08-12T17:41:08+08:00" content="2019-08-12">
-          08-12
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-06T23:18:21+08:00">
+                2019-09-06
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/理解虚数i/" itemprop="url">
-              
-                <span itemprop="name">理解虚数i</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-03-24T21:55:29+08:00" content="2019-03-24">
-          03-24
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/理解自然对数/" itemprop="url">
-              
-                <span itemprop="name">理解自然对数</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-03-22T01:20:46+08:00" content="2019-03-22">
-          03-22
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+        <p>我们先看一个问题：</p>
+<p><strong>有一座高度是10级台阶的楼梯，从下往上走，每跨一步只能向上1级或者2级台阶。要求用程序来求出一共有多少种走法。</strong></p>
+<p>这个问题暴力求解是可以，但是不够美。我们从动态规划的角度来理解下。</p>
+<blockquote>
+<p>动态规划（ DP ）是一种分阶段求解决策问题的数学思想。总结起来就是一句话，大事化小，小事化了。</p>
+</blockquote>
+<h2 id="问题建模"><a href="#问题建模" class="headerlink" title="问题建模"></a>问题建模</h2><hr>
+<p><strong>假如用户最后只差一步就可以走完整个楼梯，根据条件我们知道，这个时候会有两种情况出现</strong></p>
+<ul>
+<li>用户在还差一级台阶，9 -&gt; 10</li>
+<li>用户还差两级台阶，8 -&gt; 10</li>
+</ul>
+<p>意味着我们只要知道了前九级和前八级分别需要多少种走法，即可知道走完十级需要多少种走法。</p>
+<p>现在假设$F(n)$表示到第$n$个台阶一共的走法，即：<script type="math/tex">F(10) = F(9) + F(8)</script></p>
+<p>同理可得，假设用户还差一步可以走到第九级，那么：<script type="math/tex">F(9) = F(8) + F(7)</script><br>…<br>到最后：<script type="math/tex">F(3) = F(2) + F(1)</script></p>
+<p>当只有1级台阶和2级台阶时走法很明显，即$ F(1) = 1,F(2) = 2$。现在我们已经成功地把一个复杂地问题简单化啦，这就是动态规划。</p>
+<p>最后我们可以得到归纳出以下公式$F$：</p>
+<script type="math/tex; mode=display">\begin{cases}
+    F(1) = 1 \\
+    F(2) = 2 \\
+    F(n) = F(n-1) + F(n-2)\\
+\end{cases}</script><p><strong>动态规划中包含三个重要的概念，最优子结构、边界、状态转移公式</strong></p>
+<ul>
+<li>上面问题中，我们知道了$F(10) = F(9) + F(8)$，后两者就是前者的最优子结构。</li>
+<li>$F(1)$和$F(2)$我们已经不需要简化，这个我们称之为边界。</li>
+<li>$F$就是状态转移公式。</li>
+</ul>
+<h2 id="问题代码实现"><a href="#问题代码实现" class="headerlink" title="问题代码实现"></a>问题代码实现</h2><hr>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calcWalkWays</span><span class="params">(n)</span>:</span></span><br><span class="line">	<span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/中文书写的一些规范与参考/" rel="next" title="中文书写的一些规范与参考">
+                <i class="fa fa-chevron-left"></i> 中文书写的一些规范与参考
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -332,6 +405,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -352,8 +429,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -406,6 +492,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题建模"><span class="nav-number">1.</span> <span class="nav-text">问题建模</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题代码实现"><span class="nav-number">2.</span> <span class="nav-text">问题代码实现</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -539,6 +641,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
