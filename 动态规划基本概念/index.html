@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="| Yang |">
 <meta property="og:description" content="我们先看一个问题： 有一座高度是10级台阶的楼梯，从下往上走，每跨一步只能向上1级或者2级台阶。要求用程序来求出一共有多少种走法。 这个问题暴力求解是可以，但是不够美。我们从动态规划的角度来理解下。  动态规划（ DP ）是一种分阶段求解决策问题的数学思想。总结起来就是一句话，大事化小，小事化了。  问题建模 假如用户最后只差一步就可以走完整个楼梯，根据条件我们知道，这个时候会有两种情况出现  用">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-09-06T15:47:46.326Z">
+<meta property="og:updated_time" content="2019-09-09T16:17:10.798Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="动态规划基本概念">
 <meta name="twitter:description" content="我们先看一个问题： 有一座高度是10级台阶的楼梯，从下往上走，每跨一步只能向上1级或者2级台阶。要求用程序来求出一共有多少种走法。 这个问题暴力求解是可以，但是不够美。我们从动态规划的角度来理解下。  动态规划（ DP ）是一种分阶段求解决策问题的数学思想。总结起来就是一句话，大事化小，小事化了。  问题建模 假如用户最后只差一步就可以走完整个楼梯，根据条件我们知道，这个时候会有两种情况出现  用">
@@ -338,7 +338,9 @@
 <li>$F$就是状态转移公式。</li>
 </ul>
 <h2 id="问题代码实现"><a href="#问题代码实现" class="headerlink" title="问题代码实现"></a>问题代码实现</h2><hr>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calcWalkWays</span><span class="params">(n)</span>:</span></span><br><span class="line">	<span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<p>使用<strong>递归</strong>的方法去做：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calcWalkWays</span><span class="params">(n)</span>:</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> n == <span class="number">1</span>:</span><br><span class="line">		<span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">	<span class="keyword">if</span> n == <span class="number">2</span>:</span><br><span class="line">		<span class="keyword">return</span> <span class="number">2</span></span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">		<span class="keyword">return</span> calcWalkWays(n<span class="number">-1</span>) + calcWalkWays(n<span class="number">-2</span>)</span><br></pre></td></tr></table></figure></p>
+<p>使用<strong>dp</strong>的方法去做：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calcWalkWays</span><span class="params">(n)</span>:</span></span><br><span class="line">	dp = [<span class="number">0</span> <span class="keyword">for</span> k <span class="keyword">in</span> range(n)]</span><br><span class="line">	dp[<span class="number">0</span>],dp[<span class="number">1</span>] = <span class="number">1</span>,<span class="number">2</span></span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>,n):</span><br><span class="line">		dp[i] = dp[i<span class="number">-1</span>] + dp[i<span class="number">-2</span>]</span><br><span class="line">	<span class="keyword">return</span> dp[<span class="number">-1</span>]</span><br></pre></td></tr></table></figure></p>
+<p>从执行时间里面看出，dp要快很多，毕竟是不用每次都算完的。这个可以自己去测验一下。</p>
 
       
     </div>
