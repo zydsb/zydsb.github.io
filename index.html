@@ -242,6 +242,163 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/动态规划的经典例题/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/动态规划的经典例题/" itemprop="url">动态规划的经典例题</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-10T00:28:25+08:00">
+                2019-09-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="偷珠宝问题"><a href="#偷珠宝问题" class="headerlink" title="偷珠宝问题"></a>偷珠宝问题</h2><hr>
+<p>一条直线上，有 n 个房间，每个房间数量不等的财宝，一个盗贼希望从房屋中盗取财宝，由于房屋有警报器，同时从相邻两个房间盗取珠宝就会触发警报，若不触发警报，最多可获取多少财宝？</p>
+<h3 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h3><p>从动态规划的角度考虑，假设小偷站在第 i 个 房间的门前，这个时候他偷不偷是受前面状态影响的。如果第 i-1 个房间可以获得的最大金钱比第 i-2 个加上第 i 个要多的话，那么就应该选择偷取第 i-2 个房间和第 i 个房间，反之则偷取第 i-1 个房间，而放弃第 i 个房间。<br>状态转移公式：</p>
+<script type="math/tex; mode=display">
+\begin{cases}
+F(0) = x_{1} \\
+F(1) = x_{2} \\
+F(n) = max(F(n-2) + x_{n},F(n-1))  \\
+\end{cases}</script><h3 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">stealMoney</span><span class="params">(n)</span>:</span></span><br><span class="line">	<span class="string">"""</span></span><br><span class="line"><span class="string">	输入房子有 n 座，随机生成金额</span></span><br><span class="line"><span class="string">	"""</span></span><br><span class="line">    value = np.random.randint(<span class="number">20</span>,size=n)</span><br><span class="line">    dp = np.zeros(value.shape)</span><br><span class="line">    print(value)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">        <span class="keyword">if</span> i &lt;= <span class="number">1</span> : </span><br><span class="line">            dp[i] = value[i]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            dp[i] = max( dp[i<span class="number">-2</span>] + value[i] , dp[i<span class="number">-1</span>] )</span><br><span class="line">    print(dp)</span><br><span class="line">    <span class="keyword">return</span> dp[<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>
+<p>假设房间是围成一个圆圈呢？思考了一下，给一个大概的思路：</p>
+<p>任意选择一点，切分圆成为一条线段，按照上文的思路去计算前三个点，那么</p>
+<ul>
+<li>如果取第一个点，则对[2,-2]进行dp，最后加上第一个点的值</li>
+<li>如果取第二个点，则对[1,-1]进行dp </li>
+</ul>
+<h2 id="最大子序列和问题"><a href="#最大子序列和问题" class="headerlink" title="最大子序列和问题"></a>最大子序列和问题</h2><hr>
+<p>给定一个数组（考虑正负），求这个数组的连续子数组中，最大的那一段的和。</p>
+<h3 id="解决思路-1"><a href="#解决思路-1" class="headerlink" title="解决思路"></a>解决思路</h3><p>假设我们考虑第 i 个数，这个时候我们有记录了前面最大子数组的 dp[i-1],那我们只需要取 dp[i-1] + value[i] 和 value[i] 的最大值即可。<br>状态迭代公式：</p>
+<script type="math/tex; mode=display">
+\begin{cases}
+F(1) = x_{1} \\
+F(n) = max(F(n-1)+x_{n},x_{n}) \\
+\end{cases}</script><h3 id="算法实现-1"><a href="#算法实现-1" class="headerlink" title="算法实现"></a>算法实现</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getArrMaxSubSum</span><span class="params">(arr)</span>:</span></span><br><span class="line">    dp = [<span class="number">0</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(len(arr))]</span><br><span class="line">    dp[<span class="number">0</span>] = arr[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> range(<span class="number">1</span>,len(arr)):</span><br><span class="line">        dp[k] = max(dp[k<span class="number">-1</span>]+arr[k],arr[k])</span><br><span class="line">    <span class="keyword">return</span> dp[<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>
+<h2 id="找零钱问题"><a href="#找零钱问题" class="headerlink" title="找零钱问题"></a>找零钱问题</h2><hr>
+<p>已知不同面值的钞票，求如何用最少数量的钞票组成某个金额，求可以使用的最少钞票数量。如果任意数量的已知面值钞票都无法组成该金额，则返回 -1 。</p>
+<h3 id="解决思路-2"><a href="#解决思路-2" class="headerlink" title="解决思路"></a>解决思路</h3><p>给定一个 account 和一个 coins[1,2,5,10] 数组。我们从头开始看：</p>
+<ul>
+<li>如果金额是 1 元，则肯定是 1 张，即dp[1] = 1</li>
+<li>如果是 2 元的话，那么其实有两种选择，1 + 1 或者 2 , 有两种选择</li>
+<li>如果是 8 元的话，那么<ul>
+<li>8 = dp[7] + 1 , 1 元配上 7 元的最优解 </li>
+<li>8 = dp[6] + 1 , 2 元配上 6 元的最优解</li>
+<li>…</li>
+</ul>
+</li>
+</ul>
+<p>也就是需要遍历一下，才可以得到最优解。即归纳出 dp[i] = min(dp[i],dp[i-coins[j]] + 1 )</p>
+<h3 id="算法实现-2"><a href="#算法实现-2" class="headerlink" title="算法实现"></a>算法实现</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">checkCoins</span><span class="params">(money)</span>:</span></span><br><span class="line">	coins = [<span class="number">1</span>,<span class="number">5</span>,<span class="number">11</span>] <span class="comment"># 初始化硬币</span></span><br><span class="line">	dp = [money + <span class="number">1</span>  <span class="keyword">for</span> i <span class="keyword">in</span> range(money+<span class="number">1</span>)] <span class="comment">#初始化 dp 数组</span></span><br><span class="line">	dp[<span class="number">0</span>] = <span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,money+<span class="number">1</span>):</span><br><span class="line">		<span class="keyword">for</span> j <span class="keyword">in</span> range(len(coins)):</span><br><span class="line">			<span class="keyword">if</span> coins[j] &lt;= i: <span class="comment"># 硬币如果比钱小，则计算，如果一个硬币刚好够，则只需要一次, dp[0] = 0</span></span><br><span class="line">				dp[i] = min(dp[i],dp[i-coins[j]]+<span class="number">1</span>) <span class="comment"># 两次遍历得到最优结果</span></span><br><span class="line">	<span class="keyword">if</span> dp[money] &gt; money:</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span> </span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">		<span class="keyword">return</span> dp[money]</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://snailed.cn/动态规划基本概念/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -343,7 +500,7 @@
 <h2 id="问题代码实现"><a href="#问题代码实现" class="headerlink" title="问题代码实现"></a>问题代码实现</h2><hr>
 <p>使用<strong>递归</strong>的方法去做：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calcWalkWays</span><span class="params">(n)</span>:</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> n == <span class="number">1</span>:</span><br><span class="line">		<span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">	<span class="keyword">if</span> n == <span class="number">2</span>:</span><br><span class="line">		<span class="keyword">return</span> <span class="number">2</span></span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">		<span class="keyword">return</span> calcWalkWays(n<span class="number">-1</span>) + calcWalkWays(n<span class="number">-2</span>)</span><br></pre></td></tr></table></figure></p>
 <p>使用<strong>dp</strong>的方法去做：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calcWalkWays</span><span class="params">(n)</span>:</span></span><br><span class="line">	dp = [<span class="number">0</span> <span class="keyword">for</span> k <span class="keyword">in</span> range(n)]</span><br><span class="line">	dp[<span class="number">0</span>],dp[<span class="number">1</span>] = <span class="number">1</span>,<span class="number">2</span></span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>,n):</span><br><span class="line">		dp[i] = dp[i<span class="number">-1</span>] + dp[i<span class="number">-2</span>]</span><br><span class="line">	<span class="keyword">return</span> dp[<span class="number">-1</span>]</span><br></pre></td></tr></table></figure></p>
-<p>从执行时间里面看出，dp要快很多，毕竟是不用每次都算完的。这个可以自己去测验一下。</p>
+<p>两种方法都可以取得正确答案，但是第二种明显会快很多，这个可以自己去测试一下。</p>
 
           
         
@@ -1510,147 +1667,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/数据仓库分层/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/数据仓库分层/" itemprop="url">数据仓库分层</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-22T10:35:02+08:00">
-                2019-08-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="为什么要分层"><a href="#为什么要分层" class="headerlink" title="为什么要分层"></a>为什么要分层</h4><ul>
-<li>减少重复开发：可以开发一些通用的中间层数据，大大减小开发量</li>
-<li>清晰的数据结构：每一个数据分层都有它的作用域，使用的时候方便我们更好地定位和理解</li>
-<li>数据血缘追踪：如果说出了问题，可以更快地知道是哪里出了问题，并且知道其危害的范围</li>
-<li>把复杂任务简单化：把复杂任务拆分成多个简单任务来执行，每一步只干一个事儿。降低难度且易于追踪问题。</li>
-<li>使仓库更加稳健，屏蔽脏数据或者是数据的缺失等问题对后续任务的影响</li>
-</ul>
-<h4 id="常见分层方法"><a href="#常见分层方法" class="headerlink" title="常见分层方法"></a>常见分层方法</h4><ul>
-<li>ods</li>
-<li>dw </li>
-<li>dm </li>
-</ul>
-<h5 id="ods"><a href="#ods" class="headerlink" title="ods"></a>ods</h5><p>ODS（Operational Data Store）操作数据存储。</p>
-<p>和源数据基本同构，不过是经过我们ETL处理的，是干净的数据，粒度最细。</p>
-<h5 id="dw"><a href="#dw" class="headerlink" title="dw"></a>dw</h5><p>DW（Data Warehouse）是数据仓库最核心的一层。</p>
-<p>在这一层按照各种主题建立数据模型，比如说星型，或者雪花模型。</p>
-<h5 id="dm"><a href="#dm" class="headerlink" title="dm"></a>dm</h5><p>Dm（Data Market）存放的是轻度聚合的数据。</p>
-<p>根据业务需求，生成面向业务人员可以直接使用的表，最典型的应用就是报表。报表应用时，为了响应速度更快，一般都会存至MySQL里面。</p>
-<h5 id=""><a href="#" class="headerlink" title=" "></a> </h5><ul>
-<li>tmp层 : 用于计算中的临时表，可以抽象为一个临时层</li>
-<li>dim层 : 维度表，是对事实表中事件的要素的描述信息</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1703,7 +1719,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">95</span>
+                  <span class="site-state-item-count">96</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
