@@ -242,6 +242,302 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/ch10-时间序列/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/ch10-时间序列/" itemprop="url">ch10-时间序列</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-24T22:32:59+08:00">
+                2019-01-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">np.random.seed(<span class="number">12345</span>)</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">plt.rc(<span class="string">'figure'</span>, figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">PREVIOUS_MAX_ROWS = pd.options.display.max_rows</span><br><span class="line">pd.options.display.max_rows = <span class="number">20</span></span><br><span class="line">np.set_printoptions(precision=<span class="number">4</span>, suppress=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="日期和时间数据类型及工具"><a href="#日期和时间数据类型及工具" class="headerlink" title="日期和时间数据类型及工具"></a>日期和时间数据类型及工具</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br><span class="line">now = datetime.now()</span><br><span class="line">now</span><br></pre></td></tr></table></figure>
+<pre><code>datetime.datetime(2019, 1, 15, 0, 30, 21, 654285)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">now.year,now.month,now.day</span><br></pre></td></tr></table></figure>
+<pre><code>(2019, 1, 15)
+</code></pre><blockquote>
+<p>datetime以毫秒格式存储日期和时间，也就是我们常用的timestamp</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">delta = datetime(<span class="number">2011</span>,<span class="number">1</span>,<span class="number">7</span>) - datetime(<span class="number">2008</span>,<span class="number">6</span>,<span class="number">24</span>,<span class="number">8</span>,<span class="number">15</span>)</span><br><span class="line">delta</span><br></pre></td></tr></table></figure>
+<pre><code>datetime.timedelta(926, 56700)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">delta.days</span><br></pre></td></tr></table></figure>
+<pre><code>926
+</code></pre><blockquote>
+<p>可以给datatime对象+-一个或者多个timedelta</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> timedelta</span><br><span class="line">start = datetime(<span class="number">2011</span>,<span class="number">1</span>,<span class="number">7</span>)</span><br><span class="line">start + timedelta(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>datetime.datetime(2011, 1, 8, 0, 0)
+</code></pre><h2 id="字符串和datetime的相互转换"><a href="#字符串和datetime的相互转换" class="headerlink" title="字符串和datetime的相互转换"></a>字符串和datetime的相互转换</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">stamp = datetime(<span class="number">2011</span>,<span class="number">1</span>,<span class="number">3</span>)</span><br><span class="line">stamp</span><br></pre></td></tr></table></figure>
+<pre><code>datetime.datetime(2011, 1, 3, 0, 0)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">str(stamp)</span><br></pre></td></tr></table></figure>
+<pre><code>&#39;2011-01-03 00:00:00&#39;
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stamp.strftime(<span class="string">'%Y-%m-%d'</span>)   <span class="comment">#跟hive类似</span></span><br></pre></td></tr></table></figure>
+<pre><code>&#39;2011-01-03&#39;
+</code></pre><blockquote>
+<p>dateutil很强</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> dateutil.parser <span class="keyword">import</span> parse</span><br><span class="line"></span><br><span class="line">parse(<span class="string">'2011-01-13'</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>datetime.datetime(2011, 1, 13, 0, 0)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">parse(<span class="string">'6/12/2015'</span>,dayfirst=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>datetime.datetime(2015, 12, 6, 0, 0)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">parse(<span class="string">'Jan 31, 1997 10:45 PM'</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>datetime.datetime(1997, 1, 31, 22, 45)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">datestrs = [<span class="string">'2011-07-06 12:00:00'</span>, <span class="string">'2011-08-06 00:00:00'</span>]</span><br><span class="line">pd.to_datetime(datestrs)</span><br></pre></td></tr></table></figure>
+<pre><code>DatetimeIndex([&#39;2011-07-06 12:00:00&#39;, &#39;2011-08-06 00:00:00&#39;], dtype=&#39;datetime64[ns]&#39;, freq=None)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">idx = pd.to_datetime(datestrs + [<span class="keyword">None</span>])</span><br><span class="line">idx</span><br></pre></td></tr></table></figure>
+<pre><code>DatetimeIndex([&#39;2011-07-06 12:00:00&#39;, &#39;2011-08-06 00:00:00&#39;, &#39;NaT&#39;], dtype=&#39;datetime64[ns]&#39;, freq=None)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">idx.isnull()</span><br></pre></td></tr></table></figure>
+<pre><code>array([False, False,  True])
+</code></pre><h2 id="时间序列基础"><a href="#时间序列基础" class="headerlink" title="时间序列基础"></a>时间序列基础</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dates = [datetime(<span class="number">2011</span>, <span class="number">1</span>, <span class="number">2</span>), datetime(<span class="number">2011</span>, <span class="number">1</span>, <span class="number">5</span>),</span><br><span class="line">         datetime(<span class="number">2011</span>, <span class="number">1</span>, <span class="number">7</span>), datetime(<span class="number">2011</span>, <span class="number">1</span>, <span class="number">8</span>),</span><br><span class="line">         datetime(<span class="number">2011</span>, <span class="number">1</span>, <span class="number">10</span>), datetime(<span class="number">2011</span>, <span class="number">1</span>, <span class="number">12</span>)]</span><br><span class="line">ts = pd.Series(np.random.randn(<span class="number">6</span>), index=dates)</span><br><span class="line">ts</span><br></pre></td></tr></table></figure>
+<pre><code>2011-01-02   -0.204708
+2011-01-05    0.478943
+2011-01-07   -0.519439
+2011-01-08   -0.555730
+2011-01-10    1.965781
+2011-01-12    1.393406
+dtype: float64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">type(ts)</span><br></pre></td></tr></table></figure>
+<pre><code>pandas.core.series.Series
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts.index</span><br></pre></td></tr></table></figure>
+<pre><code>DatetimeIndex([&#39;2011-01-02&#39;, &#39;2011-01-05&#39;, &#39;2011-01-07&#39;, &#39;2011-01-08&#39;,
+               &#39;2011-01-10&#39;, &#39;2011-01-12&#39;],
+              dtype=&#39;datetime64[ns]&#39;, freq=None)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts+ts[::<span class="number">2</span>]</span><br></pre></td></tr></table></figure>
+<pre><code>2011-01-02   -0.409415
+2011-01-05         NaN
+2011-01-07   -1.038877
+2011-01-08         NaN
+2011-01-10    3.931561
+2011-01-12         NaN
+dtype: float64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts.index.dtype</span><br></pre></td></tr></table></figure>
+<pre><code>dtype(&#39;&lt;M8[ns]&#39;)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">stamp = ts.index[<span class="number">0</span>]</span><br><span class="line">stamp</span><br></pre></td></tr></table></figure>
+<pre><code>Timestamp(&#39;2011-01-02 00:00:00&#39;)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#传入一个被解释为日期的字符串</span></span><br><span class="line">ts[<span class="string">'2011-01-08'</span>]</span><br></pre></td></tr></table></figure>
+<pre><code>-0.55573030434749
+</code></pre><blockquote>
+<p>长序列可以之传入年 月等</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">long_ts = pd.Series(np.random.randn(<span class="number">1000</span>),index = pd.date_range(<span class="string">'1/1/2000'</span>,periods=<span class="number">1000</span>))</span><br><span class="line">long_ts.head()</span><br></pre></td></tr></table></figure>
+<pre><code>2000-01-01   -1.613474
+2000-01-02   -0.573966
+2000-01-03    0.424894
+2000-01-04    1.257544
+2000-01-05   -1.065343
+Freq: D, dtype: float64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">long_ts[<span class="string">'2001'</span>]</span><br></pre></td></tr></table></figure>
+<pre><code>2001-01-01    0.590119
+2001-01-02   -1.219580
+2001-01-03    0.272788
+2001-01-04   -2.691584
+2001-01-05    1.567780
+2001-01-06    0.265030
+2001-01-07   -0.929412
+2001-01-08    0.885587
+2001-01-09   -1.557180
+2001-01-10   -2.252237
+                ...   
+2001-12-22   -0.586346
+2001-12-23    0.910428
+2001-12-24   -0.573878
+2001-12-25   -0.387236
+2001-12-26   -0.857498
+2001-12-27   -0.875737
+2001-12-28   -0.075322
+2001-12-29    0.325148
+2001-12-30    1.699576
+2001-12-31   -0.027604
+Freq: D, Length: 365, dtype: float64
+</code></pre><h2 id="日期的范围，频率以及移动"><a href="#日期的范围，频率以及移动" class="headerlink" title="日期的范围，频率以及移动"></a>日期的范围，频率以及移动</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts.resample(<span class="string">'D'</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>DatetimeIndexResampler [freq=&lt;Day&gt;, axis=0, closed=left, label=left, convention=start, base=0]
+</code></pre><h3 id="生成日期范围"><a href="#生成日期范围" class="headerlink" title="生成日期范围"></a>生成日期范围</h3><blockquote>
+<p>pd.date_range()</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.date_range(<span class="string">'1/1/2011'</span>,periods=<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>DatetimeIndex([&#39;2011-01-01&#39;, &#39;2011-01-02&#39;, &#39;2011-01-03&#39;, &#39;2011-01-04&#39;,
+               &#39;2011-01-05&#39;, &#39;2011-01-06&#39;, &#39;2011-01-07&#39;, &#39;2011-01-08&#39;,
+               &#39;2011-01-09&#39;, &#39;2011-01-10&#39;],
+              dtype=&#39;datetime64[ns]&#39;, freq=&#39;D&#39;)
+</code></pre><h3 id="频率和日期偏移量"><a href="#频率和日期偏移量" class="headerlink" title="频率和日期偏移量"></a>频率和日期偏移量</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pandas.tseries.offsets <span class="keyword">import</span> Hour, Minute</span><br><span class="line">hour = Hour()</span><br><span class="line">hour</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;Hour&gt;
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.date_range(<span class="string">'2000-01-01'</span>, <span class="string">'2000-01-03 23:59'</span>, freq=<span class="string">'4h'</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>DatetimeIndex([&#39;2000-01-01 00:00:00&#39;, &#39;2000-01-01 04:00:00&#39;,
+               &#39;2000-01-01 08:00:00&#39;, &#39;2000-01-01 12:00:00&#39;,
+               &#39;2000-01-01 16:00:00&#39;, &#39;2000-01-01 20:00:00&#39;,
+               &#39;2000-01-02 00:00:00&#39;, &#39;2000-01-02 04:00:00&#39;,
+               &#39;2000-01-02 08:00:00&#39;, &#39;2000-01-02 12:00:00&#39;,
+               &#39;2000-01-02 16:00:00&#39;, &#39;2000-01-02 20:00:00&#39;,
+               &#39;2000-01-03 00:00:00&#39;, &#39;2000-01-03 04:00:00&#39;,
+               &#39;2000-01-03 08:00:00&#39;, &#39;2000-01-03 12:00:00&#39;,
+               &#39;2000-01-03 16:00:00&#39;, &#39;2000-01-03 20:00:00&#39;],
+              dtype=&#39;datetime64[ns]&#39;, freq=&#39;4H&#39;)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hour(<span class="number">2</span>) + Minute(<span class="number">30</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;150 * Minutes&gt;
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.date_range(<span class="string">'2000-01-01'</span>, periods=<span class="number">10</span>, freq=<span class="string">'1h30min'</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>DatetimeIndex([&#39;2000-01-01 00:00:00&#39;, &#39;2000-01-01 01:30:00&#39;,
+               &#39;2000-01-01 03:00:00&#39;, &#39;2000-01-01 04:30:00&#39;,
+               &#39;2000-01-01 06:00:00&#39;, &#39;2000-01-01 07:30:00&#39;,
+               &#39;2000-01-01 09:00:00&#39;, &#39;2000-01-01 10:30:00&#39;,
+               &#39;2000-01-01 12:00:00&#39;, &#39;2000-01-01 13:30:00&#39;],
+              dtype=&#39;datetime64[ns]&#39;, freq=&#39;90T&#39;)
+</code></pre><h3 id="WOM日期"><a href="#WOM日期" class="headerlink" title="WOM日期"></a>WOM日期</h3><blockquote>
+<p>WOM(Week of Month)，获得诸如‘每月第三个星期五’之类的日期</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rng = pd.date_range(<span class="string">'1/1/2012'</span>,<span class="string">'9/1/2012'</span>,freq=<span class="string">'WOM-3FRI'</span>)</span><br><span class="line">rng</span><br></pre></td></tr></table></figure>
+<pre><code>DatetimeIndex([&#39;2012-01-20&#39;, &#39;2012-02-17&#39;, &#39;2012-03-16&#39;, &#39;2012-04-20&#39;,
+               &#39;2012-05-18&#39;, &#39;2012-06-15&#39;, &#39;2012-07-20&#39;, &#39;2012-08-17&#39;],
+              dtype=&#39;datetime64[ns]&#39;, freq=&#39;WOM-3FRI&#39;)
+</code></pre><h2 id="移动数据"><a href="#移动数据" class="headerlink" title="移动数据"></a>移动数据</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ts = pd.Series(np.random.randn(<span class="number">4</span>),</span><br><span class="line">               index=pd.date_range(<span class="string">'1/1/2000'</span>, periods=<span class="number">4</span>, freq=<span class="string">'M'</span>))</span><br><span class="line">ts</span><br></pre></td></tr></table></figure>
+<pre><code>2000-01-31    0.597205
+2000-02-29    0.039901
+2000-03-31   -0.757430
+2000-04-30    1.698482
+Freq: M, dtype: float64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts.shift(<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>2000-01-31         NaN
+2000-02-29         NaN
+2000-03-31    0.597205
+2000-04-30    0.039901
+Freq: M, dtype: float64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts.shift(<span class="number">-2</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>2000-01-31   -0.757430
+2000-02-29    1.698482
+2000-03-31         NaN
+2000-04-30         NaN
+Freq: M, dtype: float64
+</code></pre><h2 id="时区处理"><a href="#时区处理" class="headerlink" title="时区处理"></a>时区处理</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pytz</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pytz.common_timezones[<span class="number">-5</span>:]</span><br></pre></td></tr></table></figure>
+<pre><code>[&#39;US/Eastern&#39;, &#39;US/Hawaii&#39;, &#39;US/Mountain&#39;, &#39;US/Pacific&#39;, &#39;UTC&#39;]
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tz=pytz.timezone(<span class="string">'UTC'</span>)</span><br><span class="line">tz</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;UTC&gt;
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rng = pd.date_range(<span class="string">'3/9/2012 9:30'</span>, periods=<span class="number">6</span>, freq=<span class="string">'D'</span>)</span><br><span class="line">ts = pd.Series(np.random.randn(len(rng)), index=rng)</span><br><span class="line">ts</span><br></pre></td></tr></table></figure>
+<pre><code>2012-03-09 09:30:00   -0.434694
+2012-03-10 09:30:00    0.516461
+2012-03-11 09:30:00   -0.153220
+2012-03-12 09:30:00   -0.452038
+2012-03-13 09:30:00    0.777409
+2012-03-14 09:30:00   -0.163869
+Freq: D, dtype: float64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.date_range(<span class="string">'3/9/2012 9:30'</span>, periods=<span class="number">10</span>, freq=<span class="string">'D'</span>, tz=<span class="string">'UTC'</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>DatetimeIndex([&#39;2012-03-09 09:30:00+00:00&#39;, &#39;2012-03-10 09:30:00+00:00&#39;,
+               &#39;2012-03-11 09:30:00+00:00&#39;, &#39;2012-03-12 09:30:00+00:00&#39;,
+               &#39;2012-03-13 09:30:00+00:00&#39;, &#39;2012-03-14 09:30:00+00:00&#39;,
+               &#39;2012-03-15 09:30:00+00:00&#39;, &#39;2012-03-16 09:30:00+00:00&#39;,
+               &#39;2012-03-17 09:30:00+00:00&#39;, &#39;2012-03-18 09:30:00+00:00&#39;],
+              dtype=&#39;datetime64[ns, UTC]&#39;, freq=&#39;D&#39;)
+</code></pre><h2 id="时期及其算术运算"><a href="#时期及其算术运算" class="headerlink" title="时期及其算术运算"></a>时期及其算术运算</h2><p>to be add</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://snailed.cn/记一次失眠/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -3622,358 +3918,6 @@ Categories (4, interval[float64]): [(-2.845, -1.307] &lt; (-1.307, 0.225] &lt; (
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Seaborn-relationships/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/Seaborn-relationships/" itemprop="url">Seaborn-relationships</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-09T23:27:39+08:00">
-                2019-01-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="写在最前"><a href="#写在最前" class="headerlink" title="写在最前"></a>写在最前</h1><blockquote>
-<p>Seaborn is a Python data visualization library based on matplotlib. It provides a high-level interface for drawing attractive and informative statistical graphics.</p>
-</blockquote>
-<p>内容来自于<a href="https://seaborn.pydata.org/tutorial.html" target="_blank" rel="noopener">Seaborn官方教程</a></p>
-<h2 id="可视化统计关系"><a href="#可视化统计关系" class="headerlink" title="可视化统计关系"></a>可视化统计关系</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line">%matplotlib inline</span><br><span class="line">sns.set(style=<span class="string">"darkgrid"</span>)</span><br></pre></td></tr></table></figure>
-<ul>
-<li>replot()</li>
-<li>lineplot()</li>
-<li>scatterplot()</li>
-</ul>
-<h3 id="用散点图关联变量"><a href="#用散点图关联变量" class="headerlink" title="用散点图关联变量"></a>用散点图关联变量</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tips = sns.load_dataset(<span class="string">"tips"</span>)   <span class="comment"># load_dateset()是从在线存储库加载数据集，极大方便了练习</span></span><br><span class="line">tips.head()</span><br></pre></td></tr></table></figure>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>total_bill</th>
-      <th>tip</th>
-      <th>sex</th>
-      <th>smoker</th>
-      <th>day</th>
-      <th>time</th>
-      <th>size</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>16.99</td>
-      <td>1.01</td>
-      <td>Female</td>
-      <td>No</td>
-      <td>Sun</td>
-      <td>Dinner</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>10.34</td>
-      <td>1.66</td>
-      <td>Male</td>
-      <td>No</td>
-      <td>Sun</td>
-      <td>Dinner</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>21.01</td>
-      <td>3.50</td>
-      <td>Male</td>
-      <td>No</td>
-      <td>Sun</td>
-      <td>Dinner</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>23.68</td>
-      <td>3.31</td>
-      <td>Male</td>
-      <td>No</td>
-      <td>Sun</td>
-      <td>Dinner</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>24.59</td>
-      <td>3.61</td>
-      <td>Female</td>
-      <td>No</td>
-      <td>Sun</td>
-      <td>Dinner</td>
-      <td>4</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.relplot(x=<span class="string">"total_bill"</span>, y=<span class="string">"tip"</span>, data=tips)</span><br></pre></td></tr></table></figure>
-<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x1a1ff4a4e0&gt;
-</code></pre><p><img src="output_7_1.png" alt="png"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.relplot(x=<span class="string">"total_bill"</span>, y=<span class="string">"tip"</span>,hue=<span class="string">'size'</span>, data=tips) <span class="comment">#hue参数对输入的变量进行分组，生成的不同的颜色</span></span><br></pre></td></tr></table></figure>
-<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x1a1fbbdc88&gt;
-</code></pre><p><img src="output_8_1.png" alt="png"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.relplot(x=<span class="string">"total_bill"</span>, y=<span class="string">"tip"</span>,hue=<span class="string">'size'</span>,size=<span class="string">'size'</span>,sizes=(<span class="number">15</span>,<span class="number">100</span>),data=tips)  <span class="comment"># size,sizes一般搭配使用</span></span><br></pre></td></tr></table></figure>
-<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x1a203be5f8&gt;
-</code></pre><p><img src="output_9_1.png" alt="png"></p>
-<blockquote>
-<p>下面这个分组画图感觉会很有用,col参数决定行，row参数决定列</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.relplot(x=<span class="string">"total_bill"</span>, y=<span class="string">"tip"</span>,hue=<span class="string">'size'</span>,size=<span class="string">'size'</span>,sizes=(<span class="number">15</span>,<span class="number">50</span>),col=<span class="string">'time'</span>,data=tips)</span><br></pre></td></tr></table></figure>
-<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x1a205eb1d0&gt;
-</code></pre><p><img src="output_11_1.png" alt="png"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.relplot(x=<span class="string">"total_bill"</span>, y=<span class="string">"tip"</span>,hue=<span class="string">'size'</span>,size=<span class="string">'size'</span>,sizes=(<span class="number">15</span>,<span class="number">50</span>),col=<span class="string">'time'</span>,row=<span class="string">'sex'</span>,data=tips)</span><br></pre></td></tr></table></figure>
-<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x1a209b8ef0&gt;
-</code></pre><p><img src="output_12_1.png" alt="png"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.relplot(x=<span class="string">"total_bill"</span>, y=<span class="string">"tip"</span>,hue=<span class="string">'time'</span>,col =<span class="string">'time'</span>,palette = [<span class="string">'b'</span>,<span class="string">'r'</span>],data=tips) <span class="comment">#指定绘图的颜色</span></span><br></pre></td></tr></table></figure>
-<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x1a21a2b390&gt;
-</code></pre><p><img src="output_13_1.png" alt="png"></p>
-<h3 id="线图表示连续性"><a href="#线图表示连续性" class="headerlink" title="线图表示连续性"></a>线图表示连续性</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">#lineplot()函数的很多参数其实和replot()一致，hue|size|col之类的，可以参考</span></span><br><span class="line"></span><br><span class="line">df = pd.DataFrame(dict(time=np.arange(<span class="number">500</span>),value=np.random.randn(<span class="number">500</span>).cumsum()))</span><br><span class="line">sns.relplot(x=<span class="string">'time'</span>,y=<span class="string">'value'</span>,kind=<span class="string">'line'</span>,data=df)</span><br></pre></td></tr></table></figure>
-<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x1a22642c88&gt;
-</code></pre><p><img src="output_15_1.png" alt="png"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.lineplot(x=<span class="string">'time'</span>,y=<span class="string">'value'</span>,data=df)</span><br></pre></td></tr></table></figure>
-<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a22879c18&gt;
-</code></pre><p><img src="output_16_1.png" alt="png"></p>
-<h3 id="聚合和表示不确定性"><a href="#聚合和表示不确定性" class="headerlink" title="聚合和表示不确定性"></a>聚合和表示不确定性</h3><p>如果<code>x</code>变量出现多次，那么seaborn会通过绘制平均值周围的其和95％置信区间来聚合每个值的多个测量值</p>
-<blockquote>
-<p>这个对于不同的数据集是需要适应其变化的，假设是时间密集型的数据集，那么就需要禁用他们</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fmri = sns.load_dataset(<span class="string">"fmri"</span>)</span><br><span class="line">sns.relplot(x=<span class="string">"timepoint"</span>, y=<span class="string">"signal"</span>, kind=<span class="string">"line"</span>, data=fmri)</span><br></pre></td></tr></table></figure>
-<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x1a229c42b0&gt;
-</code></pre><p><img src="output_19_1.png" alt="png"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#特别是对于较大的数据，可以通过绘制标准偏差而不是置信区间来表示每个时间点的分布扩散</span></span><br><span class="line">sns.relplot(x=<span class="string">"timepoint"</span>, y=<span class="string">"signal"</span>, kind=<span class="string">"line"</span>,ci=<span class="string">'sd'</span>,data=fmri)</span><br></pre></td></tr></table></figure>
-<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x1a22b6ce10&gt;
-</code></pre><p><img src="output_20_1.png" alt="png"></p>
-<h3 id="用语义映射绘制数据子集"><a href="#用语义映射绘制数据子集" class="headerlink" title="用语义映射绘制数据子集"></a>用语义映射绘制数据子集</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fmri.head()</span><br></pre></td></tr></table></figure>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>subject</th>
-      <th>timepoint</th>
-      <th>event</th>
-      <th>region</th>
-      <th>signal</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>s13</td>
-      <td>18</td>
-      <td>stim</td>
-      <td>parietal</td>
-      <td>-0.017552</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>s5</td>
-      <td>14</td>
-      <td>stim</td>
-      <td>parietal</td>
-      <td>-0.080883</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>s12</td>
-      <td>18</td>
-      <td>stim</td>
-      <td>parietal</td>
-      <td>-0.081033</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>s11</td>
-      <td>18</td>
-      <td>stim</td>
-      <td>parietal</td>
-      <td>-0.046134</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>s10</td>
-      <td>18</td>
-      <td>stim</td>
-      <td>parietal</td>
-      <td>-0.037970</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.relplot(x=<span class="string">"timepoint"</span>, y=<span class="string">"signal"</span>, hue=<span class="string">"event"</span>, kind=<span class="string">"line"</span>, data=fmri);</span><br></pre></td></tr></table></figure>
-<p><img src="output_23_0.png" alt="png"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.lineplot(x=<span class="string">'timepoint'</span>,y=<span class="string">'signal'</span>,hue=<span class="string">'region'</span>,style=<span class="string">'event'</span>,data=fmri)</span><br></pre></td></tr></table></figure>
-<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a23077320&gt;
-</code></pre><p><img src="output_24_1.png" alt="png"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#标识子集</span></span><br><span class="line">sns.relplot(x=<span class="string">"timepoint"</span>, y=<span class="string">"signal"</span>, hue=<span class="string">"region"</span>, style=<span class="string">"event"</span>,</span><br><span class="line">            dashes=<span class="keyword">False</span>, markers=<span class="keyword">True</span>, kind=<span class="string">"line"</span>, marker =<span class="keyword">True</span>,data=fmri);</span><br></pre></td></tr></table></figure>
-<p><img src="output_25_0.png" alt="png"></p>
-<blockquote>
-<p>还可以单独绘制每个采样单位，而无需通过语义区分它们。这可以避免使图例混乱</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sns.relplot(x=<span class="string">"timepoint"</span>, y=<span class="string">"signal"</span>, hue=<span class="string">"region"</span>,</span><br><span class="line">            units=<span class="string">"subject"</span>, estimator=<span class="keyword">None</span>,</span><br><span class="line">            kind=<span class="string">"line"</span>, data=fmri.query(<span class="string">"event == 'stim'"</span>))</span><br></pre></td></tr></table></figure>
-<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x1a234eef98&gt;
-</code></pre><p><img src="output_27_1.png" alt="png"></p>
-<blockquote>
-<p>默认<code>lineplot()</code>的色彩映射和图例的处理还取决于色调语义是分类还是数字</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dots = sns.load_dataset(<span class="string">"dots"</span>).query(<span class="string">"align == 'dots'"</span>)</span><br><span class="line">sns.relplot(x=<span class="string">"time"</span>, y=<span class="string">"firing_rate"</span>,</span><br><span class="line">            hue=<span class="string">"coherence"</span>, style=<span class="string">"choice"</span>,</span><br><span class="line">            kind=<span class="string">"line"</span>, data=dots)</span><br></pre></td></tr></table></figure>
-<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x1a2370e7b8&gt;
-</code></pre><p><img src="output_29_1.png" alt="png"></p>
-<h3 id="用日期数据绘图"><a href="#用日期数据绘图" class="headerlink" title="用日期数据绘图"></a>用日期数据绘图</h3><p>线图通常用于可视化与实际日期和时间相关的数据。这些函数以原始格式将数据传递给底层的matplotlib函数，因此他们可以利用matplotlib在tick标签中设置日期格式的功能。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">df = pd.DataFrame(dict(time=pd.date_range(<span class="string">"2017-1-1"</span>, periods=<span class="number">500</span>),</span><br><span class="line">                       value=np.random.randn(<span class="number">500</span>).cumsum()))</span><br><span class="line">g = sns.relplot(x=<span class="string">"time"</span>, y=<span class="string">"value"</span>, kind=<span class="string">"line"</span>, data=df)</span><br><span class="line">g.fig.autofmt_xdate()</span><br></pre></td></tr></table></figure>
-<p><img src="output_32_0.png" alt="png"></p>
-<h3 id="Showing-multiple-relationships-with-facets"><a href="#Showing-multiple-relationships-with-facets" class="headerlink" title="Showing multiple relationships with facets"></a>Showing multiple relationships with facets</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sns.relplot(x=<span class="string">"timepoint"</span>, y=<span class="string">"signal"</span>, hue=<span class="string">"subject"</span>,</span><br><span class="line">            col=<span class="string">"region"</span>, row=<span class="string">"event"</span>, height=<span class="number">3</span>,</span><br><span class="line">            kind=<span class="string">"line"</span>, estimator=<span class="keyword">None</span>, data=fmri);</span><br></pre></td></tr></table></figure>
-<p><img src="output_34_0.png" alt="png"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sns.relplot(x=<span class="string">"timepoint"</span>, y=<span class="string">"signal"</span>, hue=<span class="string">"event"</span>, style=<span class="string">"event"</span>,</span><br><span class="line">            col=<span class="string">"subject"</span>, col_wrap=<span class="number">5</span>,</span><br><span class="line">            height=<span class="number">3</span>, aspect=<span class="number">.75</span>, linewidth=<span class="number">2.5</span>,</span><br><span class="line">            kind=<span class="string">"line"</span>, data=fmri.query(<span class="string">"region == 'frontal'"</span>));</span><br></pre></td></tr></table></figure>
-<p><img src="output_35_0.png" alt="png"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -4026,7 +3970,7 @@ Categories (4, interval[float64]): [(-2.845, -1.307] &lt; (-1.307, 0.225] &lt; (
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">96</span>
+                  <span class="site-state-item-count">97</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -4039,7 +3983,7 @@ Categories (4, interval[float64]): [(-2.845, -1.307] &lt; (-1.307, 0.225] &lt; (
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">39</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
