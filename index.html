@@ -242,6 +242,362 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Hive内置的常见算术运算符和逻辑运算符/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Hive内置的常见算术运算符和逻辑运算符/" itemprop="url">Hive内置的常见算术运算符和逻辑运算符</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-10T11:48:26+08:00">
+                2019-10-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在我们日常地使用中，我们经常会使用 hive 进行各种运算操作，其实这之中发生了很多 hive 数据类型之前的转换操作，比如 string + int 。今天我们来大概看一看，以便踩坑的时候可以更快地出坑。</p>
+<h2 id="基本知识"><a href="#基本知识" class="headerlink" title="基本知识"></a>基本知识</h2><p>可以先看看后面这篇文章：<a href="https://www.iteblog.com/archives/870.html" target="_blank" rel="noopener">Hive内置数据类型</a></p>
+<p>假如我们需要对两个不同数据类型的数字进行比较，一个是 int，一个是 smallint，那么在比较的时候，都会被隐式转化为 int 类型再进行比较。不顾我们不可以隐式地将一个 int 类型的数据转化成一个 smallint 类型的数据，除非使用 cast 。</p>
+<p>任何整数类型都可以隐式转换成一个范围更大的类型。任意 int 类型、float、string 都可以隐式转换成 double 类型！boolean不可以转化为其他任意类型。</p>
+<p>​    </p>
+<h2 id="具体操作"><a href="#具体操作" class="headerlink" title="具体操作"></a>具体操作</h2><h3 id="算术运算符"><a href="#算术运算符" class="headerlink" title="算术运算符"></a>算术运算符</h3><blockquote>
+<p>无特殊说明，则默认返回是变量的最小父类型</p>
+</blockquote>
+<ul>
+<li><p>等值比较</p>
+<p>语法：A = B</p>
+<p>说明：如果表达式 A 和表达式 B 相等，则为 True ，否则为 False</p>
+</li>
+<li><p>加法操作</p>
+<p>语法： A + B</p>
+<p>说明：返回 A+B 相加的结果。结果的数值类型等于 A 的类型和 B 的类型的最小父类型。比如 int + int 结果为 int 类型，int + double 为 double 类型</p>
+</li>
+<li><p>减法操作</p>
+<p> 语法：A - B </p>
+<p> 说明：同加法操作</p>
+</li>
+<li><p>乘法操作</p>
+<p>语法： A * B</p>
+<p>说明：同样是返回 A 与 B 的最小父类型，不过如果结果超过默认的结果类型的数值范围，为需要通过 cast 将结果转换成范围更大的数值类型</p>
+</li>
+<li><p>除法操作</p>
+<p>语法： A / B</p>
+<p>说明：返回 A 除以 B 的结果。结果的数值为 double 类型。<strong>Hive中最高精度的数据类型是 double ，只精确到小数点后面16位</strong></p>
+</li>
+<li><p>取余操作</p>
+<p>语法： A % B</p>
+<p>说明：pass</p>
+</li>
+<li><p>位与操作</p>
+<p>语法： A &amp; B</p>
+<p>说明：返回  A 和 B 按位进行与操作的结果</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hive (temp)&gt; select 4 &amp; 8;</span><br><span class="line">0</span><br><span class="line">hive (temp)&gt; select 4 &amp; 6;</span><br><span class="line">4</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>位或操作</p>
+<p>语法：A | B</p>
+<p>说明：返回  A 和 B 按位进行或操作的结果</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hive (temp)&gt; select 4 | 6;</span><br><span class="line">6</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>位异或操作</p>
+<p>语法：A ^ B  </p>
+<p>说明：返回 A 和 B 按位进行异或操作的结果</p>
+</li>
+<li><p>位取反操作</p>
+<p>语法：~A</p>
+<p>说明：返回 A 按位取反操作的结果，结果的数值类型等于 A 的类型</p>
+</li>
+</ul>
+<h3 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h3><ul>
+<li><p>逻辑与操作</p>
+<p>语法：A and B  或者 A  &amp;&amp; B  </p>
+<p>操作类型： boolean</p>
+<p>说明: pass </p>
+</li>
+<li><p>逻辑或操作</p>
+<p>语法：A or B  或者 A || B </p>
+<p>操作类型：boolean</p>
+<p>说明：pass</p>
+</li>
+<li><p>逻辑非操作</p>
+<p>语法：not A 或者 !A </p>
+<p>操作类型：boolean</p>
+<p>说明：pass </p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/了解逻辑回归/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/了解逻辑回归/" itemprop="url">Untitled</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-26T18:22:48+08:00">
+                2019-09-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="什么是逻辑回归"><a href="#什么是逻辑回归" class="headerlink" title="什么是逻辑回归"></a>什么是逻辑回归</h2><p>逻辑回归是最简单的分类算法之一，简单但是好用。</p>
+<h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><h3 id="Sigmoid-函数"><a href="#Sigmoid-函数" class="headerlink" title="Sigmoid 函数"></a>Sigmoid 函数</h3><p>对于二分类问题来说，sigmoid 函数可以较为平滑地处理 01 瞬时阶跃问题。其计算公式为：</p>
+<script type="math/tex; mode=display">
+\sigma(z) = \frac {1} {1+e^{-z}}</script><p>图像为：</p>
+<p><img src="/Users/zhangyangfenbi.com/Desktop/code/my_blog/source/_posts/了解逻辑回归/sigmoid.png" alt="Sigmoid"></p>
+<p>当然我们也可以利用这个工具来可视化地了解 <a href="https://www.desmos.com/calculator/bgontvxotm" target="_blank" rel="noopener">sigmoid 函数</a>。总所周知，分类的时候会处理多个特征，那我们可以对于每一个特征 $x_i$ 乘以一个回归系数 $w_i$ ，得到 $z=w_0x_0+w_1x_0+…+w_nx_n$ ，即</p>
+<script type="math/tex; mode=display">
+z=w^Tx</script><p>可以很明显地看到，sigmoid 函数的值域是 $(0,1)$ ，且 $z$ 的值越大，则样本 $x_i$ 表示正例的概率越大，反之同理。$z$ 是一个线性函数，后面会经常用到。</p>
+<h4 id="定义条件概率"><a href="#定义条件概率" class="headerlink" title="定义条件概率"></a>定义条件概率</h4><p>在 $x_i$ 出现的情况下，原本为正的条件概率为：</p>
+<script type="math/tex; mode=display">
+P(Y=1|X= \vec x) = \sigma (z)</script><p>在 $x_i$ 出现的情况下，原本为负的条件概率为：</p>
+<script type="math/tex; mode=display">
+P(Y=1|X= \vec x) = 1 - \sigma (z)</script><p>那么条件概率既是：</p>
+<script type="math/tex; mode=display">
+P(Y=y|X= \vec x) = {\sigma(z)}^y \cdot (1-y) \cdot {(1-\sigma(z))}^{(1-y)}</script><h4 id="几率相关"><a href="#几率相关" class="headerlink" title="几率相关"></a>几率相关</h4><p>事件发生的几率等于该事件发生的概率除以不发生的概率</p>
+<script type="math/tex; mode=display">
+odds =  \frac {p}{1-p}</script><p>那么对数几率则是：</p>
+<script type="math/tex; mode=display">
+log(odds) = log(\frac{p}{1-p})</script><p>对于 LR 而言，则输出 $Y=1$ 的对数几率则是：</p>
+<script type="math/tex; mode=display">
+log(odds) = log(\frac{\sigma(z)}{1-\sigma(z)}) = z = w^{T}x</script><p>即输出 $Y=1$ 的对数几率是由输入 $x$ 表示的线性模型。 </p>
+<h4 id="导函数形式"><a href="#导函数形式" class="headerlink" title="导函数形式"></a>导函数形式</h4><script type="math/tex; mode=display">
+\sigma(z)' = (\frac {1} {1+e^{-z}})' =1+e^{-z})^{-2} \cdot e^{-z} =\sigma(z) \cdot (1 - \sigma(z))</script><h3 id="梯度"><a href="#梯度" class="headerlink" title="梯度"></a>梯度</h3><blockquote>
+<p>梯度的本意是一个向量（矢量），表示某一函数在该点处的方向导数沿着该方向取得最大值，即函数在该点处沿着该方向（此梯度的方向）变化最快，变化率最大（为该梯度的模）</p>
+</blockquote>
+<p>回顾一下梯度的计算公式：</p>
+<script type="math/tex; mode=display">
+{\displaystyle \nabla f={\begin{pmatrix}{\frac {\partial f}{\partial x}},{\frac {\partial f}{\partial y}},{\frac {\partial f}{\partial z}}\end{pmatrix}}={\frac {\partial f}{\partial x}}\mathbf {i} +{\frac {\partial f}{\partial y}}\mathbf {j} +{\frac {\partial f}{\partial z}}\mathbf {k} }</script><p>其中 <strong>i</strong>, <strong>j</strong>, <strong>k</strong> 为标准的单位向量，分别指向 <em>x</em>, <em>y</em> 跟 <em>z</em> 坐标的方向。</p>
+<h4 id="梯度下降法"><a href="#梯度下降法" class="headerlink" title="梯度下降法"></a>梯度下降法</h4><p>参考维基百科<a href="[https://zh.wikipedia.org/wiki/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95](https://zh.wikipedia.org/wiki/梯度下降法">梯度下降法</a>)</p>
+<h4 id="局部最优现象"><a href="#局部最优现象" class="headerlink" title="局部最优现象"></a>局部最优现象</h4><p>梯度下降的最终点不一定是全局最优点，所以初始点的点选择对最终结果有很大程度影响。</p>
+<h2 id="LR-原理"><a href="#LR-原理" class="headerlink" title="LR 原理"></a>LR 原理</h2><h3 id="LR-的工作原理"><a href="#LR-的工作原理" class="headerlink" title="LR 的工作原理"></a>LR 的工作原理</h3><ol>
+<li><p>初始化每一个回归系数为1</p>
+</li>
+<li><p>重复计算R次：</p>
+<ul>
+<li><p>计算整个数据集的梯度</p>
+</li>
+<li><p>使用 步长 x 梯度，更新回归系数</p>
+</li>
+</ul>
+</li>
+<li><p>更新回归系数</p>
+</li>
+</ol>
+<h3 id="LR-算法特点"><a href="#LR-算法特点" class="headerlink" title="LR 算法特点"></a>LR 算法特点</h3><p>优点：简单好用</p>
+<p>缺点：容易欠拟合，分类精度可能不高</p>
+<h3 id="LR-实现"><a href="#LR-实现" class="headerlink" title="LR 实现"></a>LR 实现</h3><h4 id="sigmoid函数"><a href="#sigmoid函数" class="headerlink" title="sigmoid函数"></a>sigmoid函数</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sigmoid</span><span class="params">(z)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span> / ( <span class="number">1</span> + math.exp(-z) )</span><br></pre></td></tr></table></figure>
+<h4 id="梯度上升"><a href="#梯度上升" class="headerlink" title="梯度上升"></a>梯度上升</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gradasend</span><span class="params">()</span>:</span></span><br><span class="line">  <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<h4 id="核心代码"><a href="#核心代码" class="headerlink" title="核心代码"></a>核心代码</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">lr</span><span class="params">()</span>:</span></span><br><span class="line">  <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<h2 id="LR实战"><a href="#LR实战" class="headerlink" title="LR实战"></a>LR实战</h2>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://snailed.cn/《日本纪行》/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1369,304 +1725,6 @@ F(n) = max(F(n-1)+x_{n},x_{n}) \\
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Linux统计文件内容/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/Linux统计文件内容/" itemprop="url">Linux统计文件内容</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-26T14:16:13+08:00">
-                2019-08-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>今天工作使用到对一个超过100万行的文件，去重统计某一列有多少个。使用命令如下<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat xx.csv | sort -t ',' -k 1,1 -u | wc -l</span><br></pre></td></tr></table></figure></p>
-<p>其中<code>-t</code>表示每行的分隔符是什么，<code>-k</code>表示统计第几列到第几列，<code>-u</code>表示去重</p>
-<p><code>wc -l</code> 统计文件有多少行</p>
-<p><code>sort</code> 和 <code>uniq</code> 这两个命令还有挺多东西需要学习一下的，后面整理一下。</p>
-<hr>
-<p>2019-08-26</p>
-<p>在工作的场景中，我们经常针对大文本做一些统计，比如说前文的去重统计某一列的id个数。使用 Python 统计固然可以，但是我们也有更方便的办法：<code>sort</code> and <code>uniq</code> 。</p>
-<p>我们先创建一个 <code>demo.txt</code> 的文件，来做实验：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span>cat demo.txt</span><br><span class="line">1,2,3</span><br><span class="line">2,3,3</span><br><span class="line">2,3,4</span><br><span class="line">2,3,3</span><br><span class="line">5,5,2</span><br><span class="line">4,2,3</span><br></pre></td></tr></table></figure></p>
-<h4 id="sort-为排序而生"><a href="#sort-为排序而生" class="headerlink" title="sort : 为排序而生"></a><code>sort</code> : 为排序而生</h4><p><code>sort</code> 基本用法:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;filename&gt; | sort</span><br><span class="line">sort &lt;file1&gt; [&lt;file2&gt; [&lt;file3&gt; [...]]]</span><br></pre></td></tr></table></figure>
-<p>两个命令都可以， <code>sort</code> 会逐行读取内容，然后按照 <code>ASCII</code> 编码的顺序，升序排列文件的行，最后输出到标准输出，其中 <code>sort</code> 可以连续读入多个文件，然后合在一起排序。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span>sort  demo.txt</span><br><span class="line">1,2,3</span><br><span class="line">2,3,3</span><br><span class="line">2,3,3</span><br><span class="line">2,3,4</span><br><span class="line">4,2,3</span><br><span class="line">5,5,2</span><br></pre></td></tr></table></figure>
-<p><code>sort</code> 常用选项：</p>
-<ul>
-<li>-o: 定向输出文件</li>
-<li>-r: 倒叙排列</li>
-<li>-n: 排序数字时使用 </li>
-<li>-u: 去除重复行</li>
-<li>-t: 指定分隔符（通常与 -k 联用）</li>
-<li>-k: 指定用于排序的列号</li>
-<li>-f: 忽略大小写</li>
-<li>-M: 能够排序月份</li>
-<li>-b: 忽略行首空白</li>
-<li>-u: 对有相同键的列去重</li>
-</ul>
-<h4 id="uniq-治重复专用"><a href="#uniq-治重复专用" class="headerlink" title="uniq 治重复专用"></a><code>uniq</code> 治重复专用</h4><p><code>uniq</code> 的作用可以描述为：针对相邻的重复行，进行相应的动作。(大哥讲太好，忍不住复制了过来)</p>
-<blockquote>
-<p>这句话中，有两个地方需要注意。首先，针对的是相邻的重复行。因此，uniq 对于不相邻的重复行是不起作用的。其次，进行相应的动作。这意味着，uniq 可以做的事情很多，不止一样。</p>
-</blockquote>
-<p><code>uniq</code> 默认是对相邻的重复行，进行去重的操作：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span>cat demo.txt | sort  | uniq</span><br><span class="line">1,2,3</span><br><span class="line">2,3,3</span><br><span class="line">2,3,4</span><br><span class="line">4,2,3</span><br><span class="line">5,5,2</span><br><span class="line"><span class="meta">#</span> 2,3,3进行了去重</span><br></pre></td></tr></table></figure>
-<p>上面命令也就很简单了：把 <code>demo.txt</code> 的文件按照升序排列，然后去除重复的行，最后输出到标准输出（屏幕）</p>
-<p>当然，我们也可以给 <code>uniq</code> 加上不同的参数，来解锁不同的姿势。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">cat &lt;filename&gt; | sort | uniq -d     # 只显示重复的行，每行只显示一次</span><br><span class="line">cat &lt;filename&gt; | sort | uniq -i     # 忽略大小写</span><br><span class="line">cat &lt;filename&gt; | sort | uniq -u     # 只显示只出现一次的行</span><br><span class="line">cat &lt;filename&gt; | sort | uniq -c     # 统计每行重复的次数</span><br></pre></td></tr></table></figure>
-<h4 id="使用sort-和-uniq"><a href="#使用sort-和-uniq" class="headerlink" title="使用sort 和 uniq"></a>使用<code>sort</code> 和 <code>uniq</code></h4><p>准备另一个集合    <code>demo_cp.txt</code></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span>cat demo_cp.txt</span><br><span class="line">1,2,3</span><br><span class="line">2,3,3</span><br><span class="line">2,3,4</span><br><span class="line">2,3,3</span><br><span class="line">6,1,2</span><br></pre></td></tr></table></figure>
-<h5 id="求交集"><a href="#求交集" class="headerlink" title="求交集"></a>求交集</h5><p>我们想要知道两个文件里面都出现了的元素，那么就是两个文件重复的行，easy。<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span>sort &lt;file1&gt; &lt;file2&gt; | uniq -d # 交集</span><br></pre></td></tr></table></figure></p>
-<p>实战一下: </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span>sort demo.txt demo_cp.txt | uniq -d</span><br><span class="line">1,2,3</span><br><span class="line">2,3,3</span><br><span class="line">2,3,4</span><br></pre></td></tr></table></figure>
-<h5 id="求并集"><a href="#求并集" class="headerlink" title="求并集"></a>求并集</h5><p>前文已经演示过了，easy</p>
-<h5 id="求差集"><a href="#求差集" class="headerlink" title="求差集"></a>求差集</h5><p>也就是重合过的不要呗，那就是 <code>uniq -u</code> 统计只出现过一次的行</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span>sort &lt;file1&gt; &lt;file2&gt; | uniq -u # 差集</span><br></pre></td></tr></table></figure>
-<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p>感恩大佬的文章<a href="https://liam.page/2016/05/05/best-match-using-sort-and-uniq-to-do-set-operations/" target="_blank" rel="noopener">最佳搭档：利用 sort 和 uniq 做集合运算</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/星星与雪花/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/星星与雪花/" itemprop="url">星星与雪花</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-22T10:51:37+08:00">
-                2019-08-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="星型模型"><a href="#星型模型" class="headerlink" title="星型模型"></a>星型模型</h4><p>中央表包含事实数据，多个表以中央表为中心呈放射状分布，它们通过数据库的主键和外键相互连接，是一种使用关系数据库实现多维分析空间的模式，其基本形式必须实现多维空间，以使用关系数据库的基本功能。同时星型模型也是一种非正规化的模型，多维数据集的每一个维度直接与事实表连接，没有渐变维度，所以存在冗余数据。在星型模型中，只需要扫描事实表就可以进行查询，主要的数据都在庞大的事实表中，所以查询效率较高，同时每个维度表和事实表关联，非常直观，很容易组合出各种查询。</p>
-<p><strong>特点</strong>：</p>
-<ul>
-<li>只有一个事实表</li>
-<li>事实表中的每一个元组都是一个外键指向维度表的主键。</li>
-<li>维度表的信息组成这个维度的全部信息</li>
-<li>事实表与维度表通过主键外键相关联，维度表之间没有关联，就像很多星星围绕在一个恒星周围，故取名为星形模型</li>
-</ul>
-<p><strong>优点</strong>：</p>
-<ul>
-<li>模型简单</li>
-<li>查询效率较高</li>
-</ul>
-<h4 id="雪花模型"><a href="#雪花模型" class="headerlink" title="雪花模型"></a>雪花模型</h4><p>雪花模型在星型模型的基础上，维度表进一步规范化为子维度表，这些子维度表没有直接与事实表连接，而是通过其他维度表连接到事实表上，看起来就像一片雪花，故称雪花模型。也就是说雪花模型是星型模型的进一步扩展，将其维度表扩展为更小的维度表，形成一种层次。这样就通过最大限度的减少数据存储量以及联合较小的维度表来改善查询性能，且去除了星型模型中的冗余数据。</p>
-<h4 id="星座模型"><a href="#星座模型" class="headerlink" title="星座模型"></a>星座模型</h4><p>星座模型其实是更复杂的星型模型：多张事实表，维度表公用。</p>
-<p>这个其实更贴近于现实的使用情况。</p>
-<h4 id="看个图"><a href="#看个图" class="headerlink" title="看个图"></a>看个图</h4><p>星型模型和雪花模型<br><img src="starandsnow.png" alt="星星与雪花"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1719,7 +1777,7 @@ F(n) = max(F(n-1)+x_{n},x_{n}) \\
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">97</span>
+                  <span class="site-state-item-count">99</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1732,7 +1790,7 @@ F(n) = max(F(n-1)+x_{n},x_{n}) \\
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

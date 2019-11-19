@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+<meta name="google-site-verification" content="YLpc_1hHqiCamrFbtaqc1SquC8Sqv0AtOvhE2V37oHw">
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="什么是逻辑回归逻辑回归是最简单的分类算法之一，简单但是好用。 基础知识Sigmoid 函数对于二分类问题来说，sigmoid 函数可以较为平滑地处理 01 瞬时阶跃问题。其计算公式为：  \sigma(z) = \frac {1} {1+e^{-z}}图像为：  当然我们也可以利用这个工具来可视化地了解 sigmoid 函数。总所周知，分类的时候会处理多个特征，那我们可以对于每一个特征 $x_i$">
+<meta property="og:type" content="article">
+<meta property="og:title" content="| Yang |">
+<meta property="og:url" content="http://snailed.cn/了解逻辑回归/index.html">
+<meta property="og:site_name" content="| Yang |">
+<meta property="og:description" content="什么是逻辑回归逻辑回归是最简单的分类算法之一，简单但是好用。 基础知识Sigmoid 函数对于二分类问题来说，sigmoid 函数可以较为平滑地处理 01 瞬时阶跃问题。其计算公式为：  \sigma(z) = \frac {1} {1+e^{-z}}图像为：  当然我们也可以利用这个工具来可视化地了解 sigmoid 函数。总所周知，分类的时候会处理多个特征，那我们可以对于每一个特征 $x_i$">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://snailed.cn/Users/zhangyangfenbi.com/Desktop/code/my_blog/source/_posts/了解逻辑回归/sigmoid.png">
+<meta property="og:updated_time" content="2019-10-20T08:43:36.459Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="| Yang |">
+<meta name="twitter:description" content="什么是逻辑回归逻辑回归是最简单的分类算法之一，简单但是好用。 基础知识Sigmoid 函数对于二分类问题来说，sigmoid 函数可以较为平滑地处理 01 瞬时阶跃问题。其计算公式为：  \sigma(z) = \frac {1} {1+e^{-z}}图像为：  当然我们也可以利用这个工具来可视化地了解 sigmoid 函数。总所周知，分类的时候会处理多个特征，那我们可以对于每一个特征 $x_i$">
+<meta name="twitter:image" content="http://snailed.cn/Users/zhangyangfenbi.com/Desktop/code/my_blog/source/_posts/了解逻辑回归/sigmoid.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://snailed.cn/了解逻辑回归/">
+
+
+
+
+
+  <title> | | Yang |</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">| Yang |</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/了解逻辑回归/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline"></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-26T18:22:48+08:00">
+                2019-09-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="什么是逻辑回归"><a href="#什么是逻辑回归" class="headerlink" title="什么是逻辑回归"></a>什么是逻辑回归</h2><p>逻辑回归是最简单的分类算法之一，简单但是好用。</p>
+<h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><h3 id="Sigmoid-函数"><a href="#Sigmoid-函数" class="headerlink" title="Sigmoid 函数"></a>Sigmoid 函数</h3><p>对于二分类问题来说，sigmoid 函数可以较为平滑地处理 01 瞬时阶跃问题。其计算公式为：</p>
+<script type="math/tex; mode=display">
+\sigma(z) = \frac {1} {1+e^{-z}}</script><p>图像为：</p>
+<p><img src="/Users/zhangyangfenbi.com/Desktop/code/my_blog/source/_posts/了解逻辑回归/sigmoid.png" alt="Sigmoid"></p>
+<p>当然我们也可以利用这个工具来可视化地了解 <a href="https://www.desmos.com/calculator/bgontvxotm" target="_blank" rel="noopener">sigmoid 函数</a>。总所周知，分类的时候会处理多个特征，那我们可以对于每一个特征 $x_i$ 乘以一个回归系数 $w_i$ ，得到 $z=w_0x_0+w_1x_0+…+w_nx_n$ ，即</p>
+<script type="math/tex; mode=display">
+z=w^Tx</script><p>可以很明显地看到，sigmoid 函数的值域是 $(0,1)$ ，且 $z$ 的值越大，则样本 $x_i$ 表示正例的概率越大，反之同理。$z$ 是一个线性函数，后面会经常用到。</p>
+<h4 id="定义条件概率"><a href="#定义条件概率" class="headerlink" title="定义条件概率"></a>定义条件概率</h4><p>在 $x_i$ 出现的情况下，原本为正的条件概率为：</p>
+<script type="math/tex; mode=display">
+P(Y=1|X= \vec x) = \sigma (z)</script><p>在 $x_i$ 出现的情况下，原本为负的条件概率为：</p>
+<script type="math/tex; mode=display">
+P(Y=1|X= \vec x) = 1 - \sigma (z)</script><p>那么条件概率既是：</p>
+<script type="math/tex; mode=display">
+P(Y=y|X= \vec x) = {\sigma(z)}^y \cdot (1-y) \cdot {(1-\sigma(z))}^{(1-y)}</script><h4 id="几率相关"><a href="#几率相关" class="headerlink" title="几率相关"></a>几率相关</h4><p>事件发生的几率等于该事件发生的概率除以不发生的概率</p>
+<script type="math/tex; mode=display">
+odds =  \frac {p}{1-p}</script><p>那么对数几率则是：</p>
+<script type="math/tex; mode=display">
+log(odds) = log(\frac{p}{1-p})</script><p>对于 LR 而言，则输出 $Y=1$ 的对数几率则是：</p>
+<script type="math/tex; mode=display">
+log(odds) = log(\frac{\sigma(z)}{1-\sigma(z)}) = z = w^{T}x</script><p>即输出 $Y=1$ 的对数几率是由输入 $x$ 表示的线性模型。 </p>
+<h4 id="导函数形式"><a href="#导函数形式" class="headerlink" title="导函数形式"></a>导函数形式</h4><script type="math/tex; mode=display">
+\sigma(z)' = (\frac {1} {1+e^{-z}})' =1+e^{-z})^{-2} \cdot e^{-z} =\sigma(z) \cdot (1 - \sigma(z))</script><h3 id="梯度"><a href="#梯度" class="headerlink" title="梯度"></a>梯度</h3><blockquote>
+<p>梯度的本意是一个向量（矢量），表示某一函数在该点处的方向导数沿着该方向取得最大值，即函数在该点处沿着该方向（此梯度的方向）变化最快，变化率最大（为该梯度的模）</p>
+</blockquote>
+<p>回顾一下梯度的计算公式：</p>
+<script type="math/tex; mode=display">
+{\displaystyle \nabla f={\begin{pmatrix}{\frac {\partial f}{\partial x}},{\frac {\partial f}{\partial y}},{\frac {\partial f}{\partial z}}\end{pmatrix}}={\frac {\partial f}{\partial x}}\mathbf {i} +{\frac {\partial f}{\partial y}}\mathbf {j} +{\frac {\partial f}{\partial z}}\mathbf {k} }</script><p>其中 <strong>i</strong>, <strong>j</strong>, <strong>k</strong> 为标准的单位向量，分别指向 <em>x</em>, <em>y</em> 跟 <em>z</em> 坐标的方向。</p>
+<h4 id="梯度下降法"><a href="#梯度下降法" class="headerlink" title="梯度下降法"></a>梯度下降法</h4><p>参考维基百科<a href="[https://zh.wikipedia.org/wiki/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95](https://zh.wikipedia.org/wiki/梯度下降法">梯度下降法</a>)</p>
+<h4 id="局部最优现象"><a href="#局部最优现象" class="headerlink" title="局部最优现象"></a>局部最优现象</h4><p>梯度下降的最终点不一定是全局最优点，所以初始点的点选择对最终结果有很大程度影响。</p>
+<h2 id="LR-原理"><a href="#LR-原理" class="headerlink" title="LR 原理"></a>LR 原理</h2><h3 id="LR-的工作原理"><a href="#LR-的工作原理" class="headerlink" title="LR 的工作原理"></a>LR 的工作原理</h3><ol>
+<li><p>初始化每一个回归系数为1</p>
+</li>
+<li><p>重复计算R次：</p>
+<ul>
+<li><p>计算整个数据集的梯度</p>
+</li>
+<li><p>使用 步长 x 梯度，更新回归系数</p>
+</li>
+</ul>
+</li>
+<li><p>更新回归系数</p>
+</li>
+</ol>
+<h3 id="LR-算法特点"><a href="#LR-算法特点" class="headerlink" title="LR 算法特点"></a>LR 算法特点</h3><p>优点：简单好用</p>
+<p>缺点：容易欠拟合，分类精度可能不高</p>
+<h3 id="LR-实现"><a href="#LR-实现" class="headerlink" title="LR 实现"></a>LR 实现</h3><h4 id="sigmoid函数"><a href="#sigmoid函数" class="headerlink" title="sigmoid函数"></a>sigmoid函数</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sigmoid</span><span class="params">(z)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span> / ( <span class="number">1</span> + math.exp(-z) )</span><br></pre></td></tr></table></figure>
+<h4 id="梯度上升"><a href="#梯度上升" class="headerlink" title="梯度上升"></a>梯度上升</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gradasend</span><span class="params">()</span>:</span></span><br><span class="line">  <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<h4 id="核心代码"><a href="#核心代码" class="headerlink" title="核心代码"></a>核心代码</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">lr</span><span class="params">()</span>:</span></span><br><span class="line">  <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<h2 id="LR实战"><a href="#LR实战" class="headerlink" title="LR实战"></a>LR实战</h2>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/《日本纪行》/" rel="next" title="《日本纪行》">
+                <i class="fa fa-chevron-left"></i> 《日本纪行》
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Hive内置的常见算术运算符和逻辑运算符/" rel="prev" title="Hive内置的常见算术运算符和逻辑运算符">
+                Hive内置的常见算术运算符和逻辑运算符 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/timg.gif" alt="zhangyang">
+            
+              <p class="site-author-name" itemprop="name">zhangyang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">99</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是逻辑回归"><span class="nav-number">1.</span> <span class="nav-text">什么是逻辑回归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础知识"><span class="nav-number">2.</span> <span class="nav-text">基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Sigmoid-函数"><span class="nav-number">2.1.</span> <span class="nav-text">Sigmoid 函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义条件概率"><span class="nav-number">2.1.1.</span> <span class="nav-text">定义条件概率</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#几率相关"><span class="nav-number">2.1.2.</span> <span class="nav-text">几率相关</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#导函数形式"><span class="nav-number">2.1.3.</span> <span class="nav-text">导函数形式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#梯度"><span class="nav-number">2.2.</span> <span class="nav-text">梯度</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#梯度下降法"><span class="nav-number">2.2.1.</span> <span class="nav-text">梯度下降法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#局部最优现象"><span class="nav-number">2.2.2.</span> <span class="nav-text">局部最优现象</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LR-原理"><span class="nav-number">3.</span> <span class="nav-text">LR 原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#LR-的工作原理"><span class="nav-number">3.1.</span> <span class="nav-text">LR 的工作原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LR-算法特点"><span class="nav-number">3.2.</span> <span class="nav-text">LR 算法特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LR-实现"><span class="nav-number">3.3.</span> <span class="nav-text">LR 实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#sigmoid函数"><span class="nav-number">3.3.1.</span> <span class="nav-text">sigmoid函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#梯度上升"><span class="nav-number">3.3.2.</span> <span class="nav-text">梯度上升</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#核心代码"><span class="nav-number">3.3.3.</span> <span class="nav-text">核心代码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LR实战"><span class="nav-number">4.</span> <span class="nav-text">LR实战</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhangyang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>

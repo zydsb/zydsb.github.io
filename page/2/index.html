@@ -242,6 +242,304 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Linux统计文件内容/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Linux统计文件内容/" itemprop="url">Linux统计文件内容</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-26T14:16:13+08:00">
+                2019-08-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>今天工作使用到对一个超过100万行的文件，去重统计某一列有多少个。使用命令如下<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat xx.csv | sort -t ',' -k 1,1 -u | wc -l</span><br></pre></td></tr></table></figure></p>
+<p>其中<code>-t</code>表示每行的分隔符是什么，<code>-k</code>表示统计第几列到第几列，<code>-u</code>表示去重</p>
+<p><code>wc -l</code> 统计文件有多少行</p>
+<p><code>sort</code> 和 <code>uniq</code> 这两个命令还有挺多东西需要学习一下的，后面整理一下。</p>
+<hr>
+<p>2019-08-26</p>
+<p>在工作的场景中，我们经常针对大文本做一些统计，比如说前文的去重统计某一列的id个数。使用 Python 统计固然可以，但是我们也有更方便的办法：<code>sort</code> and <code>uniq</code> 。</p>
+<p>我们先创建一个 <code>demo.txt</code> 的文件，来做实验：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">cat demo.txt</span></span><br><span class="line">1,2,3</span><br><span class="line">2,3,3</span><br><span class="line">2,3,4</span><br><span class="line">2,3,3</span><br><span class="line">5,5,2</span><br><span class="line">4,2,3</span><br></pre></td></tr></table></figure></p>
+<h4 id="sort-为排序而生"><a href="#sort-为排序而生" class="headerlink" title="sort : 为排序而生"></a><code>sort</code> : 为排序而生</h4><p><code>sort</code> 基本用法:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;filename&gt; | sort</span><br><span class="line">sort &lt;file1&gt; [&lt;file2&gt; [&lt;file3&gt; [...]]]</span><br></pre></td></tr></table></figure>
+<p>两个命令都可以， <code>sort</code> 会逐行读取内容，然后按照 <code>ASCII</code> 编码的顺序，升序排列文件的行，最后输出到标准输出，其中 <code>sort</code> 可以连续读入多个文件，然后合在一起排序。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">sort  demo.txt</span></span><br><span class="line">1,2,3</span><br><span class="line">2,3,3</span><br><span class="line">2,3,3</span><br><span class="line">2,3,4</span><br><span class="line">4,2,3</span><br><span class="line">5,5,2</span><br></pre></td></tr></table></figure>
+<p><code>sort</code> 常用选项：</p>
+<ul>
+<li>-o: 定向输出文件</li>
+<li>-r: 倒叙排列</li>
+<li>-n: 排序数字时使用 </li>
+<li>-u: 去除重复行</li>
+<li>-t: 指定分隔符（通常与 -k 联用）</li>
+<li>-k: 指定用于排序的列号</li>
+<li>-f: 忽略大小写</li>
+<li>-M: 能够排序月份</li>
+<li>-b: 忽略行首空白</li>
+<li>-u: 对有相同键的列去重</li>
+</ul>
+<h4 id="uniq-治重复专用"><a href="#uniq-治重复专用" class="headerlink" title="uniq 治重复专用"></a><code>uniq</code> 治重复专用</h4><p><code>uniq</code> 的作用可以描述为：针对相邻的重复行，进行相应的动作。(大哥讲太好，忍不住复制了过来)</p>
+<blockquote>
+<p>这句话中，有两个地方需要注意。首先，针对的是相邻的重复行。因此，uniq 对于不相邻的重复行是不起作用的。其次，进行相应的动作。这意味着，uniq 可以做的事情很多，不止一样。</p>
+</blockquote>
+<p><code>uniq</code> 默认是对相邻的重复行，进行去重的操作：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">cat demo.txt | sort  | uniq</span></span><br><span class="line">1,2,3</span><br><span class="line">2,3,3</span><br><span class="line">2,3,4</span><br><span class="line">4,2,3</span><br><span class="line">5,5,2</span><br><span class="line"><span class="meta">#</span><span class="bash"> 2,3,3进行了去重</span></span><br></pre></td></tr></table></figure>
+<p>上面命令也就很简单了：把 <code>demo.txt</code> 的文件按照升序排列，然后去除重复的行，最后输出到标准输出（屏幕）</p>
+<p>当然，我们也可以给 <code>uniq</code> 加上不同的参数，来解锁不同的姿势。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">cat &lt;filename&gt; | sort | uniq -d     # 只显示重复的行，每行只显示一次</span><br><span class="line">cat &lt;filename&gt; | sort | uniq -i     # 忽略大小写</span><br><span class="line">cat &lt;filename&gt; | sort | uniq -u     # 只显示只出现一次的行</span><br><span class="line">cat &lt;filename&gt; | sort | uniq -c     # 统计每行重复的次数</span><br></pre></td></tr></table></figure>
+<h4 id="使用sort-和-uniq"><a href="#使用sort-和-uniq" class="headerlink" title="使用sort 和 uniq"></a>使用<code>sort</code> 和 <code>uniq</code></h4><p>准备另一个集合    <code>demo_cp.txt</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">cat demo_cp.txt</span></span><br><span class="line">1,2,3</span><br><span class="line">2,3,3</span><br><span class="line">2,3,4</span><br><span class="line">2,3,3</span><br><span class="line">6,1,2</span><br></pre></td></tr></table></figure>
+<h5 id="求交集"><a href="#求交集" class="headerlink" title="求交集"></a>求交集</h5><p>我们想要知道两个文件里面都出现了的元素，那么就是两个文件重复的行，easy。<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">sort &lt;file1&gt; &lt;file2&gt; | uniq -d <span class="comment"># 交集</span></span></span><br></pre></td></tr></table></figure></p>
+<p>实战一下: </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">sort demo.txt demo_cp.txt | uniq -d</span></span><br><span class="line">1,2,3</span><br><span class="line">2,3,3</span><br><span class="line">2,3,4</span><br></pre></td></tr></table></figure>
+<h5 id="求并集"><a href="#求并集" class="headerlink" title="求并集"></a>求并集</h5><p>前文已经演示过了，easy</p>
+<h5 id="求差集"><a href="#求差集" class="headerlink" title="求差集"></a>求差集</h5><p>也就是重合过的不要呗，那就是 <code>uniq -u</code> 统计只出现过一次的行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">sort &lt;file1&gt; &lt;file2&gt; | uniq -u <span class="comment"># 差集</span></span></span><br></pre></td></tr></table></figure>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p>感恩大佬的文章<a href="https://liam.page/2016/05/05/best-match-using-sort-and-uniq-to-do-set-operations/" target="_blank" rel="noopener">最佳搭档：利用 sort 和 uniq 做集合运算</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/星星与雪花/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/星星与雪花/" itemprop="url">星星与雪花</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-22T10:51:37+08:00">
+                2019-08-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="星型模型"><a href="#星型模型" class="headerlink" title="星型模型"></a>星型模型</h4><p>中央表包含事实数据，多个表以中央表为中心呈放射状分布，它们通过数据库的主键和外键相互连接，是一种使用关系数据库实现多维分析空间的模式，其基本形式必须实现多维空间，以使用关系数据库的基本功能。同时星型模型也是一种非正规化的模型，多维数据集的每一个维度直接与事实表连接，没有渐变维度，所以存在冗余数据。在星型模型中，只需要扫描事实表就可以进行查询，主要的数据都在庞大的事实表中，所以查询效率较高，同时每个维度表和事实表关联，非常直观，很容易组合出各种查询。</p>
+<p><strong>特点</strong>：</p>
+<ul>
+<li>只有一个事实表</li>
+<li>事实表中的每一个元组都是一个外键指向维度表的主键。</li>
+<li>维度表的信息组成这个维度的全部信息</li>
+<li>事实表与维度表通过主键外键相关联，维度表之间没有关联，就像很多星星围绕在一个恒星周围，故取名为星形模型</li>
+</ul>
+<p><strong>优点</strong>：</p>
+<ul>
+<li>模型简单</li>
+<li>查询效率较高</li>
+</ul>
+<h4 id="雪花模型"><a href="#雪花模型" class="headerlink" title="雪花模型"></a>雪花模型</h4><p>雪花模型在星型模型的基础上，维度表进一步规范化为子维度表，这些子维度表没有直接与事实表连接，而是通过其他维度表连接到事实表上，看起来就像一片雪花，故称雪花模型。也就是说雪花模型是星型模型的进一步扩展，将其维度表扩展为更小的维度表，形成一种层次。这样就通过最大限度的减少数据存储量以及联合较小的维度表来改善查询性能，且去除了星型模型中的冗余数据。</p>
+<h4 id="星座模型"><a href="#星座模型" class="headerlink" title="星座模型"></a>星座模型</h4><p>星座模型其实是更复杂的星型模型：多张事实表，维度表公用。</p>
+<p>这个其实更贴近于现实的使用情况。</p>
+<h4 id="看个图"><a href="#看个图" class="headerlink" title="看个图"></a>看个图</h4><p>星型模型和雪花模型<br><img src="starandsnow.png" alt="星星与雪花"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://snailed.cn/事实表与维度表/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1457,259 +1755,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Python模块hashlib/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/Python模块hashlib/" itemprop="url">Python模块hashlib</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-05T23:29:27+08:00">
-                2019-08-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><p>Python内置的hashlib模块提供了我们常见的<em>摘要算法</em>，例如 md5 , sha256 等。</p>
-<p>那什么是摘要算法呢？摘要算法又称哈希算法、散列算法。它通过一个函数 <code>f()</code>，把任意长度的数据 <code>data</code> 转换为一个长度固定的数据串 <code>digest</code> （通常用16进制的字符串表示）。同时我们的函数 <code>f()</code> 也是一个单向函数（反推及其困难），所以我们可以用摘要算法来查看数据是否被篡改过。</p>
-<p>我日常工作中则是用来对人群包所需要的PHONE/IMEI/IDFA等信息加密。</p>
-<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><h5 id="方法及属性简介"><a href="#方法及属性简介" class="headerlink" title="方法及属性简介"></a>方法及属性简介</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"></span><br><span class="line"><span class="comment"># 可以运行在Python解释器中的哈希算法名称的集合</span></span><br><span class="line">hashlib.algorithms_available</span><br><span class="line"></span><br><span class="line"><span class="comment"># 保证在所有平台上此模块支持的哈希算法名称的集合</span></span><br><span class="line">hashlib.algorithms_guaranteed</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建哈希对象</span></span><br><span class="line">hashlib.md5() <span class="comment"># and so on </span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将字节对象填充到hash对象中</span></span><br><span class="line"></span><br><span class="line">hashlib.update()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 返回二进制加密结果</span></span><br><span class="line">hashlib.digest()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 返回十六进制加密解决</span></span><br><span class="line">hashlib.hexdigest()</span><br></pre></td></tr></table></figure>
-<h5 id="动手实现一下"><a href="#动手实现一下" class="headerlink" title="动手实现一下"></a>动手实现一下</h5><p>对一个文件的第二行使用md5()进行加密：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python  </span></span><br><span class="line"><span class="comment">#coding:utf-8</span></span><br><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'user_md5.csv'</span>, <span class="string">'w'</span>, newline=<span class="string">''</span>) <span class="keyword">as</span> f:</span><br><span class="line">    csvwriter = csv.writer(f)</span><br><span class="line">    csvwriter.writerow([<span class="string">'md5'</span>])</span><br><span class="line">    csvreader=open(<span class="string">'userid.csv'</span>,<span class="string">'r'</span>)</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> csvreader:</span><br><span class="line">        data=[]</span><br><span class="line">        m=hashlib.md5()</span><br><span class="line">        m.update(line.strip().split(<span class="string">','</span>)[<span class="number">1</span>].encode(<span class="string">'utf-8'</span>))  </span><br><span class="line">        encodeStr=m.hexdigest()</span><br><span class="line">        data.append(encodeStr)</span><br><span class="line">        csvwriter.writerow(data)</span><br></pre></td></tr></table></figure>
-<h5 id="要加点盐"><a href="#要加点盐" class="headerlink" title="要加点盐"></a>要加点盐</h5><p>这个加密也不是绝对安全的，破解方式可以是碰撞。假设密码是生日，那我完全可以不用去逆向计算，我暴力计算现有的所有的生日经过摘要算法处理之后的值，然后去匹配即可。所以解决方法可以是加点 <code>salt</code> 。</p>
-<p>具体实现还是很简单的，夜深了，先去休息。</p>
-<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><ol>
-<li><a href="https://www.cnblogs.com/li134655/p/7687790.html" target="_blank" rel="noopener">Python3中的hashlib模块</a></li>
-<li><a href="https://www.liaoxuefeng.com/wiki/1016959663602400/1017686752491744" target="_blank" rel="noopener">廖雪峰的官方网站-hashlib</a></li>
-<li><a href="http://kuanghy.github.io/2015/06/16/python-hashlib" target="_blank" rel="noopener">Python模块简介 — hashlib</a></li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Seaborn中文乱码问题解决/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/Seaborn中文乱码问题解决/" itemprop="url">Seaborn中文乱码问题解决</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-01T15:19:58+08:00">
-                2019-08-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>试了好多方法，亲测这个Mac+Anaconda下有效。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns </span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"></span><br><span class="line">plt.rcParams[<span class="string">'font.family'</span>] = [<span class="string">'Arial Unicode MS'</span>] <span class="comment">#用来正常显示中文标签</span></span><br><span class="line">plt.rcParams[<span class="string">'axes.unicode_minus'</span>] = <span class="keyword">False</span> <span class="comment">#用来正常显示负号</span></span><br><span class="line"></span><br><span class="line">sns.set_style(<span class="string">'whitegrid'</span>,&#123;<span class="string">'font.sans-serif'</span>:[<span class="string">'Arial Unicode MS'</span>,<span class="string">'Arial'</span>]&#125;)</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1762,7 +1807,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">97</span>
+                  <span class="site-state-item-count">99</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1775,7 +1820,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
