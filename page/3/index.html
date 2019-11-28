@@ -242,6 +242,304 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Pymysql简单使用/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Pymysql简单使用/" itemprop="url">Pymysql简单使用</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-10T15:59:24+08:00">
+                2019-08-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>写代码的时候，操作数据库是必须的。之前都是能用就可以，今天得好好总结一下，这里用 pymysql 举例。</p>
+<h4 id="什么是Pymysql"><a href="#什么是Pymysql" class="headerlink" title="什么是Pymysql"></a>什么是Pymysql</h4><p>纯 Python 实现的一个 MySQL 客户端协议，兼容几乎所有的 MySQL 数据库。</p>
+<h4 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a>简单使用</h4><h5 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install pymysql</span><br></pre></td></tr></table></figure>
+<h5 id="具体例子"><a href="#具体例子" class="headerlink" title="具体例子"></a>具体例子</h5><p>先来看看官网给我们的例子，插入&amp;查询一条记录<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"></span><br><span class="line"><span class="comment"># 建表</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">CREATE TABLE `users` (</span></span><br><span class="line"><span class="string">    `id` int(11) NOT NULL AUTO_INCREMENT,</span></span><br><span class="line"><span class="string">    `email` varchar(255) COLLATE utf8_bin NOT NULL,</span></span><br><span class="line"><span class="string">    `password` varchar(255) COLLATE utf8_bin NOT NULL,</span></span><br><span class="line"><span class="string">    PRIMARY KEY (`id`)</span></span><br><span class="line"><span class="string">) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin</span></span><br><span class="line"><span class="string">AUTO_INCREMENT=1 ;</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># connecition 信息</span></span><br><span class="line">connection = pymysql.connect(host = <span class="string">'localhost'</span>,</span><br><span class="line">                             user = <span class="string">'root'</span>,</span><br><span class="line">                             password = <span class="string">'xxx'</span>,</span><br><span class="line">                             db = <span class="string">'demo'</span>,</span><br><span class="line">                             charset = <span class="string">'utf8mb4'</span>,</span><br><span class="line">                             cursorclass=pymysql.cursors.DictCursor</span><br><span class="line">                            )</span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="comment"># 使用 with 的好处在于 with 结束后会自动关闭 cursor</span></span><br><span class="line">    <span class="comment"># 插入数据</span></span><br><span class="line">    <span class="keyword">with</span> connection.cursor() <span class="keyword">as</span> cursor:</span><br><span class="line">        sql = <span class="string">"insert into users (`email`,`password`) values (%s,%s)"</span></span><br><span class="line">        cursor.execute(sql,(<span class="string">'zy@xx.com'</span>,<span class="string">'123456'</span>))</span><br><span class="line">        <span class="comment"># 连接默认不开启 autocommit，所以需要我们自己去 commit</span></span><br><span class="line">    connection.commit()</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 查询数据   </span></span><br><span class="line">    <span class="keyword">with</span> connection.cursor() <span class="keyword">as</span> cursor:</span><br><span class="line">        sql = <span class="string">'select `id` , `email` , `password` from `users` where `email` = %s '</span></span><br><span class="line">        cursor.execute(sql,(<span class="string">'zy@xx.com'</span>))</span><br><span class="line">        res = cursor.fetchone() <span class="comment"># 这里已经提交了</span></span><br><span class="line">        print(res)</span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line">    connection.close()</span><br></pre></td></tr></table></figure></p>
+<p>输出则是：<code>(1, &#39;zy@xx.com&#39;, &#39;123456&#39;)</code></p>
+<h5 id="连接对象"><a href="#连接对象" class="headerlink" title="连接对象"></a>连接对象</h5><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pymysql.connections.Connection(host=None, user=None, password='', database=None, port=0, unix_socket=None, charset='', sql_mode=None, read_default_file=None, conv=None, use_unicode=None, client_flag=0, cursorclass=&lt;class 'pymysql.cursors.Cursor'&gt;, init_command=None, connect_timeout=10, ssl=None, read_default_group=None, compress=None, named_pipe=None, autocommit=False, db=None, passwd=None, local_infile=False, max_allowed_packet=16777216, defer_connect=False, auth_plugin_map=None, read_timeout=None, write_timeout=None, bind_address=None, binary_prefix=False, program_name=None, server_public_key=None)</span><br></pre></td></tr></table></figure>
+<p>初始化 connection 对象时有很多参数，这里我们说几个比较常用的，具体信息可以参考官方文档</p>
+<ul>
+<li>host - 数据库服务器地址</li>
+<li>user - 用户名</li>
+<li>password ( passwd ) - 密码，默认为空字符串</li>
+<li>database ( db ) - 操作的数据库</li>
+<li>port - MySQL使用的端口，默认3306</li>
+<li>charset - 想要使用的数据库编码</li>
+<li>cursorclass - 默认的游标类型</li>
+<li>connect_timeout - 连接超时时间</li>
+<li>autocommit - 是否自动提交，默认为否</li>
+<li>local_infile - 是否允许可以load本地数据</li>
+</ul>
+<p>一般我们使用 <code>cursor()</code> 和 <code>commit()</code> 方法</p>
+<h5 id="获取游标"><a href="#获取游标" class="headerlink" title="获取游标"></a>获取游标</h5><p><code>cursor=connection.cursor()</code>，有了 cursor 对象之后我们才可以进行各种增删改查等数据库操作，其对我们最重要的方法是 <code>execute()</code> 和 <code>fetch()</code> 方法，因为我们所有对数据的操作都是通过他们执行的。<code>size</code> 在 <code>fetchmany()</code></p>
+<p>cursor 可以通过创建时指定类型，有</p>
+<ul>
+<li>Cursor - 元组类型</li>
+<li>SSCursor - 无缓冲元组类型</li>
+<li>DictCursor - 字典类型</li>
+<li>SSDictCursor - 无缓冲字典类型</li>
+</ul>
+<h5 id="增删改查"><a href="#增删改查" class="headerlink" title="增删改查"></a>增删改查</h5><h6 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据"></a>查询数据</h6><p>还是之前的例子<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> connection.cursor() <span class="keyword">as</span> cursor:</span><br><span class="line">    sql = <span class="string">'select `id` , `email` , `password` from `users` where `email` = %s '</span></span><br><span class="line">    cursor.execute(sql,(<span class="string">'zy@xx.com'</span>))</span><br><span class="line">    res = cursor.fetchone()</span><br></pre></td></tr></table></figure></p>
+<p>不过还有几个其他的方法：</p>
+<ul>
+<li><code>fetchall()</code> -  取回全部数据</li>
+<li><code>fetchmany(size)</code> - 取回一部分数据,由 size 决定</li>
+</ul>
+<p>两者都返回一个 <code>list</code> 对象，不过我以为会是一个生成器的…</p>
+<h6 id="增删改数据"><a href="#增删改数据" class="headerlink" title="增删改数据"></a>增删改数据</h6><p>使用 <code>cursor.execute()</code>，方法，这个写好 sql 就好，不过这些操作都需要 <code>cursor.commit()</code> 操作才会生效。还有一个 <code>cursor.executemany()</code> 的方法，使用极少极少。</p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><ol>
+<li><a href="https://pypi.org/project/PyMySQL/#documentation" target="_blank" rel="noopener">PyMySQL-PyPi</a></li>
+<li><a href="https://pymysql.readthedocs.io/en/latest/" target="_blank" rel="noopener">PyMySQL官方文档</a></li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Python理解yiled关键字/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Python理解yiled关键字/" itemprop="url">Python理解yiled关键字</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-07T19:12:17+08:00">
+                2019-08-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>一直对Python的<code>yield</code>关键字有点迷糊，今天整理下相关的知识。</p>
+<h3 id="迭代的概念"><a href="#迭代的概念" class="headerlink" title="迭代的概念"></a>迭代的概念</h3><p>Python是一门极其灵活的语言，其很多数据里都包含了其他类型的元素。而我们在实际使用的时候，经常需要逐个地取出元素。<strong>逐个获取元素的过程，就是迭代</strong>。</p>
+<p>Python的 <code>list</code>，<code>tuple</code>，<code>string</code>等顺序类型，还包括 <code>dict</code>，<code>set</code>等也都是。就是如果我们可以从一个对象中，逐个地获取元素，那么这个对象是「可迭代的」。</p>
+<p>至于迭代器则是抽象的一个数据流，是只允许迭代一次的对象。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">	print(i)</span><br></pre></td></tr></table></figure>
+<h3 id="生成器和yield关键字"><a href="#生成器和yield关键字" class="headerlink" title="生成器和yield关键字"></a>生成器和yield关键字</h3><blockquote>
+<p>生成器函数是一种特殊的函数，而生成器则是特殊的迭代器。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gen</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">yield</span> <span class="number">1</span></span><br><span class="line"></span><br><span class="line">print(type(func))   <span class="comment"># &lt;class 'function'&gt;</span></span><br><span class="line">print(type(gen))    <span class="comment"># &lt;class 'function'&gt;</span></span><br><span class="line"></span><br><span class="line">print(type(func())) <span class="comment"># &lt;class 'int'&gt;</span></span><br><span class="line">print(type(gen()))  <span class="comment"># &lt;class 'generator'&gt;</span></span><br></pre></td></tr></table></figure>
+<p>最重要的差异是二者返回的类型是不一样的，生成器函数返回一个迭代器。</p>
+<h3 id="yield"><a href="#yield" class="headerlink" title="yield"></a>yield</h3><p><code>yield</code>关键字仅用户定义生成器函数。与普通函数不同的是，生成器函数是惰性计算的，只有在返回的生成器调用成员方法时，相应函数中的代码才会被执行。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">square</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line">        <span class="keyword">yield</span> x ** <span class="number">2</span></span><br><span class="line">square_gen = square()</span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> square_gen:</span><br><span class="line">    print(x)</span><br></pre></td></tr></table></figure>
+<p>由前面可知，<code>square_gen</code>表示一个迭代器对象，for 循环会调用迭代器对象的 <code>next()</code> 函数，将生成器中的下一个值赋值给 x , 然后再继续循环，直到终止。</p>
+<h3 id="yield的好处"><a href="#yield的好处" class="headerlink" title="yield的好处"></a>yield的好处</h3><p><strong>节省时间空间上的开销</strong>。Python 之所以要提供这样的解决方案，是因为在很多时候，我们只是需要逐个顺序访问容器内的元素。大多数时候，我们不需要一口气获取容器内所有的元素。</p>
+<h3 id="实战一下"><a href="#实战一下" class="headerlink" title="实战一下"></a>实战一下</h3><p>生成斐波那契数列<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gen_fib</span><span class="params">(n_max)</span>:</span></span><br><span class="line">    n,a,b = <span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> n &lt; n_max:</span><br><span class="line">        <span class="keyword">yield</span> b </span><br><span class="line">        a , b = b , a+b </span><br><span class="line">        n += <span class="number">1</span> </span><br><span class="line">fib = [x <span class="keyword">for</span> x <span class="keyword">in</span> gen_fib(<span class="number">10</span>)]  </span><br><span class="line">fib <span class="comment"># [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li><a href="https://liam.page/2017/06/30/understanding-yield-in-python/" target="_blank" rel="noopener">Python 中的黑暗角落（一）：理解 yield 关键字</a></li>
+<li><a href="https://www.liaoxuefeng.com/wiki/1016959663602400/1017316949097888" target="_blank" rel="noopener">廖雪峰的官方网站</a></li>
+</ol>
+<p>感恩 始终 这位大佬，跟着走一遍打了一遍！</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://snailed.cn/Python模块hashlib/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1460,338 +1758,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/利用Crontab命名完成定时任务/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/利用Crontab命名完成定时任务/" itemprop="url">利用Crontab命名完成定时任务</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-27T16:57:32+08:00">
-                2019-06-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="crontab是干啥的"><a href="#crontab是干啥的" class="headerlink" title="crontab是干啥的"></a>crontab是干啥的</h3><p>通过crontab命名，我们可以在固定的时间间隔执行指定的系统命名或者shell script脚本。时间间隔的单位分别是分、小时、日、月、周及以上任意组合，想定时跑啥就干啥+</p>
-<h3 id="crontab怎么用"><a href="#crontab怎么用" class="headerlink" title="crontab怎么用"></a>crontab怎么用</h3><h4 id="1-命名格式"><a href="#1-命名格式" class="headerlink" title="1.命名格式"></a>1.命名格式</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">crontab [-u user] file</span><br><span class="line">crontab [-u user] [ -e | -l | -r ]</span><br></pre></td></tr></table></figure>
-<h4 id="2-命令参数"><a href="#2-命令参数" class="headerlink" title="2.命令参数"></a>2.命令参数</h4><ul>
-<li>-u : 设定某个用户的crontab服务</li>
-<li>file : 表示命令文件，crontab会执行这个命名文件，如果没有文件，则接受标准输入（键盘）上键入的命令，并将它们载入crontab</li>
-<li>-e : 编辑crontab文件内容</li>
-<li>-l : 显示crontab文件内容</li>
-<li>-r : 从/var/spool/cron目录中删除某个用户的crontab文件，如果不指定用户，则默认删除当前用户的crontab文件。</li>
-<li>-i : 在删除用户的crontab文件时给确认提示</li>
-</ul>
-<h4 id="3-文件格式"><a href="#3-文件格式" class="headerlink" title="3.文件格式"></a>3.文件格式</h4><p>分 时 日 月 星期 要运行的命令</p>
-<ul>
-<li>第一列：分钟0-59</li>
-<li>第二列：小时0-23(0表示子夜)</li>
-<li>第3列：日1～31</li>
-<li>第4列：月1～12</li>
-<li>第5列：星期0～7（0和7表示星期天）</li>
-<li>第六列：要运行的命令</li>
-</ul>
-<h4 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h4><p>编辑<code>-e</code>,显示<code>-l</code>,新建删除一般用不着，需要用的时候看~</p>
-<h4 id="使用实例"><a href="#使用实例" class="headerlink" title="使用实例"></a>使用实例</h4><h5 id="1-每分钟执行一个命令"><a href="#1-每分钟执行一个命令" class="headerlink" title="1.每分钟执行一个命令"></a>1.每分钟执行一个命令</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* * * * * myCommand</span><br></pre></td></tr></table></figure>
-<h5 id="2-每小时的第3和第15分钟执行"><a href="#2-每小时的第3和第15分钟执行" class="headerlink" title="2.每小时的第3和第15分钟执行"></a>2.每小时的第3和第15分钟执行</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3,15 * * * * myCommand</span><br></pre></td></tr></table></figure>
-<h5 id="3-在上午8点到11点的第3和第15分钟执行"><a href="#3-在上午8点到11点的第3和第15分钟执行" class="headerlink" title="3.在上午8点到11点的第3和第15分钟执行"></a>3.在上午8点到11点的第3和第15分钟执行</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3,15 8-11 * * * myCommand</span><br></pre></td></tr></table></figure>
-<h5 id="4-每天18-00至23-00之间每隔30分钟执行我的脚本"><a href="#4-每天18-00至23-00之间每隔30分钟执行我的脚本" class="headerlink" title="4.每天18 : 00至23 : 00之间每隔30分钟执行我的脚本"></a>4.每天18 : 00至23 : 00之间每隔30分钟执行我的脚本</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*/30 18-23 * * * cd /home/xxx;sh xxx.sh</span><br></pre></td></tr></table></figure>
-<h3 id="crontab的坑"><a href="#crontab的坑" class="headerlink" title="crontab的坑"></a>crontab的坑</h3><h4 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h4><p>有时候我们使用crontab去执行一个定时任务，发现在shell里面手动执行是没有问题的，但是无法自动执行。导致这种问题的原因一般是crontab文件中没有配置环境变量造成的。</p>
-<p>在crontab文件中定义多个调度任务时，需要特别注环境变量的设置，因为我们手动执行某个任务时，是在当前shell环境下进行的，程序当然能找到环境变量，而系统自动执行任务调度时，是不会加载任何环境变量的，因此，就需要在crontab文件中指定任务运行所需的所有环境变量，这样，系统执行任务调度时就没有问题了</p>
-<p><strong>不要假定cron知道所需要的特殊环境，它其实并不知道</strong>，我们使用的时候，需要注意以下三点：</p>
-<ol>
-<li>脚本执行中文件路径要写全局路径</li>
-<li>脚本执行要用到java或其他环境变量时，通过source命令引入环境变量 — 这个还没用过</li>
-<li>当手动执行脚本OK，但是crontab死活不执行时,很可能是环境变量惹的祸<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env bash</span><br><span class="line">export JAVA_HOME=&apos;/usr/java/xxx&apos;</span><br><span class="line">export HADOOP_HOME=&apos;/home/maintain/hadoop/xxxx&apos;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p><strong>第三点真的是踩的陨石巨坑！！！</strong></p>
-<h4 id="清理邮件日志"><a href="#清理邮件日志" class="headerlink" title="清理邮件日志"></a>清理邮件日志</h4><p>每条任务调度执行完毕，系统都会将任务输出信息通过电子邮件的形式发送给当前系统用户，这样日积月累，日志信息会非常大，可能会影响系统的正常运行，因此对每条任务进行重定向处理很重要，比如可以这么设置，忽略日志输出：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* * * * * date &gt; /logs/time.log 2&gt;&amp;1</span><br></pre></td></tr></table></figure></p>
-<p>“/logs/time.log 2&gt;&amp;1”表示先将标准输出重定向到/dev/null，然后将标准错误重定向到标准输出</p>
-<h4 id="其他问题"><a href="#其他问题" class="headerlink" title="其他问题"></a>其他问题</h4><ul>
-<li>在crontab中%是有特殊含义的，表示换行的意思。如果要用的话必须进行转义%，如经常用的date ‘+%Y%m%d’在crontab里是不会执行的，应该换成date ‘+%Y%m%d’</li>
-<li>当crontab失效时，可以尝试/etc/init.d/crond restart解决问题。或者查看日志看某个job有没有执行/报错tail -f /var/log/cron。</li>
-<li>不要乱删。。。</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/哈巴装备清单/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/哈巴装备清单/" itemprop="url">哈巴装备清单</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-19T14:20:20+08:00">
-                2019-06-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>必备用品</p>
-</blockquote>
-<ul>
-<li>大包 - 小鹰48L </li>
-<li>冲顶包 - 北风之神金牛座</li>
-<li>硬壳 - 乌孙2.0</li>
-<li>抓绒|薄款羽绒 - 考虑优衣库小马甲</li>
-<li>速干衣</li>
-<li>速干裤</li>
-<li>保暖裤 - 秋裤</li>
-<li>登山鞋 - 赞贝拉</li>
-<li>羊毛袜 - timberland</li>
-<li>睡袋 - 冰焰基础款640g</li>
-<li>保温杯 - 膳魔师470ml</li>
-<li>登山杖 - mbc201</li>
-<li>保温帽 </li>
-<li>炉头</li>
-<li>头灯</li>
-<li>魔术头巾</li>
-<li>锅具</li>
-<li>气罐 - 目的地购买</li>
-<li>食物</li>
-</ul>
-<blockquote>
-<p>可以租用</p>
-</blockquote>
-<ul>
-<li>雪套</li>
-<li>雪镜 - 防雾、透光度S2较为适宜，近视眼者请戴上镜框眼镜。</li>
-<li>手套 - 抓绒保暖、防水性能好。</li>
-<li>冰爪</li>
-<li>冰镐</li>
-</ul>
-<blockquote>
-<p>随身用品</p>
-</blockquote>
-<ul>
-<li>身份证</li>
-<li>手机</li>
-<li>充电器</li>
-<li>防晒霜</li>
-<li>现金 - 多准备点</li>
-<li>药品 - 感冒药，创口贴</li>
-<li>充电宝</li>
-<li><del>相机</del></li>
-<li><del>暖宝宝</del></li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1839,7 +1810,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">99</span>
+                  <span class="site-state-item-count">101</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1852,7 +1823,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

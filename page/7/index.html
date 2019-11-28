@@ -242,6 +242,346 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/读《菜根谭》/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/读《菜根谭》/" itemprop="url">读《菜根谭》</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-11T00:32:26+08:00">
+                2019-01-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="写在最前"><a href="#写在最前" class="headerlink" title="写在最前"></a>写在最前</h2><p>还是读点书修身养性比较好。</p>
+<h2 id="小记"><a href="#小记" class="headerlink" title="小记"></a>小记</h2><p>《菜根谭》是一本语录体的书，可以想起来就读一点或者是放枕边，现在这里觉得好的对的就记录一下。虽然都是些大道理，但做人是要有方向的嘛。</p>
+<h3 id="处事篇"><a href="#处事篇" class="headerlink" title="处事篇"></a>处事篇</h3><blockquote>
+<p>君子之心事，天青日白，不可使人不知；君子之才华，玉韫珠藏，不知使人易知。</p>
+</blockquote>
+<p>心事看人，才华还是需要留一手的。</p>
+<blockquote>
+<p>快意回首 拂心莫停<br>恩里由来生害，故快意时须早回首；败后或反成功，辜拂心处莫便放手。</p>
+</blockquote>
+<p>跳出舒适区，披荆斩棘。</p>
+<blockquote>
+<p>不恶小人 礼待君子</p>
+</blockquote>
+<p>难</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/seaborn-liner/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/seaborn-liner/" itemprop="url">seaborn-liner</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-10T19:14:43+08:00">
+                2019-01-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="可视化线性关系"><a href="#可视化线性关系" class="headerlink" title="可视化线性关系"></a>可视化线性关系</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">sns.set(color_codes=<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line">tips = sns.load_dataset(<span class="string">"tips"</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="绘制线性回归"><a href="#绘制线性回归" class="headerlink" title="绘制线性回归"></a>绘制线性回归</h2><blockquote>
+<p>Two main functions in seaborn are used to visualize a linear relationship as determined through regression. These functions, regplot() and lmplot() are closely related, and share much of their core functionality. It is important to understand the ways they differ, however, so that you can quickly choose the correct tool for particular job.</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#先看一个最简单的例子</span></span><br><span class="line"><span class="comment">#默认置信区间为95%</span></span><br><span class="line"></span><br><span class="line">sns.regplot(x=<span class="string">'total_bill'</span>,y=<span class="string">'tip'</span>,data=tips)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x110f64d68&gt;
+</code></pre><p><img src="output_3_1.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.lmplot(x=<span class="string">'total_bill'</span>,y=<span class="string">'tip'</span>,data=tips)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x110f15780&gt;
+</code></pre><p><img src="output_4_1.png" alt="png"></p>
+<p>regplot()可以接受更加灵活的输入，lmplot()接受整形输入，同时regplot()也拥有部分lmplot()的功能。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.lmplot(x=<span class="string">'size'</span>,y=<span class="string">'tip'</span>,data=tips)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x112574400&gt;
+</code></pre><p><img src="output_6_1.png" alt="png"></p>
+<h2 id="Fitting-different-kinds-of-models（拟合不同的模型）"><a href="#Fitting-different-kinds-of-models（拟合不同的模型）" class="headerlink" title="Fitting different kinds of models（拟合不同的模型）"></a>Fitting different kinds of models（拟合不同的模型）</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">anscombe = sns.load_dataset(<span class="string">"anscombe"</span>)</span><br><span class="line">anscombe.head()</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>dataset</th>
+      <th>x</th>
+      <th>y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>I</td>
+      <td>10.0</td>
+      <td>8.04</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>I</td>
+      <td>8.0</td>
+      <td>6.95</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>I</td>
+      <td>13.0</td>
+      <td>7.58</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>I</td>
+      <td>9.0</td>
+      <td>8.81</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>I</td>
+      <td>11.0</td>
+      <td>8.33</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.lmplot(x=<span class="string">'x'</span>,y=<span class="string">'y'</span>,data=anscombe.query(<span class="string">"dataset == 'I'"</span>),ci=<span class="keyword">None</span>,scatter_kws=&#123;<span class="string">"s"</span>: <span class="number">80</span>&#125;)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x1a1e166978&gt;
+</code></pre><p><img src="output_9_1.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sns.lmplot(x=<span class="string">"x"</span>, y=<span class="string">"y"</span>, data=anscombe.query(<span class="string">"dataset == 'II'"</span>),</span><br><span class="line">           ci=<span class="keyword">None</span>, scatter_kws=&#123;<span class="string">"s"</span>: <span class="number">80</span>&#125;)</span><br></pre></td></tr></table></figure>
+<p><img src="output_10_0.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#上一个明明显拟合不到位，我们可以猜测这是一个多项式回归，利用order参数调用numpy.polyfit()</span></span><br><span class="line">sns.lmplot(x=<span class="string">"x"</span>, y=<span class="string">"y"</span>, data=anscombe.query(<span class="string">"dataset == 'II'"</span>),order = <span class="number">2</span> ,</span><br><span class="line">           ci=<span class="keyword">None</span>, scatter_kws=&#123;<span class="string">"s"</span>: <span class="number">80</span>&#125;)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x1a1e3b3cc0&gt;
+</code></pre><p><img src="output_11_1.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sns.lmplot(x=<span class="string">"x"</span>, y=<span class="string">"y"</span>, data=anscombe.query(<span class="string">"dataset == 'III'"</span>),</span><br><span class="line">           ci=<span class="keyword">None</span>, scatter_kws=&#123;<span class="string">"s"</span>: <span class="number">80</span>&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">## 存在异常值</span></span><br></pre></td></tr></table></figure>
+<p><img src="output_12_0.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 不同的损失函数来减轻相对较大的残差</span></span><br><span class="line">sns.lmplot(x=<span class="string">"x"</span>, y=<span class="string">"y"</span>, data=anscombe.query(<span class="string">"dataset == 'III'"</span>),</span><br><span class="line">           robust=<span class="keyword">True</span>, ci=<span class="keyword">None</span>, scatter_kws=&#123;<span class="string">"s"</span>: <span class="number">80</span>&#125;);</span><br></pre></td></tr></table></figure>
+<p><img src="output_13_0.png" alt="png"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://snailed.cn/seaborn-distribution/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -10021,580 +10361,11 @@ dtype: object
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/ch04-Numpy基础/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/ch04-Numpy基础/" itemprop="url">ch04_Numpy基础</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-31T00:23:24+08:00">
-                2018-12-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> this</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment">#创建ndarray</span></span><br><span class="line">data0 = [<span class="number">6</span>,<span class="number">7</span>,<span class="number">8.1</span>,<span class="number">2</span>]</span><br><span class="line">data =np.array(data0)</span><br><span class="line">data</span><br></pre></td></tr></table></figure>
-<pre><code>array([6. , 7. , 8.1, 2. ])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">data2=[[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],[<span class="number">2.1</span>,<span class="number">6</span>,<span class="number">3</span>]]</span><br><span class="line">arr = np.array(data2)</span><br><span class="line">arr.dtype</span><br></pre></td></tr></table></figure>
-<pre><code>dtype(&#39;float64&#39;)
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.zeros((<span class="number">3</span>,<span class="number">2</span>))</span><br></pre></td></tr></table></figure>
-<pre><code>array([[0., 0.],
-       [0., 0.],
-       [0., 0.]])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.ones((<span class="number">3</span>,<span class="number">2</span>))</span><br></pre></td></tr></table></figure>
-<pre><code>array([[1., 1.],
-       [1., 1.],
-       [1., 1.]])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">np.empty((<span class="number">3</span>,<span class="number">2</span>))</span><br><span class="line"><span class="comment">### np.empty()返回的是未经初始化的垃圾值</span></span><br></pre></td></tr></table></figure>
-<pre><code>array([[1., 1.],
-       [1., 1.],
-       [1., 1.]])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.arange(<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
-<pre><code>array([0, 1, 2, 3, 4])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">test = np.arange(<span class="number">5</span>)</span><br><span class="line">test.dtype</span><br></pre></td></tr></table></figure>
-<pre><code>dtype(&#39;int64&#39;)
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ones_like()，传入一个数组，根据其形状和dtype创建一个全1数组</span></span><br><span class="line">a=[[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],[<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>]]</span><br><span class="line">b=np.ones_like(a)</span><br><span class="line">b</span><br></pre></td></tr></table></figure>
-<pre><code>array([[1, 1, 1],
-       [1, 1, 1]])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#创建正方的NxN矩阵(对角线为1，其余为0)</span></span><br><span class="line">np.eye(<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
-<pre><code>array([[1., 0., 0., 0., 0.],
-       [0., 1., 0., 0., 0.],
-       [0., 0., 1., 0., 0.],
-       [0., 0., 0., 1., 0.],
-       [0., 0., 0., 0., 1.]])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],dtype=np.int64)</span><br></pre></td></tr></table></figure>
-<pre><code>array([1, 2, 3])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#进行显式类型转换</span></span><br><span class="line">data = np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],dtype=np.int64)</span><br><span class="line">print(data.dtype)</span><br><span class="line">print(data.astype(np.float64).dtype)</span><br></pre></td></tr></table></figure>
-<pre><code>int64
-float64
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">num_str = np.array([<span class="string">'1.2'</span>,<span class="string">'3.25'</span>,<span class="string">'4.1'</span>],dtype=np.string_)</span><br><span class="line">print(num_str)</span><br><span class="line">num_str.astype(float)</span><br></pre></td></tr></table></figure>
-<pre><code>[b&#39;1.2&#39; b&#39;3.25&#39; b&#39;4.1&#39;]
-
-
-
-
-
-array([1.2 , 3.25, 4.1 ])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#任何计算都会被应用到元素级</span></span><br><span class="line">arr=np.array([[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],[<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>]])</span><br><span class="line"></span><br><span class="line">arr*arr</span><br></pre></td></tr></table></figure>
-<pre><code>array([[ 1,  4,  9],
-       [16, 25, 36]])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#与标量进行运算</span></span><br><span class="line">arr=np.array([[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],[<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>]])</span><br><span class="line">arr * <span class="number">2</span></span><br></pre></td></tr></table></figure>
-<pre><code>array([[ 2,  4,  6],
-       [ 8, 10, 12]])
-</code></pre><h2 id="基本的索引和切片"><a href="#基本的索引和切片" class="headerlink" title="基本的索引和切片"></a>基本的索引和切片</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">arr = np.arange(<span class="number">10</span>)</span><br><span class="line">arr</span><br></pre></td></tr></table></figure>
-<pre><code>array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">arr = np.arange(<span class="number">10</span>)</span><br><span class="line">arr[<span class="number">5</span>:<span class="number">7</span>] = <span class="number">99</span></span><br><span class="line">arr</span><br></pre></td></tr></table></figure>
-<pre><code>array([ 0,  1,  2,  3,  4, 99, 99,  7,  8,  9])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">arr0 = np.ones((<span class="number">5</span>,<span class="number">2</span>))</span><br><span class="line">arr0[<span class="number">0</span>][<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
-<pre><code>dtype(&#39;float64&#39;)
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#可以传入一个索引列表来选取单个元素</span></span><br><span class="line">arr1=np.ones((<span class="number">5</span>,<span class="number">2</span>))</span><br><span class="line">arr1[<span class="number">1</span>,<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
-<pre><code>1.0
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#高维数据</span></span><br><span class="line">arr3d = np.array([[[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]], [[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>], [<span class="number">10</span>, <span class="number">11</span>, <span class="number">12</span>]]])</span><br><span class="line">arr3d</span><br></pre></td></tr></table></figure>
-<pre><code>array([[[ 1,  2,  3],
-        [ 4,  5,  6]],
-
-       [[ 7,  8,  9],
-        [10, 11, 12]]])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr3d</span><br></pre></td></tr></table></figure>
-<pre><code>array([[[ 1,  2,  3],
-        [ 4,  5,  6]],
-
-       [[ 7,  8,  9],
-        [10, 11, 12]]])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">old_value = arr3d[<span class="number">0</span>].copy()</span><br><span class="line">arr3d[<span class="number">0</span>]=<span class="number">12</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr3d[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
-<pre><code>array([[12, 12, 12],
-       [12, 12, 12]])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr3d[<span class="number">0</span>]=old_value</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr3d[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
-<pre><code>array([[1, 2, 3],
-       [4, 5, 6]])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">arr2d=np.array([[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],[<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>],[<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>]])</span><br><span class="line">arr2d</span><br></pre></td></tr></table></figure>
-<pre><code>array([[1, 2, 3],
-       [4, 5, 6],
-       [7, 8, 9]])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr2d[:<span class="number">2</span>]</span><br></pre></td></tr></table></figure>
-<pre><code>array([[1, 2, 3],
-       [4, 5, 6]])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr2d[:<span class="number">2</span>,<span class="number">1</span>:<span class="number">2</span>]</span><br></pre></td></tr></table></figure>
-<pre><code>array([[2],
-       [5]])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr2d[:,:<span class="number">2</span>]</span><br></pre></td></tr></table></figure>
-<pre><code>array([[1, 2],
-       [4, 5],
-       [7, 8]])
-</code></pre><h3 id="布尔型索引"><a href="#布尔型索引" class="headerlink" title="布尔型索引"></a>布尔型索引</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">names = np.array([<span class="string">'Bob'</span>, <span class="string">'Joe'</span>, <span class="string">'Will'</span>, <span class="string">'Bob'</span>, <span class="string">'Will'</span>, <span class="string">'Joe'</span>])</span><br><span class="line">data = np.random.randn(<span class="number">6</span>,<span class="number">5</span>)</span><br><span class="line">names</span><br></pre></td></tr></table></figure>
-<pre><code>array([&#39;Bob&#39;, &#39;Joe&#39;, &#39;Will&#39;, &#39;Bob&#39;, &#39;Will&#39;, &#39;Joe&#39;], dtype=&#39;&lt;U4&#39;)
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data</span><br></pre></td></tr></table></figure>
-<pre><code>array([[ 1.04334945, -0.51882989,  0.39479822, -1.26167769, -0.60706667],
-       [-0.10854399, -0.77654652, -0.90842022, -0.91657036, -1.57115294],
-       [ 0.78047305, -0.55011782, -0.72659944, -0.78787495,  2.10762613],
-       [-0.94467982,  1.4091048 ,  0.4530369 , -1.83722786, -0.14625949],
-       [ 0.34030044, -1.12975372,  1.03528971,  0.8180118 ,  0.42579557],
-       [-0.07116101,  0.83523538, -0.61881987, -0.5052446 ,  1.06253317]])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">names == <span class="string">'Bob'</span></span><br></pre></td></tr></table></figure>
-<pre><code>array([ True, False, False,  True, False, False])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data[names==<span class="string">'Bob'</span>]</span><br></pre></td></tr></table></figure>
-<pre><code>array([[ 0.24865102,  0.11944466,  0.40557113, -1.24757741,  0.16418035],
-       [-0.0478229 , -0.30082172, -1.18252039, -1.17703784, -0.40956047]])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data[names==<span class="string">'Bob'</span>,:<span class="number">2</span>]</span><br></pre></td></tr></table></figure>
-<pre><code>array([[ 0.24865102,  0.11944466],
-       [-0.0478229 , -0.30082172]])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">demo = np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">-1</span>,<span class="number">-5</span>])</span><br><span class="line">demo[demo&lt;<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">demo</span><br></pre></td></tr></table></figure>
-<pre><code>array([1, 2, 3, 1, 1])
-</code></pre><h3 id="花式索引"><a href="#花式索引" class="headerlink" title="花式索引"></a>花式索引</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr=np.empty((<span class="number">8</span>,<span class="number">4</span>))</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">8</span>):</span><br><span class="line">    arr[i] = i </span><br><span class="line">arr</span><br></pre></td></tr></table></figure>
-<pre><code>array([[0., 0., 0., 0.],
-       [1., 1., 1., 1.],
-       [2., 2., 2., 2.],
-       [3., 3., 3., 3.],
-       [4., 4., 4., 4.],
-       [5., 5., 5., 5.],
-       [6., 6., 6., 6.],
-       [7., 7., 7., 7.]])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#传入整数列表或者ndarray获取元素</span></span><br><span class="line">arr[[<span class="number">4</span>,<span class="number">2</span>,<span class="number">0</span>,<span class="number">1</span>]]</span><br></pre></td></tr></table></figure>
-<pre><code>array([[4., 4., 4., 4.],
-       [2., 2., 2., 2.],
-       [0., 0., 0., 0.],
-       [1., 1., 1., 1.]])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">arr1=np.arange(<span class="number">32</span>).reshape((<span class="number">8</span>,<span class="number">4</span>))</span><br><span class="line">arr1</span><br></pre></td></tr></table></figure>
-<pre><code>array([[ 0,  1,  2,  3],
-       [ 4,  5,  6,  7],
-       [ 8,  9, 10, 11],
-       [12, 13, 14, 15],
-       [16, 17, 18, 19],
-       [20, 21, 22, 23],
-       [24, 25, 26, 27],
-       [28, 29, 30, 31]])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr1[[<span class="number">4</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">2</span>]]</span><br></pre></td></tr></table></figure>
-<pre><code>array([19, 10])
-</code></pre><h2 id="数组转置和轴兑换"><a href="#数组转置和轴兑换" class="headerlink" title="数组转置和轴兑换"></a>数组转置和轴兑换</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr = np.arange(<span class="number">15</span>).reshape((<span class="number">3</span>,<span class="number">5</span>))</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr</span><br></pre></td></tr></table></figure>
-<pre><code>array([[ 0,  1,  2,  3,  4],
-       [ 5,  6,  7,  8,  9],
-       [10, 11, 12, 13, 14]])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr.T</span><br></pre></td></tr></table></figure>
-<pre><code>array([[ 0,  5, 10],
-       [ 1,  6, 11],
-       [ 2,  7, 12],
-       [ 3,  8, 13],
-       [ 4,  9, 14]])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">arr= np.random.randn(<span class="number">6</span>,<span class="number">3</span>)</span><br><span class="line">arr</span><br></pre></td></tr></table></figure>
-<pre><code>array([[-1.14899925,  2.01403377, -0.579223  ],
-       [ 1.29437371, -0.37256935, -0.1998847 ],
-       [ 0.88795876,  0.38322303, -0.77289001],
-       [ 0.84318194,  1.57318664, -0.14691985],
-       [ 0.09926862, -0.84374676,  0.47847472],
-       [ 0.30721121,  0.7380255 ,  1.09155033]])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.dot(arr.T,arr)</span><br></pre></td></tr></table></figure>
-<pre><code>array([[ 4.59926208, -0.98662632, -0.02053929],
-       [-0.98662632,  8.0735063 , -1.21754486],
-       [-0.02053929, -1.21754486,  2.41481777]])
-</code></pre><h2 id="通用函数：快速的元素级组函数"><a href="#通用函数：快速的元素级组函数" class="headerlink" title="通用函数：快速的元素级组函数"></a>通用函数：快速的元素级组函数</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">arr = np.arange(<span class="number">10</span>)</span><br><span class="line">arr</span><br></pre></td></tr></table></figure>
-<pre><code>array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.sqrt(arr)</span><br></pre></td></tr></table></figure>
-<pre><code>array([0.        , 1.        , 1.41421356, 1.73205081, 2.        ,
-       2.23606798, 2.44948974, 2.64575131, 2.82842712, 3.        ])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.exp(arr)</span><br></pre></td></tr></table></figure>
-<pre><code>array([1.00000000e+00, 2.71828183e+00, 7.38905610e+00, 2.00855369e+01,
-       5.45981500e+01, 1.48413159e+02, 4.03428793e+02, 1.09663316e+03,
-       2.98095799e+03, 8.10308393e+03])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = np.random.randn(<span class="number">8</span>)</span><br><span class="line">x</span><br></pre></td></tr></table></figure>
-<pre><code>array([-1.52621084,  0.91491997,  1.8613378 ,  0.50723883,  0.26956039,
-       -0.65576259,  0.81621241, -0.71835102])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">y = np.random.randn(<span class="number">8</span>)</span><br><span class="line">y</span><br></pre></td></tr></table></figure>
-<pre><code>array([-0.61305033, -0.99195929, -0.89955148, -0.63491395,  1.54908888,
-       -1.82440893,  0.08511608, -0.60391516])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.maximum(x,y)</span><br></pre></td></tr></table></figure>
-<pre><code>array([-0.61305033,  0.91491997,  1.8613378 ,  0.50723883,  1.54908888,
-       -0.65576259,  0.81621241, -0.60391516])
-</code></pre><h2 id="利用数组进行数据处理"><a href="#利用数组进行数据处理" class="headerlink" title="利用数组进行数据处理"></a>利用数组进行数据处理</h2><p>用数组表达式代替循环的做法，我们称之为矢量化</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">points = np.arange(<span class="number">-5</span>,<span class="number">5</span>,<span class="number">0.01</span>)<span class="comment">#1000个间隔点</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xs,ys=np.meshgrid(points,points)</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xs</span><br></pre></td></tr></table></figure>
-<pre><code>array([[-5.  , -4.99, -4.98, ...,  4.97,  4.98,  4.99],
-       [-5.  , -4.99, -4.98, ...,  4.97,  4.98,  4.99],
-       [-5.  , -4.99, -4.98, ...,  4.97,  4.98,  4.99],
-       ...,
-       [-5.  , -4.99, -4.98, ...,  4.97,  4.98,  4.99],
-       [-5.  , -4.99, -4.98, ...,  4.97,  4.98,  4.99],
-       [-5.  , -4.99, -4.98, ...,  4.97,  4.98,  4.99]])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ys</span><br></pre></td></tr></table></figure>
-<pre><code>array([[-5.  , -5.  , -5.  , ..., -5.  , -5.  , -5.  ],
-       [-4.99, -4.99, -4.99, ..., -4.99, -4.99, -4.99],
-       [-4.98, -4.98, -4.98, ..., -4.98, -4.98, -4.98],
-       ...,
-       [ 4.97,  4.97,  4.97, ...,  4.97,  4.97,  4.97],
-       [ 4.98,  4.98,  4.98, ...,  4.98,  4.98,  4.98],
-       [ 4.99,  4.99,  4.99, ...,  4.99,  4.99,  4.99]])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">z=np.sqrt(xs**<span class="number">2</span>+ys**<span class="number">2</span>)</span><br><span class="line">z</span><br></pre></td></tr></table></figure>
-<pre><code>array([[7.07106781, 7.06400028, 7.05693985, ..., 7.04988652, 7.05693985,
-        7.06400028],
-       [7.06400028, 7.05692568, 7.04985815, ..., 7.04279774, 7.04985815,
-        7.05692568],
-       [7.05693985, 7.04985815, 7.04278354, ..., 7.03571603, 7.04278354,
-        7.04985815],
-       ...,
-       [7.04988652, 7.04279774, 7.03571603, ..., 7.0286414 , 7.03571603,
-        7.04279774],
-       [7.05693985, 7.04985815, 7.04278354, ..., 7.03571603, 7.04278354,
-        7.04985815],
-       [7.06400028, 7.05692568, 7.04985815, ..., 7.04279774, 7.04985815,
-        7.05692568]])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">plt.imshow(z,cmap=plt.cm.OrRd)</span><br><span class="line">plt.title(<span class="string">'Image plot of $\sqrt&#123;x^2+y^2&#125;$ for a grid of values'</span>)</span><br></pre></td></tr></table></figure>
-<pre><code>Text(0.5,1,&#39;Image plot of $\\sqrt{x^2+y^2}$ for a grid of values&#39;)
-</code></pre><p><img src="output_63_1.png" alt="png"></p>
-<h2 id="将条件表达式表述为数组运算"><a href="#将条件表达式表述为数组运算" class="headerlink" title="将条件表达式表述为数组运算"></a>将条件表达式表述为数组运算</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.where?</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xarr = np.random.randn(<span class="number">5</span>)</span><br><span class="line">xarr</span><br></pre></td></tr></table></figure>
-<pre><code>array([-0.05191135,  0.46807508,  1.5955647 , -1.21585517,  0.68848672])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yarr=np.random.randn(<span class="number">5</span>)</span><br><span class="line">yarr</span><br></pre></td></tr></table></figure>
-<pre><code>array([-1.60333056,  2.16303939, -0.37219312, -1.85605698,  0.41180341])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.where(xarr&gt;=<span class="number">0</span>,xarr,yarr)<span class="comment">#构建布尔型索引，实现想要的东西</span></span><br></pre></td></tr></table></figure>
-<pre><code>array([-1.60333056,  0.46807508,  1.5955647 , -1.85605698,  0.68848672])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">##替换所有正值为1，负值为-1</span></span><br><span class="line">arr=np.random.randn(<span class="number">4</span>,<span class="number">4</span>)</span><br><span class="line">arr</span><br></pre></td></tr></table></figure>
-<pre><code>array([[ 0.32359596, -1.15124188,  0.12417984, -1.34511765],
-       [-0.41019678,  1.0543996 ,  2.6307449 ,  0.74725061],
-       [ 1.03418855, -0.58064793, -0.61019497, -1.13773196],
-       [-0.64005234,  0.73911588,  1.15966556, -0.26103626]])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.where(arr&gt;<span class="number">0</span>,<span class="number">1</span>,<span class="number">-1</span>)</span><br></pre></td></tr></table></figure>
-<pre><code>array([[ 1, -1,  1, -1],
-       [-1,  1,  1,  1],
-       [ 1, -1, -1, -1],
-       [-1,  1,  1, -1]])
-</code></pre><h2 id="数学和统计方法"><a href="#数学和统计方法" class="headerlink" title="数学和统计方法"></a>数学和统计方法</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">arr=np.random.randn(<span class="number">5</span>,<span class="number">4</span>)</span><br><span class="line">arr</span><br></pre></td></tr></table></figure>
-<pre><code>array([[ 0.3794937 , -0.91051976,  0.54977469,  0.98390242],
-       [ 1.24989257, -0.14989659, -0.70528342,  0.66344849],
-       [ 0.15440786,  0.75716823, -1.54809025,  0.05263153],
-       [ 0.63369665, -1.47415409, -1.35897948, -0.24638285],
-       [ 0.36552553,  1.44667304,  1.80073603,  0.70854674]])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr.mean()</span><br></pre></td></tr></table></figure>
-<pre><code>0.1676295519907499
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.mean(arr)</span><br></pre></td></tr></table></figure>
-<pre><code>0.1676295519907499
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr.sum()</span><br></pre></td></tr></table></figure>
-<pre><code>3.352591039814998
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr.sum(axis=<span class="number">1</span>)  <span class="comment"># 接受轴参数</span></span><br></pre></td></tr></table></figure>
-<pre><code>array([ 1.00265105,  1.05816104, -0.58388263, -2.44581977,  4.32148134])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
-<pre><code>array([ 0.3794937 , -0.91051976,  0.54977469,  0.98390242])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr.sum(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-<pre><code>array([ 2.7830163 , -0.33072917, -1.26184243,  2.16214634])
-</code></pre><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.sum?</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">arr=np.arange(<span class="number">9</span>).reshape((<span class="number">3</span>,<span class="number">3</span>))</span><br><span class="line">arr</span><br></pre></td></tr></table></figure>
-<pre><code>array([[0, 1, 2],
-       [3, 4, 5],
-       [6, 7, 8]])
-</code></pre><h2 id="用于布尔型数组的方法"><a href="#用于布尔型数组的方法" class="headerlink" title="用于布尔型数组的方法"></a>用于布尔型数组的方法</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#求和等计算方法中，布尔值会被强制转化为0，1，因为sum()方法可以计数</span></span><br><span class="line">arr=np.random.randn(<span class="number">10</span>)</span><br><span class="line">arr</span><br></pre></td></tr></table></figure>
-<pre><code>array([ 0.62662142, -0.23714492,  2.52986602,  0.66838534,  0.47275484,
-        1.81467714, -0.39454002, -2.59347451,  0.90815739, -0.0813537 ])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr &gt; <span class="number">0</span></span><br></pre></td></tr></table></figure>
-<pre><code>array([ True, False,  True,  True,  True,  True, False, False,  True,
-       False])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(arr&gt;<span class="number">0</span>).sum()</span><br></pre></td></tr></table></figure>
-<pre><code>6
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(arr&lt;<span class="number">0</span>).any() <span class="comment">#若有一个True,则为True</span></span><br></pre></td></tr></table></figure>
-<pre><code>True
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(arr&gt;<span class="number">0</span>).all() <span class="comment">#全部为True,则为True</span></span><br></pre></td></tr></table></figure>
-<pre><code>False
-</code></pre><h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">arr=np.random.randn(<span class="number">10</span>)</span><br><span class="line">arr</span><br></pre></td></tr></table></figure>
-<pre><code>array([ 0.23588362, -0.45045835,  1.22450303, -0.2419639 , -0.23873288,
-       -1.09141889, -0.87760038, -0.53059957,  0.15428331, -1.43959318])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">arr.sort()</span><br><span class="line">arr</span><br></pre></td></tr></table></figure>
-<pre><code>array([-1.43959318, -1.09141889, -0.87760038, -0.53059957, -0.45045835,
-       -0.2419639 , -0.23873288,  0.15428331,  0.23588362,  1.22450303])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#可以在任意轴上排序</span></span><br><span class="line">arr=np.random.randn(<span class="number">5</span>,<span class="number">5</span>)</span><br><span class="line">arr</span><br></pre></td></tr></table></figure>
-<pre><code>array([[ 0.34871828,  1.03879317,  0.21363644,  0.05765405,  1.01230602],
-       [ 0.20640237, -0.2323433 ,  0.2214327 ,  1.16611884,  0.5123435 ],
-       [ 0.4660787 , -0.16572832,  0.03096976,  1.07155177, -1.90712269],
-       [-0.45824044, -0.25984925, -1.37214123,  1.14006713, -0.70677386],
-       [-2.51549148,  0.1314714 ,  1.68439925, -0.92174553,  1.03215197]])
-</code></pre><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr.sort?</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">arr.sort(axis=<span class="number">1</span>)</span><br><span class="line">arr</span><br></pre></td></tr></table></figure>
-<pre><code>array([[ 0.05765405,  0.21363644,  0.34871828,  1.01230602,  1.03879317],
-       [-0.2323433 ,  0.20640237,  0.2214327 ,  0.5123435 ,  1.16611884],
-       [-1.90712269, -0.16572832,  0.03096976,  0.4660787 ,  1.07155177],
-       [-1.37214123, -0.70677386, -0.45824044, -0.25984925,  1.14006713],
-       [-2.51549148, -0.92174553,  0.1314714 ,  1.03215197,  1.68439925]])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">arr.sort(<span class="number">1</span>)</span><br><span class="line">arr</span><br></pre></td></tr></table></figure>
-<pre><code>array([[ 0.05765405,  0.21363644,  0.34871828,  1.01230602,  1.03879317],
-       [-0.2323433 ,  0.20640237,  0.2214327 ,  0.5123435 ,  1.16611884],
-       [-1.90712269, -0.16572832,  0.03096976,  0.4660787 ,  1.07155177],
-       [-1.37214123, -0.70677386, -0.45824044, -0.25984925,  1.14006713],
-       [-2.51549148, -0.92174553,  0.1314714 ,  1.03215197,  1.68439925]])
-</code></pre><h2 id="唯一化"><a href="#唯一化" class="headerlink" title="唯一化"></a>唯一化</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr = np.array([<span class="number">3</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">54</span>,<span class="number">223</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">3</span>])</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.unique(arr) <span class="comment">#找出数组中的唯一值，并返回排序的结果</span></span><br></pre></td></tr></table></figure>
-<pre><code>array([  1,   2,   3,  54, 223])
-</code></pre><h2 id="线性代数"><a href="#线性代数" class="headerlink" title="线性代数"></a>线性代数</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x = np.array([[<span class="number">1.</span>, <span class="number">2.</span>, <span class="number">3.</span>], [<span class="number">4.</span>, <span class="number">5.</span>, <span class="number">6.</span>]])</span><br><span class="line">y = np.array([[<span class="number">6.</span>, <span class="number">23.</span>], [<span class="number">-1</span>, <span class="number">7</span>], [<span class="number">8</span>, <span class="number">9</span>]])</span><br><span class="line">x</span><br><span class="line">y</span><br><span class="line">np.dot(x,y)</span><br></pre></td></tr></table></figure>
-<pre><code>array([[ 28.,  64.],
-       [ 67., 181.]])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.dot(x,np.ones(<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
-<pre><code>array([ 6., 15.])
-</code></pre><h3 id=""><a href="#" class="headerlink" title=" "></a> </h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">arr = np.random.normal(size=(<span class="number">4</span>,<span class="number">4</span>))</span><br><span class="line">arr</span><br></pre></td></tr></table></figure>
-<pre><code>array([[ 1.11433974, -0.2520489 , -0.2349691 , -0.94610534],
-       [ 2.28170964,  0.78521532, -2.05844323, -0.40333454],
-       [-0.1225117 , -0.9144343 ,  0.25932307,  0.283972  ],
-       [-0.63086567, -1.17039446, -0.20103388, -0.21096491]])
-</code></pre><h2 id="随机漫步"><a href="#随机漫步" class="headerlink" title="随机漫步"></a>随机漫步</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nstep = <span class="number">100</span></span><br><span class="line">draws = np.random.randint(<span class="number">0</span>,<span class="number">2</span>,size=nstep)</span><br><span class="line">draws</span><br></pre></td></tr></table></figure>
-<pre><code>array([1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1,
-       0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0,
-       0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1,
-       0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1,
-       1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">steps = np.where(draws&gt;<span class="number">0</span>,<span class="number">1</span>,<span class="number">-1</span>)</span><br><span class="line">steps</span><br></pre></td></tr></table></figure>
-<pre><code>array([ 1,  1,  1,  1, -1, -1, -1, -1,  1,  1, -1, -1, -1,  1,  1, -1, -1,
-       -1, -1,  1,  1,  1, -1,  1, -1, -1, -1, -1,  1,  1, -1,  1, -1,  1,
-        1,  1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,  1, -1, -1, -1, -1,
-        1, -1, -1, -1,  1, -1, -1,  1, -1,  1, -1, -1, -1, -1,  1, -1,  1,
-        1,  1,  1,  1,  1, -1,  1, -1, -1, -1,  1,  1, -1, -1, -1,  1,  1,
-       -1,  1,  1,  1,  1, -1,  1, -1, -1,  1,  1, -1,  1, -1,  1])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">walk=steps.cumsum()</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">walk.min()</span><br></pre></td></tr></table></figure>
-<pre><code>-19
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">walk.max()</span><br></pre></td></tr></table></figure>
-<pre><code>4
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(np.abs(walk)&gt;=<span class="number">5</span>).argmax()</span><br></pre></td></tr></table></figure>
-<pre><code>40
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/About-Application/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/About-Application/" itemprop="url">关于查询的执行过程</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-29T12:21:30+08:00">
-                2018-12-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="写在最前"><a href="#写在最前" class="headerlink" title="写在最前"></a>写在最前</h3><p>前文提到过查询的优化问题，这里我们了解下怎么更精准地去找到到底是哪里出了问题。</p>
-<h3 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h3><p>这里我们在<code>hive shell</code>里面执行任务时的日志信息，里面可以获取很多信息，这里我们先看一下Application，Task ，Job和Stage这几个概念，这里借鉴一下Spark的…<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Application：User program built on Spark. Consists of a driver program and executors on the cluster.</span><br><span class="line">Task：A unit of work that will be sent to one executor</span><br><span class="line">Job：A parallel computation consisting of multiple tasks that gets spawned in response to a Spark action (e.g. save, collect); you&apos;ll see this term used in the driver&apos;s logs.</span><br><span class="line">Stage：Each job gets divided into smaller sets of tasks called stages that depend on each other (similar to the map and reduce stages in MapReduce); you&apos;ll see this term used in the driver&apos;s logs.</span><br></pre></td></tr></table></figure></p>
-<p>更直观地感受就是去看一下shell里输出的日志信息，里面都是有用的。这里画了一下图，助于理解<br><img src="/images/Application.png" alt="结构"></p>
-<h3 id="执行"><a href="#执行" class="headerlink" title="执行"></a>执行</h3><ul>
-<li>如果发现查询过程中效率很低，这个时候先观察日志，到底是哪一步慢了，至少细化到Stage粒度</li>
-<li>explain yourfile.hql，查看hive的执行计划</li>
-</ul>
-<p>这里就不贴实际的代码和输出的信息了，在公司环境上搞的，还是稳健一点比较好。<br>虽然对Spark了解不多，但感觉对其优化应该也是这么一个思路吧，后面该开始了解一下Spark了。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -10642,7 +10413,7 @@ array([1.2 , 3.25, 4.1 ])
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">99</span>
+                  <span class="site-state-item-count">101</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -10655,7 +10426,7 @@ array([1.2 , 3.25, 4.1 ])
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
