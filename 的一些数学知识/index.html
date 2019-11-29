@@ -88,7 +88,7 @@
 <meta property="og:description" content="在之前简单的 ABtest 过程中，实验效果经常是有小幅变化。这个时候问题来了：实验结果是受我们抽样的数据波动影响还是真实的效果提升？借助于数理统计的知识，我们可以知道一个相对正确的答案。  一些基础知识主要是《概率论与数理统计》中“假设检验”这一章的知识，包括但不限于  总体与样本 正态分布 $t$ 分布 假设检验 $P$ 值法 …  这里重点说一下我觉着比较重要的几个点。 $t$ 分布很多时候">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://snailed.cn/的一些数学知识/假设检验_1.jpg">
-<meta property="og:updated_time" content="2019-11-29T11:36:46.228Z">
+<meta property="og:updated_time" content="2019-11-29T15:07:47.149Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ABtest-一些数学知识">
 <meta name="twitter:description" content="在之前简单的 ABtest 过程中，实验效果经常是有小幅变化。这个时候问题来了：实验结果是受我们抽样的数据波动影响还是真实的效果提升？借助于数理统计的知识，我们可以知道一个相对正确的答案。  一些基础知识主要是《概率论与数理统计》中“假设检验”这一章的知识，包括但不限于  总体与样本 正态分布 $t$ 分布 假设检验 $P$ 值法 …  这里重点说一下我觉着比较重要的几个点。 $t$ 分布很多时候">
@@ -345,7 +345,8 @@
 <li>如果 $P &lt;= \alpha$ , 则在当前显著性水平下拒绝原假设</li>
 <li>如果 $P &gt; \alpha$ , 则在当前显著性水平下接受原假设</li>
 </ul>
-<p>也可以这么想：在原假设成立的条件下，我们观察到计算所得样本数据特征的概率。如果 $P$ 值小于显著性水平，也就是在原假设成立的情况下，我们是基本无法观察到这个数据的，所以我们应该拒绝原假设。</p>
+<p>也可以这么想：如下图笔记中定义 $P$ 值的计算方式</p>
+<script type="math/tex; mode=display">P(弃真: 原假设为真时拒绝原假设) = P( z >= Z_{0} ) <= \alpha</script><p>如果我们计算出来的值小于显著性水平，那么我们的条件就是成立的，即应该拒绝原假设。</p>
 <p>附上《假设检验》学习笔记。<br><img src="假设检验_1.jpg" alt="假设检验"></p>
 <h3 id="举个例子"><a href="#举个例子" class="headerlink" title="举个例子"></a>举个例子</h3><p>未完待续</p>
 <h3 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h3><p>文章内容基本来自大佬的这篇文章<a href="https://xuyushi.github.io/15299133098726.html" target="_blank" rel="noopener">abtest数据分析</a>，确实写得太好了。本文是看了大佬的文章结合自己的知识整理而成，这里给大佬送上冰可乐。</p>
