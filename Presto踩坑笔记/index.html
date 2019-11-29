@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="查 MySQL 不走索引查一个大表，只需要计算当天的数据，建立的联合索引里面有 createdtime 这个字段。但是查的时候，极慢，没有走索引。 先 Presto 查询单个订单，秒出，即索引是有效的。然后怀疑是 Presto 日期函数处理结果的问题，发现果然不对劲。我们在 SQL 利用to_unixtime() 函数生成的结果是 timestamp类型的，MySQL表中 createdtime">
+<meta name="description" content="查 MySQL 不走索引查一个大表，只需要计算当天的数据，建立的联合索引里面有 createdtime 这个字段。但是查的时候，只限定 createdtime 这个字段，但是极慢没有走索引。 先 Presto 查询单个订单，秒出，即索引是有效的。然后怀疑是 Presto 日期函数处理结果的问题，发现果然不对劲。我们在 SQL 利用to_unixtime() 函数生成的结果是 timestamp类型">
 <meta name="keywords" content="Presto">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Presto 踩坑笔记">
 <meta property="og:url" content="http://snailed.cn/Presto踩坑笔记/index.html">
 <meta property="og:site_name" content="| Yang |">
-<meta property="og:description" content="查 MySQL 不走索引查一个大表，只需要计算当天的数据，建立的联合索引里面有 createdtime 这个字段。但是查的时候，极慢，没有走索引。 先 Presto 查询单个订单，秒出，即索引是有效的。然后怀疑是 Presto 日期函数处理结果的问题，发现果然不对劲。我们在 SQL 利用to_unixtime() 函数生成的结果是 timestamp类型的，MySQL表中 createdtime">
+<meta property="og:description" content="查 MySQL 不走索引查一个大表，只需要计算当天的数据，建立的联合索引里面有 createdtime 这个字段。但是查的时候，只限定 createdtime 这个字段，但是极慢没有走索引。 先 Presto 查询单个订单，秒出，即索引是有效的。然后怀疑是 Presto 日期函数处理结果的问题，发现果然不对劲。我们在 SQL 利用to_unixtime() 函数生成的结果是 timestamp类型">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-28T08:54:26.395Z">
+<meta property="og:updated_time" content="2019-11-29T02:23:03.851Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Presto 踩坑笔记">
-<meta name="twitter:description" content="查 MySQL 不走索引查一个大表，只需要计算当天的数据，建立的联合索引里面有 createdtime 这个字段。但是查的时候，极慢，没有走索引。 先 Presto 查询单个订单，秒出，即索引是有效的。然后怀疑是 Presto 日期函数处理结果的问题，发现果然不对劲。我们在 SQL 利用to_unixtime() 函数生成的结果是 timestamp类型的，MySQL表中 createdtime">
+<meta name="twitter:description" content="查 MySQL 不走索引查一个大表，只需要计算当天的数据，建立的联合索引里面有 createdtime 这个字段。但是查的时候，只限定 createdtime 这个字段，但是极慢没有走索引。 先 Presto 查询单个订单，秒出，即索引是有效的。然后怀疑是 Presto 日期函数处理结果的问题，发现果然不对劲。我们在 SQL 利用to_unixtime() 函数生成的结果是 timestamp类型">
 
 
 
@@ -310,20 +310,20 @@
       
 
       
-        <h2 id="查-MySQL-不走索引"><a href="#查-MySQL-不走索引" class="headerlink" title="查 MySQL 不走索引"></a>查 MySQL 不走索引</h2><p>查一个大表，只需要计算当天的数据，建立的联合索引里面有 <code>createdtime</code> 这个字段。但是查的时候，极慢，没有走索引。</p>
+        <h2 id="查-MySQL-不走索引"><a href="#查-MySQL-不走索引" class="headerlink" title="查 MySQL 不走索引"></a>查 MySQL 不走索引</h2><p>查一个大表，只需要计算当天的数据，建立的联合索引里面有 <code>createdtime</code> 这个字段。但是查的时候，只限定 <code>createdtime</code> 这个字段，但是极慢没有走索引。</p>
 <p>先 Presto 查询单个订单，秒出，即索引是有效的。然后怀疑是 Presto 日期函数处理结果的问题，发现果然不对劲。我们在 SQL 利用<code>to_unixtime()</code> 函数生成的结果是 <code>timestamp</code>类型的，MySQL表中 <code>createdtime</code> 的类型是 <code>bigint</code>，而 Presto 要求<strong>类型严格</strong>，所以踩坑了。。。</p>
 <p>解决办法很简单，使用 <code>cast</code> 做一下类型转化即可</p>
 <h2 id="找不到表名"><a href="#找不到表名" class="headerlink" title="找不到表名"></a>找不到表名</h2><p>订单表命名为 <code>order</code>，在 Hive 和 MySQL 中都是使用’`’去做转义，Presto死活找不到，后来发现是使用’”‘去搞的。。。</p>
 <h2 id="存成文件查询报错"><a href="#存成文件查询报错" class="headerlink" title="存成文件查询报错"></a>存成文件查询报错</h2><p>cli 中可以无错执行，<code>presto -f</code> 则报错。</p>
 <p>若存成文件执行，要在末尾加<code>;</code>。</p>
 <h2 id="重定向内容每一段包含’”‘"><a href="#重定向内容每一段包含’”‘" class="headerlink" title="重定向内容每一段包含’”‘"></a>重定向内容每一段包含’”‘</h2><p>例如查询出来的结果像这样：<code>&quot;123&quot;,&quot;123&quot;,&quot;123&quot;</code></p>
-<p>处理的时候很不方便，可以直接使用 <code>sed</code> 命令修改文件：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> sed 's/要被取代的字串/新的字串/g'</span><br><span class="line">sed -i 's/","/\t/g' demo.txt</span><br><span class="line">sed -i 's/"//g' demo.txt</span><br></pre></td></tr></table></figure></p>
+<p>处理的时候很不方便，可以直接使用 <code>sed</code> 命令修改文件：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> sed <span class="string">'s/要被取代的字串/新的字串/g'</span></span></span><br><span class="line">sed -i 's/","/\t/g' demo.txt</span><br><span class="line">sed -i 's/"//g' demo.txt</span><br></pre></td></tr></table></figure></p>
 <h2 id="数据量太大"><a href="#数据量太大" class="headerlink" title="数据量太大"></a>数据量太大</h2><ol>
 <li>不要选取全部字段，选自己使用的</li>
-<li>减少数据量常规方法</li>
+<li>减少数据量常规方法…</li>
 <li><code>join</code> 的时候大表放在左边，Presto 默认 broadcast join，即将 join 左边的表分割到多个 worker，然后将 join 右边的表数据整个复制一份发送到每个 worker 进行计算。如果右边的表数据量太大，则可能会报内存溢出错误。</li>
 </ol>
-
+<h2 id="未完待续"><a href="#未完待续" class="headerlink" title="未完待续"></a>未完待续</h2>
       
     </div>
     
@@ -444,7 +444,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">101</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -490,7 +490,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#查-MySQL-不走索引"><span class="nav-number">1.</span> <span class="nav-text">查 MySQL 不走索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#找不到表名"><span class="nav-number">2.</span> <span class="nav-text">找不到表名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#存成文件查询报错"><span class="nav-number">3.</span> <span class="nav-text">存成文件查询报错</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重定向内容每一段包含’”‘"><span class="nav-number">4.</span> <span class="nav-text">重定向内容每一段包含’”‘</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据量太大"><span class="nav-number">5.</span> <span class="nav-text">数据量太大</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#查-MySQL-不走索引"><span class="nav-number">1.</span> <span class="nav-text">查 MySQL 不走索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#找不到表名"><span class="nav-number">2.</span> <span class="nav-text">找不到表名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#存成文件查询报错"><span class="nav-number">3.</span> <span class="nav-text">存成文件查询报错</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重定向内容每一段包含’”‘"><span class="nav-number">4.</span> <span class="nav-text">重定向内容每一段包含’”‘</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据量太大"><span class="nav-number">5.</span> <span class="nav-text">数据量太大</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#未完待续"><span class="nav-number">6.</span> <span class="nav-text">未完待续</span></a></li></ol></div>
             
 
           </div>

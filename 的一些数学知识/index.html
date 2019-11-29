@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="算法,">
+  <meta name="keywords" content="ABtest,">
 
 
 
@@ -79,18 +79,20 @@
 
 
 
-<meta name="description" content="我们先看一个问题： 有一座高度是10级台阶的楼梯，从下往上走，每跨一步只能向上1级或者2级台阶。要求用程序来求出一共有多少种走法。 这个问题暴力求解是可以，但是不够美。我们从动态规划的角度来理解下。  动态规划（ DP ）是一种分阶段求解决策问题的数学思想。总结起来就是一句话，大事化小，小事化了。  问题建模 假如用户最后只差一步就可以走完整个楼梯，根据条件我们知道，这个时候会有两种情况出现  用">
-<meta name="keywords" content="算法">
+<meta name="description" content="在之前简单的 ABtest 过程中，实验效果经常是有小幅变化。这个时候问题来了：实验结果是受我们抽样的数据波动影响还是真实的效果提升？借助于数理统计的知识，我们可以知道一个相对正确的答案。  一些基础知识主要是《概率论与数理统计》中“假设检验”这一章的知识，包括但不限于  总体与样本 正态分布 $t$ 分布 假设检验 $P$ 值法 …  这里重点说一下我觉着比较重要的几个点。 $t$ 分布很多时候">
+<meta name="keywords" content="ABtest">
 <meta property="og:type" content="article">
-<meta property="og:title" content="动态规划基本概念">
-<meta property="og:url" content="http://snailed.cn/动态规划基本概念/index.html">
+<meta property="og:title" content="ABtest-一些数学知识">
+<meta property="og:url" content="http://snailed.cn/的一些数学知识/index.html">
 <meta property="og:site_name" content="| Yang |">
-<meta property="og:description" content="我们先看一个问题： 有一座高度是10级台阶的楼梯，从下往上走，每跨一步只能向上1级或者2级台阶。要求用程序来求出一共有多少种走法。 这个问题暴力求解是可以，但是不够美。我们从动态规划的角度来理解下。  动态规划（ DP ）是一种分阶段求解决策问题的数学思想。总结起来就是一句话，大事化小，小事化了。  问题建模 假如用户最后只差一步就可以走完整个楼梯，根据条件我们知道，这个时候会有两种情况出现  用">
+<meta property="og:description" content="在之前简单的 ABtest 过程中，实验效果经常是有小幅变化。这个时候问题来了：实验结果是受我们抽样的数据波动影响还是真实的效果提升？借助于数理统计的知识，我们可以知道一个相对正确的答案。  一些基础知识主要是《概率论与数理统计》中“假设检验”这一章的知识，包括但不限于  总体与样本 正态分布 $t$ 分布 假设检验 $P$ 值法 …  这里重点说一下我觉着比较重要的几个点。 $t$ 分布很多时候">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-09-09T16:28:00.395Z">
+<meta property="og:image" content="http://snailed.cn/的一些数学知识/假设检验_1.jpg">
+<meta property="og:updated_time" content="2019-11-29T11:36:46.228Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="动态规划基本概念">
-<meta name="twitter:description" content="我们先看一个问题： 有一座高度是10级台阶的楼梯，从下往上走，每跨一步只能向上1级或者2级台阶。要求用程序来求出一共有多少种走法。 这个问题暴力求解是可以，但是不够美。我们从动态规划的角度来理解下。  动态规划（ DP ）是一种分阶段求解决策问题的数学思想。总结起来就是一句话，大事化小，小事化了。  问题建模 假如用户最后只差一步就可以走完整个楼梯，根据条件我们知道，这个时候会有两种情况出现  用">
+<meta name="twitter:title" content="ABtest-一些数学知识">
+<meta name="twitter:description" content="在之前简单的 ABtest 过程中，实验效果经常是有小幅变化。这个时候问题来了：实验结果是受我们抽样的数据波动影响还是真实的效果提升？借助于数理统计的知识，我们可以知道一个相对正确的答案。  一些基础知识主要是《概率论与数理统计》中“假设检验”这一章的知识，包括但不限于  总体与样本 正态分布 $t$ 分布 假设检验 $P$ 值法 …  这里重点说一下我觉着比较重要的几个点。 $t$ 分布很多时候">
+<meta name="twitter:image" content="http://snailed.cn/的一些数学知识/假设检验_1.jpg">
 
 
 
@@ -120,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://snailed.cn/动态规划基本概念/">
+  <link rel="canonical" href="http://snailed.cn/的一些数学知识/">
 
 
 
 
 
-  <title>动态规划基本概念 | | Yang |</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>ABtest-一些数学知识 | | Yang |</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -243,7 +245,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/动态规划基本概念/">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/的一些数学知识/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhangyang">
@@ -260,7 +262,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">动态规划基本概念</h2>
+          <h2 class="post-title" itemprop="name headline">ABtest-一些数学知识</h2>
         
 
         <div class="post-meta">
@@ -272,8 +274,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-06T23:18:21+08:00">
-                2019-09-06
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-29T15:40:07+08:00">
+                2019-11-29
               </time>
             
 
@@ -310,37 +312,43 @@
       
 
       
-        <p>我们先看一个问题：</p>
-<p><strong>有一座高度是10级台阶的楼梯，从下往上走，每跨一步只能向上1级或者2级台阶。要求用程序来求出一共有多少种走法。</strong></p>
-<p>这个问题暴力求解是可以，但是不够美。我们从动态规划的角度来理解下。</p>
+        <p>在之前简单的 ABtest 过程中，实验效果经常是有小幅变化。这个时候问题来了：实验结果是受我们抽样的数据波动影响还是真实的效果提升？借助于数理统计的知识，我们可以知道一个相对正确的答案。</p>
+<hr>
+<h3 id="一些基础知识"><a href="#一些基础知识" class="headerlink" title="一些基础知识"></a>一些基础知识</h3><p>主要是《概率论与数理统计》中“假设检验”这一章的知识，包括但不限于</p>
+<ul>
+<li>总体与样本</li>
+<li>正态分布</li>
+<li>$t$ 分布</li>
+<li>假设检验</li>
+<li>$P$ 值法</li>
+<li>…</li>
+</ul>
+<p>这里重点说一下我觉着比较重要的几个点。</p>
+<h4 id="t-分布"><a href="#t-分布" class="headerlink" title="$t$ 分布"></a>$t$ 分布</h4><p>很多时候，我们不知道总体的均值，只知道样本的均值，这个时候我们只能用样本均值近似代替总体均值进行计算（ $z$ 分布）。但是当样本量不够的时候，$t$分布就有了用武之地。</p>
+<p>设 $X \sim N(0,1),Y \sim {\chi}^2(n)$,且$X,Y$相互独立，则称</p>
+<script type="math/tex; mode=display">t = \frac{X}{\sqrt{Y/n}}</script><p>满足自由度为 $n$ 的 $t$ 分布，记为 $t \sim t(n)$</p>
+<h4 id="假设检验"><a href="#假设检验" class="headerlink" title="假设检验"></a>假设检验</h4><p>假设检验是利用样本数据来推断总体数据的某些性质。我们先对总体数据提出某种假设，然后利用样本数据来判断假设是否成立。</p>
+<p>假设检验的方式：</p>
+<ul>
+<li>提出原假设和备择假设，不需要证明的或者是我们着重考虑的放原假设，需要证明的放备择假设</li>
+<li>确定显著性水平 $\alpha$</li>
+<li>确定检验方法和检验统计量，并计算其分布</li>
+<li>确定拒绝域。如果统计量落在拒绝域，则拒绝原假设，反之则接受原假设</li>
+</ul>
 <blockquote>
-<p>动态规划（ DP ）是一种分阶段求解决策问题的数学思想。总结起来就是一句话，大事化小，小事化了。</p>
+<p>拒绝域即拒绝原假设的区域，其概率即为显著性水平。常用显著性水平如5%、1%等，即在原假设成立的条件下，样本值落在拒绝域的概率很低，是一个小概率事件，按照实际推断原理，小概率事件在一次抽样中一般是不会发生的，因为我们有理由认为样本值落在拒绝域的时候，原假设是不成立的。<br>不过实际推断原理只是说在一次抽样中，小概率事件可以认为是不会发生的，而不能肯定绝对不发生。因此，有一定概率在原假设成立的情况下，统计量落入拒绝域，导致我们拒绝原假设。这种情况实际上是一种错误，在假设检验中，称这种错误为第一类错误，也就是“弃真”错误，发生的概率记作 α，即显著性水平。另一种错误是原假设不成立，但是接受了原假设，称为第二类错误，即“受伪”错误，它发生的概率记作 β。<br>由于抽样的随机性，我们不可能完全排除这两类错误的发生，因此只能把这两类错误控制在一定的范围之内。当样本容量 n 确定之后，犯两类错误的概率不可能同时降低，通常我们会用一个较小的显著性水平 α 来控制第一类错误的发生，因为原假设一般是结合问题特点提出的，需要着重考虑的假设，不应该轻易拒绝，所以第一类错误的概率要控制得较小。这种只控制犯第一类错误的概率，而不考虑犯第二类错误的概率的检验，称为显著性检验</p>
 </blockquote>
-<h2 id="问题建模"><a href="#问题建模" class="headerlink" title="问题建模"></a>问题建模</h2><hr>
-<p><strong>假如用户最后只差一步就可以走完整个楼梯，根据条件我们知道，这个时候会有两种情况出现</strong></p>
+<p>上面这段我觉得说得很好，告诉我们该如何去设计的我们的假设。为什么我们要设计一个很小的显著性水平？（因为我们原假设是经验告诉我们的正确的，不会轻易被拒绝的，我们优先保证不会范“弃真”这个错误）</p>
+<p>另外还有单/双边检验的问题，这个是计算的问题，主要是备择假设是否具有方向性，这里可以先不说，画个图就很好理解了。</p>
+<h4 id="P-Value"><a href="#P-Value" class="headerlink" title="$P$ Value"></a>$P$ Value</h4><p>教材上定义：假设检验的 $P$ 值是由检验统计量的样本观察值得出的原假设可被拒绝的最小显著性水平。</p>
 <ul>
-<li>用户在还差一级台阶，9 -&gt; 10</li>
-<li>用户还差两级台阶，8 -&gt; 10</li>
+<li>如果 $P &lt;= \alpha$ , 则在当前显著性水平下拒绝原假设</li>
+<li>如果 $P &gt; \alpha$ , 则在当前显著性水平下接受原假设</li>
 </ul>
-<p>意味着我们只要知道了前九级和前八级分别需要多少种走法，即可知道走完十级需要多少种走法。</p>
-<p>现在假设$F(n)$表示到第$n$个台阶一共的走法，即：<script type="math/tex">F(10) = F(9) + F(8)</script></p>
-<p>同理可得，假设用户还差一步可以走到第九级，那么：<script type="math/tex">F(9) = F(8) + F(7)</script><br>…<br>到最后：<script type="math/tex">F(3) = F(2) + F(1)</script></p>
-<p>当只有1级台阶和2级台阶时走法很明显，即$ F(1) = 1,F(2) = 2$。现在我们已经成功地把一个复杂地问题简单化啦，这就是动态规划。</p>
-<p>最后我们可以得到归纳出以下公式$F$：</p>
-<script type="math/tex; mode=display">\begin{cases}
-    F(1) = 1 \\
-    F(2) = 2 \\
-    F(n) = F(n-1) + F(n-2)\\
-\end{cases}</script><p><strong>动态规划中包含三个重要的概念，最优子结构、边界、状态转移公式</strong></p>
-<ul>
-<li>上面问题中，我们知道了$F(10) = F(9) + F(8)$，后两者就是前者的最优子结构。</li>
-<li>$F(1)$和$F(2)$我们已经不需要简化，这个我们称之为边界。</li>
-<li>$F$就是状态转移公式。</li>
-</ul>
-<h2 id="问题代码实现"><a href="#问题代码实现" class="headerlink" title="问题代码实现"></a>问题代码实现</h2><hr>
-<p>使用<strong>递归</strong>的方法去做：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calcWalkWays</span><span class="params">(n)</span>:</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> n == <span class="number">1</span>:</span><br><span class="line">		<span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">	<span class="keyword">if</span> n == <span class="number">2</span>:</span><br><span class="line">		<span class="keyword">return</span> <span class="number">2</span></span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">		<span class="keyword">return</span> calcWalkWays(n<span class="number">-1</span>) + calcWalkWays(n<span class="number">-2</span>)</span><br></pre></td></tr></table></figure></p>
-<p>使用<strong>dp</strong>的方法去做：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calcWalkWays</span><span class="params">(n)</span>:</span></span><br><span class="line">	dp = [<span class="number">0</span> <span class="keyword">for</span> k <span class="keyword">in</span> range(n)]</span><br><span class="line">	dp[<span class="number">0</span>],dp[<span class="number">1</span>] = <span class="number">1</span>,<span class="number">2</span></span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>,n):</span><br><span class="line">		dp[i] = dp[i<span class="number">-1</span>] + dp[i<span class="number">-2</span>]</span><br><span class="line">	<span class="keyword">return</span> dp[<span class="number">-1</span>]</span><br></pre></td></tr></table></figure></p>
-<p>两种方法都可以取得正确答案，但是第二种明显会快很多，这个可以自己去测试一下。</p>
+<p>也可以这么想：在原假设成立的条件下，我们观察到计算所得样本数据特征的概率。如果 $P$ 值小于显著性水平，也就是在原假设成立的情况下，我们是基本无法观察到这个数据的，所以我们应该拒绝原假设。</p>
+<p>附上《假设检验》学习笔记。<br><img src="假设检验_1.jpg" alt="假设检验"></p>
+<h3 id="举个例子"><a href="#举个例子" class="headerlink" title="举个例子"></a>举个例子</h3><p>未完待续</p>
+<h3 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h3><p>文章内容基本来自大佬的这篇文章<a href="https://xuyushi.github.io/15299133098726.html" target="_blank" rel="noopener">abtest数据分析</a>，确实写得太好了。本文是看了大佬的文章结合自己的知识整理而成，这里给大佬送上冰可乐。</p>
 
       
     </div>
@@ -358,7 +366,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/算法/" rel="tag"># 算法</a>
+            <a href="/tags/ABtest/" rel="tag"># ABtest</a>
           
         </div>
       
@@ -371,8 +379,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/中文书写的一些规范与参考/" rel="next" title="中文书写的一些规范与参考">
-                <i class="fa fa-chevron-left"></i> 中文书写的一些规范与参考
+              <a href="/ABtest-再深入一点点/" rel="next" title="ABtest-再深入一点点">
+                <i class="fa fa-chevron-left"></i> ABtest-再深入一点点
               </a>
             
           </div>
@@ -380,10 +388,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/动态规划的经典例题/" rel="prev" title="动态规划的经典例题">
-                动态规划的经典例题 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -508,7 +512,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题建模"><span class="nav-number">1.</span> <span class="nav-text">问题建模</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题代码实现"><span class="nav-number">2.</span> <span class="nav-text">问题代码实现</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一些基础知识"><span class="nav-number">1.</span> <span class="nav-text">一些基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#t-分布"><span class="nav-number">1.1.</span> <span class="nav-text">$t$ 分布</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#假设检验"><span class="nav-number">1.2.</span> <span class="nav-text">假设检验</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#P-Value"><span class="nav-number">1.3.</span> <span class="nav-text">$P$ Value</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#举个例子"><span class="nav-number">2.</span> <span class="nav-text">举个例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#相关链接"><span class="nav-number">3.</span> <span class="nav-text">相关链接</span></a></li></ol></div>
             
 
           </div>
