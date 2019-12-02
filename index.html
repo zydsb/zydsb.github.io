@@ -332,8 +332,8 @@
 <p>假设检验的方式：</p>
 <ul>
 <li>提出原假设和备择假设，不需要证明的或者是我们着重考虑的放原假设，需要证明的放备择假设</li>
-<li>确定显著性水平 $\alpha$</li>
 <li>确定检验方法和检验统计量，并计算其分布</li>
+<li>确定显著性水平 $\alpha$</li>
 <li>确定拒绝域。如果统计量落在拒绝域，则拒绝原假设，反之则接受原假设</li>
 </ul>
 <blockquote>
@@ -349,8 +349,49 @@
 <p>也可以这么想：如下图笔记中定义 $P$ 值的计算方式</p>
 <script type="math/tex; mode=display">P(弃真: 原假设为真时拒绝原假设) = P( z >= Z_{0} ) <= \alpha</script><p>如果我们计算出来的值小于显著性水平，那么我们的条件就是成立的，即应该拒绝原假设。</p>
 <p>附上《假设检验》学习笔记。<br><img src="假设检验_1.jpg" alt="假设检验"></p>
-<h3 id="举个例子"><a href="#举个例子" class="headerlink" title="举个例子"></a>举个例子</h3><p>未完待续</p>
+<h3 id="举个例子"><a href="#举个例子" class="headerlink" title="举个例子"></a>举个例子</h3><p>假设我们有 AB 两个方案，样本容量为 $N$ （两方案不一定相等），转化率为 $P$ ，现在转化率差异不大，我们想知道这两个方案的转化率是否有显著差异。</p>
+<p>那么我们可以很明显的知道数据满足伯努利分布:</p>
+<script type="math/tex; mode=display">A \sim B(N_{a},P_{a}) \quad B \sim B(N_{b},P_{b})</script><h4 id="提出假设"><a href="#提出假设" class="headerlink" title="提出假设"></a>提出假设</h4><script type="math/tex; mode=display">H0 : 没有显著差异</script><script type="math/tex; mode=display">H1 : 有显著差异</script><h4 id="确定检验方法"><a href="#确定检验方法" class="headerlink" title="确定检验方法"></a>确定检验方法</h4><p>样本量 $N$ 足够大，满足中心极限定理,我们可以使用 $Z$ 检验。因为是检验样本间有无差异，我们确定 $Z$ 值计算方法为：</p>
+<script type="math/tex; mode=display">Z = \frac{\bar X_{1} - \bar X_{2}} { \sqrt{ {s_1^2 \over n_1 } +  {s_2^2 \over n_2 } } }</script><h4 id="确定显著性水平"><a href="#确定显著性水平" class="headerlink" title="确定显著性水平"></a>确定显著性水平</h4><p>pass </p>
+<h4 id="计算检验量"><a href="#计算检验量" class="headerlink" title="计算检验量"></a>计算检验量</h4><p>伯努利分布的数学期望为$E(x) = N \cdot P$ ， 方差则是 $D(x) = NP \cdot (1-P)$ 。<br>样本均值计算公式为：</p>
+<script type="math/tex; mode=display">\bar X  = \frac {\sum_{i=1}^n x_n} {n}</script><p>样本方差计算公式为：</p>
+<script type="math/tex; mode=display">S^2 = \frac {\sum_{i=1}^n (x_n - \bar X )^2  } {n-1}</script><h4 id="检验结果"><a href="#检验结果" class="headerlink" title="检验结果"></a>检验结果</h4><p>可以参考 $P$ 值的方式，不过 $Z$ 是绝对值，附表如下：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>$Z$</th>
+<th>$P$</th>
+<th>显著程度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$&gt; 2.58$</td>
+<td>$&lt; 0.01$</td>
+<td>非常显著</td>
+</tr>
+<tr>
+<td>$&gt; 1.96$</td>
+<td>$&lt; 0.05$</td>
+<td>显著</td>
+</tr>
+<tr>
+<td>$&lt; 1.96$</td>
+<td>$&gt; 0.05$</td>
+<td>不显著</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>最后根据计算的结果得出结论即可，至此，关于 ABtest 的结果检验完成。当然了，还有其他的检验问题，比如确定一个样本和总体的差异是否显著。慢慢来。</p>
 <h3 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h3><p>文章内容基本来自大佬的这篇文章<a href="https://xuyushi.github.io/15299133098726.html" target="_blank" rel="noopener">abtest数据分析</a>，确实写得太好了。本文是看了大佬的文章结合自己的知识整理而成，这里给大佬送上冰可乐。</p>
+<p>当然还有下面这几篇文章：</p>
+<ul>
+<li><a href="http://www.woshipm.com/data-analysis/2207880.html" target="_blank" rel="noopener">你的AB测试结果有多靠谱</a></li>
+<li><a href="http://www.woshipm.com/data-analysis/2148920.html" target="_blank" rel="noopener">你的A/B测试结果真的靠谱吗？</a></li>
+<li><a href="https://wiki.mbalib.com/wiki/Z%E6%A3%80%E9%AA%8C" target="_blank" rel="noopener">Z检验</a></li>
+</ul>
 
           
         
