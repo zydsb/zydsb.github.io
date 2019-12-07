@@ -242,6 +242,147 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/理解自然对数/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/理解自然对数/" itemprop="url">理解自然对数</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-22T01:20:46+08:00">
+                2019-03-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="写在最前"><a href="#写在最前" class="headerlink" title="写在最前"></a>写在最前</h3><p>从什么时候知道自然对数$e$早就忘了，记得当时老师也只是叫大家记住，但是没说这个数字是怎么来的，自己也没有去了解。前几天看到一个推导，觉得很不错，这个Mark一下。</p>
+<h3 id="复利引入"><a href="#复利引入" class="headerlink" title="复利引入"></a>复利引入</h3><p>首先我们要知道$e$在数学上是一个无理常数，约等于$2.718$,由大数学家<strong>雅可比·伯努利</strong>发现。</p>
+<p>从经济学的的一个概念<strong>复利</strong>，我们可以很好地了解到$e$。复利应该是最伟大的力量之一，这里面有很多可以说的，但是我的了解也很浅薄，以后多看。</p>
+<p>引入一个指数增长模型：</p>
+<p>我们都知道某些细菌是通过二分裂进行繁殖的，假设在一个完美的环境下（细菌可以无限量任意繁殖，不会受到任何限制），那么细菌第$n+1$天都会是第$n$天的两倍。即</p>
+<script type="math/tex; mode=display">S = K \cdot 2^n</script><p>其中$S$是第$n$天的细菌数量，$K$是培养皿中细菌的起始数量。<br>当然我么也可以对公式稍微改一改，就变成了<script type="math/tex">S = K \cdot ( 1 + 1 )^n = K \cdot (1+100\%)^n</script> , 这里我们就可以把分裂换成增长率是$100\%$，同样的 增长率也可以是$50\%$，$25\%$等等，那公式就可以变成</p>
+<script type="math/tex; mode=display">S = K \cdot (1 + r)^n</script><p>其中$r$是增长率。</p>
+<h3 id="问题与解答"><a href="#问题与解答" class="headerlink" title="问题与解答"></a>问题与解答</h3><p>假设一个小伙子有一块钱，然后有家银行打出了年利$ 100\% $的的方案来吸引资金，而且可以随时存取，那请问小伙子怎么办才能获取最多的钱呢？假设有最多的钱，是多少呢？</p>
+<p>其实稍微了解点复利的概念，就知道存了然后把利息取出来再存进去就可以利滚利了，而且是利息越多越好，因为有限的时间下，越早钱越多滚到最后越大，即我们应该尽早拿出利息，再存进去。那我们随便列举一下情况：</p>
+<ul>
+<li>半年存取一次</li>
+<li>四个月存取一次</li>
+<li>一天存取一次</li>
+</ul>
+<p>假如说半年取一次，就需要存取两次，增长率为${100\% \over 2} = 50\% $，即最后可以获得</p>
+<script type="math/tex; mode=display">S = 1 \cdot (1+50\%)^2 = 2.250</script><p>那相应的四个月取一次，相应可以存取三次，增长率为${100\% \over 3}= 33.3\%$，则最后可以获得的钱为</p>
+<script type="math/tex; mode=display">S = 1 \cdot (1+{100 \over 3}\%)^3 = 2.370</script><p>同理我们可以很简单的得到一天存取一次可以获得多少钱:</p>
+<script type="math/tex; mode=display">S = 1 \cdot (1+{100 \over 365}\%)^{365} = 2.714</script><p>可以看出来确实是满足我们假设的，那假如说我存取越来越频繁，以趋近于无穷呢？</p>
+<p>那我们写段小代码自己算一下<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">假设存取<span class="number">1</span>次，那么最后可以获得<span class="number">2.0</span>元</span><br><span class="line">假设存取<span class="number">2</span>次，那么最后可以获得<span class="number">2.25</span>元</span><br><span class="line">假设存取<span class="number">4</span>次，那么最后可以获得<span class="number">2.44140625</span>元</span><br><span class="line">假设存取<span class="number">8</span>次，那么最后可以获得<span class="number">2.565784513950348</span>元</span><br><span class="line">假设存取<span class="number">16</span>次，那么最后可以获得<span class="number">2.6379284973666</span>元</span><br><span class="line">假设存取<span class="number">32</span>次，那么最后可以获得<span class="number">2.676990129378183</span>元</span><br><span class="line">假设存取<span class="number">64</span>次，那么最后可以获得<span class="number">2.697344952565099</span>元</span><br><span class="line">假设存取<span class="number">128</span>次，那么最后可以获得<span class="number">2.7077390196880207</span>元</span><br><span class="line">假设存取<span class="number">256</span>次，那么最后可以获得<span class="number">2.7129916242534344</span>元</span><br><span class="line">假设存取<span class="number">512</span>次，那么最后可以获得<span class="number">2.7156320001689913</span>元</span><br><span class="line">假设存取<span class="number">1024</span>次，那么最后可以获得<span class="number">2.7169557294664357</span>元</span><br><span class="line">假设存取<span class="number">2048</span>次，那么最后可以获得<span class="number">2.7176184823368796</span>元</span><br></pre></td></tr></table></figure></p>
+<p>可以看到，我们可以猜测这种操作是存在一种极限的，这个极限就是我们的自然对数$e$! 也就是说只要在利率保持$100\%$的情况下，不断提高存取次数，那么最后的余额会逼近$e=2.7182818…$</p>
+<p>这个时候，我们就可以祭出高等数学微积分中的重要极限了！</p>
+<script type="math/tex; mode=display">e = \lim _ {n \to \infty} (1+{1 \over n})^n</script><p>看，就是这么自然！</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://snailed.cn/AboutMe/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1570,129 +1711,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Spark学习笔记00/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/Spark学习笔记00/" itemprop="url">Spark学习笔记00</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-20T00:35:05+08:00">
-                2019-02-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>前提是提前安装好Java，因为之前鼓捣Hadoop的时候已经搞定，所以安装很方便，一行命令搞定。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install apache-spark</span><br></pre></td></tr></table></figure>
-<p>配合Jupyter使用:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export PYSPARK_DRIVER_PYTHON=jupyter</span><br><span class="line">export PYSPARK_DRIVER_PYTHON_OPTS='notebook'</span><br></pre></td></tr></table></figure></p>
-<p>相关链接:<br><a href="https://formulae.brew.sh/formula/apache-spark" target="_blank" rel="noopener">brew-spark</a><br><a href="https://spark.apache.org/" target="_blank" rel="noopener">官网</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1745,7 +1763,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">102</span>
+                  <span class="site-state-item-count">103</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
