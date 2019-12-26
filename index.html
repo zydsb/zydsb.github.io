@@ -242,6 +242,277 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/awk简单使用/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/awk简单使用/" itemprop="url">awk简单使用</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-12-12T19:42:06+08:00">
+                2019-12-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><code>awk</code> 这个命令用得比较少，但是某些情况下回很有用。</p>
+<p>让我们先创建一个测试文件 awk_test.txt<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">yang,chongqing,2019,01,01,100</span><br><span class="line">kunk,wuzhou,2020,02,02,100</span><br><span class="line">larry,beijing,2015,03,03,200</span><br><span class="line">zinba,beijing,2018,04,04,300</span><br></pre></td></tr></table></figure></p>
+<h3 id="基本参数"><a href="#基本参数" class="headerlink" title="基本参数"></a>基本参数</h3><p>基本上只使用了<code>-F</code>这个参数，用于指定分隔符。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span>awk -F "," '&#123;print $1,$2,$3,$4,$5&#125;' awk_test.txt</span><br><span class="line"><span class="meta">#</span> 结果 pass</span><br></pre></td></tr></table></figure>
+<h3 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h3><h4 id="打印部分或者全部信息"><a href="#打印部分或者全部信息" class="headerlink" title="打印部分或者全部信息"></a>打印部分或者全部信息</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span>awk -F "," '&#123;print $1,$2,$3,$4,$5&#125;' awk_test.txt</span><br><span class="line">yang chongqing 2019 01 01</span><br><span class="line">kunk wuzhou 2020 02 02</span><br><span class="line">larry beijing 2015 03 03</span><br><span class="line">zinba beijing 2018 04 04</span><br></pre></td></tr></table></figure>
+<p>还有几个 tips:</p>
+<ul>
+<li><code>$0</code>表示引用一行的全部内容</li>
+<li><code>-F</code> 可以使用 <code>-F &quot;[,.]&quot;</code> 来指定多个分隔符</li>
+</ul>
+<h4 id="过滤"><a href="#过滤" class="headerlink" title="过滤"></a>过滤</h4><p>找到第一列是 kunk 的记录<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span>awk -F, '$1 == "kunk"' awk_test.txt</span><br><span class="line">kunk,wuzhou,2020,02,02,100</span><br></pre></td></tr></table></figure></p>
+<p>找到第二列是 beijing 而且 第三列大于 2017 的记录，并输出前两行<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span>awk -F, '$2 == "beijing"  &amp;&amp; $3 &gt; 2017 &#123;print $1,$2&#125;' awk_test.txt</span><br><span class="line">zinba beijing</span><br></pre></td></tr></table></figure></p>
+<p>利用正则表达式找出第一列带有 a 这个字母的记录,并输出前两行（使用<code>~</code>实现）<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span>awk -F, '$1~/a/ &#123;print $1,$2&#125;' awk_test.txt</span><br><span class="line">yang chongqing</span><br><span class="line">larry beijing</span><br><span class="line">zinba beijing</span><br></pre></td></tr></table></figure></p>
+<h4 id="内建变量"><a href="#内建变量" class="headerlink" title="内建变量"></a>内建变量</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span>awk -F"," 'BEGIN&#123;printf "%4s %4s %4s %4s %4s %4s %4s %4s %4s\n","FILENAME","ARGC","FNR","FS","NF","NR","OFS","ORS","RS";printf "---------------------------------------------\n"&#125; &#123;printf "%4s %4s %4s %4s %4s %4s %4s %4s %4s\n",FILENAME,ARGC,FNR,FS,NF,NR,OFS,ORS,RS&#125;'  awk_test.txt</span><br><span class="line"></span><br><span class="line">FILENAME ARGC  FNR   FS   NF   NR  OFS  ORS   RS</span><br><span class="line">---------------------------------------------</span><br><span class="line">awk_test.txt    2    1    ,    6    1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">awk_test.txt    2    2    ,    6    2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">awk_test.txt    2    3    ,    6    3</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">awk_test.txt    2    4    ,    6    4</span><br></pre></td></tr></table></figure>
+<p>为方便处理而出现，可以视为是 <code>awk</code> 定义的一些变量，看需求来使用。</p>
+<h3 id="awk-脚本"><a href="#awk-脚本" class="headerlink" title="awk 脚本"></a>awk 脚本</h3><p>标准格式如下：</p>
+<ul>
+<li>BEGIN ：处理文件前执行前的语句</li>
+<li>PROCESS：对每一行数据要做的处理</li>
+<li>END：文件处理完之后执行的语句</li>
+</ul>
+<p>举个简单的例子：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/awk -f</span><br><span class="line"><span class="meta">#</span>运行前</span><br><span class="line"></span><br><span class="line">BEGIN&#123;</span><br><span class="line">    FS = ","</span><br><span class="line">    printf "NAME  CITY YEAR MONTH DAY\n"</span><br><span class="line">    printf "---------------------------------------------\n"</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">&#123;</span><br><span class="line">    printf "%-6s %-6s %-6d %-6d %-6d\n",$1,$2,$3,$4,$5</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">END&#123;</span><br><span class="line"></span><br><span class="line">    printf "---------------------------------------------\n"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>其结果如下：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">NAME  CITY YEAR MONTH DAY</span><br><span class="line">---------------------------------------------</span><br><span class="line">yang   chongqing 2019   1      1</span><br><span class="line">kunk   wuzhou 2020   2      2</span><br><span class="line">larry  beijing 2015   3      3</span><br><span class="line">zinba  beijing 2018   4      4</span><br><span class="line">---------------------------------------------</span><br></pre></td></tr></table></figure></p>
+<p>当然这只是最简单的用法，现在权当了解，后面有需要的时候再深入学习。</p>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
+<li><a href="https://www.runoob.com/linux/linux-comm-awk.html" target="_blank" rel="noopener">Linux-awk 菜鸟教程</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/interleaving和多臂老虎机/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/interleaving和多臂老虎机/" itemprop="url">interleaving和多臂老虎机</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-12-11T18:20:25+08:00">
+                2019-12-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>大佬的文章：</p>
+<ol>
+<li><a href="http://xiaoyue26.github.io/2019/11/13/2019-11/%E5%88%A9%E7%94%A8%E5%BA%8F%E5%88%97%E6%A0%B7%E6%9C%AC%E8%B6%85%E8%B6%8AA-B-Test-interleaving%E5%92%8C%E5%A4%9A%E8%87%82%E8%80%81%E8%99%8E%E6%9C%BA/" target="_blank" rel="noopener">利用序列样本超越A/B Test: interleaving和多臂老虎机</a></li>
+<li><a href="https://www.staticor.io/blog/algo" target="_blank" rel="noopener">多臂老虎机（Multi-armed Bandit）</a></li>
+<li><a href="https://cosx.org/2017/05/bandit-and-recommender-systems/#fn:https-gist-githu" target="_blank" rel="noopener">Bandit 算法和推荐系统</a></li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://snailed.cn/中心极限定理/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1467,293 +1738,6 @@ F(n) = max(F(n-1)+x_{n},x_{n}) \\
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/动态规划基本概念/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/动态规划基本概念/" itemprop="url">动态规划基本概念</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-06T23:18:21+08:00">
-                2019-09-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>我们先看一个问题：</p>
-<p><strong>有一座高度是10级台阶的楼梯，从下往上走，每跨一步只能向上1级或者2级台阶。要求用程序来求出一共有多少种走法。</strong></p>
-<p>这个问题暴力求解是可以，但是不够美。我们从动态规划的角度来理解下。</p>
-<blockquote>
-<p>动态规划（ DP ）是一种分阶段求解决策问题的数学思想。总结起来就是一句话，大事化小，小事化了。</p>
-</blockquote>
-<h2 id="问题建模"><a href="#问题建模" class="headerlink" title="问题建模"></a>问题建模</h2><hr>
-<p><strong>假如用户最后只差一步就可以走完整个楼梯，根据条件我们知道，这个时候会有两种情况出现</strong></p>
-<ul>
-<li>用户在还差一级台阶，9 -&gt; 10</li>
-<li>用户还差两级台阶，8 -&gt; 10</li>
-</ul>
-<p>意味着我们只要知道了前九级和前八级分别需要多少种走法，即可知道走完十级需要多少种走法。</p>
-<p>现在假设$F(n)$表示到第$n$个台阶一共的走法，即：<script type="math/tex">F(10) = F(9) + F(8)</script></p>
-<p>同理可得，假设用户还差一步可以走到第九级，那么：<script type="math/tex">F(9) = F(8) + F(7)</script><br>…<br>到最后：<script type="math/tex">F(3) = F(2) + F(1)</script></p>
-<p>当只有1级台阶和2级台阶时走法很明显，即$ F(1) = 1,F(2) = 2$。现在我们已经成功地把一个复杂地问题简单化啦，这就是动态规划。</p>
-<p>最后我们可以得到归纳出以下公式$F$：</p>
-<script type="math/tex; mode=display">\begin{cases}
-    F(1) = 1 \\
-    F(2) = 2 \\
-    F(n) = F(n-1) + F(n-2)\\
-\end{cases}</script><p><strong>动态规划中包含三个重要的概念，最优子结构、边界、状态转移公式</strong></p>
-<ul>
-<li>上面问题中，我们知道了$F(10) = F(9) + F(8)$，后两者就是前者的最优子结构。</li>
-<li>$F(1)$和$F(2)$我们已经不需要简化，这个我们称之为边界。</li>
-<li>$F$就是状态转移公式。</li>
-</ul>
-<h2 id="问题代码实现"><a href="#问题代码实现" class="headerlink" title="问题代码实现"></a>问题代码实现</h2><hr>
-<p>使用<strong>递归</strong>的方法去做：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calcWalkWays</span><span class="params">(n)</span>:</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> n == <span class="number">1</span>:</span><br><span class="line">		<span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">	<span class="keyword">if</span> n == <span class="number">2</span>:</span><br><span class="line">		<span class="keyword">return</span> <span class="number">2</span></span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">		<span class="keyword">return</span> calcWalkWays(n<span class="number">-1</span>) + calcWalkWays(n<span class="number">-2</span>)</span><br></pre></td></tr></table></figure></p>
-<p>使用<strong>dp</strong>的方法去做：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calcWalkWays</span><span class="params">(n)</span>:</span></span><br><span class="line">	dp = [<span class="number">0</span> <span class="keyword">for</span> k <span class="keyword">in</span> range(n)]</span><br><span class="line">	dp[<span class="number">0</span>],dp[<span class="number">1</span>] = <span class="number">1</span>,<span class="number">2</span></span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>,n):</span><br><span class="line">		dp[i] = dp[i<span class="number">-1</span>] + dp[i<span class="number">-2</span>]</span><br><span class="line">	<span class="keyword">return</span> dp[<span class="number">-1</span>]</span><br></pre></td></tr></table></figure></p>
-<p>两种方法都可以取得正确答案，但是第二种明显会快很多，这个可以自己去测试一下。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/中文书写的一些规范与参考/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/中文书写的一些规范与参考/" itemprop="url">中文书写的一些规范与参考</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-02T00:59:02+08:00">
-                2019-09-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="胡说八道"><a href="#胡说八道" class="headerlink" title="胡说八道"></a>胡说八道</h1><hr>
-<p>一直觉得自己博客的排版不太好，反思了一下，还是细节不到位。</p>
-<p>学习了大佬的<a href="https://github.com/ruanyf/document-style-guide" target="_blank" rel="noopener">中文技术文档的写作规范</a>,虽然现在很少写技术文档，不过好的习惯需要有。参考链接很有用。</p>
-<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><hr>
-<ul>
-<li><a href="http://wenku.baidu.com/view/23cc1a6527d3240c8447efbf.html" target="_blank" rel="noopener">产品手册中文写作规范</a>, by 华为</li>
-<li><a href="http://guide.daocloud.io/dcs/%E5%86%99%E4%BD%9C%E8%A7%84%E8%8C%83%E5%92%8C%E6%A0%BC%E5%BC%8F%E8%A7%84%E8%8C%83-9153803.html" target="_blank" rel="noopener">写作规范和格式规范</a>, by DaoCloud</li>
-<li><a href="http://www.hitachi-tc.co.jp/company/thesis/thesis.pdf" target="_blank" rel="noopener">技术写作技巧在日汉翻译中的应用</a>, by 刘方</li>
-<li><a href="https://www.lengoo.de/documents/styleguides/lengoo_styleguide_ZH.pdf" target="_blank" rel="noopener">简体中文规范指南</a>, by lengoo</li>
-<li><a href="https://open.leancloud.cn/copywriting-style-guide.html" target="_blank" rel="noopener">文档风格指南</a>, by LeanCloud</li>
-<li><a href="https://docs.google.com/document/d/1R8lMCPf6zCD5KEA8ekZ5knK77iw9J-vJ6vEopPemqZM/edit" target="_blank" rel="noopener">豌豆荚文案风格指南</a>, by 豌豆荚</li>
-<li><a href="https://github.com/sparanoid/chinese-copywriting-guidelines" target="_blank" rel="noopener">中文文案排版指北</a>, by sparanoid</li>
-<li><a href="http://w3c.github.io/clreq/" target="_blank" rel="noopener">中文排版需求</a>, by W3C</li>
-<li><a href="http://www.ruanyifeng.com/blog/2017/02/filename-should-be-lowercase.html" target="_blank" rel="noopener">为什么文件名要小写？</a>, by 阮一峰</li>
-<li><a href="https://developers.google.com/style/" target="_blank" rel="noopener">Google Developer Documentation Style Guide</a>, by Google</li>
-<li><a href="http://www.moe.gov.cn/ewebeditor/uploadfile/2015/01/13/20150113091154536.pdf" target="_blank" rel="noopener">出版物上数字用法的规定（国家标准GBT15835－2011）</a></li>
-<li><a href="https://baike.baidu.com/item/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%9B%BD%E5%AE%B6%E6%A0%87%E5%87%86%E5%87%BA%E7%89%88%E7%89%A9%E6%95%B0%E5%AD%97%E7%94%A8%E6%B3%95" target="_blank" rel="noopener">中华人民共和国国家标准出版物数字用法</a></li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1806,7 +1790,7 @@ F(n) = max(F(n-1)+x_{n},x_{n}) \\
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">103</span>
+                  <span class="site-state-item-count">105</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1819,7 +1803,7 @@ F(n) = max(F(n-1)+x_{n},x_{n}) \\
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

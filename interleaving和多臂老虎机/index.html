@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Spark,">
+  <meta name="keywords" content="Abtest,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="感恩博主扎心了，老铁 Spark中的基本概念 Application: 表示某个应用程序 Driver: main()函数，创建SparkContext。由SparkContext与ClusterManager通信，进行资源的申请，任务的分配和监控等。在程序执行完毕之后关闭SparkContext。 Excuter: 某个Application运行在一个节点的一个进程，负责运行某些Task，并将数">
-<meta name="keywords" content="Spark">
+<meta name="description" content="大佬的文章：  利用序列样本超越A/B Test: interleaving和多臂老虎机 多臂老虎机（Multi-armed Bandit） Bandit 算法和推荐系统">
+<meta name="keywords" content="Abtest">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Spark学习笔记之运行流程">
-<meta property="og:url" content="http://snailed.cn/Spark学习笔记之运行流程/index.html">
+<meta property="og:title" content="interleaving和多臂老虎机">
+<meta property="og:url" content="http://snailed.cn/interleaving和多臂老虎机/index.html">
 <meta property="og:site_name" content="| Yang |">
-<meta property="og:description" content="感恩博主扎心了，老铁 Spark中的基本概念 Application: 表示某个应用程序 Driver: main()函数，创建SparkContext。由SparkContext与ClusterManager通信，进行资源的申请，任务的分配和监控等。在程序执行完毕之后关闭SparkContext。 Excuter: 某个Application运行在一个节点的一个进程，负责运行某些Task，并将数">
+<meta property="og:description" content="大佬的文章：  利用序列样本超越A/B Test: interleaving和多臂老虎机 多臂老虎机（Multi-armed Bandit） Bandit 算法和推荐系统">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-02-28T15:59:30.972Z">
+<meta property="og:updated_time" content="2019-12-24T11:14:08.086Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Spark学习笔记之运行流程">
-<meta name="twitter:description" content="感恩博主扎心了，老铁 Spark中的基本概念 Application: 表示某个应用程序 Driver: main()函数，创建SparkContext。由SparkContext与ClusterManager通信，进行资源的申请，任务的分配和监控等。在程序执行完毕之后关闭SparkContext。 Excuter: 某个Application运行在一个节点的一个进程，负责运行某些Task，并将数">
+<meta name="twitter:title" content="interleaving和多臂老虎机">
+<meta name="twitter:description" content="大佬的文章：  利用序列样本超越A/B Test: interleaving和多臂老虎机 多臂老虎机（Multi-armed Bandit） Bandit 算法和推荐系统">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://snailed.cn/Spark学习笔记之运行流程/">
+  <link rel="canonical" href="http://snailed.cn/interleaving和多臂老虎机/">
 
 
 
 
 
-  <title>Spark学习笔记之运行流程 | | Yang |</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>interleaving和多臂老虎机 | | Yang |</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -243,7 +243,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Spark学习笔记之运行流程/">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/interleaving和多臂老虎机/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhangyang">
@@ -260,7 +260,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Spark学习笔记之运行流程</h2>
+          <h2 class="post-title" itemprop="name headline">interleaving和多臂老虎机</h2>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-28T23:14:33+08:00">
-                2019-02-28
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-12-11T18:20:25+08:00">
+                2019-12-11
               </time>
             
 
@@ -310,19 +310,13 @@
       
 
       
-        <p>感恩博主<a href="https://www.cnblogs.com/qingyunzong/p/8945933.html" target="_blank" rel="noopener">扎心了，老铁</a></p>
-<h3 id="Spark中的基本概念"><a href="#Spark中的基本概念" class="headerlink" title="Spark中的基本概念"></a>Spark中的基本概念</h3><ul>
-<li>Application: 表示某个应用程序</li>
-<li>Driver: main()函数，创建SparkContext。由SparkContext与ClusterManager通信，进行资源的申请，任务的分配和监控等。在程序执行完毕之后关闭SparkContext。</li>
-<li>Excuter: 某个Application运行在一个节点的一个进程，负责运行某些Task，并将数据存在内存或者磁盘上。在Spark on Yarn模式下，其进程名称为 CoarseGrainedExecutor Backend，一个CoarseGrainedExecutor Backend进程有且仅有一个executor对象，它负责将Task包装成taskRunner，并从线程池中抽取出一个空闲线程运行Task，这样，每个CoarseGrainedExecutorBackend能并行运行Task的数据就取决于分配给它的CPU的个数。</li>
-<li>Worker: 集群中可以运行Application的节点，在Spark on Yarn模式下指DataNode。</li>
-<li>Task: task是被提交到executor上的work单元，每一个stage都有一些task，一个task对应一个partition。</li>
-<li>Job: Job是由一系列tasks组成的并行计算任务，它是由action类型的函数激活的，换言之没有action，job不会被提交。</li>
-<li>Stage: 每一个job都被划分为几个小的set，这些set被称之为stages，它们之间是相互依赖的。</li>
-<li>DAGScheduler: 根据Job构建基于Stage的DAG，并提交Stage给TaskScheduler，其划分Stage的依据是RDD之间的依赖关系</li>
-<li>TaskScheduler: 将TaskSet提交给集群(worker)运行。</li>
-</ul>
-<h3 id="Spark的基本流程"><a href="#Spark的基本流程" class="headerlink" title="Spark的基本流程"></a>Spark的基本流程</h3>
+        <p>大佬的文章：</p>
+<ol>
+<li><a href="http://xiaoyue26.github.io/2019/11/13/2019-11/%E5%88%A9%E7%94%A8%E5%BA%8F%E5%88%97%E6%A0%B7%E6%9C%AC%E8%B6%85%E8%B6%8AA-B-Test-interleaving%E5%92%8C%E5%A4%9A%E8%87%82%E8%80%81%E8%99%8E%E6%9C%BA/" target="_blank" rel="noopener">利用序列样本超越A/B Test: interleaving和多臂老虎机</a></li>
+<li><a href="https://www.staticor.io/blog/algo" target="_blank" rel="noopener">多臂老虎机（Multi-armed Bandit）</a></li>
+<li><a href="https://cosx.org/2017/05/bandit-and-recommender-systems/#fn:https-gist-githu" target="_blank" rel="noopener">Bandit 算法和推荐系统</a></li>
+</ol>
+
       
     </div>
     
@@ -339,7 +333,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Spark/" rel="tag"># Spark</a>
+            <a href="/tags/Abtest/" rel="tag"># Abtest</a>
           
         </div>
       
@@ -352,8 +346,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/Spark学习笔记之累加器与广播变量/" rel="next" title="Spark学习笔记之累加器与广播变量">
-                <i class="fa fa-chevron-left"></i> Spark学习笔记之累加器与广播变量
+              <a href="/中心极限定理/" rel="next" title="中心极限定理">
+                <i class="fa fa-chevron-left"></i> 中心极限定理
               </a>
             
           </div>
@@ -362,8 +356,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/Spark学习笔记之SparkSQL/" rel="prev" title="Spark学习笔记之SparkSQL">
-                Spark学习笔记之SparkSQL <i class="fa fa-chevron-right"></i>
+              <a href="/awk简单使用/" rel="prev" title="awk简单使用">
+                awk简单使用 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -416,17 +410,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -479,22 +464,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Spark中的基本概念"><span class="nav-number">1.</span> <span class="nav-text">Spark中的基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spark的基本流程"><span class="nav-number">2.</span> <span class="nav-text">Spark的基本流程</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
