@@ -242,6 +242,147 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/数据仓库分层/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/数据仓库分层/" itemprop="url">数据仓库分层</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-22T10:35:02+08:00">
+                2019-08-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="为什么要分层"><a href="#为什么要分层" class="headerlink" title="为什么要分层"></a>为什么要分层</h4><ul>
+<li>减少重复开发：可以开发一些通用的中间层数据，大大减小开发量</li>
+<li>清晰的数据结构：每一个数据分层都有它的作用域，使用的时候方便我们更好地定位和理解</li>
+<li>数据血缘追踪：如果说出了问题，可以更快地知道是哪里出了问题，并且知道其危害的范围</li>
+<li>把复杂任务简单化：把复杂任务拆分成多个简单任务来执行，每一步只干一个事儿。降低难度且易于追踪问题。</li>
+<li>使仓库更加稳健，屏蔽脏数据或者是数据的缺失等问题对后续任务的影响</li>
+</ul>
+<h4 id="常见分层方法"><a href="#常见分层方法" class="headerlink" title="常见分层方法"></a>常见分层方法</h4><ul>
+<li>ods</li>
+<li>dw </li>
+<li>dm </li>
+</ul>
+<h5 id="ods"><a href="#ods" class="headerlink" title="ods"></a>ods</h5><p>ODS（Operational Data Store）操作数据存储。</p>
+<p>和源数据基本同构，不过是经过我们ETL处理的，是干净的数据，粒度最细。</p>
+<h5 id="dw"><a href="#dw" class="headerlink" title="dw"></a>dw</h5><p>DW（Data Warehouse）是数据仓库最核心的一层。</p>
+<p>在这一层按照各种主题建立数据模型，比如说星型，或者雪花模型。</p>
+<h5 id="dm"><a href="#dm" class="headerlink" title="dm"></a>dm</h5><p>Dm（Data Market）存放的是轻度聚合的数据。</p>
+<p>根据业务需求，生成面向业务人员可以直接使用的表，最典型的应用就是报表。报表应用时，为了响应速度更快，一般都会存至MySQL里面。</p>
+<h5 id=""><a href="#" class="headerlink" title=" "></a> </h5><ul>
+<li>tmp层 : 用于计算中的临时表，可以抽象为一个临时层</li>
+<li>dim层 : 维度表，是对事实表中事件的要素的描述信息</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://snailed.cn/KNN原理与实现/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1604,145 +1745,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Linux下统计文件夹里的文件数目/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/Linux下统计文件夹里的文件数目/" itemprop="url">Linux下统计文件夹里的文件数目</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-26T14:35:45+08:00">
-                2019-07-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>有时候我们不仅仅要看文件的大小，还需要统计下文件夹里文件数目，这里记录一下。</p>
-<p>我们可以使用<code>ls</code>、<code>grep</code>、<code>wc</code>这三个常用的命名来组合统计出我们想要的信息</p>
-<ol>
-<li><p>统计文件夹中的文件（不包括子目录）</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span>ls -l | grep '^-' | wc -l</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>统计文件夹中的文件（包括子目录）</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span>ls -lR | grep '^-' | wc -l</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>统计文件夹中的目录（包括子目录）</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span>ls -lR | grep '^d' | wc -l</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p><strong>命令解析</strong></p>
-<ul>
-<li>ls : <code>ls -l</code>长列表输出该目录下文件信息(注意这里的文件是指目录、链接、设备文件等)，每一行对应一个文件或目录，<code>ls -lR</code>是列出所有文件，包括子目录。</li>
-<li>grep : <code>grep &#39;^-&#39;</code>表示只保留一般文件，<code>grep &#39;^d&#39;</code>表示只保留目录</li>
-<li>wc : <code>wc -l</code>统计过滤之后的文件行数</li>
-</ul>
-<p>参考：<a href="http://noahsnail.com/2017/02/07/2017-02-07-Linux%E7%BB%9F%E8%AE%A1%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B%E7%9A%84%E6%96%87%E4%BB%B6%E6%95%B0%E7%9B%AE/" target="_blank" rel="noopener">SnailTyan的博客</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1795,7 +1797,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">105</span>
+                  <span class="site-state-item-count">106</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
