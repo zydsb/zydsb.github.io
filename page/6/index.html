@@ -242,6 +242,808 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/理解虚数i/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/理解虚数i/" itemprop="url">理解虚数i</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-24T21:55:29+08:00">
+                2019-03-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>什么是虚数i，这个问题之前也是不求甚解，Mark一下。</p>
+<p>我们都知道$x^2=1$的解是$x \in {(1,-1)}$，都是在大家所正在理解的实数范围内，但是要问你</p>
+<script type="math/tex; mode=display">x^2=-1</script><p>这个方程的答案是什么的时候，还记得第一次看到这个的我，瞎了..然后老师才说出了虚数$i$这个概念（虽然也没理解是为啥…）。</p>
+<p>这里就开门见山地解释一下，这里引入$i$其实是引入了<strong>复平面</strong>。我们把式子拆分一下：</p>
+<script type="math/tex; mode=display">1 \cdot x \cdot x = -1</script><p>其中$\cdot x$这个操作看做是一种数学变换，就像$1 \cdot 5 = 5$这种变换这么简单，那相当于做了两次变换就得到了$-1$。</p>
+<p>通过图形可以很好地解释，比如说我们就把x看作是<em>逆时针旋转90度</em>呢，在实数轴和虚数轴构成的复平面上，一个点连续逆时针旋转90度两次，即可在实数轴上的到其相对于原点的对称点，即$-1$。</p>
+<p><strong>懒得贴图….</strong></p>
+<blockquote>
+<p>$ i = i$<br>$ i^2 = -1$<br>$ i^3 = -i$<br>$ i^4 = 1$</p>
+</blockquote>
+<p>此时，复数的概念就很好引出了：</p>
+<script type="math/tex; mode=display">Z = a + bi</script><p>同理，复数的运算也就好理解了很多…具体就不说了，该去翻一番大学《复变函数》的教材了:)</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/理解自然对数/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/理解自然对数/" itemprop="url">理解自然对数</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-22T01:20:46+08:00">
+                2019-03-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="写在最前"><a href="#写在最前" class="headerlink" title="写在最前"></a>写在最前</h3><p>从什么时候知道自然对数$e$早就忘了，记得当时老师也只是叫大家记住，但是没说这个数字是怎么来的，自己也没有去了解。前几天看到一个推导，觉得很不错，这个Mark一下。</p>
+<h3 id="复利引入"><a href="#复利引入" class="headerlink" title="复利引入"></a>复利引入</h3><p>首先我们要知道$e$在数学上是一个无理常数，约等于$2.718$,由大数学家<strong>雅可比·伯努利</strong>发现。</p>
+<p>从经济学的的一个概念<strong>复利</strong>，我们可以很好地了解到$e$。复利应该是最伟大的力量之一，这里面有很多可以说的，但是我的了解也很浅薄，以后多看。</p>
+<p>引入一个指数增长模型：</p>
+<p>我们都知道某些细菌是通过二分裂进行繁殖的，假设在一个完美的环境下（细菌可以无限量任意繁殖，不会受到任何限制），那么细菌第$n+1$天都会是第$n$天的两倍。即</p>
+<script type="math/tex; mode=display">S = K \cdot 2^n</script><p>其中$S$是第$n$天的细菌数量，$K$是培养皿中细菌的起始数量。<br>当然我么也可以对公式稍微改一改，就变成了<script type="math/tex">S = K \cdot ( 1 + 1 )^n = K \cdot (1+100\%)^n</script> , 这里我们就可以把分裂换成增长率是$100\%$，同样的 增长率也可以是$50\%$，$25\%$等等，那公式就可以变成</p>
+<script type="math/tex; mode=display">S = K \cdot (1 + r)^n</script><p>其中$r$是增长率。</p>
+<h3 id="问题与解答"><a href="#问题与解答" class="headerlink" title="问题与解答"></a>问题与解答</h3><p>假设一个小伙子有一块钱，然后有家银行打出了年利$ 100\% $的的方案来吸引资金，而且可以随时存取，那请问小伙子怎么办才能获取最多的钱呢？假设有最多的钱，是多少呢？</p>
+<p>其实稍微了解点复利的概念，就知道存了然后把利息取出来再存进去就可以利滚利了，而且是利息越多越好，因为有限的时间下，越早钱越多滚到最后越大，即我们应该尽早拿出利息，再存进去。那我们随便列举一下情况：</p>
+<ul>
+<li>半年存取一次</li>
+<li>四个月存取一次</li>
+<li>一天存取一次</li>
+</ul>
+<p>假如说半年取一次，就需要存取两次，增长率为${100\% \over 2} = 50\% $，即最后可以获得</p>
+<script type="math/tex; mode=display">S = 1 \cdot (1+50\%)^2 = 2.250</script><p>那相应的四个月取一次，相应可以存取三次，增长率为${100\% \over 3}= 33.3\%$，则最后可以获得的钱为</p>
+<script type="math/tex; mode=display">S = 1 \cdot (1+{100 \over 3}\%)^3 = 2.370</script><p>同理我们可以很简单的得到一天存取一次可以获得多少钱:</p>
+<script type="math/tex; mode=display">S = 1 \cdot (1+{100 \over 365}\%)^{365} = 2.714</script><p>可以看出来确实是满足我们假设的，那假如说我存取越来越频繁，以趋近于无穷呢？</p>
+<p>那我们写段小代码自己算一下<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">假设存取<span class="number">1</span>次，那么最后可以获得<span class="number">2.0</span>元</span><br><span class="line">假设存取<span class="number">2</span>次，那么最后可以获得<span class="number">2.25</span>元</span><br><span class="line">假设存取<span class="number">4</span>次，那么最后可以获得<span class="number">2.44140625</span>元</span><br><span class="line">假设存取<span class="number">8</span>次，那么最后可以获得<span class="number">2.565784513950348</span>元</span><br><span class="line">假设存取<span class="number">16</span>次，那么最后可以获得<span class="number">2.6379284973666</span>元</span><br><span class="line">假设存取<span class="number">32</span>次，那么最后可以获得<span class="number">2.676990129378183</span>元</span><br><span class="line">假设存取<span class="number">64</span>次，那么最后可以获得<span class="number">2.697344952565099</span>元</span><br><span class="line">假设存取<span class="number">128</span>次，那么最后可以获得<span class="number">2.7077390196880207</span>元</span><br><span class="line">假设存取<span class="number">256</span>次，那么最后可以获得<span class="number">2.7129916242534344</span>元</span><br><span class="line">假设存取<span class="number">512</span>次，那么最后可以获得<span class="number">2.7156320001689913</span>元</span><br><span class="line">假设存取<span class="number">1024</span>次，那么最后可以获得<span class="number">2.7169557294664357</span>元</span><br><span class="line">假设存取<span class="number">2048</span>次，那么最后可以获得<span class="number">2.7176184823368796</span>元</span><br></pre></td></tr></table></figure></p>
+<p>可以看到，我们可以猜测这种操作是存在一种极限的，这个极限就是我们的自然对数$e$! 也就是说只要在利率保持$100\%$的情况下，不断提高存取次数，那么最后的余额会逼近$e=2.7182818…$</p>
+<p>这个时候，我们就可以祭出高等数学微积分中的重要极限了！</p>
+<script type="math/tex; mode=display">e = \lim _ {n \to \infty} (1+{1 \over n})^n</script><p>看，就是这么自然！</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/AboutMe/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/AboutMe/" itemprop="url">AboutMe</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-12T22:37:21+08:00">
+                2019-03-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>我觉得我是一个什么样的人呢？</p>
+<p>我想成为一个什么样的人呢？</p>
+<p>我不知道，我觉得我需要一个契机。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Git实战之远程篇/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Git实战之远程篇/" itemprop="url">Git实战之远程篇</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-08T20:08:49+08:00">
+                2019-03-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Git-Clone"><a href="#Git-Clone" class="headerlink" title="Git Clone"></a>Git Clone</h3><p>无需多说</p>
+<h3 id="Git-Fetch"><a href="#Git-Fetch" class="headerlink" title="Git Fetch"></a>Git Fetch</h3><p>Git远程仓库其实就是为我们提供“从远程仓库传输数据以及从远程仓库获取数据”的功能，既然我们能与远程仓库同步，那么我们也可以拿到任何已经被Git管理的更新。</p>
+<p><code>git fetch</code>做了两件事：</p>
+<ul>
+<li>从远程仓库下载本地仓库缺失的记录</li>
+<li>更新远程分支指针</li>
+</ul>
+<p>其实就是把远程分支更新成了远程仓库相应分支最新的状态。</p>
+<h3 id="Git-Pull"><a href="#Git-Pull" class="headerlink" title="Git Pull"></a>Git Pull</h3><p><code>git pull</code>进行先抓取更新再合并到本地分支的工作，实际上也就是<code>git fetch + git merge</code></p>
+<h3 id="Git难题"><a href="#Git难题" class="headerlink" title="Git难题"></a>Git难题</h3><p>假如说我们周一<code>git pull</code>了一下仓库，然后开始搞一个新功能，周五上线的时候，发现同事已经写了很多代码，还改了你用到的api，然后你的新功能 跪了，这个应该咋办呢？</p>
+<p><strong>先更新本地仓库的远程分支，然后再rebase相关提交到最新的提交记录下，然后再push到远程仓库</strong></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Git实战之高级篇/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Git实战之高级篇/" itemprop="url">Git实战之高级篇</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-06T23:53:26+08:00">
+                2019-03-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="分离HEAD"><a href="#分离HEAD" class="headerlink" title="分离HEAD"></a>分离HEAD</h3><p>HEAD是一个对当前检出记录的符号引用，也就是指向你正在其基础上进行工作的提交记录。</p>
+<p>HEAD总是指向当前分支上最近一次提交记录。</p>
+<p>分离的HEAD就是让其指向了某个具体的提交记录而不是分支名，使用<code>git checkout x</code>实现。</p>
+<h3 id="相对引用"><a href="#相对引用" class="headerlink" title="相对引用"></a>相对引用</h3><p>相对引用让我们可以避免直接使用哈希值去指定提交记录，常用的有：</p>
+<ul>
+<li>使用<code>^</code>向上移动1个提交记录</li>
+<li>使用<code>~&lt;num&gt;</code>向上移动多个提交记录</li>
+</ul>
+<h3 id="撤销变更"><a href="#撤销变更" class="headerlink" title="撤销变更"></a>撤销变更</h3><h4 id="Git-Reset"><a href="#Git-Reset" class="headerlink" title="Git Reset"></a>Git Reset</h4><p><code>git reset</code>通过把分支记录回退几个提交记录来实现撤销改动。你可以将这想象成“改写历史”。<code>git reset</code>向上移动分支，原来指向的提交记录就跟从来没有提交过一样。</p>
+<p>只对本地分支有效。</p>
+<h4 id="Git-Revert"><a href="#Git-Revert" class="headerlink" title="Git Revert"></a>Git Revert</h4><p>生成一个和当前提交完全相反的提交，来达到撤销的目的，适用于远程。</p>
+<h3 id="自由修改提交树"><a href="#自由修改提交树" class="headerlink" title="自由修改提交树"></a>自由修改提交树</h3><h4 id="Git-Cherry-pick"><a href="#Git-Cherry-pick" class="headerlink" title="Git Cherry-pick"></a>Git Cherry-pick</h4><p><code>git cherry-pick &lt;提交号&gt;...</code>实在是很简单。。。</p>
+<h4 id="Git-Rebase"><a href="#Git-Rebase" class="headerlink" title="Git Rebase"></a>Git Rebase</h4><p>当你知道你所需要的提交记录（并且还知道这些提交记录的哈希值）时, 用cherry-pick再好不过了。但是很乱的时候，就可以用交互式的<code>git rebase</code>来解决，帮你从一系列的提交中找到你想要的。</p>
+<p>交互式rebase指的是使用带参数<code>--interactive</code>的<code>rebase</code>命令, 简写为<code>-i</code></p>
+<p>参数详情待添加，平时<code>git rebase -i</code>之后<code>-f</code>参数用得最多。</p>
+<h3 id="提交的技巧"><a href="#提交的技巧" class="headerlink" title="提交的技巧"></a>提交的技巧</h3><h4 id="Git-Rebase-1"><a href="#Git-Rebase-1" class="headerlink" title="Git Rebase"></a>Git Rebase</h4><p>假设我们在<code>newImage</code>分支上进行一次提交，然后又基于它创建了<code>cpation</code>分支，然后又提交了一次，这个时候我们想对之前的提交记录有一些小小的调整，emmm还是很常见的，我们可以这么来<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> git rebase -i HEAD~2</span><br><span class="line"><span class="meta">$</span> git commit --amend</span><br><span class="line"><span class="meta">$</span> git rebase -i HEAD~2</span><br><span class="line"><span class="meta">$</span> git rebase caption maste</span><br></pre></td></tr></table></figure></p>
+<p><img src="gitrebase2.png" alt="效果图"></p>
+<h4 id="Git-Cherry-pick-1"><a href="#Git-Cherry-pick-1" class="headerlink" title="Git Cherry-pick"></a>Git Cherry-pick</h4><p>当然我们也可以直接使用<code>git cherry-pick xxx</code>达到我们的目的。</p>
+<h4 id="Git-Tags"><a href="#Git-Tags" class="headerlink" title="Git Tags"></a>Git Tags</h4><p>分支很容易被人为移动，且当有新的提交时，它也会移动。<code>Tags</code>便是永远指向某个提交的标识。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> git checkout c1</span><br><span class="line"><span class="meta">$</span> git tag v0</span><br><span class="line"><span class="meta">$</span> git checkout c2</span><br><span class="line"><span class="meta">$</span> git tag v1</span><br></pre></td></tr></table></figure>
+<p><img src="gittag.png" alt="Tags"></p>
+<h4 id="Git-Describe"><a href="#Git-Describe" class="headerlink" title="Git Describe"></a>Git Describe</h4><p>由于标签在代码库中有“锚点”的作用，Git设计了<code>git describe</code>的命令来描述离标签最近的点。</p>
+<p>pass</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Git实战之基础篇/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Git实战之基础篇/" itemprop="url">Git实战之基础篇</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-06T22:37:33+08:00">
+                2019-03-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="写在最前"><a href="#写在最前" class="headerlink" title="写在最前"></a>写在最前</h3><p>之前有写过对Git的一点点使用，但是不会的还是太多了。</p>
+<p>趁着鹏飞讲了Git，自己也跟着走一走。</p>
+<h3 id="Git-Commit"><a href="#Git-Commit" class="headerlink" title="Git Commit"></a>Git Commit</h3><p>Git仓库中的提交记录保存的是你目录下所有文件的快照，同时Git希望提交记录尽量轻量，因此在你每次进行提交时，它并不会盲目地复制整个目录。条件允许的情况下，它会将当前版本与仓库中的上一个版本进行对比，并把所有的差异打包到一起作为一个提交记录。当然Git也保存了提交的历史记录。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span>git commit </span><br><span class="line"><span class="meta">#</span> 不过公司提交一般要求加上备注</span><br><span class="line"><span class="meta">$</span>git commit -m 'your comment'</span><br></pre></td></tr></table></figure>
+<h3 id="Git-Branch"><a href="#Git-Branch" class="headerlink" title="Git Branch"></a>Git Branch</h3><p>Git 的分支也非常轻量。它们只是简单地指向某个提交纪录 —— 仅此而已。网上大佬们都说：<br><strong>早建分支！多用分支！</strong></p>
+<p>因为创建再多的分支也不会造成存储或者内存上的开销，并且按照逻辑分解到不同的分支比维护臃肿的分支简单很多。</p>
+<p>使用分支可以理解为“我想基于这个提交以及他的所有父提交进行新的工作”</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 创建新分支</span><br><span class="line"><span class="meta">$</span>git branch bugFix</span><br><span class="line"><span class="meta">#</span> 切换到新分支</span><br><span class="line"><span class="meta">$</span>git checkout bugFix</span><br></pre></td></tr></table></figure>
+<h3 id="Git-Merge"><a href="#Git-Merge" class="headerlink" title="Git Merge"></a>Git Merge</h3><p>在我们新建好分支且完成新功能的开发之后，这个时候我们需要将其合并回主线。我们先来看看第一种方法<code>git merge</code>。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> git branch bugFix</span><br><span class="line"><span class="meta">$</span> git checkout bugFix</span><br><span class="line"><span class="meta">$</span> git commit</span><br><span class="line"><span class="meta">$</span> git checkout master</span><br><span class="line"><span class="meta">$</span> git commit</span><br><span class="line"><span class="meta">$</span> git merge bugFix</span><br></pre></td></tr></table></figure>
+<p><img src="gitmerge.png" alt="Merge"></p>
+<h3 id="Git-Rebase"><a href="#Git-Rebase" class="headerlink" title="Git Rebase"></a>Git Rebase</h3><p><code>git rebase</code>同样是合并分支的方法，其实质是取出一系列的提交记录，“复制”他们，然后再另一个地方逐个的放下去。</p>
+<blockquote>
+<p>Rebase的优势是可以创造更线性的提交历史，因为如果只使用Rebase的话，代码库的提交历史将会变得异常清晰。</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> git branch bugFix</span><br><span class="line"><span class="meta">$</span> git checkout bugFix</span><br><span class="line"><span class="meta">$</span> git commit</span><br><span class="line"><span class="meta">$</span> git checkout master</span><br><span class="line"><span class="meta">$</span> git commit</span><br><span class="line"><span class="meta">$</span> git checkout bugFix</span><br><span class="line"><span class="meta">$</span> git rebase master</span><br></pre></td></tr></table></figure>
+<p><img src="gitrebase.png" alt="Rebase"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://snailed.cn/Spark学习笔记之SparkSQL/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -789,908 +1591,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Spark学习笔记之RDD/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/Spark学习笔记之RDD/" itemprop="url">Spark学习笔记之RDD</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-20T16:34:23+08:00">
-                2019-02-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="什么是RDD"><a href="#什么是RDD" class="headerlink" title="什么是RDD"></a>什么是RDD</h2><p>RDD（Resilient Distributed Dataset）叫做弹性分布式数据集，是Spark中最基本的数据抽象，它代表一个不可变、可分区、里面的元素可并行计算的集合。RDD具有数据流模型的特点：</p>
-<ul>
-<li>自动容错</li>
-<li>位置感知性调度</li>
-<li>可伸缩性</li>
-</ul>
-<p>RDD允许用户在执行多个查询时显式地将工作集缓存在内存中，后续的查询能够重用工作集，这极大地提升了查询速度（持久化）。</p>
-<h2 id="RDD核心概念"><a href="#RDD核心概念" class="headerlink" title="RDD核心概念"></a>RDD核心概念</h2><p>首先我们需要初始化Spark的上下文环境,Spark2.4.0版本应该是默认初始化了的。<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">from pyspark import SparkConf, SparkContext</span><br><span class="line">sc = SparkContext()</span><br></pre></td></tr></table></figure></p>
-<p>然后再创建RDD<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">intRDD = sc.parallelize([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>])</span><br><span class="line">intRDD.collect()</span><br><span class="line"></span><br><span class="line">stringRDD = sc.parallelize([<span class="string">'zhang'</span>,<span class="string">'yang'</span>])</span><br><span class="line">stringRDD.collect()</span><br></pre></td></tr></table></figure></p>
-<h2 id="转化运算"><a href="#转化运算" class="headerlink" title="转化运算"></a>转化运算</h2><p>转化运算是惰性的</p>
-<h3 id="RDD基本转化运算"><a href="#RDD基本转化运算" class="headerlink" title="RDD基本转化运算"></a>RDD基本转化运算</h3><h4 id="map运算"><a href="#map运算" class="headerlink" title="map运算"></a>map运算</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">intRDD.map(<span class="keyword">lambda</span> x:x+<span class="number">1</span>).collect()</span><br></pre></td></tr></table></figure>
-<pre><code>[2, 3, 4, 5, 6, 7, 3, 4]
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">intRDD.map(<span class="keyword">lambda</span> x:x**<span class="number">2</span>).collect()</span><br></pre></td></tr></table></figure>
-<pre><code>[1, 4, 9, 16, 25, 36, 4, 9]
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lines = sc.textFile(<span class="string">'README.md'</span>)</span><br><span class="line">lines.first()</span><br></pre></td></tr></table></figure>
-<pre><code>&#39;[![buildstatus](https://travis-ci.org/holdenk/learning-spark-examples.svg?branch=master)](https://travis-ci.org/holdenk/learning-spark-examples)&#39;
-</code></pre><h4 id="filter运算"><a href="#filter运算" class="headerlink" title="filter运算"></a>filter运算</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">pairs = lines.map(<span class="keyword">lambda</span> x:(x.split(<span class="string">' '</span>)[<span class="number">0</span>],x))</span><br><span class="line"></span><br><span class="line"><span class="comment">#对第二个元素进行筛选</span></span><br><span class="line"></span><br><span class="line">result = pairs.filter(<span class="keyword">lambda</span> keyValue:len(keyValue[<span class="number">1</span>])&lt;<span class="number">20</span>)</span><br><span class="line">result.collect()[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
-<pre><code>(&#39;===============&#39;, &#39;===============&#39;)
-</code></pre><h4 id="distinct运算"><a href="#distinct运算" class="headerlink" title="distinct运算"></a>distinct运算</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">intRDD.distinct().collect()</span><br></pre></td></tr></table></figure>
-<pre><code>[4, 1, 5, 2, 6, 3]
-</code></pre><h4 id="randomsplit运算"><a href="#randomsplit运算" class="headerlink" title="randomsplit运算"></a>randomsplit运算</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sRDD = intRDD.randomSplit([<span class="number">0.1</span>,<span class="number">0.1</span>])</span><br><span class="line">print(len(sRDD))</span><br><span class="line">print(sRDD[<span class="number">0</span>].collect())</span><br><span class="line">print(sRDD[<span class="number">1</span>].collect())</span><br></pre></td></tr></table></figure>
-<pre><code>2
-[3, 4, 5, 2, 3]
-[1, 2, 6]
-</code></pre><h4 id="groupby运算"><a href="#groupby运算" class="headerlink" title="groupby运算"></a>groupby运算</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">result = intRDD.groupBy(<span class="keyword">lambda</span> x : x % <span class="number">2</span>).collect()</span><br><span class="line"><span class="keyword">for</span> x,y <span class="keyword">in</span> result:</span><br><span class="line">    print(x,sorted(y))</span><br></pre></td></tr></table></figure>
-<pre><code>0 [2, 2, 4, 6]
-1 [1, 3, 3, 5]
-</code></pre><h3 id="多个RDD转化运算"><a href="#多个RDD转化运算" class="headerlink" title="多个RDD转化运算"></a>多个RDD转化运算</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">intRDD1 = sc.parallelize([<span class="number">3</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">5</span>])</span><br><span class="line">intRDD2 = sc.parallelize([<span class="number">5</span>,<span class="number">6</span>,<span class="number">2</span>])</span><br><span class="line">intRDD3 = sc.parallelize([<span class="number">2</span>,<span class="number">7</span>])</span><br></pre></td></tr></table></figure>
-<h4 id="取并集"><a href="#取并集" class="headerlink" title="取并集"></a>取并集</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># union()</span></span><br><span class="line">print(intRDD1.union(intRDD2).union(intRDD3).collect()) <span class="comment">#取并集</span></span><br><span class="line">print(intRDD1.union(intRDD2).union(intRDD3).distinct().collect()) <span class="comment">#并集且去重</span></span><br></pre></td></tr></table></figure>
-<pre><code>[3, 1, 2, 5, 5, 5, 6, 2, 2, 7]
-[1, 2, 3, 5, 6, 7]
-</code></pre><h4 id="取交集"><a href="#取交集" class="headerlink" title="取交集"></a>取交集</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># intersection()</span></span><br><span class="line">print(intRDD1.intersection(intRDD2).intersection(intRDD3).collect())</span><br></pre></td></tr></table></figure>
-<pre><code>[2]
-</code></pre><h4 id="取差集"><a href="#取差集" class="headerlink" title="取差集"></a>取差集</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># subtract()</span></span><br><span class="line">print(intRDD1.subtract(intRDD2).collect())</span><br></pre></td></tr></table></figure>
-<pre><code>[1, 3]
-</code></pre><h4 id="笛卡尔积运算-cartesian"><a href="#笛卡尔积运算-cartesian" class="headerlink" title="笛卡尔积运算 cartesian()"></a>笛卡尔积运算 cartesian()</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># cartsection()</span></span><br><span class="line">print(intRDD1.cartesian(intRDD2).collect())</span><br></pre></td></tr></table></figure>
-<pre><code>[(3, 5), (3, 6), (3, 2), (1, 5), (1, 6), (1, 2), (2, 5), (2, 6), (2, 2), (5, 5), (5, 5), (5, 6), (5, 6), (5, 2), (5, 2)]
-</code></pre><h2 id="动作运算"><a href="#动作运算" class="headerlink" title="动作运算"></a>动作运算</h2><h3 id="基本动作运算"><a href="#基本动作运算" class="headerlink" title="基本动作运算"></a>基本动作运算</h3><h4 id="读取元素"><a href="#读取元素" class="headerlink" title="读取元素"></a>读取元素</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#取第一条数据</span></span><br><span class="line"><span class="keyword">print</span> (intRDD.first())</span><br><span class="line"><span class="comment">#取前两条数据</span></span><br><span class="line"><span class="keyword">print</span> (intRDD.take(<span class="number">2</span>))</span><br><span class="line"><span class="comment">#升序排列，并取前3条数据</span></span><br><span class="line"><span class="keyword">print</span> (intRDD.takeOrdered(<span class="number">3</span>))</span><br><span class="line"><span class="comment">#降序排列，并取前3条数据</span></span><br><span class="line"><span class="keyword">print</span> (intRDD.takeOrdered(<span class="number">3</span>,<span class="keyword">lambda</span> x:-x))</span><br></pre></td></tr></table></figure>
-<pre><code>1
-[1, 2]
-[1, 2, 2]
-[6, 5, 4]
-</code></pre><h4 id="统计值"><a href="#统计值" class="headerlink" title="统计值"></a>统计值</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#统计</span></span><br><span class="line"><span class="keyword">print</span> (intRDD.stats())</span><br><span class="line"><span class="comment">#最小值</span></span><br><span class="line"><span class="keyword">print</span> (intRDD.min())</span><br><span class="line"><span class="comment">#最大值</span></span><br><span class="line"><span class="keyword">print</span> (intRDD.max())</span><br><span class="line"><span class="comment">#标准差</span></span><br><span class="line"><span class="keyword">print</span> (intRDD.stdev())</span><br><span class="line"><span class="comment">#计数</span></span><br><span class="line"><span class="keyword">print</span> (intRDD.count())</span><br><span class="line"><span class="comment">#求和</span></span><br><span class="line"><span class="keyword">print</span> (intRDD.sum())</span><br><span class="line"><span class="comment">#平均</span></span><br><span class="line"><span class="keyword">print</span> (intRDD.mean())</span><br></pre></td></tr></table></figure>
-<pre><code>(count: 8, mean: 3.25, stdev: 1.5612494995995996, max: 6.0, min: 1.0)
-1
-6
-1.5612494995995996
-8
-26
-3.25
-</code></pre><h3 id="k-v转换"><a href="#k-v转换" class="headerlink" title="k-v转换"></a>k-v转换</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kvRDD1 = sc.parallelize([(<span class="number">3</span>,<span class="number">4</span>),(<span class="number">3</span>,<span class="number">6</span>),(<span class="number">5</span>,<span class="number">6</span>),(<span class="number">1</span>,<span class="number">2</span>)])</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(kvRDD1.keys().collect())</span><br></pre></td></tr></table></figure>
-<pre><code>[3, 3, 5, 1]
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(kvRDD1.values().collect())</span><br></pre></td></tr></table></figure>
-<pre><code>[4, 6, 6, 2]
-</code></pre><h4 id="筛选元素"><a href="#筛选元素" class="headerlink" title="筛选元素"></a>筛选元素</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">print</span> (kvRDD1.filter(<span class="keyword">lambda</span> x:x[<span class="number">0</span>] &lt; <span class="number">5</span>).collect())</span><br></pre></td></tr></table></figure>
-<pre><code>[(3, 4), (3, 6), (1, 2)]
-</code></pre><h4 id="值运算"><a href="#值运算" class="headerlink" title="值运算"></a>值运算</h4><p>使用mapvalue()进行排序</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(kvRDD1.mapValues(<span class="keyword">lambda</span> x:x**<span class="number">2</span>).collect())</span><br></pre></td></tr></table></figure>
-<pre><code>[(3, 16), (3, 36), (5, 36), (1, 4)]
-</code></pre><h4 id="按照key排序"><a href="#按照key排序" class="headerlink" title="按照key排序"></a>按照key排序</h4><p>sortByKey()，传入的参数默认为True，表示从小到大排序</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(kvRDD1.sortByKey().collect())</span><br></pre></td></tr></table></figure>
-<pre><code>[(1, 2), (3, 4), (3, 6), (5, 6)]
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(kvRDD1.sortByKey(<span class="keyword">False</span>).collect())</span><br></pre></td></tr></table></figure>
-<pre><code>[(5, 6), (3, 4), (3, 6), (1, 2)]
-</code></pre><h4 id="合并相同key值的数据"><a href="#合并相同key值的数据" class="headerlink" title="合并相同key值的数据"></a>合并相同key值的数据</h4><p>reduceByKey()</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(kvRDD1.reduceByKey(<span class="keyword">lambda</span> x,y:x+y).collect())</span><br></pre></td></tr></table></figure>
-<pre><code>[(5, 6), (1, 2), (3, 10)]
-</code></pre><h3 id="多个RDD-kv转化运算"><a href="#多个RDD-kv转化运算" class="headerlink" title="多个RDD kv转化运算"></a>多个RDD kv转化运算</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kvRDD1 = sc.parallelize([(<span class="number">3</span>,<span class="number">4</span>),(<span class="number">3</span>,<span class="number">6</span>),(<span class="number">5</span>,<span class="number">6</span>),(<span class="number">1</span>,<span class="number">2</span>)])</span><br><span class="line">kvRDD2 = sc.parallelize([(<span class="number">3</span>,<span class="number">8</span>)])</span><br></pre></td></tr></table></figure>
-<h4 id="内连接"><a href="#内连接" class="headerlink" title="内连接"></a>内连接</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(kvRDD1.join(kvRDD2).collect())</span><br></pre></td></tr></table></figure>
-<pre><code>[(3, (4, 8)), (3, (6, 8))]
-</code></pre><h4 id="左外连接"><a href="#左外连接" class="headerlink" title="左外连接"></a>左外连接</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(kvRDD1.leftOuterJoin(kvRDD2).collect())</span><br></pre></td></tr></table></figure>
-<pre><code>[(1, (2, None)), (3, (4, 8)), (3, (6, 8)), (5, (6, None))]
-</code></pre><h4 id="右外连接"><a href="#右外连接" class="headerlink" title="右外连接"></a>右外连接</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(kvRDD1.rightOuterJoin(kvRDD2).collect())</span><br></pre></td></tr></table></figure>
-<pre><code>[(3, (4, 8)), (3, (6, 8))]
-</code></pre><h4 id="删除相同key值数据"><a href="#删除相同key值数据" class="headerlink" title="删除相同key值数据"></a>删除相同key值数据</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(kvRDD1.subtractByKey(kvRDD2).collect())</span><br></pre></td></tr></table></figure>
-<pre><code>[(1, 2), (5, 6)]
-</code></pre><h3 id="kv-动作运算"><a href="#kv-动作运算" class="headerlink" title="kv-动作运算"></a>kv-动作运算</h3><h4 id="读取数据"><a href="#读取数据" class="headerlink" title="读取数据"></a>读取数据</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#读取第一条数据</span></span><br><span class="line">print(kvRDD1.first())</span><br><span class="line"><span class="comment">#读取前两条数据</span></span><br><span class="line">print(kvRDD1.take(<span class="number">2</span>))</span><br><span class="line"><span class="comment">#读取第一条数据的key值</span></span><br><span class="line">print(kvRDD1.first()[<span class="number">0</span>])</span><br><span class="line"><span class="comment">#读取第一条数据的value值</span></span><br><span class="line">print(kvRDD1.first()[<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
-<pre><code>(3, 4)
-[(3, 4), (3, 6)]
-3
-4
-</code></pre><h4 id="按key值统计"><a href="#按key值统计" class="headerlink" title="按key值统计"></a>按key值统计</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(kvRDD1.countByKey())</span><br></pre></td></tr></table></figure>
-<pre><code>defaultdict(&lt;class &#39;int&#39;&gt;, {3: 2, 5: 1, 1: 1})
-</code></pre><h4 id="lookup查找"><a href="#lookup查找" class="headerlink" title="lookup查找"></a>lookup查找</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(kvRDD1.lookup(<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
-<pre><code>[4, 6]
-</code></pre><h3 id="持久化操作"><a href="#持久化操作" class="headerlink" title="持久化操作"></a>持久化操作</h3><p>spark RDD的持久化机制，可以将重复运算的RDD存储在内存中，可以大幅提升运算效率</p>
-<h4 id="持久化"><a href="#持久化" class="headerlink" title="持久化"></a>持久化</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kvRDD1.persist()</span><br></pre></td></tr></table></figure>
-<pre><code>ParallelCollectionRDD[24] at parallelize at PythonRDD.scala:195
-</code></pre><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>等级</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>MEMORY_ONLY</td>
-<td>以反序列化的JAVA对象的方式存储在JVM中. 如果内存不够， RDD的一些分区将不会被缓存， 这样当再次需要这些分区的时候，将会重新计算。这是默认的级别。</td>
-</tr>
-<tr>
-<td>MEMORY_AND_DISK</td>
-<td>以反序列化的JAVA对象的方式存储在JVM中. 如果内存不够， RDD的一些分区将将会缓存在磁盘上，再次需要的时候从磁盘读取。</td>
-</tr>
-<tr>
-<td>MEMORY_ONLY_SER</td>
-<td>以序列化JAVA对象的方式存储 (每个分区一个字节数组). 相比于反序列化的方式,这样更高效的利用空间， 尤其是使用快速序列化时。但是读取是CPU操作很密集。</td>
-</tr>
-<tr>
-<td>MEMORY_AND_DISK_SER</td>
-<td>与MEMORY_ONLY_SER相似, 区别是但内存不足时，存储在磁盘上而不是每次重新计算。</td>
-</tr>
-<tr>
-<td>DISK_ONLY</td>
-<td>只存储RDD在磁盘</td>
-</tr>
-<tr>
-<td>MEMORY_ONLY_2, MEMORY_AND_DISK_2, etc.</td>
-<td>与上面的级别相同，只不过每个分区的副本只存储在两个集群节点上。</td>
-</tr>
-<tr>
-<td>OFF_HEAP (experimental)</td>
-<td>将RDD以序列化的方式存储在 Tachyon. 与 MEMORY_ONLY_SER相比, OFF_HEAP减少了垃圾回收。允许执行体更小通过共享一个内存池。因此对于拥有较大堆内存和高并发的环境有较大的吸引力。更重要的是，因为RDD存储在Tachyon上，执行体的崩溃不会造成缓存的丢失。在这种模式下.Tachyon中的内存是可丢弃的，这样 Tachyon 对于从内存中挤出的块不会试图重建它。如果你打算使用Tachyon作为堆缓存，Spark提供了与Tachyon相兼容的版本。</td>
-</tr>
-</tbody>
-</table>
-</div>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">#pyspark中封装了StorageLevel类，实现不同存储等级的存储</span></span><br><span class="line"><span class="keyword">from</span> pyspark.storagelevel <span class="keyword">import</span> StorageLevel</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, useDisk, useMemory, useOffHeap, deserialized, replication=<span class="number">1</span>)</span>:</span></span><br><span class="line">        self.useDisk = useDisk</span><br><span class="line">        self.useMemory = useMemory</span><br><span class="line">        self.useOffHeap = useOffHeap</span><br><span class="line">        self.deserialized = deserialized</span><br><span class="line">        self.replication = replication</span><br></pre></td></tr></table></figure>
-<h4 id="取消持久化"><a href="#取消持久化" class="headerlink" title="取消持久化"></a>取消持久化</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kvRDD1.unpersist()</span><br></pre></td></tr></table></figure>
-<pre><code>ParallelCollectionRDD[24] at parallelize at PythonRDD.scala:195
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Spark学习笔记00/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/Spark学习笔记00/" itemprop="url">Spark学习笔记00</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-20T00:35:05+08:00">
-                2019-02-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>前提是提前安装好Java，因为之前鼓捣Hadoop的时候已经搞定，所以安装很方便，一行命令搞定。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install apache-spark</span><br></pre></td></tr></table></figure>
-<p>配合Jupyter使用:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export PYSPARK_DRIVER_PYTHON=jupyter</span><br><span class="line">export PYSPARK_DRIVER_PYTHON_OPTS='notebook'</span><br></pre></td></tr></table></figure></p>
-<p>相关链接:<br><a href="https://formulae.brew.sh/formula/apache-spark" target="_blank" rel="noopener">brew-spark</a><br><a href="https://spark.apache.org/" target="_blank" rel="noopener">官网</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/入坑tmux/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/入坑tmux/" itemprop="url">入坑tmux</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-02T11:06:06+08:00">
-                2019-02-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="写在最前"><a href="#写在最前" class="headerlink" title="写在最前"></a>写在最前</h3><p>18年3月刚来贵司实习的时候，jy就推荐了一些shell方面好用的工具，比如<code>Iterm2</code>,<code>zsh</code>,<code>tmux</code>之类的，还有<code>14pt Source Code Pro Semibold Italic</code>这款很好看的字体，<code>autojump</code>,<code>the_sliver_seracher</code>等神器。除了<code>tmux</code>，最开始体验的时候那反人类的复制滚屏模式劝退了我，其他用得不要太爽呀~</p>
-<p>前几天觉得工作上需要在shell里面开的窗口越来越多了，得从工具上来一波更新，于是实战了一下<code>tmux</code>，这次感觉好多了，记录分享一下。</p>
-<h3 id="Tmux"><a href="#Tmux" class="headerlink" title="Tmux"></a>Tmux</h3><p>tmux主要优点有下面三个：</p>
-<ul>
-<li>强大的分屏支持: tmux窗口中，新开的pane，默认进入到之前的路径，如果是ssh连接，登录状态也依旧保持</li>
-<li>保护现场 : 下班回家连上服务器就可以很快回到操作现场，简洁省事</li>
-<li>会话共享 : 将tmux会话的地址分享给他人，这样他们就可以通过 SSH 接入该会话(我应该是用不到这个了）</li>
-</ul>
-<h4 id="安装tmux"><a href="#安装tmux" class="headerlink" title="安装tmux"></a>安装tmux</h4><p>在Mac上安装<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 先安装Homebrew，有则跳过</span></span><br><span class="line">ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"</span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装tmux</span></span><br><span class="line">brew install tmux</span><br></pre></td></tr></table></figure></p>
-<p>在Linux上安装<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install tmux</span><br></pre></td></tr></table></figure></p>
-<h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4><p>session-window-pane:一个session有多个窗口，一个窗口有多个面板</p>
-<p>多任务神器，用过就知道</p>
-<h4 id="直达使用"><a href="#直达使用" class="headerlink" title="直达使用"></a>直达使用</h4><p>我们先创建一个名为local的session，用第一个命令即可<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tmux new -s local # 创建一个名为local的session</span><br><span class="line">tmux kill-session -t local # 关闭绘画</span><br><span class="line">tmux kill-server #关闭服务器，所有会话被关闭</span><br></pre></td></tr></table></figure></p>
-<p>此时我们可以看到底部默认的小绿条，我理解这就是tmux的状态栏了嘛。tmux已经默认为我们创建好了一个window,这个时候就可以去执行切分pane之类的操作了。我这里随便举个栗子：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 默认所有操作都加了前缀，tmux的快捷键也都是加了前缀才会生效</span></span><br><span class="line">, # 重命名当前window</span><br><span class="line">- # 横切窗口，默认进入当前目录</span><br><span class="line">| # 竖切窗口，默认进入当前目录</span><br><span class="line">c # 新建window</span><br><span class="line">hjkl # 切换窗口，类似vim操作</span><br><span class="line">t # 显示时钟</span><br></pre></td></tr></table></figure></p>
-<p>我随便截图一下表示效果</p>
-<p><img src="snapshot.png" alt="我的Tmux"></p>
-<h4 id="tmux设置"><a href="#tmux设置" class="headerlink" title="tmux设置"></a>tmux设置</h4><p>这里直接附上我的<code>.tmux.conf</code>文件，不过基本也是来自网上大佬的<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">设置前缀为Ctrl + x</span></span><br><span class="line">set -g prefix C-x</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">解除Ctrl+b 与前缀的对应关系</span></span><br><span class="line">unbind C-b</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">up</span></span><br><span class="line">bind-key k select-pane -U</span><br><span class="line"><span class="meta">#</span><span class="bash">down</span></span><br><span class="line">bind-key j select-pane -D</span><br><span class="line"><span class="meta">#</span><span class="bash">left</span></span><br><span class="line">bind-key h select-pane -L</span><br><span class="line"><span class="meta">#</span><span class="bash">right</span></span><br><span class="line">bind-key l select-pane -R</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 绑定快捷键为r</span></span><br><span class="line">bind r source-file ~/.tmux.conf \; display-message "Config reloaded.."</span><br><span class="line"></span><br><span class="line">unbind '"'</span><br><span class="line">bind - splitw -v -c '#&#123;pane_current_path&#125;' # 垂直方向新增面板，默认进入当前目录</span><br><span class="line">unbind %</span><br><span class="line">bind | splitw -h -c '#&#123;pane_current_path&#125;' # 水平方向新增面板，默认进入当前目录</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 绑定Ctrl+hjkl键为面板上下左右调整边缘的快捷指令</span></span><br><span class="line">bind -r ^k resizep -U 5 # 绑定Ctrl+k为往↑调整面板边缘10个单元格</span><br><span class="line">bind -r ^j resizep -D 5 # 绑定Ctrl+j为往↓调整面板边缘10个单元格</span><br><span class="line">bind -r ^h resizep -L 5 # 绑定Ctrl+h为往←调整面板边缘10个单元格</span><br><span class="line">bind -r ^l resizep -R 5 # 绑定Ctrl+l为往→调整面板边缘10个单元格</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 开启鼠标</span></span><br><span class="line">set-option -g mouse on</span><br></pre></td></tr></table></figure></p>
-<p>这里要感恩网上大佬分享的教程<a href="http://louiszhai.github.io/2017/09/30/tmux/" target="_blank" rel="noopener">Tmux使用手册</a></p>
-<h3 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h3><p>复制滚屏模式直到现在都还有点不习惯，不过还好开启了鼠标支持，后面再来吐槽。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/utf8编码坑/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/utf8编码坑/" itemprop="url">utf8编码坑</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-01T01:40:32+08:00">
-                2019-02-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="保存文件是出现乱码"><a href="#保存文件是出现乱码" class="headerlink" title="保存文件是出现乱码"></a>保存文件是出现乱码</h3><p>文件缺失BOM的锅，用<code>utf_8_sig</code>解决…具体编码怎么回事参见<a href="https://segmentfault.com/a/1190000004321605" target="_blank" rel="noopener">BOM</a><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.to_csv(<span class="string">"file"</span>,encoding=<span class="string">"utf_8_sig"</span>)</span><br></pre></td></tr></table></figure></p>
-<h3 id="mysql-utf8mb4"><a href="#mysql-utf8mb4" class="headerlink" title="mysql-utf8mb4"></a>mysql-utf8mb4</h3><p>MySQL的字符设置….注意一下</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/浅草キッド/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/浅草キッド/" itemprop="url">浅草キッド</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-30T01:08:50+08:00">
-                2019-01-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="back"><a href="#back" class="headerlink" title="back"></a>back</h4><p>早已忘了是什么时候知道北野武这个名字的，只是知道他很屌，后来看了《菊次郎的夏天》《战场上的圣诞快乐》等电影才稍微有了多一点的了解。</p>
-<p>记得《战场上的圣诞快乐》的结局里，随着坂本龙一的mcml渐渐响起，屏幕上是北野武那张大脸，他用英文说出“Merry Christmas，Lawrence.”,眼角有点湿润…</p>
-<p><img src="byw.jpg" alt="北野武"></p>
-<p>前段时间听到这一首《浅草キッド》,被打中了啊</p>
-<p><a href="https://music.163.com/#/song?id=433675" target="_blank" rel="noopener">浅草キッド-网易云</a><br><a href="https://www.bilibili.com/video/av14632564/" target="_blank" rel="noopener">浅草キッド-Bilibili</a></p>
-<h4 id="歌词"><a href="#歌词" class="headerlink" title="歌词"></a>歌词</h4><p>お前と会った 仲見世の<br>与你相见在仲见世<br>煮込みしかない 鯨屋で<br>那间只有煮菜的鲸肉店<br>夢を語ったチュー八イの<br>我们谈论梦想<br>泡にはじけた 約束は<br>汽酒泡沫里消失的约定<br>灯的消元た 浅草の<br>在灯火暗去的浅草<br>コ夕ツ１つの アパートで<br>只有一个被炉的公寓</p>
-<p>同じ背広を初めて買って<br>第一次买了同样的西装<br>同じ形の ちょうたい作り<br>做了同样的蝴蝶结领带<br>同じ靴まで 買う金はなく<br>却没钱买同样的鞋<br>いつも笑いのネ夕にして<br>这一直被我们当做笑料<br>いつか売れると信じてた<br>什么时候走红 我们期待着<br>客が2人の 演芸場で<br>在只有两个观众的剧场里</p>
-<p>夢を托した100円を<br>把托付着梦想的一百元硬币<br>投げて真面目に拝んでる<br>投出去，一本正经地祈祷<br>顔に浮かんだ幼児の<br>你脸上浮现孩童般的纯真<br>無垢な心に またほれて<br>我再次被你吸引</p>
-<p>１人訪ねたアパートで<br>独自去探访你的公寓<br>グラス傾け懐かしむ<br>相碰的酒杯间<br>そんな時代もあったねと<br>怀念从前我们也有那样的时代啊<br>笑い背中が揺れている<br>你抖着肩膀笑起来<br>夢は棄てたと 言わないで<br>不要说 我们已抛弃梦想<br>他にあてなき ２人なのに<br>我们本是 没有其他人可以依靠的两个人<br>夢は棄てたと 言わないで<br>不要说 我们已抛弃梦想<br>他に道無き ２人なのに<br>我们本是 没有其他人可以依靠的两个人</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/看《天注定》/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/看《天注定》/" itemprop="url">看《天注定》</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-30T00:38:31+08:00">
-                2019-01-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="写在最前"><a href="#写在最前" class="headerlink" title="写在最前"></a>写在最前</h2><p>偶尔记录下平时看的电影~</p>
-<h2 id="关于天注定"><a href="#关于天注定" class="headerlink" title="关于天注定"></a>关于天注定</h2><p>这是贾樟柯的一部片子，斩获大奖却被禁了…当然看过之后就知道为啥被禁了，折射了太多的问题了…</p>
-<ul>
-<li>胡文海杀村官案</li>
-<li>周克华跨省抢劫案</li>
-<li>邓玉娇刺官案</li>
-<li>富士康十四连跳</li>
-</ul>
-<p>记录了当代中国一个个脆弱的个体在面临不公走投无路从而诉诸血腥暴力的无奈悲剧(抄的)</p>
-<h3 id="大海"><a href="#大海" class="headerlink" title="大海"></a>大海</h3><p>被压迫到最后只有诉诸暴力，但暴力之后也没有真正的自由。</p>
-<h3 id="小玉"><a href="#小玉" class="headerlink" title="小玉"></a>小玉</h3><p>一刀见血那一幕真的很有侠客的味道。</p>
-<p>故事不知道该怎么说…</p>
-<h3 id="三儿"><a href="#三儿" class="headerlink" title="三儿"></a>三儿</h3><p>周克华事件，当时还在读初中..</p>
-<p>他回到家里，看到些人觉得很没有意思，但这并不能成为杀人抢劫的理由。</p>
-<h3 id="小辉"><a href="#小辉" class="headerlink" title="小辉"></a>小辉</h3><p>希望在哪里？<br>希望在哪里？<br>希望在哪里？</p>
-<h2 id="观后感"><a href="#观后感" class="headerlink" title="观后感"></a>观后感</h2><p>很压抑。</p>
-<p>当骨感的现实汹涌而来的时候，希望自己可以稳住，有可能的话，让这个世界更好一点点。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1738,7 +1643,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-count">114</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

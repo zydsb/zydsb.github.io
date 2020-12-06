@@ -242,6 +242,940 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/ch6-逻辑回归与最大熵/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/ch6-逻辑回归与最大熵/" itemprop="url">ch6-逻辑回归与最大熵</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-12-06T15:27:40+08:00">
+                2020-12-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="逻辑回归"><a href="#逻辑回归" class="headerlink" title="逻辑回归"></a>逻辑回归</h3><p>在前文有推导过具体的公式，这里就不写了。</p>
+<p>不过记住这一点：<strong>输出 $Y=1$ 的对数几率是由输入 $x$ 的线性函数表示的模型，即是逻辑回归模型</strong>。</p>
+<h3 id="最大熵"><a href="#最大熵" class="headerlink" title="最大熵"></a>最大熵</h3><p>最大熵原理：学习概率模型是，在所有可能的概率模型中，熵最大的模型是最好的模型。我们可以理解为在没有更多信息的情况下，那些不确定的部分是等可能的。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/ch5-决策树/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/ch5-决策树/" itemprop="url">ch5-决策树</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-12-06T15:27:04+08:00">
+                2020-12-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h3><p>决策树是一种对实例进行分类的树形结构，由</p>
+<ul>
+<li>结点<ul>
+<li>内结点：分类的特征</li>
+<li>叶子结点：具体的类别</li>
+</ul>
+</li>
+<li>有向边</li>
+</ul>
+<p>决策树是互斥且完备的：可以理解为一个实例只会被一条路径覆盖。</p>
+<p>给定数据集：</p>
+<script type="math/tex; mode=display">
+D = \{(x_{1},y_{1}),(x_{2},y_{2}) \cdots  (x_{n},y_{n}) \}</script><p>其中 $x=(x^{1},x^{2} \cdots x^{n})^{T}$ 是特征向量，$n$ 为特征个数。</p>
+<p>决策树的学习函数通常是正则化的极大似然函数，其学习策略是以损失函数为目标函数最小化。通常做法是递归地选择最优特征，划分数据集。</p>
+<h4 id="特征选择"><a href="#特征选择" class="headerlink" title="特征选择"></a>特征选择</h4><p>主要讨论怎么去判定哪个特征能最好地划分数据集。</p>
+<h5 id="信息增益"><a href="#信息增益" class="headerlink" title="信息增益"></a>信息增益</h5><p>我们一般用熵来衡量一个随机变量的不确定性：熵越大，不确定性越大</p>
+<script type="math/tex; mode=display">
+H(X) = - \sum_{i=1}^{n} p_{i} log{p_{i}}</script><p>条件熵则是已知随机变量 $X$ 的情况下，随机变量 $Y$ 的不确定性：</p>
+<script type="math/tex; mode=display">
+H(Y|X) = \sum_{i=1}^{n}p_{i} \cdot H(Y|X=x_{i})</script><p>信息增益就可以理解为我们分类之后对训练集不确定性的降低：</p>
+<script type="math/tex; mode=display">
+g(D,A) = H(D) - H(D|A)</script><p>那么我们就可以知道，对于不同地特征分类效果也是不同地，我们自然是想要最优地特征，即信息增益最大的特征。</p>
+<p>可以用极大似然估计地方式去算，具体推导pass，这里比较简单，只需要算出相应地概率即可。</p>
+<h3 id="决策树的生成"><a href="#决策树的生成" class="headerlink" title="决策树的生成"></a>决策树的生成</h3><h4 id="ID3-算法"><a href="#ID3-算法" class="headerlink" title="ID3 算法"></a>ID3 算法</h4><p>$ID3$ 算法的核心是在决策树各个节点上使用信息增益去选择特征，递归地构建决策树。 </p>
+<p>算法流程：</p>
+<p>输入：训练集 $D$ ，特征集 $A$ ，阈值 $\delta$</p>
+<p>输出：</p>
+<ol>
+<li>若集合中全部实例属于同一类$C<em>{k}$ ，则 $T$ 为单结点树，类标记是 $C</em>{k}$；</li>
+<li>若 $A$ 是空集，则将集合中实例数最多的类 $C_{k}$ 作为该结点的类标记</li>
+<li>否则，按照信息增益法则去计算 $A$ 中各特征对集合 $D$ 的信息增益，选择信息增益最大的特征 $A_{i}$</li>
+<li>如果 $A<em>{i}$ 的信息增益小于阈值 $\delta$ ，则将集合中实例数最多的类 $C</em>{k}$ 作为该结点的类标记</li>
+<li>否则，对于 $A<em>{i}$ 的每一个值 $a</em>{i}$ ，划分数据集 $D$  为若干非空子集 $D<em>{i}$ ，将 $D</em>{i}$ 中实例数最多的类作为该子集的标记，构建子结点</li>
+<li>对于第 $i$ 个结点，使用 $A-A<em>{i}$ 为特征集，对训练集 $D</em>{i}$ 递归地调用前五步。</li>
+</ol>
+<p>$ID3$ 算法只是生成了树，达到了局部最优，但是缺少了剪枝的过程，容易过拟合，泛化能力可能不高。</p>
+<h4 id="C4-5-生成算法"><a href="#C4-5-生成算法" class="headerlink" title="C4.5 生成算法"></a>C4.5 生成算法</h4><p>$C4.5$ 算法针对 $ID3$ 算法做出了改进，使用信息增益比来选择特征。</p>
+<h4 id="信息增益比"><a href="#信息增益比" class="headerlink" title="信息增益比"></a>信息增益比</h4><p>定义：信息增益 $g(D,A)$ 与训练集 $D$ 关于特征 $A$ 的值得熵 $H_{A}(D)$ 之比</p>
+<script type="math/tex; mode=display">
+g_{R}(D,A) = \frac{g(D,A)}{H_{A}(D)}</script><p>具体训练过程基本同 $ID3$ 算法。</p>
+<h3 id="决策树的剪枝"><a href="#决策树的剪枝" class="headerlink" title="决策树的剪枝"></a>决策树的剪枝</h3><p>上述算法生成的决策时在训练集上表现可能极为优秀，但是在其他数据集上就可以分类很不准确，此为过拟合现象。因为此决策树可能过于复杂，我们解决问题的方法是简化决策树，称之为剪枝。</p>
+<p>书上说的一个比较简单的算法：</p>
+<p>设树的叶子结点个数为 $|T|$ ， $t$ 是树 $T$ 的叶结点，该结点有 $N<em>{t}$ 个样本点，其中 $k$ 类的样本点有 $N</em>{tk}$ 个，$H_{t}(T)$ 定义为叶子结点上的经验熵，$\alpha &gt;= 0$ 是参数，则其损失函数为： </p>
+<script type="math/tex; mode=display">
+C_{\alpha}(T) = \sum_{t=1}^{|T|} { N_{t}H_{t}(T) + \alpha |T| }</script><p>其中经验熵则是：</p>
+<script type="math/tex; mode=display">
+H_{t}(T) = -\sum_{k} \frac {N_{tk}}{N_{t}} log{ \frac {N_{tk}}{N_{t}} }</script><p>我们把 $ C(T) = \sum<em>{t=1}^{|T|} { N</em>{t}H_{t}(T) } $ 称之为预测误差，$|T|$ 表示模型复杂度，我们使用参数 $\alpha$ 来控制两者之间的影响：</p>
+<ul>
+<li>若 $alpha$ 较小，则模型相对复杂</li>
+<li>若 $alpha$ 较大，则模型相对简单</li>
+</ul>
+<p>然后我们只需要计算每个结点的经验熵，并且递归地网上回缩：若损失函数值更小，则进行剪枝，直到不能继续为止。</p>
+<h3 id="CART-算法"><a href="#CART-算法" class="headerlink" title="$CART$ 算法"></a>$CART$ 算法</h3><p>在给定随机变量 $X$ 的情况下输出随机变量 $Y$ 的条件概率分布的学习方法。</p>
+<h4 id="算法生成"><a href="#算法生成" class="headerlink" title="算法生成"></a>算法生成</h4><p>决策树的生成是递归地构建二叉决策树的过程。对回归树用平方误差最小化准则，对分类树用基尼指数最小化准则。</p>
+<h5 id="回归树"><a href="#回归树" class="headerlink" title="回归树"></a>回归树</h5><p>pass</p>
+<h5 id="分类树"><a href="#分类树" class="headerlink" title="分类树"></a>分类树</h5><p>基尼系数：假设有 $K$ 个类，样本点属于第 $k$ 类的概率是 $p_{k}$ ，则概率分布的基尼系数定义为</p>
+<script type="math/tex; mode=display">
+Gini(p) = \sum_{k=1}^{K} p_{k}(1-p_{k}) = 1 - \sum_{k=1}^{K} {p_{k}}^2</script><p>对于二分类问题而言，样本点属于第一个分类的概率为 $p$ ，则</p>
+<script type="math/tex; mode=display">
+Gini(p) = 2p(1-p)</script><p>那么对于给定的样本集合 $D$ ，则有：</p>
+<script type="math/tex; mode=display">
+Gini(D) = 1 - \sum_{k=1}^{K} (  \frac {|C_{k}|} {|D|}  )^2</script><p>我们知道根据特征 $A$ 的值可以把 $D$ 分成两个子集，那么在特征 $A$ 的条件下，集合 $D$ 的基尼系数为：</p>
+<script type="math/tex; mode=display">
+Gini(D,A) = \frac {|D_{1}|}{|D|} Gini(D_{1}) +  \frac {|D_{2}|}{|D|} Gini(D_{2})</script><p>这一点的理解和熵十分类似。</p>
+<p>具体过程：</p>
+<ol>
+<li>给定训练集 $D$ , 对每一个特征 $A<em>{i}$ 的每一个取值 $a</em>{i}$ 计算基尼系数</li>
+<li>选择最小的基尼系数对应的特征及取值，从而生成两个子结点，分配训练集的数据</li>
+<li>重复前两步，直到满足停止条件</li>
+</ol>
+<p>算法的停止条件是自定义的，可以样本个数小于阈值，也可以是基尼系数小于阈值（表示基本是同一类的）…</p>
+<h4 id="算法剪枝"><a href="#算法剪枝" class="headerlink" title="算法剪枝"></a>算法剪枝</h4><p>因为此决策树是完全生长的，所以需要剪去一些子树。</p>
+<p>还是使用损失函数：</p>
+<script type="math/tex; mode=display">
+C_{\alpha}(T) = C(T) + \alpha|T|</script><p>定义同上文基本一致，不过不确定性的度量函数换了。</p>
+<p>我们可以知道，对于固定的 $\alpha$ ,肯定存在是 $C<em>{\alpha}(T)$ 最小的子树，将其表示为 $T</em>{\alpha}$。</p>
+<p>pass </p>
+<h3 id="课后习题"><a href="#课后习题" class="headerlink" title="课后习题"></a>课后习题</h3><p>待完成。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/ch4-朴素贝叶斯/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/ch4-朴素贝叶斯/" itemprop="url">ch4-朴素贝叶斯</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-12-06T15:26:32+08:00">
+                2020-12-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="基本方法"><a href="#基本方法" class="headerlink" title="基本方法"></a>基本方法</h3><p>朴素贝叶斯的两个基础：</p>
+<ul>
+<li>贝叶斯定理</li>
+<li>假设特征条件独立</li>
+</ul>
+<p>给定数据集 $T$ ：</p>
+<script type="math/tex; mode=display">
+T = \{(x_{1},y_{1}) ,(x_{2},y_{2}) ...(x_{n},y_{n})\}</script><p>由 $P(X,Y)$ 独立同分布生成。</p>
+<p>那么条件概率分布是：</p>
+<script type="math/tex; mode=display">
+P(X=x|Y=x_{k}) = P(x=(x_{1},x_{2}...x_{n})| Y = c_{k} )</script><p>因为我们假设特征条件是独立的，那么可以得到：</p>
+<script type="math/tex; mode=display">
+P(X=x|Y=c_{k}) = \prod_{j} P(X=x_{j}|Y=c_{k})</script><p>基础有了，现在对于我们一个给定的 $x$ ，我们可以通过贝叶斯定理去计算其后验概率分布，将后验分布最大值对应的类作为 $x$ 的类输出：</p>
+<script type="math/tex; mode=display">
+P(Y=c_{k}|X=x) = \frac{ P(X=x|Y=c_{k}) \cdot P(Y=c_{k)}  }{P(X=x)}</script><p>相应地，公式带入一下，同时我们可以知道 $P(X=x)$ 是一个定值，其不会影响最后的结果，那么：</p>
+<script type="math/tex; mode=display">
+P(Y=c_{k}|X=x) = {P(X=x)} \cdot \prod_{j} P(X=x_{j}|Y=c_{k})</script><p>相应地，分类结果为：</p>
+<script type="math/tex; mode=display">
+y = arg Max \quad {P(X=x)} \cdot \prod_{j} P(X=x_{j}|Y=c_{k})</script><h3 id="朴素贝叶斯法的参数估计"><a href="#朴素贝叶斯法的参数估计" class="headerlink" title="朴素贝叶斯法的参数估计"></a>朴素贝叶斯法的参数估计</h3><p>可以使用极大似然估计，具体地：</p>
+<script type="math/tex; mode=display">
+P(Y=c_{k}) = \frac {\sum_{i=1}^{n}  I(y_{i} = c_{k}) } {N}</script><script type="math/tex; mode=display">
+P(X_{j} = a_{jl}|Y=c_{k}) = \frac {  \sum_{i=1}^{n} I(x_{i}^{j} = a_{jl},y_{i}=c_{k}) } {\sum_{i=1}^{n}  I(y_{i} = c_{k}) }</script><p>其中 $X<em>{j}$ 是 $x$ 的第 $j$ 个特征， $a</em>{jl}$ 是 $x_{j}$ 第 $l$ 个可能取得的值。</p>
+<h3 id="贝叶斯估计"><a href="#贝叶斯估计" class="headerlink" title="贝叶斯估计"></a>贝叶斯估计</h3><p>作用：解决极大似然估计可能出现的概率为 0 的情况。</p>
+<p>公式如下：</p>
+<script type="math/tex; mode=display">
+P(X_{j} = a_{jl}|Y=c_{k}) = \frac {  \sum_{i=1}^{n} { I(x_{i}^{j} = a_{jl},y_{i}=c_{k}) } + \lambda } {\sum_{i=1}^{n} { I(y_{i} = c_{k}) } + S_{j} \lambda }</script><p>其中 $\lambda &gt;= 0$ ，等价于在随机变量的各个取值的频数上加一个正数，其中 $S_{j}$ 是该特征变量的可能取值数。读起来有点 $Beta$ 分布的感觉。</p>
+<p>同理：</p>
+<script type="math/tex; mode=display">
+P(Y=c_{k}) = \frac {\sum_{i=1}^{n}  {I(y_{i} = c_{k})} + \lambda } {N + K \lambda}</script><p>其中 $K$ 为 $Y$ 可能的取值数。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>朴素贝叶斯法最应理解的还是<strong>条件独立性</strong> 这一点，让计算方便了许多。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/ch3-KNN/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/ch3-KNN/" itemprop="url">ch3-KNN</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-12-06T15:25:14+08:00">
+                2020-12-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="K-近邻算法"><a href="#K-近邻算法" class="headerlink" title="K 近邻算法"></a>K 近邻算法</h3><p>直接解释：</p>
+<p>给定一个训练集 $T$ ，对于新输入的实例 $x<em>{i}$，选取 $T$ 中与该实例最解决的 $K$ 的实例中占多数的那个类别，作为 $x</em>{i}$ 的类别</p>
+<p>K 近邻算法没有显式的学习过程。</p>
+<h3 id="三大要素"><a href="#三大要素" class="headerlink" title="三大要素"></a>三大要素</h3><p>三大要素确定后，模型即可确定。</p>
+<h4 id="距离度量"><a href="#距离度量" class="headerlink" title="距离度量"></a>距离度量</h4><p>特征空间中两个点的距离是两个点相似程度的反应。在一般的 $n$ 维空间中我们可以使用 欧式距离，还有 $L_{p}$，他们之间是有关系的。</p>
+<script type="math/tex; mode=display">
+L_{p} = (\sum_{l=1}^{n}(|x_{i}^{l} - x_{j}^{l}|)^p)^{\frac {1}{p}}</script><p>其中 $x<em>{i} = { x</em>{i}^{1}, x<em>{i}^{2},… x</em>{i}^{l} }$ 。</p>
+<p>当 $p = 1$，则是曼哈顿距离；</p>
+<p>当 $p=2$，则是欧式距离</p>
+<script type="math/tex; mode=display">
+L_{2} = \sum_{l=1}^{n}|x_{i}^{l} - x_{j}^{l}|^{ 1 \over 2}</script><h4 id="K-值的选择"><a href="#K-值的选择" class="headerlink" title="K 值的选择"></a>K 值的选择</h4><p>K 值的选择会对结果产生重大影响：</p>
+<ul>
+<li>过小：敏感，受近的数据点支配，容易过拟合</li>
+<li>过大：不敏感，近似误差大</li>
+</ul>
+<p>解决方法：选择一个较小的 K 值，然后交叉验证</p>
+<h4 id="决策规则"><a href="#决策规则" class="headerlink" title="决策规则"></a>决策规则</h4><p>一般是多数表决。</p>
+<p>KNN 的多数表决是让误分类的概率最小，是满足经验风险最小化的要求的。</p>
+<h3 id="计算优化"><a href="#计算优化" class="headerlink" title="计算优化"></a>计算优化</h3><p>这一块的知识还得再了解。</p>
+<p>资料：<a href="https://wuzhiwei.net/kdtree/" target="_blank" rel="noopener">kd 树</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/ch2-感知机/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/ch2-感知机/" itemprop="url">ch2-感知机</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-12-06T15:24:39+08:00">
+                2020-12-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="感知机"><a href="#感知机" class="headerlink" title="感知机"></a>感知机</h3><p>定义如下：</p>
+<script type="math/tex; mode=display">
+sign(x)=
+\left\{
+\begin{array}{ll}+1,& x \geq 0\\
+-1,& x < 0
+\end{array}
+\right.</script><h4 id="线性可分性"><a href="#线性可分性" class="headerlink" title="线性可分性"></a>线性可分性</h4><p>给定一个数据集 $T$ ，存在一个超平面 $S$ ，满足能够将数据集的正实例点和负实例点完全正确地划分到超平面两侧，则称此数据集是线性可分的。</p>
+<h4 id="感知机的损失函数"><a href="#感知机的损失函数" class="headerlink" title="感知机的损失函数"></a>感知机的损失函数</h4><p>由超平面 $S$ 的方程 $wx+b$ 可以得到对于任意一个点，到超平面的距离是</p>
+<script type="math/tex; mode=display">
+\frac{1}{||w||} \cdot | wx + b|</script><p>其中 $\frac{1}{||w||}$ 是 L2 范数。</p>
+<p>那么对于某一误分类点，则有：</p>
+<script type="math/tex; mode=display">
+- \frac{y_{i}}{||w||} |wx+b| > 0</script><p>考虑所有误分类点，则有：</p>
+<script type="math/tex; mode=display">
+- \sum_{i=1}^{n} \frac{y_{i}}{||w||} (wx+b)</script><p>我们忽略 $\frac{1}{||w||}$ ，则得到了感知机算法的损失函数：</p>
+<script type="math/tex; mode=display">
+- \sum_{i=1}^{n} y_{i} (wx_{i}+b)</script><p>使用随机梯度下降算法对损失函数进行最优化。</p>
+<h4 id="训练过程"><a href="#训练过程" class="headerlink" title="训练过程"></a>训练过程</h4><p>输出：参数 $w,b$ </p>
+<script type="math/tex; mode=display">
+f(x) = sign (wx+b)</script><ol>
+<li><p>选取初始值 $w<em>{0}$ , $b</em>{0}$ （一般默认为 0 ）</p>
+</li>
+<li><p>在训练集中选取数据 $(x<em>{i},y</em>{i})$</p>
+</li>
+<li><p>如果 $y<em>{i}(w \cdot x</em>{i} + b) &lt;= 0$ 则：</p>
+<script type="math/tex; mode=display">w \gets w +\eta x_{i} y_{i} \\ b \gets b + \eta y_{i}</script></li>
+<li><p>重复步骤 2 和 3 ，直到完全分类未知。</p>
+</li>
+</ol>
+<h4 id="算法的收敛性"><a href="#算法的收敛性" class="headerlink" title="算法的收敛性"></a>算法的收敛性</h4><p>对于线性可分的数据集，感知机算法是收敛的。</p>
+<script type="math/tex; mode=display">
+k <= (\frac{R}{\gamma})^2</script><p>其中 $R=max|x_{i}|$ , $\gamma &gt; 0$ 。</p>
+<h4 id="感知机的对偶形式"><a href="#感知机的对偶形式" class="headerlink" title="感知机的对偶形式"></a>感知机的对偶形式</h4><p>我们知道利用随机梯度函数优化的时候，有：</p>
+<script type="math/tex; mode=display">
+w \gets w +\eta x_{i} y_{i}</script><script type="math/tex; mode=display">
+b \gets b + \eta y_{i}</script><p>这里我们可以知道每次修改的量都是一定的，这里我们定义 $\alpha<em>{i} = n</em>{i} \cdot \gamma$ , 其中 $n_{i}$ 表示该点被选择了第 $i$ 次，那么</p>
+<script type="math/tex; mode=display">
+w = \sum_{i=1}^{N} \alpha_{i}x_{i}y_{i}</script><script type="math/tex; mode=display">
+b = \sum_{i=1}^{N} \alpha_{i} y_{i}</script><p>这样，则模型变为：</p>
+<script type="math/tex; mode=display">
+f(x) = sign( \sum_{i=1}^{N} \alpha_{i}x_{i}y_{i} \cdot x + \sum_{i=1}^{N} \alpha_{i} y_{i})</script><p>其中我们只需要对 $\alpha_{i}$ 进行迭代就好了,训练步骤基本同上。</p>
+<p>那我们为什么要对偶形式呢？疑问我们可以看到 $f(x)$ 中样本点的特征向量以内积的形式存在，如果我们可以提前计算好，那么就可以大大滴加快训练速度。</p>
+<h5 id="Gram-矩阵"><a href="#Gram-矩阵" class="headerlink" title="Gram 矩阵"></a>Gram 矩阵</h5><script type="math/tex; mode=display">
+G_{ij}=x_{i} \cdot  x_{j}</script><h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>感知机学习算法是基于<strong>随机梯度下降法</strong>的对损失函数的最优化算法，有对偶形式，算法简单。若数据集线性可分，则感知机是收敛的</p>
+<h3 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h3><ol>
+<li><p>初始点的选择对随机梯度下降算法的影响。</p>
+<p>如果算法是收敛的，那么可能存在多个解。</p>
+</li>
+</ol>
+<h3 id="作业题"><a href="#作业题" class="headerlink" title="作业题"></a>作业题</h3><p>Q：感知机为什么线性不可分？</p>
+<p>A: 因为 XOR 的训练集线性不可分。坐标轴上点 （0，0） = （1,1） = 1 ， （0，1） = （1,0 ） = 0 ，此时异或无法线性可分。</p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p>很好地一篇学习笔记: <a href="https://www.zybuluo.com/ArrowLLL/note/827264" target="_blank" rel="noopener">感知机学习笔记</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/ch1-统计学习方法概论/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/ch1-统计学习方法概论/" itemprop="url">ch1-统计学习方法概论</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-12-06T15:22:32+08:00">
+                2020-12-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="遇到的疑惑"><a href="#遇到的疑惑" class="headerlink" title="遇到的疑惑"></a>遇到的疑惑</h3><ol>
+<li><p>风险函数</p>
+<ul>
+<li><p>经验风险最小化：</p>
+<ul>
+<li>需要手动推导：模型是条件概率分布，损失函数是对数损失函数，则其经验风险最小化等价于极大似然函数。这里可以用逻辑回归举例</li>
+<li>极大似然估计的一个思想：既然发生了，那么该事件出现的概率其实就是很大的，用已经发生的事件去估计</li>
+</ul>
+</li>
+<li>未知的参数相对更为准确（频率派）</li>
+</ul>
+</li>
+</ol>
+<script type="math/tex; mode=display">
+\theta  = arg Max \quad P(X;\theta) \\ 
+= arg Max \quad \sum_{i=1}^{n} log(x_{i},\theta) \\
+=  arg Min \quad -\sum_{i=1}^{n} log(x_{i},\theta)</script><p>​     </p>
+<p>​     </p>
+<ul>
+<li><p>结构风险最小化：</p>
+<ul>
+<li>模型是条件概率分布，损失函数事对数损失函数，模型复杂度由模型的先验概率表示时。结构风险等价于最大后验概率估计</li>
+<li><p>这一点没有太理解。。</p>
+<ul>
+<li>相关链接： </li>
+</ul>
+</li>
+</ul>
+<ol>
+<li><a href="https://zhuanlan.zhihu.com/p/40024110" target="_blank" rel="noopener">极大似然和最大后延</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/32480810" target="_blank" rel="noopener">MLE与MAP</a> (ps:这篇写得更好)</li>
+</ol>
+</li>
+</ul>
+<p>先验分布是均匀分布的时候，MLE 等价于 MAP。</p>
+<h3 id="课后习题"><a href="#课后习题" class="headerlink" title="课后习题"></a>课后习题</h3><p>如上公式（1) ，已经证明。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://snailed.cn/2020观影记录/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -925,924 +1859,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/interleaving和多臂老虎机/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/interleaving和多臂老虎机/" itemprop="url">interleaving和多臂老虎机</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-12-11T18:20:25+08:00">
-                2019-12-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>大佬的文章：</p>
-<ol>
-<li><a href="http://xiaoyue26.github.io/2019/11/13/2019-11/%E5%88%A9%E7%94%A8%E5%BA%8F%E5%88%97%E6%A0%B7%E6%9C%AC%E8%B6%85%E8%B6%8AA-B-Test-interleaving%E5%92%8C%E5%A4%9A%E8%87%82%E8%80%81%E8%99%8E%E6%9C%BA/" target="_blank" rel="noopener">利用序列样本超越A/B Test: interleaving和多臂老虎机</a></li>
-<li><a href="https://www.staticor.io/blog/algo" target="_blank" rel="noopener">多臂老虎机（Multi-armed Bandit）</a></li>
-<li><a href="https://cosx.org/2017/05/bandit-and-recommender-systems/#fn:https-gist-githu" target="_blank" rel="noopener">Bandit 算法和推荐系统</a></li>
-<li><a href="https://www.cnblogs.com/gczr/p/11220187.html" target="_blank" rel="noopener">推荐算法之汤普森采样</a></li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/中心极限定理/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/中心极限定理/" itemprop="url">中心极限定理</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-12-04T18:21:19+08:00">
-                2019-12-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>上一篇我们说了 ABtest 的一些数学知识，其中有应用到中心极限定理，这里复习一下。</p>
-<p>2019-11-07<br>写公式写到自闭。。。</p>
-<hr>
-<h3 id="独立同分布的中心极限定理"><a href="#独立同分布的中心极限定理" class="headerlink" title="独立同分布的中心极限定理"></a>独立同分布的中心极限定理</h3><p><code>mathjax</code> 用起来真有点坑。。。刚打了半天的字没了。。。就简单说下</p>
-<p>一组随机变量满足独立同分布，那么随机变量之和的标准化变量近似服从标准正态分布。</p>
-<script type="math/tex; mode=display">Y_{n} = \frac{(\sum_{k=1}^{n}X_{n})-n\mu}{\sqrt{n}\sigma} = \frac{\bar X - \mu}{\sigma \over \sqrt{n}} \sim N(0,1)</script><h3 id="李雅普诺夫定理"><a href="#李雅普诺夫定理" class="headerlink" title="李雅普诺夫定理"></a>李雅普诺夫定理</h3><p>pass 一下</p>
-<h3 id="棣莫佛－拉普拉斯定理"><a href="#棣莫佛－拉普拉斯定理" class="headerlink" title="棣莫佛－拉普拉斯定理"></a>棣莫佛－拉普拉斯定理</h3><p>在实际应用中很广，因为很多设计转化，点击相关的问题，都服从二项分布。定理指出二项分布 $(n,p)$ 在 $n$ 很大的情况下，近似服从 $(np,np(1-p))$ 的正态分布。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/的一些数学知识/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/的一些数学知识/" itemprop="url">ABtest-一些数学知识</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-29T15:40:07+08:00">
-                2019-11-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>在之前简单的 ABtest 过程中，实验效果经常是有小幅变化。这个时候问题来了：实验结果是受我们抽样的数据波动影响还是真实的效果提升？借助于数理统计的知识，我们可以知道一个相对正确的答案。</p>
-<hr>
-<h3 id="一些基础知识"><a href="#一些基础知识" class="headerlink" title="一些基础知识"></a>一些基础知识</h3><p>主要是《概率论与数理统计》中“假设检验”这一章的知识，包括但不限于</p>
-<ul>
-<li>总体与样本</li>
-<li>正态分布</li>
-<li>$t$ 分布</li>
-<li>假设检验</li>
-<li>$P$ 值法</li>
-<li>…</li>
-</ul>
-<p>这里重点说一下我觉着比较重要的几个点。</p>
-<h4 id="t-分布"><a href="#t-分布" class="headerlink" title="$t$ 分布"></a>$t$ 分布</h4><p>很多时候，我们不知道总体的均值，只知道样本的均值，这个时候我们只能用样本均值近似代替总体均值进行计算（ $z$ 分布）。但是当样本量不够的时候，$t$分布就有了用武之地。</p>
-<p>设 $X \sim N(0,1),Y \sim {\chi}^2(n)$,且$X,Y$相互独立，则称</p>
-<script type="math/tex; mode=display">t = \frac{X}{\sqrt{Y/n}}</script><p>满足自由度为 $n$ 的 $t$ 分布，记为 $t \sim t(n)$</p>
-<h4 id="假设检验"><a href="#假设检验" class="headerlink" title="假设检验"></a>假设检验</h4><p>假设检验是利用样本数据来推断总体数据的某些性质。我们先对总体数据提出某种假设，然后利用样本数据来判断假设是否成立。</p>
-<p>假设检验的方式：</p>
-<ul>
-<li>提出原假设和备择假设，不需要证明的或者是我们着重考虑的放原假设，需要证明的放备择假设</li>
-<li>确定检验方法和检验统计量，并计算其分布</li>
-<li>确定显著性水平 $\alpha$</li>
-<li>确定拒绝域。如果统计量落在拒绝域，则拒绝原假设，反之则接受原假设</li>
-</ul>
-<blockquote>
-<p>拒绝域即拒绝原假设的区域，其概率即为显著性水平。常用显著性水平如5%、1%等，即在原假设成立的条件下，样本值落在拒绝域的概率很低，是一个小概率事件，按照实际推断原理，小概率事件在一次抽样中一般是不会发生的，因为我们有理由认为样本值落在拒绝域的时候，原假设是不成立的。<br>不过实际推断原理只是说在一次抽样中，小概率事件可以认为是不会发生的，而不能肯定绝对不发生。因此，有一定概率在原假设成立的情况下，统计量落入拒绝域，导致我们拒绝原假设。这种情况实际上是一种错误，在假设检验中，称这种错误为第一类错误，也就是“弃真”错误，发生的概率记作 α，即显著性水平。另一种错误是原假设不成立，但是接受了原假设，称为第二类错误，即“受伪”错误，它发生的概率记作 β。<br>由于抽样的随机性，我们不可能完全排除这两类错误的发生，因此只能把这两类错误控制在一定的范围之内。当样本容量 n 确定之后，犯两类错误的概率不可能同时降低，通常我们会用一个较小的显著性水平 α 来控制第一类错误的发生，因为原假设一般是结合问题特点提出的，需要着重考虑的假设，不应该轻易拒绝，所以第一类错误的概率要控制得较小。这种只控制犯第一类错误的概率，而不考虑犯第二类错误的概率的检验，称为显著性检验</p>
-</blockquote>
-<p>上面这段我觉得说得很好，告诉我们该如何去设计的我们的假设。为什么我们要设计一个很小的显著性水平？（因为我们原假设是经验告诉我们的正确的，不会轻易被拒绝的，我们优先保证不会范“弃真”这个错误）</p>
-<p>另外还有单/双边检验的问题，这个是计算的问题，主要是备择假设是否具有方向性，这里可以先不说，画个图就很好理解了。</p>
-<h4 id="P-Value"><a href="#P-Value" class="headerlink" title="$P$ Value"></a>$P$ Value</h4><p>教材上定义：假设检验的 $P$ 值是由检验统计量的样本观察值得出的原假设可被拒绝的最小显著性水平。</p>
-<ul>
-<li>如果 $P &lt;= \alpha$ , 则在当前显著性水平下拒绝原假设</li>
-<li>如果 $P &gt; \alpha$ , 则在当前显著性水平下接受原假设</li>
-</ul>
-<p>也可以这么想：如下图笔记中定义 $P$ 值的计算方式</p>
-<script type="math/tex; mode=display">P(弃真: 原假设为真时拒绝原假设) = P( z >= Z_{0} ) <= \alpha</script><p>如果我们计算出来的值小于显著性水平，那么我们的条件就是成立的，即应该拒绝原假设。</p>
-<p>附上《假设检验》学习笔记。<br><img src="假设检验_1.jpg" alt="假设检验"></p>
-<h3 id="举个例子"><a href="#举个例子" class="headerlink" title="举个例子"></a>举个例子</h3><p>假设我们有 AB 两个方案，样本容量为 $N$ （两方案不一定相等），转化率为 $P$ ，现在转化率差异不大，我们想知道这两个方案的转化率是否有显著差异。</p>
-<p>那么我们可以很明显的知道数据满足伯努利分布:</p>
-<script type="math/tex; mode=display">A \sim B(N_{a},P_{a}) \quad B \sim B(N_{b},P_{b})</script><h4 id="提出假设"><a href="#提出假设" class="headerlink" title="提出假设"></a>提出假设</h4><script type="math/tex; mode=display">H0 : 没有显著差异</script><script type="math/tex; mode=display">H1 : 有显著差异</script><h4 id="确定检验方法"><a href="#确定检验方法" class="headerlink" title="确定检验方法"></a>确定检验方法</h4><p>样本量 $N$ 足够大，满足中心极限定理,我们可以使用 $Z$ 检验。因为是检验样本间有无差异，我们确定 $Z$ 值计算方法为：</p>
-<script type="math/tex; mode=display">Z = \frac{\bar X_{1} - \bar X_{2}} { \sqrt{ {s_1^2 \over n_1 } +  {s_2^2 \over n_2 } } }</script><h4 id="确定显著性水平"><a href="#确定显著性水平" class="headerlink" title="确定显著性水平"></a>确定显著性水平</h4><p>pass </p>
-<h4 id="计算检验量"><a href="#计算检验量" class="headerlink" title="计算检验量"></a>计算检验量</h4><p>伯努利分布的数学期望为$E(x) = N \cdot P$ ， 方差则是 $D(x) = NP \cdot (1-P)$ 。<br>样本均值计算公式为：</p>
-<script type="math/tex; mode=display">\bar X  = \frac {\sum_{i=1}^n x_n} {n}</script><p>样本方差计算公式为：</p>
-<script type="math/tex; mode=display">S^2 = \frac {\sum_{i=1}^n (x_n - \bar X )^2  } {n-1}</script><h4 id="检验结果"><a href="#检验结果" class="headerlink" title="检验结果"></a>检验结果</h4><p>可以参考 $P$ 值的方式，不过 $Z$ 是绝对值，附表如下：</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>$Z$</th>
-<th>$P$</th>
-<th>显著程度</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>$&gt; 2.58$</td>
-<td>$&lt; 0.01$</td>
-<td>非常显著</td>
-</tr>
-<tr>
-<td>$&gt; 1.96$</td>
-<td>$&lt; 0.05$</td>
-<td>显著</td>
-</tr>
-<tr>
-<td>$&lt; 1.96$</td>
-<td>$&gt; 0.05$</td>
-<td>不显著</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>最后根据计算的结果得出结论即可，至此，关于 ABtest 的结果检验完成。当然了，还有其他的检验问题，比如确定一个样本和总体的差异是否显著。慢慢来。</p>
-<h3 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h3><p>文章内容基本来自大佬的这篇文章<a href="https://xuyushi.github.io/15299133098726.html" target="_blank" rel="noopener">abtest数据分析</a>，确实写得太好了。本文是看了大佬的文章结合自己的知识整理而成，这里给大佬送上冰可乐。</p>
-<p>当然还有下面这几篇文章：</p>
-<ul>
-<li><a href="http://www.woshipm.com/data-analysis/2207880.html" target="_blank" rel="noopener">你的AB测试结果有多靠谱</a></li>
-<li><a href="http://www.woshipm.com/data-analysis/2148920.html" target="_blank" rel="noopener">你的A/B测试结果真的靠谱吗？</a></li>
-<li><a href="https://wiki.mbalib.com/wiki/Z%E6%A3%80%E9%AA%8C" target="_blank" rel="noopener">Z检验</a></li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/ABtest-再深入一点点/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/ABtest-再深入一点点/" itemprop="url">ABtest-再深入一点点</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-28T14:27:58+08:00">
-                2019-11-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="基本的-ABtest"><a href="#基本的-ABtest" class="headerlink" title="基本的 ABtest"></a>基本的 ABtest</h2><hr>
-<p>最基本的 ABtest 还得从达尔文他老人家观察动物进化说起：同一个岛上的同一种鸟，分别生活在岛的东西两侧，然后分别进化出了不同的鸟喙。</p>
-<p>这也总结出了 ABtest 的核心思想：</p>
-<ul>
-<li>两个及以上的实验方案</li>
-<li>只有单变量影响该实验的实验结果</li>
-</ul>
-<p>我们尽可能地满足多个实验方案的样本是独立同分布的，这点在数据量大的情况下，还是比较好实现的。ABtest 可以帮助我们通过数据的方式，科学且客观地区判断不同方案间的好坏与否，做出比较正确的判断。但是简单的 ABtest 方法也有不足，其中最大的缺点就是<strong>流量利用率太低</strong>，这点是无法忍受的。</p>
-<h2 id="可重叠的分桶分层方法"><a href="#可重叠的分桶分层方法" class="headerlink" title="可重叠的分桶分层方法"></a>可重叠的分桶分层方法</h2><p>分桶的本质就是根据一定的算法进行分组。现在有一批用户，我们希望其可以随机地分到 n 个桶中，我们可以根据我们自己生成的唯一标识值，根据哈希算法计算出一个 hash 值，再将此 hash 值模 n 进而分配到不同的桶中，其中随机性的保障来源于唯一标识值，我们需要保证这个值是随机的。</p>
-<p>分层则是我们认为互相不影响的实验，理论上是可以同时进行的。比如我们的文章有 ABCD 四个变量，其点击率是我们观察的实验结果；同时我们可以进行下单页是微信支付在前还是支付宝支付在前的实验，观察其订单支付率。两者的变量和观察的结果都是不相关的，所以启发我们可以将实验分为多个互相之间独立的层，实验之间互相影响的在同一层。比如说课程展示层、订单层、UI层这样的，要求满足正交、互斥的要求。</p>
-<ul>
-<li>正交：层与层之间流量是正交的，一份流量穿越每层实验时，都会再次随机打散，且随机效果离散。</li>
-<li>互斥：实验在同一层拆分流量，且不论如何拆分，不同组的流量是不重叠的。</li>
-</ul>
-<p>好了那我们现在就有了可重叠分桶分层方法的雏形：<strong>先抽象出可重叠的多层，然后对每一层的流量按照不同的分桶算法进行随机分桶</strong>。</p>
-<p>为什么要每一层都按照不同的算法随机分桶呢？是因为我们需要保证流量在不同层之间的正交的，简单来理解就是说一个用户在不同的层应该被分到哪一个桶里面，是独立不相关的，比如层 A 中桶 1 的用户在层 B 中应该随机分布在所有桶中。</p>
-<h2 id="具体操作"><a href="#具体操作" class="headerlink" title="具体操作"></a>具体操作</h2><p>还没操作呢。。。不过感觉怎么分配不难，难点在于后续的数据效果追踪。。。</p>
-<h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2><ul>
-<li><a href="https://yangwenbo.com/articles/abtest-traffic-diversion.html#comment-35353" target="_blank" rel="noopener">ABtest 平台设计-如何进行流量分桶</a></li>
-<li><a href="https://www.infoq.cn/article/alimama-large-scale-online-hierarchical-experiment" target="_blank" rel="noopener">阿里妈妈在线大规模分层实践</a></li>
-<li><a href="http://www.woshipm.com/pd/1080730.html" target="_blank" rel="noopener">一文搞懂 ABtest 分层分流</a></li>
-<li><a href="https://ai.google/research/pubs/pub36500" target="_blank" rel="noopener">Overlapping Experiment Infrastructure: More, Better, Faster Experimentation</a></li>
-<li><a href="https://www.chen-jun.me/bai-fen-bi-fen-liu-suan-fa-she-ji/" target="_blank" rel="noopener">百分比分流算法设计</a></li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Presto踩坑笔记/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/Presto踩坑笔记/" itemprop="url">Presto 踩坑笔记</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-28T14:25:24+08:00">
-                2019-11-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="查-MySQL-不走索引"><a href="#查-MySQL-不走索引" class="headerlink" title="查 MySQL 不走索引"></a>查 MySQL 不走索引</h2><p>查一个大表，只需要计算当天的数据，建立的联合索引里面有 <code>createdtime</code> 这个字段。但是查的时候，只限定 <code>createdtime</code> 这个字段，但是极慢没有走索引。</p>
-<p>先 Presto 查询单个订单，秒出，即索引是有效的。然后怀疑是 Presto 日期函数处理结果的问题，发现果然不对劲。我们在 SQL 利用<code>to_unixtime()</code> 函数生成的结果是 <code>timestamp</code>类型的，MySQL表中 <code>createdtime</code> 的类型是 <code>bigint</code>，而 Presto 要求<strong>类型严格</strong>，所以踩坑了。。。</p>
-<p>解决办法很简单，使用 <code>cast</code> 做一下类型转化即可</p>
-<h2 id="找不到表名"><a href="#找不到表名" class="headerlink" title="找不到表名"></a>找不到表名</h2><p>订单表命名为 <code>order</code>，在 Hive 和 MySQL 中都是使用’`’去做转义，Presto死活找不到，后来发现是使用’”‘去搞的。。。</p>
-<h2 id="存成文件查询报错"><a href="#存成文件查询报错" class="headerlink" title="存成文件查询报错"></a>存成文件查询报错</h2><p>cli 中可以无错执行，<code>presto -f</code> 则报错。</p>
-<p>若存成文件执行，要在末尾加<code>;</code>。</p>
-<h2 id="重定向内容每一段包含’”‘"><a href="#重定向内容每一段包含’”‘" class="headerlink" title="重定向内容每一段包含’”‘"></a>重定向内容每一段包含’”‘</h2><p>例如查询出来的结果像这样：<code>&quot;123&quot;,&quot;123&quot;,&quot;123&quot;</code></p>
-<p>处理的时候很不方便，可以直接使用 <code>sed</code> 命令修改文件：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> sed <span class="string">'s/要被取代的字串/新的字串/g'</span></span></span><br><span class="line">sed -i 's/","/\t/g' demo.txt</span><br><span class="line">sed -i 's/"//g' demo.txt</span><br></pre></td></tr></table></figure></p>
-<h2 id="数据量太大"><a href="#数据量太大" class="headerlink" title="数据量太大"></a>数据量太大</h2><ol>
-<li>不要选取全部字段，选自己使用的</li>
-<li>减少数据量常规方法…</li>
-<li><code>join</code> 的时候大表放在左边，Presto 默认 broadcast join，即将 join 左边的表分割到多个 worker，然后将 join 右边的表数据整个复制一份发送到每个 worker 进行计算。如果右边的表数据量太大，则可能会报内存溢出错误。</li>
-</ol>
-<h2 id="未完待续"><a href="#未完待续" class="headerlink" title="未完待续"></a>未完待续</h2>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Hive内置的常见算术运算符和逻辑运算符/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/Hive内置的常见算术运算符和逻辑运算符/" itemprop="url">Hive内置的常见算术运算符和逻辑运算符</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-10T11:48:26+08:00">
-                2019-10-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>在我们日常地使用中，我们经常会使用 hive 进行各种运算操作，其实这之中发生了很多 hive 数据类型之前的转换操作，比如 string + int 。今天我们来大概看一看，以便踩坑的时候可以更快地出坑。</p>
-<h2 id="基本知识"><a href="#基本知识" class="headerlink" title="基本知识"></a>基本知识</h2><p>可以先看看后面这篇文章：<a href="https://www.iteblog.com/archives/870.html" target="_blank" rel="noopener">Hive内置数据类型</a></p>
-<p>假如我们需要对两个不同数据类型的数字进行比较，一个是 int，一个是 smallint，那么在比较的时候，都会被隐式转化为 int 类型再进行比较。不顾我们不可以隐式地将一个 int 类型的数据转化成一个 smallint 类型的数据，除非使用 cast 。</p>
-<p>任何整数类型都可以隐式转换成一个范围更大的类型。任意 int 类型、float、string 都可以隐式转换成 double 类型！boolean不可以转化为其他任意类型。</p>
-<p>​    </p>
-<h2 id="具体操作"><a href="#具体操作" class="headerlink" title="具体操作"></a>具体操作</h2><h3 id="算术运算符"><a href="#算术运算符" class="headerlink" title="算术运算符"></a>算术运算符</h3><blockquote>
-<p>无特殊说明，则默认返回是变量的最小父类型</p>
-</blockquote>
-<ul>
-<li><p>等值比较</p>
-<p>语法：A = B</p>
-<p>说明：如果表达式 A 和表达式 B 相等，则为 True ，否则为 False</p>
-</li>
-<li><p>加法操作</p>
-<p>语法： A + B</p>
-<p>说明：返回 A+B 相加的结果。结果的数值类型等于 A 的类型和 B 的类型的最小父类型。比如 int + int 结果为 int 类型，int + double 为 double 类型</p>
-</li>
-<li><p>减法操作</p>
-<p> 语法：A - B </p>
-<p> 说明：同加法操作</p>
-</li>
-<li><p>乘法操作</p>
-<p>语法： A * B</p>
-<p>说明：同样是返回 A 与 B 的最小父类型，不过如果结果超过默认的结果类型的数值范围，为需要通过 cast 将结果转换成范围更大的数值类型</p>
-</li>
-<li><p>除法操作</p>
-<p>语法： A / B</p>
-<p>说明：返回 A 除以 B 的结果。结果的数值为 double 类型。<strong>Hive中最高精度的数据类型是 double ，只精确到小数点后面16位</strong></p>
-</li>
-<li><p>取余操作</p>
-<p>语法： A % B</p>
-<p>说明：pass</p>
-</li>
-<li><p>位与操作</p>
-<p>语法： A &amp; B</p>
-<p>说明：返回  A 和 B 按位进行与操作的结果</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hive (temp)&gt; select 4 &amp; 8;</span><br><span class="line">0</span><br><span class="line">hive (temp)&gt; select 4 &amp; 6;</span><br><span class="line">4</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>位或操作</p>
-<p>语法：A | B</p>
-<p>说明：返回  A 和 B 按位进行或操作的结果</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hive (temp)&gt; select 4 | 6;</span><br><span class="line">6</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>位异或操作</p>
-<p>语法：A ^ B  </p>
-<p>说明：返回 A 和 B 按位进行异或操作的结果</p>
-</li>
-<li><p>位取反操作</p>
-<p>语法：~A</p>
-<p>说明：返回 A 按位取反操作的结果，结果的数值类型等于 A 的类型</p>
-</li>
-</ul>
-<h3 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h3><ul>
-<li><p>逻辑与操作</p>
-<p>语法：A and B  或者 A  &amp;&amp; B  </p>
-<p>操作类型： boolean</p>
-<p>说明: pass </p>
-</li>
-<li><p>逻辑或操作</p>
-<p>语法：A or B  或者 A || B </p>
-<p>操作类型：boolean</p>
-<p>说明：pass</p>
-</li>
-<li><p>逻辑非操作</p>
-<p>语法：not A 或者 !A </p>
-<p>操作类型：boolean</p>
-<p>说明：pass </p>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1890,7 +1911,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-count">114</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

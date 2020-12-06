@@ -242,6 +242,1125 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/小球称重问题/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/小球称重问题/" itemprop="url">小球称重问题</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-14T02:12:12+08:00">
+                2018-12-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>有 12 个球，外形相同，其中一个小球的质量与其他 11 个不同，给一个天平，最少需要几次把这个小球找出来并且知道这个小球是比其他的轻还是重?</p>
+<h3 id="思考轨迹"><a href="#思考轨迹" class="headerlink" title="思考轨迹"></a>思考轨迹</h3><p>首先想到的当然是分组称重这样的解法：</p>
+<ul>
+<li>均分为三组，每组四个</li>
+<li>取任意两组称重…GG </li>
+</ul>
+<p>后经大佬提示，涨了姿势:</p>
+<blockquote>
+<p>信息熵计算公式：</p>
+<script type="math/tex; mode=display">H(x) = - \sum_{i=1}^{n} P(x_{i}) \cdot log_2{P(x_{i})}</script></blockquote>
+<ul>
+<li>有12个小球，分别有重和不重两种状态，即有24种可能，那么信息熵为$H(x)=24 \cdot {1 \over 24} \cdot \log_2{24} = log_2{24} $</li>
+<li>我们每一次称重存在三种状态，即轻、重、平衡，那么每一次称重的熵为$H(x)=3 \cdot {1 \over 3} \cdot \log_2{3}  = log_2{3}  $</li>
+<li>所以理论上称重次数为$ {log_2{24} \over log_2{3}} = 3 $,即三次即可找出小球</li>
+</ul>
+<p>100个，1000个也是同理，从信息论的角度来看只是熵大小的差别。</p>
+<p>同理，给定称重次数N，也可以反推回去最多可以称多少个小球。（$n = \frac {3^N-3}{2}$）</p>
+<h3 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h3><p>概括一下就是：</p>
+<ul>
+<li>分为三组</li>
+<li>平衡Pass，若不平衡，则引入三个正常球替换三个球</li>
+<li>…</li>
+</ul>
+<h3 id="final"><a href="#final" class="headerlink" title="final"></a>final</h3><p>在金勇的博客上看到这个问题，于此写下回答。</p>
+<p>在解决很多常规想法看起来不好确定的问题的时候，从熵的角度去看会很有用。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/杂谈20181213/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/杂谈20181213/" itemprop="url">夜谈00</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-14T00:48:08+08:00">
+                2018-12-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="写在最前"><a href="#写在最前" class="headerlink" title="写在最前"></a>写在最前</h3><p>每天其实都有蛮多事情，亦或者说很多想法吧，不定期更新一下~</p>
+<h3 id="关于今天刷屏的成都七中直播课"><a href="#关于今天刷屏的成都七中直播课" class="headerlink" title="关于今天刷屏的成都七中直播课"></a>关于今天刷屏的成都七中直播课</h3><p>今天被冰点周刊的关于“全国两百多所学校通过成都七中的网络直播课展开教育的新闻，文中数据显示7.2w人通过直播课学习，88人考上清北”刷屏了。关于这个新闻，心里面是有一些想法的：</p>
+<ul>
+<li>这是一个好事，绝对绝对的好事！以一个相对公平的方式去分享好的教育资源，给想要学习却又囿于资源的同学提供了一个很好的方式！</li>
+<li>数据有失真。据我了解，这些学校都是成立了试点班级，选取的基本都是自己学校顶尖的学生来组成直播班，文中举的例子也基本着力于这些学生中的头部学生，应该是为了宣传效果吧。</li>
+<li>这样的班级会配备老师在课堂上做一些辅导工作，比如针对直播的老师讲的一些点做补充之类的，首先这样对老师公平吗？其次是对于学生，这样讲课与班级管理分开，个人感觉师生之间缺少了点什么（纽带？）</li>
+<li>这个也是收费的，学校需要支付给一个网校机构一大笔钱。打着公益的名头干收钱的事儿不对，有益的事情是应该有利的，单收钱就不要提公益（听说要收钱，没有去查证）</li>
+<li>明年在线教育行业应该会发生挺多事的，感觉国家意志开始介入了。</li>
+</ul>
+<p>一直记得高中班主任说的那句：到学校应该先学做人，再学知识。</p>
+<h3 id="关于Hive优化"><a href="#关于Hive优化" class="headerlink" title="关于Hive优化"></a>关于Hive优化</h3><p>在调整了几个之后感觉这个最重要的知识还是在于理解MapReduce，比如今天遇到一个问题是有一个Map任务耗时特别久，检查之后发现时case when判断的时候<code>string</code>类型的grade的条件值的是<code>int</code>类型的，这里就多个一个对每行数据取公共类型的处理，导致Map任务耗时增加。再有就是数据倾斜了，这个之前有写过，感觉会是一生之敌，不过改天还是总结一下实际业务中常见情景及解决方法吧。</p>
+<h3 id="使用了一下快手"><a href="#使用了一下快手" class="headerlink" title="使用了一下快手"></a>使用了一下快手</h3><p>抖音实在是太火了，虽然我没有用过。。。我主观地以为这个就像是粉饰了的太平，喧嚣但是没有啥营养，高频的刺激让用户觉得很上瘾吧。很早之前因为下载过快手，但是很快就卸载了，觉得真的太low了,里面的视频都是弱智么…不过前几天因为虎嗅的一篇文章重新下载了并且保留了几天都没有卸，应该是因为<strong>真实</strong>吧。</p>
+<p>昨天看到张小龙的年会摘录，里面有一条是：</p>
+<ul>
+<li>大部分产品都在欺骗用户，你做各种滤镜，你说[记录美好生活]，但生活其实是不美好的。</li>
+</ul>
+<p>Be real。</p>
+<h3 id="读《乌合之众》杂想"><a href="#读《乌合之众》杂想" class="headerlink" title="读《乌合之众》杂想"></a>读《乌合之众》杂想</h3><p>今晚看完了勒庞的《乌合之众》，有些许印象与点点想法，记录一下：</p>
+<ul>
+<li>你信不信这译本的前20%都是译者的序。。。</li>
+<li>群体是不相信原则的，如果想要引领群体，就要去寻找他们所关心的点</li>
+<li>种族是对一个群体最大的影响（种族-&gt;文化-&gt;传统-&gt;制度-&gt;教育）</li>
+<li>遗传赋予每个种族中的每一个人某些共同特征，这些特征加在一起，便构成了这个种族的气质</li>
+<li>人们从来不是按照纯粹理性的教导来指导行动的</li>
+<li>作出简洁有力的断言，不理睬任何推理和证据，是让某种观念进入群众头脑最可靠的办法之一。再搭配重复、传染的方式，会变得很有力有效</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Monty_hall/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Monty_hall/" itemprop="url">蒙蒂大厅问题</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-10T23:34:30+08:00">
+                2018-12-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近开始了解贝叶斯相关的东西，《贝叶斯思维》这本书开篇提到的“Monty Hall Problem”就很有趣（第一次我也错了。。。）这里就记录一下这个问题。</p>
+<h3 id="问题是什么"><a href="#问题是什么" class="headerlink" title="问题是什么"></a>问题是什么</h3><p>书里面描述有点多，直接简化来说现在有三道扇门，其中一扇后面有10w软妹币，另外两扇后面则是1软妹币,现在我们按如下的规则玩游戏：</p>
+<ul>
+<li>猜那个后面有大奖，猜中则拿到大奖</li>
+<li>让你先挑选一扇门，我们称之为A，另外两扇分别为B，C</li>
+<li>为了增加悬念，这个时候主持人会打开B，C中的任意一个，假设B吧（B，C中肯定可以开一个)</li>
+<li>然后主持人给你一个选择：是坚持最初的选择还是换到剩下未打开的门上</li>
+</ul>
+<p>我的第一反应是这俩没啥区别，既然开了一扇小的，那么剩下两扇门后面中大奖的概率应该是五五开的。但是一个贝叶斯主义者应该不这么看，此时的概率已经悄然改变。</p>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><h4 id="贝叶斯公式"><a href="#贝叶斯公式" class="headerlink" title="贝叶斯公式"></a>贝叶斯公式</h4><p>估计这个不需要介绍太多</p>
+<script type="math/tex; mode=display">P(A|B) = \frac{P(B)P(A|B)}{P(B}</script><p>通俗一点解释就是：</p>
+<script type="math/tex; mode=display">后验概率 = \frac{先验概率 \cdot 似然度}{标准化常量}</script><p>后文例子中：</p>
+<ul>
+<li>$p(H)$：先验概率</li>
+<li>$p(D \vert H)$：似然度，即在该假设下得到某数据的概率</li>
+<li>$p(D)$：标准化常量，即在任何假设下得到某数据的概率</li>
+<li>$p(H \vert D)$：后验概率，即看到新数据后，我们要计算的概率</li>
+</ul>
+<h4 id="定义事件"><a href="#定义事件" class="headerlink" title="定义事件"></a>定义事件</h4><p>我们可以把事件归纳为以下两件，其中重点是理解事件D</p>
+<ul>
+<li><p>H : 钱在门后面</p>
+</li>
+<li><p>D : <strong>打开门B且钱不在后面</strong></p>
+</li>
+</ul>
+<h4 id="算算概率"><a href="#算算概率" class="headerlink" title="算算概率"></a>算算概率</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>假设</th>
+<th>先验概率$p(H)$</th>
+<th>似然度$p(D \vert H)$</th>
+<th>$p(H)p(D \vert H)$</th>
+<th>后验概率$p(H \vert D)$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>假设A</td>
+<td>${1 \over 3}$</td>
+<td>${1 \over 2 }$</td>
+<td>${1 \over 6 }$</td>
+<td>${1 \over 3 }$</td>
+</tr>
+<tr>
+<td>假设B</td>
+<td>${1 \over 3}$</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>假设C</td>
+<td>${1 \over 3}$</td>
+<td>1</td>
+<td>${1 \over 3 }$</td>
+<td>${2 \over 3 }$</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>先验概率一眼而知，但是似然度就需要一些思考了，现在我们分开来看：</p>
+<ul>
+<li>对于假设A，即钱在A门后面，那么在这种情况下，BC两门任选，即$p(D \vert H)={1 \over 2}$</li>
+<li>对于假设B，主持人必须打开门C，此时$p(D \vert H)=0$</li>
+<li>对于假设C，主持人必须打开门B，此时$p(D \vert H)=1$</li>
+</ul>
+<p>算一算$p(D) = {1 \over 2}$,后面的后验概率也是呼之欲出了</p>
+<h4 id="个人思考"><a href="#个人思考" class="headerlink" title="个人思考"></a>个人思考</h4><p>就跟考试的时候选择题第十题，假设这个时候你已经知道一个答案的错的情况下，再去选择的话，只要不傻，正确的概率就由0.25变成0.33了赛。<br>个人感觉重点是理解似然度的计算，理解已经发生的事情对未知的事情（打开了门B且没有钱）对未知的事情（钱在哪一个门后面）产生的影响。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/理解MapReduce/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/理解MapReduce/" itemprop="url">理解MapReduce</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-09T14:30:38+08:00">
+                2018-12-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>MapReduce的核心思想是<strong>分而治之</strong>和<strong>并行处理</strong>。</p>
+<h3 id="举个栗子"><a href="#举个栗子" class="headerlink" title="举个栗子"></a>举个栗子</h3><p>假设我跟一个身高一米八体重一百八的大胖哥打架，我估计我有点危险，这个时候怎么办呢？打个电话叫兄弟赛，单挑是一个打一群，群殴是一群揍一个，MapReduce大概干的也是这个事儿~</p>
+<h3 id="键值对"><a href="#键值对" class="headerlink" title="键值对"></a>键值对</h3><h4 id="键值对的具体含义"><a href="#键值对的具体含义" class="headerlink" title="键值对的具体含义"></a>键值对的具体含义</h4><p>键值数据作为MapReduce操作的基础，让MapReduce变得十分强大。因为很多数据要么本身即是键值对的形式，要么可以以键值对的形式表示，其简洁而有力，所以我们有必要清晰一下键值对的特征：</p>
+<ul>
+<li>键必须是唯一的</li>
+<li>每个值必须与键相关联，但键可能没有值</li>
+<li>对键有明确的定义，比如是否区分大小写</li>
+</ul>
+<h4 id="MapReduce作为一系列键值变换"><a href="#MapReduce作为一系列键值变换" class="headerlink" title="MapReduce作为一系列键值变换"></a>MapReduce作为一系列键值变换</h4><p>有人这么描述MapReduce:</p>
+<pre><code>{K1,V1} -&gt; {K2,List&lt;V2&gt;} -&gt; {K3,V3}
+</code></pre><p>现在我们试图来理解一下：</p>
+<ul>
+<li>MapReduce作业中map方法的输入是一系列的键值对，我们称之为K1、V1</li>
+<li>map方法的输出是一系列键和与之对应的值的列表（其作为接下来reduce方法的输入），我们称之为K2、V2。注意一点是map方法输出的其实是一系列单个的键值对，需要shuffle方法组合成键与值列表</li>
+<li>reduce方法接受输入，输出K3、V3</li>
+</ul>
+<h3 id="MapReduce执行流程"><a href="#MapReduce执行流程" class="headerlink" title="MapReduce执行流程"></a>MapReduce执行流程</h3><p>直接看图写作文吧（图来自互联网）<br><img src="/images/MapReduceProgress.png" alt="MapReduce过程"></p>
+<h4 id="1-输入和拆分（Input-amp-Split）"><a href="#1-输入和拆分（Input-amp-Split）" class="headerlink" title="1.输入和拆分（Input&amp;Split）"></a>1.输入和拆分（Input&amp;Split）</h4><p>对数据内容进行分片处理，例如WordCount例子中便对每行内容拆分为单词。</p>
+<h4 id="2-迭代（iteration）"><a href="#2-迭代（iteration）" class="headerlink" title="2.迭代（iteration）"></a>2.迭代（iteration）</h4><p>遍历输入数据，并将之解析成key/value对，即{K1,V1}。</p>
+<h4 id="3-映射（map）"><a href="#3-映射（map）" class="headerlink" title="3.映射（map）"></a>3.映射（map）</h4><p>将输入key/value对映射成另外一些key/value对。MapReduce开始在机器上执行map方法，map()由我们定义。</p>
+<h4 id="4-洗牌过程（shuffle）"><a href="#4-洗牌过程（shuffle）" class="headerlink" title="4.洗牌过程（shuffle）"></a>4.洗牌过程（shuffle）</h4><p>依据 key 对中间数据进行分组(grouping)，输出{K2,List<v2>}。其中会有排序、合并、分区等操作，是一个很神奇的地方，需要专门学习一下。</v2></p>
+<h4 id="5-归约（reduce"><a href="#5-归约（reduce" class="headerlink" title="5.归约（reduce)"></a>5.归约（reduce)</h4><p>以组为单位对数据进行归约(reduce)，输出{K3,V3}。</p>
+<h4 id="6-迭代"><a href="#6-迭代" class="headerlink" title="6.迭代"></a>6.迭代</h4><p>输出文件到HDFS。</p>
+<h3 id="说点屁话"><a href="#说点屁话" class="headerlink" title="说点屁话"></a>说点屁话</h3><p>讲道理到现在直接写MR程序还真没干过，都是直接用Hive搞了，节约了大量的时间，但是理解工欲善其事必先利其器，学习一下MapReduce的各种知识，感觉还是蛮有必要的。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Hive-Serde/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Hive-Serde/" itemprop="url">Hive-Serde</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-09T13:59:36+08:00">
+                2018-12-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>SerDe是Serialize/Deserialize的简称，即序列化和和反序列化</p>
+<h3 id="序列化的作用"><a href="#序列化的作用" class="headerlink" title="序列化的作用"></a>序列化的作用</h3><ul>
+<li><p>序列化是对象转化为字节序列的过程 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Row object --&gt; Serializer --&gt; &lt;key, value&gt; --&gt; OutputFileFormat --&gt; HDFS files</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>反序列化是字节序列恢复为对象的过程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HDFS files --&gt; InputFileFormat --&gt; &lt;key, value&gt; --&gt; Deserializer --&gt; Row object</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>我们对对象序列化主要用于：</p>
+<ul>
+<li>对象的持久化</li>
+<li>对象的网络传送</li>
+</ul>
+</li>
+</ul>
+<p>Hive的反序列化是吧k-v数据反序列化成为Table里的列值，而不需要转化，为海量数据处理节省大量时间。 </p>
+<p>SerDe说明hive如何去处理一条记录，包括Serialize/Deserilize两个功能， Serialize把hive使用的java object转换成能写入hdfs的字节序列，或者其他系统能识别的流文件。Deserilize把字符串或者二进制流转换成hive能识别的java object对象。比如：select语句会用到Deserialize对象， 把hdfs数据解析出来；insert语句会使用Serilize，数据写入hdfs系统，需要把数据序列化。</p>
+<h3 id="SerDe的使用"><a href="#SerDe的使用" class="headerlink" title="SerDe的使用"></a>SerDe的使用</h3><p>Hive建表的时候可以使用自定义的SerDe或者Hive内置的SerDe类型指定数据的序列化和反序列化的方式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">--指定*.RequestSerde做Serde</span><br><span class="line"></span><br><span class="line">create table xxx</span><br><span class="line">(</span><br><span class="line"> userid  string ,</span><br><span class="line"> nickname string ,</span><br><span class="line"> xxx and so on </span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">PARTITIONED BY (</span><br><span class="line">  `year` string,</span><br><span class="line">  `month` string,</span><br><span class="line">  `day` string)</span><br><span class="line">ROW FORMAT SERDE</span><br><span class="line">  &apos;com.fenbi.ape.hive.serde.RequestSerde&apos;</span><br><span class="line">STORED AS INPUTFORMAT</span><br><span class="line">  &apos;org.apache.hadoop.mapred.TextInputFormat&apos;</span><br><span class="line">OUTPUTFORMAT</span><br><span class="line">  &apos;org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat&apos;</span><br><span class="line">LOCATION</span><br><span class="line">  &apos;hdfs://f04/log/tutor&apos;</span><br></pre></td></tr></table></figure>
+<h3 id="SerDe内置类型"><a href="#SerDe内置类型" class="headerlink" title="SerDe内置类型"></a>SerDe内置类型</h3><ul>
+<li>Avro </li>
+<li>ORC </li>
+<li>RegEx</li>
+<li>ThrifT</li>
+<li>Parquet</li>
+<li>CSV</li>
+<li>JsonSerDe</li>
+</ul>
+<h3 id="自定义类型"><a href="#自定义类型" class="headerlink" title="自定义类型"></a>自定义类型</h3><p><em>定义一个类，继承抽象类AbstractSerDe</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2018-10-18</span><br><span class="line">demo code to be added</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Markdown中的数学公式/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Markdown中的数学公式/" itemprop="url">Markdown中的数学公式</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-06T21:08:15+08:00">
+                2018-12-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="写在最前"><a href="#写在最前" class="headerlink" title="写在最前"></a>写在最前</h3><p>Markdown写东西是很舒服，不过难免会有用到数学公式的地方，之前的解决方式是在Word或者在线编辑器上写好，然后生成图片贴到文章上，这样缺点其实蛮多的（难以修改，格式混乱），现在有了MathJax这样的利器，今晚就跟着大神的<a href="https://www.cnblogs.com/q735613050/p/7253073.html" target="_blank" rel="noopener">博客</a>自己走一遍！</p>
+<h3 id="使用参考"><a href="#使用参考" class="headerlink" title="使用参考"></a>使用参考</h3><h4 id="如何插入公式"><a href="#如何插入公式" class="headerlink" title="如何插入公式"></a>如何插入公式</h4><ul>
+<li>行中公式(放在文中与其它文字混编)可以用<code>$</code>来标记</li>
+<li>独立公式可以用两个<code>$</code>来标记</li>
+<li>自动编号公式：<code>在每个公式末尾前使用\tag{行标}</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">我们常说的欧拉公式$e^&#123;i\pi&#125;+1=0$</span><br></pre></td></tr></table></figure>
+<p>显示：<br>我们常说的欧拉公式$e^{i\pi}+1=0$</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$ e^&#123;i\pi&#125;+1=0 $$</span><br></pre></td></tr></table></figure>
+<p>显示：</p>
+<script type="math/tex; mode=display">e^{i\pi}+1=0</script><h4 id="输入上下标"><a href="#输入上下标" class="headerlink" title="输入上下标"></a>输入上下标</h4><p><code>^</code>表示商标，<code>_</code>表示下标，两者可以同时使用，也可以嵌套。如果遇到多个字符组成组成的内容，可以使用<code>{}</code>来表示为一个整体。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$ e^&#123;x^\pi&#125;=1+y^z $$</span><br></pre></td></tr></table></figure>
+<p>结果显示:</p>
+<script type="math/tex; mode=display">e^{x^\pi}=1+y^z</script><h4 id="如何输入括号和分隔符"><a href="#如何输入括号和分隔符" class="headerlink" title="如何输入括号和分隔符"></a>如何输入括号和分隔符</h4><p><code>()</code>、<code>|</code>还有<code>[]</code>都表示本身<code>{</code>需要使用<code>\</code>转义，即<code>\{\}</code>表示<code>{}</code>,可以用<code>\left</code>和<code>\right</code>命令表示大括号或分隔符。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$f(x,y,z)=e^&#123;xz&#125;+2x\left(3+\frac&#123;1+x&#125;&#123;1+xyz&#125;\right)$$</span><br></pre></td></tr></table></figure>
+<p>显示：</p>
+<script type="math/tex; mode=display">f(x,y,z)=e^{xz}+2x\left(3+\frac{1+x}{1+xyz}\right)</script><h4 id="如何输入分数"><a href="#如何输入分数" class="headerlink" title="如何输入分数"></a>如何输入分数</h4><p>利用<code>\frac{}{}</code>来表示，可以嵌套；使用<code>\frac ab</code>快速生成；<code>分子 \over 分母</code>可表示只有一层的分母<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$ \frac &#123;a+1&#125;&#123;b-1&#125; \quad and \quad \frac &#123;a-1&#125;b \quad and \quad &#123;a-1 \over b+1&#125;  $$</span><br></pre></td></tr></table></figure></p>
+<p>显示：</p>
+<script type="math/tex; mode=display">\frac {a+1}{b-1} \quad and \quad \frac {a-1}b \quad and \quad {a-1 \over b+1}</script><h4 id="如何输入开方"><a href="#如何输入开方" class="headerlink" title="如何输入开方"></a>如何输入开方</h4><p><code>\sqrt [根指数，省略时为2] {被开方数}</code>表示开方<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$\sqrt [3] &#123;xyz&#125;  \quad and \quad \sqrt &#123;x&#125;$$</span><br></pre></td></tr></table></figure></p>
+<p>显示：</p>
+<script type="math/tex; mode=display">\sqrt [3] {xyz}  \quad and \quad \sqrt {x}</script><h4 id="如何输入省略号"><a href="#如何输入省略号" class="headerlink" title="如何输入省略号"></a>如何输入省略号</h4><p>数学公式中常见的省略号有两种,<code>\ldots</code>表示与文本底线对齐的省略号,<code>\cdots</code>表示与文本中线对齐的省略号。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$P(w_1,w_2,\cdots,w_n|y_1,y_2,\cdots,y_n)=\frac&#123;P(y_1,y_2,\cdots,y_n|w_1,w_2,\cdots,w_n)P(w_1,w_2,\cdots,w_n)&#125;&#123;P(y_1,y_2,\cdots,y_n)&#125;$$</span><br></pre></td></tr></table></figure></p>
+<p>显示：</p>
+<script type="math/tex; mode=display">P(w_1,w_2,\cdots,w_n|y_1,y_2,\cdots,y_n)=\frac{P(y_1,y_2,\cdots,y_n|w_1,w_2,\cdots,w_n)P(w_1,w_2,\cdots,w_n)}{P(y_1,y_2,\cdots,y_n)}</script><h4 id="如何输入矢量"><a href="#如何输入矢量" class="headerlink" title="如何输入矢量"></a>如何输入矢量</h4><p><code>\vec{矢量}</code>来表示一个矢量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$ \vec&#123;a&#125; \cdot \vec&#123;c&#125; = 0 $$</span><br></pre></td></tr></table></figure></p>
+<p>显示：</p>
+<script type="math/tex; mode=display">\vec{a} \cdot \vec{c} = 0</script><h4 id="如何输入积分"><a href="#如何输入积分" class="headerlink" title="如何输入积分"></a>如何输入积分</h4><p><code>\int_积分下限^积分上限 {被积表达式}</code>表示一个积分<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$\int^a_b&#123;x^2&#125;\,&#123;\rm d&#125;x = &#123;1 \over 3&#125;(a^3-b^3)$$</span><br></pre></td></tr></table></figure></p>
+<p>显示：</p>
+<script type="math/tex; mode=display">\int^a_b{x^2}\,{\rm d}x = {1 \over 3}(a^3-b^3)</script><h4 id="如何输入极限运算"><a href="#如何输入极限运算" class="headerlink" title="如何输入极限运算"></a>如何输入极限运算</h4><p>使用<code>\lim_{变量 \to 表达式}</code>来表示极限，<code>\infty</code>表示取极限，前面可加正负号。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$\lim_&#123;n \to +\infty&#125; &#123;1 \over 1+e^&#123;-n&#125;&#125;=1$$</span><br></pre></td></tr></table></figure></p>
+<p>显示</p>
+<script type="math/tex; mode=display">\lim_{n \to +\infty} {1 \over 1+e^{-n}}=1</script><h4 id="如何表示累积运算"><a href="#如何表示累积运算" class="headerlink" title="如何表示累积运算"></a>如何表示累积运算</h4><p>使用<code>\sum_{下标表达式}^{上标表达式}{}</code>表示累加。<br>与之类似，使用<code>\prod</code>，<code>\bigcup</code>，<code>\bigcap</code>来分别输入累乘、并集和交集<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$\frac&#123;\pi&#125;&#123;4&#125; = \sum_&#123;n=0&#125;^&#123;\infty&#125;\frac&#123;(-1)^n&#125;&#123;2n+1&#125;$$</span><br></pre></td></tr></table></figure></p>
+<p>显示：</p>
+<script type="math/tex; mode=display">\frac{\pi}{4} = \sum_{n=0}^{\infty}\frac{(-1)^n}{2n+1}</script><h4 id="怎么输入希腊字母"><a href="#怎么输入希腊字母" class="headerlink" title="怎么输入希腊字母"></a>怎么输入希腊字母</h4><p>输入<code>\小写希腊字母英文全称</code>和<code>\首字母大写希腊字母英文全称</code>来分别输入小写和大写希腊字母。<br>对于大写希腊字母与现有字母相同的，直接输入大写字母即可。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>输入</th>
+<th>显示</th>
+<th>输入</th>
+<th>显示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>\alpha</code></td>
+<td>$\alpha$</td>
+<td><code>A</code></td>
+<td>$A$</td>
+</tr>
+<tr>
+<td><code>\beta</code></td>
+<td>$\beta$</td>
+<td><code>B</code></td>
+<td>$B$</td>
+</tr>
+<tr>
+<td><code>\gamma</code></td>
+<td>$\gamma$</td>
+<td><code>\Gamma</code></td>
+<td>$\Gamma$</td>
+</tr>
+<tr>
+<td><code>\delta</code></td>
+<td>$\delta$</td>
+<td><code>\Delta</code></td>
+<td>$\delta$</td>
+</tr>
+<tr>
+<td><code>\epsilon</code></td>
+<td>$\epsilon$</td>
+<td><code>E</code></td>
+<td>$E$</td>
+</tr>
+<tr>
+<td><code>\zeta</code></td>
+<td>$\zeta$</td>
+<td><code>Z</code></td>
+<td>$Z$</td>
+</tr>
+<tr>
+<td><code>\eta</code></td>
+<td>$\eta$</td>
+<td><code>H</code></td>
+<td>$H$</td>
+</tr>
+<tr>
+<td><code>\theta</code></td>
+<td>$\theta$</td>
+<td><code>\Theta</code></td>
+<td>$\Theta$</td>
+</tr>
+<tr>
+<td><code>\iota</code></td>
+<td>$\iota$</td>
+<td><code>I</code></td>
+<td>$I$</td>
+</tr>
+<tr>
+<td><code>\kappa</code></td>
+<td>$\kappa$</td>
+<td><code>K</code></td>
+<td>$K$</td>
+</tr>
+<tr>
+<td><code>\lambda</code></td>
+<td>$\lambda$</td>
+<td><code>\Lambda</code></td>
+<td>$\Lambda$</td>
+</tr>
+<tr>
+<td><code>\nu</code></td>
+<td>$\nu$</td>
+<td><code>N</code></td>
+<td>$N$</td>
+</tr>
+<tr>
+<td><code>\mu</code></td>
+<td>$\mu$</td>
+<td><code>M</code></td>
+<td>$M$</td>
+</tr>
+<tr>
+<td><code>\xi</code></td>
+<td>$\xi$</td>
+<td><code>\Xi</code></td>
+<td>$\Xi$</td>
+</tr>
+<tr>
+<td><code>o</code></td>
+<td>$o$</td>
+<td><code>O</code></td>
+<td>$O$</td>
+</tr>
+<tr>
+<td><code>\pi</code></td>
+<td>$\pi$</td>
+<td><code>\Pi</code></td>
+<td>$\Pi$</td>
+</tr>
+<tr>
+<td><code>\rho</code></td>
+<td>$\rho$</td>
+<td><code>P</code></td>
+<td>$P$</td>
+</tr>
+<tr>
+<td><code>\sigma</code></td>
+<td>$\sigma$</td>
+<td><code>\Sigma</code></td>
+<td>$\Sigma$</td>
+</tr>
+<tr>
+<td><code>\tau</code></td>
+<td>$\tau$</td>
+<td><code>T</code></td>
+<td>$T$</td>
+</tr>
+<tr>
+<td><code>\upsilon</code></td>
+<td>$\upsilon$</td>
+<td><code>\Upsilon</code></td>
+<td>$\Upsilon$</td>
+</tr>
+<tr>
+<td><code>\phi</code></td>
+<td>$\phi$</td>
+<td><code>\Phi</code></td>
+<td>$\Phi$</td>
+</tr>
+<tr>
+<td><code>\chi</code></td>
+<td>$\chi$</td>
+<td><code>X</code></td>
+<td>$X$</td>
+</tr>
+<tr>
+<td><code>\psi</code></td>
+<td>$\psi$</td>
+<td><code>\Psi</code></td>
+<td>$\Psi$</td>
+</tr>
+<tr>
+<td><code>\omega</code></td>
+<td>$\omega$</td>
+<td><code>\Omega</code></td>
+<td>$\Omega$</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="大括号和行标的使用"><a href="#大括号和行标的使用" class="headerlink" title="大括号和行标的使用"></a>大括号和行标的使用</h4><p>使用<code>\left</code>和<code>\right</code>来创建自动匹配高度的 (圆括号)，[方括号] 和 {花括号} 。<br>在每个公式末尾前使用<code>\tag{行标}</code>来实现行标。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$$</span><br><span class="line">f\left(</span><br><span class="line">   \left[ </span><br><span class="line">     \frac&#123;</span><br><span class="line">       1+y</span><br><span class="line">     &#125;&#123;</span><br><span class="line">       \left(</span><br><span class="line">          \frac&#123;x&#125;&#123;y&#125;+\frac&#123;y&#125;&#123;x&#125;</span><br><span class="line">       \right)</span><br><span class="line">       \left(u+1\right)</span><br><span class="line">     &#125;+a</span><br><span class="line">   \right]^&#123;3/2&#125;</span><br><span class="line">\right)</span><br><span class="line">\tag&#123;行标&#125;</span><br><span class="line">$$</span><br></pre></td></tr></table></figure></p>
+<script type="math/tex; mode=display">
+f\left(
+   \left[ 
+     \frac{
+       1+y
+     }{
+       \left(
+          \frac{x}{y}+\frac{y}{x}
+       \right)
+       \left(u+1\right)
+     }+a
+   \right]^{3/2}
+\right)
+\tag{行标}</script><h4 id="特殊函数"><a href="#特殊函数" class="headerlink" title="特殊函数"></a>特殊函数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$  \sinx \quad and \quand \lnx \quad and \quad \max(a,b,c)  $$</span><br></pre></td></tr></table></figure>
+<p>显示：</p>
+<script type="math/tex; mode=display">\sin x \quad and \quad \ln x \quad and \quad \max(a,b,c)</script><h4 id="矩阵展示"><a href="#矩阵展示" class="headerlink" title="矩阵展示"></a>矩阵展示</h4><h5 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h5><p>起始标记<code>\begin{matrix}</code>，结束标记<code>\end{matrix}</code><br>每一行末尾标记<code>\\\</code>，行间元素之间以<code>&amp;</code>分隔<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$$\begin&#123;matrix&#125;</span><br><span class="line">1&amp;0&amp;1\\\</span><br><span class="line">0&amp;1&amp;1\\\</span><br><span class="line">0&amp;1&amp;0\\\</span><br><span class="line">\end&#123;matrix&#125;$$</span><br></pre></td></tr></table></figure></p>
+<p>显示：</p>
+<script type="math/tex; mode=display">\begin{matrix}
+1&0&1\\\
+0&1&1\\\
+0&1&0\\\
+\end{matrix}</script><h5 id="矩阵边框"><a href="#矩阵边框" class="headerlink" title="矩阵边框"></a>矩阵边框</h5><p>在起始、结束标记处用下列词替换 matrix</p>
+<ul>
+<li>pmatrix ：小括号边框</li>
+<li>bmatrix ：中括号边框</li>
+<li>Bmatrix ：大括号边框</li>
+<li>vmatrix ：单竖线边框</li>
+<li>Vmatrix ：双竖线边框<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$$\begin&#123;matrix&#125;</span><br><span class="line">1&amp;0&amp;1\\\</span><br><span class="line">0&amp;1&amp;1\\\</span><br><span class="line">0&amp;1&amp;0\\\</span><br><span class="line">\end&#123;matrix&#125;$$</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>显示：</p>
+<script type="math/tex; mode=display">\begin{pmatrix}
+1&0&1\\\
+0&1&1\\\
+0&1&0\\\
+\end{pmatrix}</script><h5 id="省略元素"><a href="#省略元素" class="headerlink" title="省略元素"></a>省略元素</h5><p>同上，添加<code>\vdots</code>代表斜省略号</p>
+<h5 id="方程组"><a href="#方程组" class="headerlink" title="方程组"></a>方程组</h5><p>case环境。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$$\begin&#123;cases&#125;</span><br><span class="line">a_1x+b_1y+c_1z=d_1\\</span><br><span class="line">a_2x+b_2y+c_2z=d_2\\</span><br><span class="line">a_3x+b_3y+c_3z=d_3\\</span><br><span class="line">\end&#123;cases&#125;</span><br><span class="line">$$</span><br></pre></td></tr></table></figure></p>
+<p>显示：</p>
+<script type="math/tex; mode=display">\begin{cases}
+a_1x+b_1y+c_1z=d_1\\\
+a_2x+b_2y+c_2z=d_2\\\
+a_3x+b_3y+c_3z=d_3\\\
+\end{cases}</script><h3 id="赶紧睡觉！！！"><a href="#赶紧睡觉！！！" class="headerlink" title="赶紧睡觉！！！"></a>赶紧睡觉！！！</h3>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://snailed.cn/隐马尔科夫模型/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -927,939 +2046,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Seaborn/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/Seaborn/" itemprop="url">Seaborn</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-20T00:44:52+08:00">
-                2018-11-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>明晚来更新，不然这周不喝可乐了！</p>
-<p>2018-11-20,这周没有可乐喝了。。。sad </p>
-<p>不过今天了解了下序列化和反序列化的东西，后面写出来一下</p>
-<p>zhangyang chishibani!</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/记我的爷爷/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/记我的爷爷/" itemprop="url">记我的爷爷</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-20T00:27:20+08:00">
-                2018-11-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>瀑布的水逆流而上，<br>蒲公英的种子从远处飘回，聚成伞的模样，<br>太阳从西边升起，落向东方。<br>子弹退回枪膛，<br>运动员回到起跑线山，<br>我交回录取通知书，忘了十年寒窗。<br>厨房里飘来饭菜的香，<br>你把我的卷子签好名字，<br>关掉电视，帮我把书包背上。<br>你还在我身旁。  </p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/读《人类简史》/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/读《人类简史》/" itemprop="url">读《人类简史》</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-20T00:24:53+08:00">
-                2018-11-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="思考的代价"><a href="#思考的代价" class="headerlink" title="思考的代价"></a><strong>思考的代价</strong></h4><blockquote>
-<p>人类大脑在变得越来越大的过程中，使智人更倾向于直立行走，也改变了女性的怀孕时间，<em>人类都是早产儿</em>（那剖腹产算什么？）<br>相较之下，人类转眼登上顶端，不仅让生态系统猝不及防，也让人类不知所措。<br>人类历史上的众多灾难，不论是生灵涂炭的战乱还是生态遭逢的浩劫，其实都是源于这场过于仓促的跳跃。    </p>
-</blockquote>
-<p>   我们在生活学习中面对巨大的跳跃的时候，还是应当稳健稳健，毕竟我们是个体，是我们自己意志主导的~   同时我们的不起眼的习惯，里面可能有大文章</p>
-<h4 id="替代理论"><a href="#替代理论" class="headerlink" title="替代理论"></a><strong>替代理论</strong></h4><p>类似于美洲大陆被欧洲人发现时的印第安人大屠杀，历史上智人也许对尼安德特人挥起了屠刀。<br>  <em>纳粹</em></p>
-<h4 id="人际交往的限制"><a href="#人际交往的限制" class="headerlink" title="人际交往的限制"></a><strong>人际交往的限制</strong></h4><blockquote>
-<p>社会研究指出，根据八卦来维持的最大’自然’团体就是150人。只要超过这个数字，大多数人就无法真正深入了解，八卦所有成员的生活情形。 </p>
-</blockquote>
-<p>  <em>我也觉得的太多的交际反而让我感到不安</em><br> 不过随着移动互联网的发展 ，改善了我们的交流方式，这个数字应该不止150人，但是face to face来的感情才是最真的！  </p>
-<h4 id="我们的智力"><a href="#我们的智力" class="headerlink" title="我们的智力"></a><strong>我们的智力</strong></h4><p>   <em>讨论虚构的事物，是人类特有的能力</em><br>   叫拉布拉多来算微积分？，不如让它来泼墨吧！  </p>
-<h4 id="新旧之别"><a href="#新旧之别" class="headerlink" title="新旧之别"></a><strong>新旧之别</strong></h4><p>书中观点认为虽然我们现代人的知识量可谓是碾压采集时代的人，但是就单体所掌握的来说，现代人是比不上古人的。其理由在于那个时代的人们需要求生而掌握的知识和技巧远远多于现代人，例如他们需要知道动植物的习性，需要明白地形天气，也要知道怎么走怎么运动才是最省力的等等（PS:他们的身体素质也应该远超过绝大多数的现代人）。不过我认为这就是进化的好处，在之前智人因为语言等文化称霸了人类，于是这也就是成了我们的进化方向，我必须承认绝大多数的我们都是普通的人，没有超乎常人的智力，但是我们可以通过合作达成’1+1&gt;2’的效果，我们现在不需要个人你掌握很多很多的东西，<strong>Team  Work</strong>可以创造更多。  </p>
-<p>  书中还提到了幸福感的问题，作者的观点认为是采集时代的智人会比现在更加幸福，因为没有这么多的压力疾病之类的。虽然也很有道理，但是我认为幸福永远是我们自己的事，应当自己去追求的，比谁更幸福真心没用。  </p>
-<h4 id="宗教"><a href="#宗教" class="headerlink" title="宗教"></a><strong>宗教</strong></h4><p>在远古时期的人类是相信<em>泛神论</em>（各种宗教，图腾，邪教之类的）的，他们认为万物有灵（拉丁语中’anima’既是’灵魂’意思），再普通不过的石头小草都是有灵性的，这一点上，现在世界的绝大多数教派都达成了共识，我会觉得很神奇，为什么当时还几乎没有任何联系的会在上面达成让人惊讶的一致，我猜应该是我们基因决定的吧，再多的不同，可是我们终究发源于同一个地方，生活在同一片天空之下。不过作为一名还比较坚定的无神论者  <strong>待续</strong>  </p>
-<h4 id="关于生态"><a href="#关于生态" class="headerlink" title="关于生态"></a><strong>关于生态</strong></h4><p>人类造成了世界上绝大所数生物的灭绝 ，在向其他陆地进发的时候，作为狩猎者的人类可谓是见神杀神见佛杀佛，无所不用其极，<em>能好怎</em>用得是出神入化。</p>
-<h4 id="小麦驯化了智人"><a href="#小麦驯化了智人" class="headerlink" title="小麦驯化了智人"></a><strong>小麦驯化了智人</strong></h4><p>智人由采集的生活转换为农业，限制了自己的活动空间，改变了自己做的事情，换个角度想来，说智人驯化了人类也没错。  </p>
-<h4 id="关于历史"><a href="#关于历史" class="headerlink" title="关于历史"></a><strong>关于历史</strong></h4><blockquote>
-<p>在现代晚期之前，总人口有九成以上都是农民，日出而作，日落而息。他们生产出的粮食养活了一小撮的精英分子：国王，官员，战士，艺术家，思想家，科学家，但历史写的几乎全是这些人的故事。于是历史只告诉了我们极少数的人在作什么，而其他绝大多数人的生活就是不停地跳水耕田。  </p>
-</blockquote>
-<p>我认为这是理所应当的，大自然的法则便是<strong>优胜劣汰</strong>，但莫要成为那种精致的利己主义者就好，享受了资源，便理所应当地付出。艺术家给人精神享受，思想家带给我们不同的精神世界，科学家去探索世界的真相，政府机构组织起了庞大的人类社会等等等…  </p>
-<h4 id="秩序"><a href="#秩序" class="headerlink" title="秩序"></a><strong>秩序</strong></h4><p>现代我们社会的秩序其实来源于人类极致的想象能力，最有名的比如美国的《独立宣言》，’联合国’等。秩序由人类制定，但也得由人类接受才能有效。<br><strong>我接受的教育是人人平等，但先天的影响与后天的作为着实是不平等的</strong></p>
-<h4 id="历史从无正义"><a href="#历史从无正义" class="headerlink" title="历史从无正义"></a><strong>历史从无正义</strong></h4><p>在我读完看来，其实男女是平等的，历史上的人做了符合当时情况的选择，也就是最大似然估计。在面对战争,生产,甚至某些创作的时候，大多数情况下所表现出来的能力优于女性，于是被选择了。若不信可以试试，假设有一个国家，其女性的决定性的能力高于男性，那发展100年或者更久之后，这个国家会不会就是现在大多数国家的镜像，只不过男女颠倒而已。再加一点，上个世纪开始的关于女性人权的讨论，大多数不也是那些能力卓越的女性所领导的。所以这并不是男女的区别，而是能力的问题。<br><strong>我还是坚决支持男女平等的，公平竞争多好啊</strong>  </p>
-<h4 id="关于历史的融合与统一"><a href="#关于历史的融合与统一" class="headerlink" title="关于历史的融合与统一"></a><strong>关于历史的融合与统一</strong></h4><p>曾经读到一本书，大意是：“人类发展到最后必然走向统一，且在无比巨大的人口基数下，帝国是最好的方式”。这类的问题我没有过多的思考过，不过我想我最应该注意的是自己的生活，如果能够和家人幸福地生活下去，那其他的又有什么重要？  </p>
-<h4 id="Money"><a href="#Money" class="headerlink" title="Money"></a><strong>Money</strong></h4><p>金钱是有史以来最普遍也是最有效的互信系统。  </p>
-<h4 id="关于帝国"><a href="#关于帝国" class="headerlink" title="关于帝国"></a><strong>关于帝国</strong></h4><p>2200年前的今天，也许我的祖先还被人称做‘蛮子’，可是现在他的子孙也被叫做汉人。我们应该这么安慰自己：我们只是时间长河上一滴水，大家一起打出其中的一些水花便被蒸发，可是百川入海。PS：我也不知道我写的这句话有什么意思..  </p>
-<h4 id="资本主义"><a href="#资本主义" class="headerlink" title="资本主义"></a><strong>资本主义</strong></h4><p>是人类的自私与懒惰促进了现代的发展？</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Markdown初体验/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/Markdown初体验/" itemprop="url">Markdown初体验</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-20T00:12:04+08:00">
-                2018-11-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="导语"><a href="#导语" class="headerlink" title="导语"></a>导语</h3><p>Markdown写习惯了看起来还是习惯很多。</p>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>  安装之类的十分简单，毕竟是轻量级的<em>标记语言</em>（以下仅推荐）。  </p>
-<ul>
-<li>Windows: MarkdownPad   </li>
-<li>IOS: Mou  </li>
-<li>Web: 简书  </li>
-<li>Linux: Sublime Text 3  </li>
-</ul>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><ol>
-<li>标题<br>一般使用Atx形式  <h3 id="red"><a href="#red" class="headerlink" title="red"></a>red</h3><h4 id="red-1"><a href="#red-1" class="headerlink" title="red"></a>red</h4><h5 id="red-2"><a href="#red-2" class="headerlink" title="red"></a>red</h5><pre><code>code:  
- ###red  
- ####red  
- #####red
-</code></pre></li>
-<li>列表  <ul>
-<li>有序列表  <ol>
-<li>red  </li>
-<li>blue<br><strong>数字序列+英文<code>.</code>+一个空格</strong></li>
-</ol>
-</li>
-<li>无序列表  <pre><code> + red   
- - blue  
- * yellow    
-</code></pre></li>
-</ul>
-</li>
-<li>引用<br> 使用<code>&gt;</code>符号，在句子的最开始处    </li>
-</ol>
-<blockquote>
-<p>岂曰无衣 与子同袍                                           </p>
-</blockquote>
-<ol>
-<li>代码区块<br> 使用连续三` 来标记，eg:    <pre><code> print(Hello Markdown)  
-</code></pre><pre><code>code:  
-```print(Hello Markdown)
-</code></pre><code>``  
-或者是使用</code>tab`键，四个缩进即可    </li>
-<li><p>分隔线  </p>
-<hr>
-<hr>
-<pre><code>code:  
- ---  
- ***
-</code></pre></li>
-<li>换行<br> 在换行处先敲两个空格再回车即可</li>
-<li>链接  <ul>
-<li>行内式<br><a href="www.baidu.com">百度</a>  <pre><code>    code:
-        [百度](www.baidu.com)
-</code></pre></li>
-<li>参考式<br>I love <a href="www.google.com">google</a>,not <a href="www.baidu.com">baidu</a>  </li>
-</ul>
-</li>
-</ol>
-<pre><code>          code:  
-              I love [google][1] ,not [baidu][2]  
-              [1]:www.google.com
-              [2]:www.baidu.com      
-</code></pre><ol>
-<li>强调<br>使用<code>*</code>或者<code>_</code>来标记<br><strong>山随平野尽，江入大荒流</strong><br><em>七月在野，八月在宇，九月在户，十月蟋蟀,入我床下</em><pre><code>  code:
-       **山随平野尽，江入大荒流**    
-        *七月在野，八月在宇，九月在户，十月蟋蟀,入我床下*  
-</code></pre></li>
-<li>图片<br>方法类似于<strong>链接</strong>    </li>
-</ol>
-<p>其实这个语法真的蛮简单的，排版出来也工整漂亮，hhh  ~<br><strong>友情提示：Web版和客户端版的解码有问题。所以最好别换着换着编辑,别问我怎么知道的。。昨晚眼睛有快写瞎了,今天打开一看，WCNMLGBD乱码=重写</strong>  　　</p>
-<p>以上，hiahia<br>这里是<a href="http://www.jianshu.com/p/075d7cac8fef" target="_blank" rel="noopener">我学习的Markdown的地方</a>。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/深入浅出SQL总结/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/深入浅出SQL总结/" itemprop="url">深入浅出SQL总结</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-20T00:08:49+08:00">
-                2018-11-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><blockquote>
-<p>SQL语法是不区分大小写的，但是命名的时候最好注意规范，语法规定用<code>_</code>来代替空格  </p>
-</blockquote>
-<p>我是用《深入浅出SQL》这本书来学习的，网上可以查<a href="http://www.w3school.com.cn/sql/sql_insert.asp" target="_blank" rel="noopener">W3School</a>~</p>
-<h4 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h4><h5 id="语句"><a href="#语句" class="headerlink" title="语句"></a>语句</h5><ol>
-<li><strong>CREATE</strong>  <pre><code>    creatr database my_db;
-    use my_db;
-    create table my_info
-      (
-        my_id int not null auto_increment,
-        my_name char(50),
-        primary key(my_id)
-      )
-</code></pre></li>
-<li><p><strong>DROP</strong>   </p>
-<pre><code>       drop table my_name           
-</code></pre></li>
-<li><p><strong>INSERT</strong>   </p>
-<pre><code>       insert into table  my_info(col0,col1...) values(&#39;num0&#39;,&#39;num1&#39;...)
-</code></pre></li>
-<li><strong>SELECT</strong>  <pre><code>       select * from  tavle_name where ..  
-</code></pre><blockquote>
-<p>select 展开讲太多了，最重要的还是灵活运用子查询和各种连接</p>
-</blockquote>
-</li>
-<li><p><strong>UPDATE</strong>    </p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">update table table_name  </span><br><span class="line">         set col = </span><br><span class="line">             case  </span><br><span class="line">                 when condition0 then reslut0  </span><br><span class="line">                 when condition1 then result1</span><br><span class="line">              end;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>DELETE</strong>  </p>
-<pre><code>              delete table_name from where conditon
-</code></pre></li>
-<li><strong>SHOW</strong>    <pre><code>                show databases/tables
-</code></pre></li>
-<li><strong>ALTER</strong>    <pre><code>       ```
-                      alter table table_name
-                       add col...，
-                       rename to ...，  
-                       change...，
-                       modify...，  
-                       drop ..
-                       ```  
-</code></pre>其实就是对表进行修改</li>
-</ol>
-<h5 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h5><p><strong>USE</strong>:接下来的操作都在某个db中进行<br><strong>DESC</strong>：显示db的结构 /在<code>order by</code>中代表逆序<br><strong>NULL</strong>:不是值，代表未被定义的值<br><strong>DEFAULT</strong>:缺省值<br><strong>LIKE</strong>:查找部分文本字符串  , <strong><code>%</code>  </strong>：替换符<br><strong>BETWEEN</strong>:在…之间（&lt;=&amp;&amp;&gt;=）<br><strong>AFTER</strong>:把某列放在另一列之后<br><strong>RIGHT(),LEFT()</strong>:选出指定数量的字符<br>                select right(‘location’,2) from my_table<br><strong>ORDER BY(),GROUP BY()</strong>:按…排序，按…分组<br><strong>MIN(),MAX(),AVG(),SUM(),COUNT()</strong>:其中<code>count()</code>作用是返回指定列中的元素<br><strong>DINSTINCT</strong>：查询列中出现过的不重复元素<br><strong>LIMIT</strong>:查询结果的数量 <code>limit m,n #从m开始一共查询n个</code><br><strong>T.x -&gt; T.y</strong>:在关系表T中，y列函数依赖x列<br><strong>having</strong>:对已经排序的结果进行限制，常和<code>group by</code>等关键词组合使用</p>
-<ul>
-<li><strong>数据模式</strong><ul>
-<li>一对一  </li>
-<li>一对多  </li>
-<li>多对多  </li>
-</ul>
-</li>
-<li><strong>ACID</strong>:原子性，一致性，隔离性，持久性    </li>
-<li><strong>RDBMS的规范</strong>：<br><strong>1NF</strong>：数据具有原子性，有主键<br><strong>2NF</strong>：任何非关键列完全依赖关键列（不存在部分函数依赖）<br><strong>3NF</strong>：任何非关键列不以来其他非关键列（不存在传递函数依赖）  <blockquote>
-<p>字符一般加引号，列名不加</p>
-</blockquote>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/正则表达式/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/正则表达式/" itemprop="url">正则表达式</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-20T00:03:56+08:00">
-                2018-11-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="导语"><a href="#导语" class="headerlink" title="导语"></a>导语</h4><p>正则表达式的作用：  </p>
-<ul>
-<li>测试字符串内的模式  </li>
-<li>替换文本  </li>
-<li>基于模式匹配从字符串中提取子字符串  </li>
-</ul>
-<h4 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h4><blockquote>
-<p>正则表达式的各组成部分可以是单个字符、字符集、字符范围或在几个字符之间选择。 也可以是这些组成部分的任意组合。   </p>
-</blockquote>
-<p>写完第一步是需要测试的，这里提供一个在线测试网站<a href="http://www.regexplanet.com/advanced/java/index.html" target="_blank" rel="noopener">RegexPlaner</a>  </p>
-<p>以下是个人常用的(具体的看<a href="https://msdn.microsoft.com/zh-cn/library/ae5bf541(v=vs.100" target="_blank" rel="noopener">官方文档</a>.aspx))</p>
-<ol>
-<li>通过在一对分隔符之间放置表达式的各种组成部分，就可以构建正则表达式  <pre><code>       /expression/  
-</code></pre></li>
-<li>最简单的正则表达式是与搜索字符串相比较的单个普通字符。 例如，单字符正则表达式 A 会始终匹配字母 A，无论其会出现在搜索字符串的哪个位置。  <pre><code>      /A/  
-      /a/  
-      /123/  
-</code></pre></li>
-<li><p>元字符    </p>
-<ul>
-<li><code>.</code>:匹配除换行符以外的任意字符  </li>
-<li><code>\w</code>:匹配字母或数字或下划线或汉字  </li>
-<li><code>\s</code>:匹配任意的空白符  </li>
-<li><code>\d</code>:匹配任意数字  </li>
-<li><code>\b</code>：匹配单词的开始和结束  </li>
-<li><code>^</code>:字符串的开始  </li>
-<li><code>￥</code>：字符串的结束        </li>
-<li>当然如果你字符串中本来就有这些符号，就可以使用\来进行转义<code>.</code>，如<code>*</code>就应该写成<br>E.G:<br><code>\ba\w*\b</code>匹配以字母a开头的单词——先是某个单词开始处(\b)，然后是字母a,然后是任意数量的字母或数字(\w)，最后是单词结束处(\b)。<br><code>\d+</code>匹配1个或更多连续的数字。这里的+是和<em>类似的元字符，不同的是</em>匹配重复任意次(可能是0次)，而+则匹配重复1次或更多次。<br>元字符<code>^</code>（和数字6在同一个键位上的符号）和<script type="math/tex">`都匹配一个位置，这和`\b`有点类似。`^`匹配你要用来查找的字符串的开头，`</script>匹配结尾。比如一个网站如果要求你填写的QQ号必须为5位到12位数字时，可以使用：<code>^\d{5,12}$</code>          </li>
-</ul>
-</li>
-<li><p>限定符  </p>
-<ul>
-<li><code>*</code>:匹配零次或多次前面的字符或子表达式  </li>
-<li><code>+</code>:  匹配一次或多次前面的字符或子表达式</li>
-<li><code>?</code>:匹配零次或一次</li>
-<li><code>{n}</code>:  匹配N次</li>
-<li><code>{n,}</code>:  匹配N或更多次</li>
-<li><code>{n,m}</code>:  匹配N到M次<br>E.G: <code>Linux\d+</code>:匹配Linux之后跟的一个或多个数字  </li>
-</ul>
-</li>
-<li><p>字符类<br>如果你想匹配没有预定义元字符的字符集合(比如元音字母a,e,i,o,u),你只需要在方括号里列出它们就行了，像[aeiou]就匹配任何一个英文元音字母，[.?!]匹配标点符号(.或?或!)。  </p>
-<ul>
-<li>[0-9]:匹配任意一个数字，类似于<code>\d</code>  </li>
-<li>[a-z]&amp;[A-Z]:匹配任意一个小写字母&amp;大写字母<br>E.G：<br><code>/(?0\d{2}[) -]?\d{8}</code>:就可以匹配(010)88886666，或022-22334455，或02912345678之类的。首先使用\对<code>(</code>进行转义，然后匹配一个或没有0，再接着两个数字，<code>[)-]</code>则匹配一次<code>) or -</code>这两个符号，最后再加上<code>\d{8}</code>匹配八位数字  </li>
-</ul>
-</li>
-<li><p>反义<br>有时需要查找不属于某个能简单定义的字符类的字符。比如想查找除了数字以外，其它任意字符都行的情况，这时需要用到反义。  </p>
-<ul>
-<li>\W:匹配任意不是字母，数字，下划线，汉字的字符  </li>
-<li>\S:匹配任意不是空白符的字符<br>…  </li>
-<li><sup><a href="#fn_z" id="reffn_z">z</a></sup>:匹配除了z以外的任意字符  </li>
-</ul>
-</li>
-<li><p>分支条件 .<br>正则表达式里的分枝条件指的是有几种规则，如果满足其中任意一种规则都应该当成匹配，具体方法是用<code>|</code>把不同的规则分隔开。<br>E.G:</p>
-<ul>
-<li><code>0\d{2}-\d{8}|0\d{3}-\d{7}</code>这个表达式能匹配两种以连字号分隔的电话号码：一种是三位区号，8位本地号(如010-12345678)，一种是4位区号，7位本地号(0376-2233445)    </li>
-<li><code>\d{5}-\d{4}|\d{5}</code>这个表达式用于匹配美国的邮政编码。美国邮编的规则是5位数字，或者用连字号间隔的9位数字。之所以要给出这个例子是因为它能说明一个问题：使用分枝条件时，要注意各个条件的顺序。如果你把它改成<code>\d{5}|\d{5}-\d{4}</code>的话，那么就只会匹配5位的邮编(以及9位邮编的前5位)。原因是匹配分枝条件时，将会从左到右地测试每个条件，如果满足了某个分枝的话，就不会去再管其它的条件了。    </li>
-</ul>
-</li>
-<li>分组<br>前面我们看到单个字符数字等可以重复，其实多个也是可以的，这就需要使用分组啦<br>E.G:<br><code>((2[0-4]\d|25[0-5]|[01]?\d\d?)\.){3}(2[0-4]\d|25[0-5]|[01]?\d\d?)</code>：匹配IP地址，自己领会~</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/11/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/11/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1907,7 +2098,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-count">114</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
