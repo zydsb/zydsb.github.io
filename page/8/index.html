@@ -242,6 +242,358 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Seaborn-relationships/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Seaborn-relationships/" itemprop="url">Seaborn-relationships</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-09T23:27:39+08:00">
+                2019-01-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="写在最前"><a href="#写在最前" class="headerlink" title="写在最前"></a>写在最前</h1><blockquote>
+<p>Seaborn is a Python data visualization library based on matplotlib. It provides a high-level interface for drawing attractive and informative statistical graphics.</p>
+</blockquote>
+<p>内容来自于<a href="https://seaborn.pydata.org/tutorial.html" target="_blank" rel="noopener">Seaborn官方教程</a></p>
+<h2 id="可视化统计关系"><a href="#可视化统计关系" class="headerlink" title="可视化统计关系"></a>可视化统计关系</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line">%matplotlib inline</span><br><span class="line">sns.set(style=<span class="string">"darkgrid"</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>replot()</li>
+<li>lineplot()</li>
+<li>scatterplot()</li>
+</ul>
+<h3 id="用散点图关联变量"><a href="#用散点图关联变量" class="headerlink" title="用散点图关联变量"></a>用散点图关联变量</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tips = sns.load_dataset(<span class="string">"tips"</span>)   <span class="comment"># load_dateset()是从在线存储库加载数据集，极大方便了练习</span></span><br><span class="line">tips.head()</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>total_bill</th>
+      <th>tip</th>
+      <th>sex</th>
+      <th>smoker</th>
+      <th>day</th>
+      <th>time</th>
+      <th>size</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>16.99</td>
+      <td>1.01</td>
+      <td>Female</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>10.34</td>
+      <td>1.66</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>21.01</td>
+      <td>3.50</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>23.68</td>
+      <td>3.31</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>24.59</td>
+      <td>3.61</td>
+      <td>Female</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.relplot(x=<span class="string">"total_bill"</span>, y=<span class="string">"tip"</span>, data=tips)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x1a1ff4a4e0&gt;
+</code></pre><p><img src="output_7_1.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.relplot(x=<span class="string">"total_bill"</span>, y=<span class="string">"tip"</span>,hue=<span class="string">'size'</span>, data=tips) <span class="comment">#hue参数对输入的变量进行分组，生成的不同的颜色</span></span><br></pre></td></tr></table></figure>
+<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x1a1fbbdc88&gt;
+</code></pre><p><img src="output_8_1.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.relplot(x=<span class="string">"total_bill"</span>, y=<span class="string">"tip"</span>,hue=<span class="string">'size'</span>,size=<span class="string">'size'</span>,sizes=(<span class="number">15</span>,<span class="number">100</span>),data=tips)  <span class="comment"># size,sizes一般搭配使用</span></span><br></pre></td></tr></table></figure>
+<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x1a203be5f8&gt;
+</code></pre><p><img src="output_9_1.png" alt="png"></p>
+<blockquote>
+<p>下面这个分组画图感觉会很有用,col参数决定行，row参数决定列</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.relplot(x=<span class="string">"total_bill"</span>, y=<span class="string">"tip"</span>,hue=<span class="string">'size'</span>,size=<span class="string">'size'</span>,sizes=(<span class="number">15</span>,<span class="number">50</span>),col=<span class="string">'time'</span>,data=tips)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x1a205eb1d0&gt;
+</code></pre><p><img src="output_11_1.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.relplot(x=<span class="string">"total_bill"</span>, y=<span class="string">"tip"</span>,hue=<span class="string">'size'</span>,size=<span class="string">'size'</span>,sizes=(<span class="number">15</span>,<span class="number">50</span>),col=<span class="string">'time'</span>,row=<span class="string">'sex'</span>,data=tips)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x1a209b8ef0&gt;
+</code></pre><p><img src="output_12_1.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.relplot(x=<span class="string">"total_bill"</span>, y=<span class="string">"tip"</span>,hue=<span class="string">'time'</span>,col =<span class="string">'time'</span>,palette = [<span class="string">'b'</span>,<span class="string">'r'</span>],data=tips) <span class="comment">#指定绘图的颜色</span></span><br></pre></td></tr></table></figure>
+<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x1a21a2b390&gt;
+</code></pre><p><img src="output_13_1.png" alt="png"></p>
+<h3 id="线图表示连续性"><a href="#线图表示连续性" class="headerlink" title="线图表示连续性"></a>线图表示连续性</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">#lineplot()函数的很多参数其实和replot()一致，hue|size|col之类的，可以参考</span></span><br><span class="line"></span><br><span class="line">df = pd.DataFrame(dict(time=np.arange(<span class="number">500</span>),value=np.random.randn(<span class="number">500</span>).cumsum()))</span><br><span class="line">sns.relplot(x=<span class="string">'time'</span>,y=<span class="string">'value'</span>,kind=<span class="string">'line'</span>,data=df)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x1a22642c88&gt;
+</code></pre><p><img src="output_15_1.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.lineplot(x=<span class="string">'time'</span>,y=<span class="string">'value'</span>,data=df)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a22879c18&gt;
+</code></pre><p><img src="output_16_1.png" alt="png"></p>
+<h3 id="聚合和表示不确定性"><a href="#聚合和表示不确定性" class="headerlink" title="聚合和表示不确定性"></a>聚合和表示不确定性</h3><p>如果<code>x</code>变量出现多次，那么seaborn会通过绘制平均值周围的其和95％置信区间来聚合每个值的多个测量值</p>
+<blockquote>
+<p>这个对于不同的数据集是需要适应其变化的，假设是时间密集型的数据集，那么就需要禁用他们</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fmri = sns.load_dataset(<span class="string">"fmri"</span>)</span><br><span class="line">sns.relplot(x=<span class="string">"timepoint"</span>, y=<span class="string">"signal"</span>, kind=<span class="string">"line"</span>, data=fmri)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x1a229c42b0&gt;
+</code></pre><p><img src="output_19_1.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#特别是对于较大的数据，可以通过绘制标准偏差而不是置信区间来表示每个时间点的分布扩散</span></span><br><span class="line">sns.relplot(x=<span class="string">"timepoint"</span>, y=<span class="string">"signal"</span>, kind=<span class="string">"line"</span>,ci=<span class="string">'sd'</span>,data=fmri)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x1a22b6ce10&gt;
+</code></pre><p><img src="output_20_1.png" alt="png"></p>
+<h3 id="用语义映射绘制数据子集"><a href="#用语义映射绘制数据子集" class="headerlink" title="用语义映射绘制数据子集"></a>用语义映射绘制数据子集</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fmri.head()</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>subject</th>
+      <th>timepoint</th>
+      <th>event</th>
+      <th>region</th>
+      <th>signal</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>s13</td>
+      <td>18</td>
+      <td>stim</td>
+      <td>parietal</td>
+      <td>-0.017552</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>s5</td>
+      <td>14</td>
+      <td>stim</td>
+      <td>parietal</td>
+      <td>-0.080883</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>s12</td>
+      <td>18</td>
+      <td>stim</td>
+      <td>parietal</td>
+      <td>-0.081033</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>s11</td>
+      <td>18</td>
+      <td>stim</td>
+      <td>parietal</td>
+      <td>-0.046134</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>s10</td>
+      <td>18</td>
+      <td>stim</td>
+      <td>parietal</td>
+      <td>-0.037970</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.relplot(x=<span class="string">"timepoint"</span>, y=<span class="string">"signal"</span>, hue=<span class="string">"event"</span>, kind=<span class="string">"line"</span>, data=fmri);</span><br></pre></td></tr></table></figure>
+<p><img src="output_23_0.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.lineplot(x=<span class="string">'timepoint'</span>,y=<span class="string">'signal'</span>,hue=<span class="string">'region'</span>,style=<span class="string">'event'</span>,data=fmri)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a23077320&gt;
+</code></pre><p><img src="output_24_1.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#标识子集</span></span><br><span class="line">sns.relplot(x=<span class="string">"timepoint"</span>, y=<span class="string">"signal"</span>, hue=<span class="string">"region"</span>, style=<span class="string">"event"</span>,</span><br><span class="line">            dashes=<span class="keyword">False</span>, markers=<span class="keyword">True</span>, kind=<span class="string">"line"</span>, marker =<span class="keyword">True</span>,data=fmri);</span><br></pre></td></tr></table></figure>
+<p><img src="output_25_0.png" alt="png"></p>
+<blockquote>
+<p>还可以单独绘制每个采样单位，而无需通过语义区分它们。这可以避免使图例混乱</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sns.relplot(x=<span class="string">"timepoint"</span>, y=<span class="string">"signal"</span>, hue=<span class="string">"region"</span>,</span><br><span class="line">            units=<span class="string">"subject"</span>, estimator=<span class="keyword">None</span>,</span><br><span class="line">            kind=<span class="string">"line"</span>, data=fmri.query(<span class="string">"event == 'stim'"</span>))</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x1a234eef98&gt;
+</code></pre><p><img src="output_27_1.png" alt="png"></p>
+<blockquote>
+<p>默认<code>lineplot()</code>的色彩映射和图例的处理还取决于色调语义是分类还是数字</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dots = sns.load_dataset(<span class="string">"dots"</span>).query(<span class="string">"align == 'dots'"</span>)</span><br><span class="line">sns.relplot(x=<span class="string">"time"</span>, y=<span class="string">"firing_rate"</span>,</span><br><span class="line">            hue=<span class="string">"coherence"</span>, style=<span class="string">"choice"</span>,</span><br><span class="line">            kind=<span class="string">"line"</span>, data=dots)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x1a2370e7b8&gt;
+</code></pre><p><img src="output_29_1.png" alt="png"></p>
+<h3 id="用日期数据绘图"><a href="#用日期数据绘图" class="headerlink" title="用日期数据绘图"></a>用日期数据绘图</h3><p>线图通常用于可视化与实际日期和时间相关的数据。这些函数以原始格式将数据传递给底层的matplotlib函数，因此他们可以利用matplotlib在tick标签中设置日期格式的功能。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">df = pd.DataFrame(dict(time=pd.date_range(<span class="string">"2017-1-1"</span>, periods=<span class="number">500</span>),</span><br><span class="line">                       value=np.random.randn(<span class="number">500</span>).cumsum()))</span><br><span class="line">g = sns.relplot(x=<span class="string">"time"</span>, y=<span class="string">"value"</span>, kind=<span class="string">"line"</span>, data=df)</span><br><span class="line">g.fig.autofmt_xdate()</span><br></pre></td></tr></table></figure>
+<p><img src="output_32_0.png" alt="png"></p>
+<h3 id="Showing-multiple-relationships-with-facets"><a href="#Showing-multiple-relationships-with-facets" class="headerlink" title="Showing multiple relationships with facets"></a>Showing multiple relationships with facets</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sns.relplot(x=<span class="string">"timepoint"</span>, y=<span class="string">"signal"</span>, hue=<span class="string">"subject"</span>,</span><br><span class="line">            col=<span class="string">"region"</span>, row=<span class="string">"event"</span>, height=<span class="number">3</span>,</span><br><span class="line">            kind=<span class="string">"line"</span>, estimator=<span class="keyword">None</span>, data=fmri);</span><br></pre></td></tr></table></figure>
+<p><img src="output_34_0.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sns.relplot(x=<span class="string">"timepoint"</span>, y=<span class="string">"signal"</span>, hue=<span class="string">"event"</span>, style=<span class="string">"event"</span>,</span><br><span class="line">            col=<span class="string">"subject"</span>, col_wrap=<span class="number">5</span>,</span><br><span class="line">            height=<span class="number">3</span>, aspect=<span class="number">.75</span>, linewidth=<span class="number">2.5</span>,</span><br><span class="line">            kind=<span class="string">"line"</span>, data=fmri.query(<span class="string">"region == 'frontal'"</span>));</span><br></pre></td></tr></table></figure>
+<p><img src="output_35_0.png" alt="png"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://snailed.cn/ch08-数据可视化/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -9870,153 +10222,6 @@ array([1.2 , 3.25, 4.1 ])
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/TF-IDF/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/TF-IDF/" itemprop="url">浅识TF-IDF</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-25T01:16:46+08:00">
-                2018-12-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="写在最前"><a href="#写在最前" class="headerlink" title="写在最前"></a>写在最前</h4><p>关于TF-IDF算法本是我九月组内分享会的内容，前段时间看《数学之美》的时候又重新看到。虽然在实战中使用的机会很少，但是不妨碍我们去感受去理解这些简洁却有力量的思想。</p>
-<h4 id="什么是TF和IDF"><a href="#什么是TF和IDF" class="headerlink" title="什么是TF和IDF"></a>什么是TF和IDF</h4><ul>
-<li>TF:词频(term frequency),即一个词语出现在一篇文章的频率，计算方式很简单：词频=某个词在文章中的出现次数/文章的总词数</li>
-<li>IDF:逆文本频率(inverse document frequency)，是一个词语的普遍重要性的度量，逆文本频率=log(语料库的文档总数/包含该词的文档数+1)</li>
-</ul>
-<p>TF-IDF = TF * IDF </p>
-<p>某一特定文件内的高词语频率，以及该词语在整个文件集合中的低文件频率，可以产生出高权重的TF-IDF。因此，TF-IDF倾向于过滤掉常见的词语，保留重要的词语。</p>
-<p>具体公式可以参见<a href="https://zh.wikipedia.org/wiki/Tf-idf" target="_blank" rel="noopener">维基百科</a></p>
-<h4 id="简单应用"><a href="#简单应用" class="headerlink" title="简单应用"></a>简单应用</h4><p>TF-IDF 思想及其简单，但是应用起来威力就很大，下面我们来看一个判断句子相关性的例子：</p>
-<ul>
-<li>str0:’今天中午的螃蟹真好吃’</li>
-<li>str1:’今天中午的大闸蟹真难吃’</li>
-</ul>
-<h5 id="分词"><a href="#分词" class="headerlink" title="分词"></a>分词</h5><p>首先我们需要对句子进行分词处理，网上有很多优秀的资源，比如<a href="https://github.com/fxsjy/jieba" target="_blank" rel="noopener">结巴中文分词</a>，这里我们从简~</p>
-<p>str0:[‘今天’,’中午’,’的’,’螃蟹’,’真’,’好吃’]<br>str1:[‘今天’,’中午’,’的’,’大闸蟹’,’真’,’难吃’]</p>
-<h5 id="构建词向量"><a href="#构建词向量" class="headerlink" title="构建词向量"></a>构建词向量</h5><p>对我们分词的结果取set(),那么我们可以得到[‘今天’,’中午’,’的’,’螃蟹’,’大闸蟹’,’真’,’好吃’,’难吃’]这个词组。我们分别对str0和str1构建词向量，结果为</p>
-<ul>
-<li>str0=[1,1,1,1,0,1,1,0]</li>
-<li>str1=[1,1,1,0,1,1,0,1]</li>
-</ul>
-<h5 id="计算相关性"><a href="#计算相关性" class="headerlink" title="计算相关性"></a>计算相关性</h5><p>数学上我们学过向量空间的余弦相似度，在这里就派上了大用场。最简单的例子，若两条直线的余弦为0，表示不相关；若为-1，则表示完全相反。即余弦相似度越大，其内容的相似度越高，其推广到多维空间也是成立的。</p>
-<p>公式和计算过程就省略一下,计算结果是0.677,相关系数还蛮高的</p>
-<p>更多内容参考<a href="https://www.cnblogs.com/chaosimple/archive/2013/06/28/3160839.html" target="_blank" rel="noopener">这里</a></p>
-<h5 id="更多应用"><a href="#更多应用" class="headerlink" title="更多应用"></a>更多应用</h5><ul>
-<li>论文检索</li>
-<li>新闻的分类</li>
-<li>用户画像</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -10069,7 +10274,7 @@ array([1.2 , 3.25, 4.1 ])
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">106</span>
+                  <span class="site-state-item-count">107</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
