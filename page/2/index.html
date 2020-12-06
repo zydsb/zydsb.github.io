@@ -242,6 +242,174 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/了解逻辑回归/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/了解逻辑回归/" itemprop="url">了解逻辑回归</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-08T00:00:00+08:00">
+                2019-10-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="什么是逻辑回归"><a href="#什么是逻辑回归" class="headerlink" title="什么是逻辑回归"></a>什么是逻辑回归</h2><p>逻辑回归是最简单的分类算法之一，简单但是好用。</p>
+<h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><h3 id="Sigmoid-函数"><a href="#Sigmoid-函数" class="headerlink" title="Sigmoid 函数"></a>Sigmoid 函数</h3><p>对于二分类问题来说，sigmoid 函数可以较为平滑地处理 01 瞬时阶跃问题。其计算公式为：</p>
+<script type="math/tex; mode=display">
+\sigma(z) = \frac {1} {1+e^{-z}}</script><p>图像为：</p>
+<p><img src="/Users/zhangyangfenbi.com/Desktop/code/my_blog/source/_posts/了解逻辑回归/sigmoid.png" alt="Sigmoid"></p>
+<p>当然我们也可以利用这个工具来可视化地了解 <a href="https://www.desmos.com/calculator/bgontvxotm" target="_blank" rel="noopener">sigmoid 函数</a>。总所周知，分类的时候会处理多个特征，那我们可以对于每一个特征 $x_i$ 乘以一个回归系数 $w_i$ ，得到 $z=w_0x_0+w_1x_0+…+w_nx_n$ ，即</p>
+<script type="math/tex; mode=display">
+z=w^Tx</script><p>可以很明显地看到，sigmoid 函数的值域是 $(0,1)$ ，且 $z$ 的值越大，则样本 $x_i$ 表示正例的概率越大，反之同理。$z$ 是一个线性函数，后面会经常用到。</p>
+<h4 id="定义条件概率"><a href="#定义条件概率" class="headerlink" title="定义条件概率"></a>定义条件概率</h4><p>在 $x_i$ 出现的情况下，原本为正的条件概率为：</p>
+<script type="math/tex; mode=display">
+P(Y=1|X= \vec x) = \sigma (z)</script><p>在 $x_i$ 出现的情况下，原本为负的条件概率为：</p>
+<script type="math/tex; mode=display">
+P(Y=1|X= \vec x) = 1 - \sigma (z)</script><p>那么条件概率既是：</p>
+<script type="math/tex; mode=display">
+P(Y=y|X= \vec x) = {\sigma(z)}^y \cdot (1-y) \cdot {(1-\sigma(z))}^{(1-y)}</script><h4 id="几率相关"><a href="#几率相关" class="headerlink" title="几率相关"></a>几率相关</h4><p>事件发生的几率等于该事件发生的概率除以不发生的概率</p>
+<script type="math/tex; mode=display">
+odds =  \frac {p}{1-p}</script><p>那么对数几率则是：</p>
+<script type="math/tex; mode=display">
+log(odds) = log(\frac{p}{1-p})</script><p>对于 LR 而言，则输出 $Y=1$ 的对数几率则是：</p>
+<script type="math/tex; mode=display">
+log(odds) = log(\frac{\sigma(z)}{1-\sigma(z)}) = z = w^{T}x</script><p>即输出 $Y=1$ 的对数几率是由输入 $x$ 表示的线性模型。 </p>
+<h4 id="导函数形式"><a href="#导函数形式" class="headerlink" title="导函数形式"></a>导函数形式</h4><script type="math/tex; mode=display">
+\sigma(z)' = (\frac {1} {1+e^{-z}})' =1+e^{-z})^{-2} \cdot e^{-z} =\sigma(z) \cdot (1 - \sigma(z))</script><h3 id="梯度"><a href="#梯度" class="headerlink" title="梯度"></a>梯度</h3><blockquote>
+<p>梯度的本意是一个向量（矢量），表示某一函数在该点处的方向导数沿着该方向取得最大值，即函数在该点处沿着该方向（此梯度的方向）变化最快，变化率最大（为该梯度的模）</p>
+</blockquote>
+<p>回顾一下梯度的计算公式：</p>
+<script type="math/tex; mode=display">
+{\displaystyle \nabla f={\begin{pmatrix}{\frac {\partial f}{\partial x}},{\frac {\partial f}{\partial y}},{\frac {\partial f}{\partial z}}\end{pmatrix}}={\frac {\partial f}{\partial x}}\mathbf {i} +{\frac {\partial f}{\partial y}}\mathbf {j} +{\frac {\partial f}{\partial z}}\mathbf {k} }</script><p>其中 <strong>i</strong>, <strong>j</strong>, <strong>k</strong> 为标准的单位向量，分别指向 <em>x</em>, <em>y</em> 跟 <em>z</em> 坐标的方向。</p>
+<h4 id="梯度下降法"><a href="#梯度下降法" class="headerlink" title="梯度下降法"></a>梯度下降法</h4><p>参考维基百科<a href="[https://zh.wikipedia.org/wiki/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95](https://zh.wikipedia.org/wiki/梯度下降法">梯度下降法</a>)</p>
+<h4 id="局部最优现象"><a href="#局部最优现象" class="headerlink" title="局部最优现象"></a>局部最优现象</h4><p>梯度下降的最终点不一定是全局最优点，所以初始点的点选择对最终结果有很大程度影响。</p>
+<h2 id="LR-原理"><a href="#LR-原理" class="headerlink" title="LR 原理"></a>LR 原理</h2><h3 id="LR-的工作原理"><a href="#LR-的工作原理" class="headerlink" title="LR 的工作原理"></a>LR 的工作原理</h3><ol>
+<li><p>初始化每一个回归系数为1</p>
+</li>
+<li><p>重复计算R次：</p>
+<ul>
+<li><p>计算整个数据集的梯度</p>
+</li>
+<li><p>使用 步长 x 梯度，更新回归系数</p>
+</li>
+</ul>
+</li>
+<li><p>更新回归系数</p>
+</li>
+</ol>
+<h3 id="LR-算法特点"><a href="#LR-算法特点" class="headerlink" title="LR 算法特点"></a>LR 算法特点</h3><p>优点：简单好用</p>
+<p>缺点：容易欠拟合，分类精度可能不高</p>
+<h3 id="LR-实现"><a href="#LR-实现" class="headerlink" title="LR 实现"></a>LR 实现</h3><h4 id="sigmoid函数"><a href="#sigmoid函数" class="headerlink" title="sigmoid函数"></a>sigmoid函数</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sigmoid</span><span class="params">(z)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span> / ( <span class="number">1</span> + math.exp(-z) )</span><br></pre></td></tr></table></figure>
+<h4 id="梯度上升"><a href="#梯度上升" class="headerlink" title="梯度上升"></a>梯度上升</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gradasend</span><span class="params">()</span>:</span></span><br><span class="line">  <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<h4 id="核心代码"><a href="#核心代码" class="headerlink" title="核心代码"></a>核心代码</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">lr</span><span class="params">()</span>:</span></span><br><span class="line">  <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<h2 id="LR实战"><a href="#LR实战" class="headerlink" title="LR实战"></a>LR实战</h2>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://snailed.cn/《日本纪行》/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1531,142 +1699,6 @@ F(n) = max(F(n-1)+x_{n},x_{n}) \\
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/星星与雪花/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/星星与雪花/" itemprop="url">星星与雪花</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-22T10:51:37+08:00">
-                2019-08-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="星型模型"><a href="#星型模型" class="headerlink" title="星型模型"></a>星型模型</h4><p>中央表包含事实数据，多个表以中央表为中心呈放射状分布，它们通过数据库的主键和外键相互连接，是一种使用关系数据库实现多维分析空间的模式，其基本形式必须实现多维空间，以使用关系数据库的基本功能。同时星型模型也是一种非正规化的模型，多维数据集的每一个维度直接与事实表连接，没有渐变维度，所以存在冗余数据。在星型模型中，只需要扫描事实表就可以进行查询，主要的数据都在庞大的事实表中，所以查询效率较高，同时每个维度表和事实表关联，非常直观，很容易组合出各种查询。</p>
-<p><strong>特点</strong>：</p>
-<ul>
-<li>只有一个事实表</li>
-<li>事实表中的每一个元组都是一个外键指向维度表的主键。</li>
-<li>维度表的信息组成这个维度的全部信息</li>
-<li>事实表与维度表通过主键外键相关联，维度表之间没有关联，就像很多星星围绕在一个恒星周围，故取名为星形模型</li>
-</ul>
-<p><strong>优点</strong>：</p>
-<ul>
-<li>模型简单</li>
-<li>查询效率较高</li>
-</ul>
-<h4 id="雪花模型"><a href="#雪花模型" class="headerlink" title="雪花模型"></a>雪花模型</h4><p>雪花模型在星型模型的基础上，维度表进一步规范化为子维度表，这些子维度表没有直接与事实表连接，而是通过其他维度表连接到事实表上，看起来就像一片雪花，故称雪花模型。也就是说雪花模型是星型模型的进一步扩展，将其维度表扩展为更小的维度表，形成一种层次。这样就通过最大限度的减少数据存储量以及联合较小的维度表来改善查询性能，且去除了星型模型中的冗余数据。</p>
-<h4 id="星座模型"><a href="#星座模型" class="headerlink" title="星座模型"></a>星座模型</h4><p>星座模型其实是更复杂的星型模型：多张事实表，维度表公用。</p>
-<p>这个其实更贴近于现实的使用情况。</p>
-<h4 id="看个图"><a href="#看个图" class="headerlink" title="看个图"></a>看个图</h4><p>星型模型和雪花模型<br><img src="starandsnow.png" alt="星星与雪花"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1719,7 +1751,7 @@ F(n) = max(F(n-1)+x_{n},x_{n}) \\
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">107</span>
+                  <span class="site-state-item-count">108</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
