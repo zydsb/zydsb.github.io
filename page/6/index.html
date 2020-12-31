@@ -242,6 +242,134 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/读《愿生命从容》/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/读《愿生命从容》/" itemprop="url">读《愿生命从容》</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-12T00:22:32+08:00">
+                2019-05-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>太久没有更新博客了，前一个月忙其他事情， 学习的时间变少了…</p>
+<p>这段时间正在学习php和重学Python，此不提。</p>
+<p>贵司七月要请周国平来搞讲座课，为了了解下，读了其散文集《愿生命从容》。读毕，对其前三节观点还是很有认同感的，后面的一些东西我经验不够，暂时不提。</p>
+<ul>
+<li>善良 - 来自于人与人之间的同情，要做一个善良的人</li>
+<li>丰富 - 精神世界的乐趣远大于肉体的享受，大概是要有一个有趣的灵魂的意思吧：）</li>
+<li>高贵 - 人与人之间的尊重，不仅仅限于对个人的尊重，而是对每个人做的每件事，都应当客观地尊重。纵然其有好有坏，自然会有其或好或坏的结果</li>
+</ul>
+<p>纵观下来，有很浓的鸡汤味，不过偶尔的鸡汤，还是很乐意接受的。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://snailed.cn/理解虚数i/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1452,145 +1580,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Spark学习笔记之RDD依赖/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/Spark学习笔记之RDD依赖/" itemprop="url">Spark学习笔记之RDD依赖</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-26T23:58:39+08:00">
-                2019-02-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="依赖关系"><a href="#依赖关系" class="headerlink" title="依赖关系"></a>依赖关系</h3><p>RDD是一个粗粒度的数据集，什么都可以往里面放，而且前面我们知道了转化操作会生成新的RDD，由此形成了RDD之间就形成了前后依赖关系，RDD和它依赖的父RDD（s）的关系有两种不同的类型，即窄依赖（narrow dependency）和宽依赖（wide dependency），如下图。</p>
-<p><img src="rdd_dependcy.png" alt="RDD依赖"></p>
-<p>从图中可知：</p>
-<p><strong>窄依赖</strong>：指每个父RDD的一个Partition最多被一个子RDD的Partition所使用，比如filter,union,map等操作都会产生窄依赖，也有说法是‘独生子女’</p>
-<p><strong>宽依赖</strong>：指一个父RDD的一个Partition被多个子RDD的Partition所使用，比如groupByKey(),reduceByKey(),sortByKey()等都会产生宽依赖，超生。</p>
-<p>对于join操作有两种情况：</p>
-<ul>
-<li>如果两个RDD在进行join操作时，一个RDD的partition仅仅和另一个RDD中已知个数的Partition进行join，那么这种类型的join操作就是窄依赖，如图中左半部分的join操作</li>
-<li>其它情况的join操作就是宽依赖，由于是需要父RDD的所有partition进行join的转换，这就涉及到了shuffle，因此这种类型的join操作也是宽依赖</li>
-</ul>
-<p>总结一下：</p>
-<blockquote>
-<p>我们使用父RDD的Partition被子RDD的Partition所使用的个数来决定依赖关系，即：如果父RDD的一个Partition被子RDD的一个Partition所使用就是窄依赖，否则的话就是宽依赖。同时一个子RDD的Partition可以依赖多个父RDD的Partition,只要关系数量确定，也为窄依赖。<br>具体解释为：即子RDD的partition对父RDD依赖的Partition的数量不会随着RDD数据规模的改变而改变。即无论是有100T的数据量还是1P的数据量，在窄依赖中，子RDD所依赖的父RDD的partition的个数是确定的，而宽依赖是shuffle级别的，数据量越大，那么子RDD所依赖的父RDD的个数就越多，从而子RDD所依赖的父RDD的partition的个数也会变得越来越多。</p>
-</blockquote>
-<h3 id="数据流图"><a href="#数据流图" class="headerlink" title="数据流图"></a>数据流图</h3><p>Spark根据RDD之间的依赖关系来为计算任务生成不同的阶段。由于窄依赖间的依赖关系是确定的，其转换处理可以在同一个线程里完成，因此窄依赖会被Spark划分到同一个Stage里面；宽依赖则只能等父RDD的shuffle流程处理完之后，在下一个stage才能开始接下来的计算。</p>
-<p><img src="RDD_DAG.png" alt="RDD数据流"></p>
-<p><strong>因此Spark划分stage的思路是:</strong>从后往前推，遇到宽依赖就断开划分为一个新的Stage，遇到窄依赖就将这个RDD加入该stage中。</p>
-<blockquote>
-<p>因此如图所示，A为一个单独的Stage,CDEF均为窄依赖，为一个stage,BF为一个stage</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1643,7 +1632,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">114</span>
+                  <span class="site-state-item-count">115</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1656,7 +1645,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">39</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

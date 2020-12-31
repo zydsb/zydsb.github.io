@@ -242,6 +242,156 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/动态规划基本概念/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/动态规划基本概念/" itemprop="url">动态规划基本概念</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-06T23:18:21+08:00">
+                2019-09-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>我们先看一个问题：</p>
+<p><strong>有一座高度是10级台阶的楼梯，从下往上走，每跨一步只能向上1级或者2级台阶。要求用程序来求出一共有多少种走法。</strong></p>
+<p>这个问题暴力求解是可以，但是不够美。我们从动态规划的角度来理解下。</p>
+<blockquote>
+<p>动态规划（ DP ）是一种分阶段求解决策问题的数学思想。总结起来就是一句话，大事化小，小事化了。</p>
+</blockquote>
+<h2 id="问题建模"><a href="#问题建模" class="headerlink" title="问题建模"></a>问题建模</h2><hr>
+<p><strong>假如用户最后只差一步就可以走完整个楼梯，根据条件我们知道，这个时候会有两种情况出现</strong></p>
+<ul>
+<li>用户在还差一级台阶，9 -&gt; 10</li>
+<li>用户还差两级台阶，8 -&gt; 10</li>
+</ul>
+<p>意味着我们只要知道了前九级和前八级分别需要多少种走法，即可知道走完十级需要多少种走法。</p>
+<p>现在假设$F(n)$表示到第$n$个台阶一共的走法，即：<script type="math/tex">F(10) = F(9) + F(8)</script></p>
+<p>同理可得，假设用户还差一步可以走到第九级，那么：<script type="math/tex">F(9) = F(8) + F(7)</script><br>…<br>到最后：<script type="math/tex">F(3) = F(2) + F(1)</script></p>
+<p>当只有1级台阶和2级台阶时走法很明显，即$ F(1) = 1,F(2) = 2$。现在我们已经成功地把一个复杂地问题简单化啦，这就是动态规划。</p>
+<p>最后我们可以得到归纳出以下公式$F$：</p>
+<script type="math/tex; mode=display">\begin{cases}
+    F(1) = 1 \\
+    F(2) = 2 \\
+    F(n) = F(n-1) + F(n-2)\\
+\end{cases}</script><p><strong>动态规划中包含三个重要的概念，最优子结构、边界、状态转移公式</strong></p>
+<ul>
+<li>上面问题中，我们知道了$F(10) = F(9) + F(8)$，后两者就是前者的最优子结构。</li>
+<li>$F(1)$和$F(2)$我们已经不需要简化，这个我们称之为边界。</li>
+<li>$F$就是状态转移公式。</li>
+</ul>
+<h2 id="问题代码实现"><a href="#问题代码实现" class="headerlink" title="问题代码实现"></a>问题代码实现</h2><hr>
+<p>使用<strong>递归</strong>的方法去做：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calcWalkWays</span><span class="params">(n)</span>:</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> n == <span class="number">1</span>:</span><br><span class="line">		<span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">	<span class="keyword">if</span> n == <span class="number">2</span>:</span><br><span class="line">		<span class="keyword">return</span> <span class="number">2</span></span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">		<span class="keyword">return</span> calcWalkWays(n<span class="number">-1</span>) + calcWalkWays(n<span class="number">-2</span>)</span><br></pre></td></tr></table></figure></p>
+<p>使用<strong>dp</strong>的方法去做：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calcWalkWays</span><span class="params">(n)</span>:</span></span><br><span class="line">	dp = [<span class="number">0</span> <span class="keyword">for</span> k <span class="keyword">in</span> range(n)]</span><br><span class="line">	dp[<span class="number">0</span>],dp[<span class="number">1</span>] = <span class="number">1</span>,<span class="number">2</span></span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>,n):</span><br><span class="line">		dp[i] = dp[i<span class="number">-1</span>] + dp[i<span class="number">-2</span>]</span><br><span class="line">	<span class="keyword">return</span> dp[<span class="number">-1</span>]</span><br></pre></td></tr></table></figure></p>
+<p>两种方法都可以取得正确答案，但是第二种明显会快很多，这个可以自己去测试一下。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://snailed.cn/中文书写的一些规范与参考/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1501,165 +1651,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/KNN原理与实现/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/KNN原理与实现/" itemprop="url">KNN原理与实现</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-21T18:07:16+08:00">
-                2019-08-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="KNN原理"><a href="#KNN原理" class="headerlink" title="KNN原理"></a>KNN原理</h3><p>k 近邻算法的输入为实例的特征向量，对应于特征空间的点；输出为实例的类别，可以取多类。k 近邻算法假设给定一个训练数据集，其中的实例类别已定。分类时，对新的实例，根据其 k 个最近邻的训练实例的类别，通过多数表决等方式进行预测。因此，k近邻算法不具有显式的学习过程。</p>
-<p>简单来说就是：我们想要知道研究的对象属于什么分类，我们只需要知道距离这个对象最近的K个对象里面，哪一个分类占比最大，那么该对象就属于这个分类。</p>
-<blockquote>
-<p>近朱者赤，近墨者黑</p>
-</blockquote>
-<p>一般地距离计算公式：</p>
-<script type="math/tex; mode=display">S_{ij} = \sqrt{\sum_{1}^{n}(X_{i}-X_{j})^2}</script><h3 id="实际使用"><a href="#实际使用" class="headerlink" title="实际使用"></a>实际使用</h3><ul>
-<li>收集数据：任何方法</li>
-<li>准备数据：距离计算所需要的数值，最好是结构化的数据格式</li>
-<li>分析数据：任何方法</li>
-<li>训练算法：此步骤不适用于 k-近邻算法</li>
-<li>测试算法：计算错误率</li>
-<li>使用算法：输入样本数据和结构化的输出结果，然后运行 k-近邻算法判断输入数据分类属于哪个分类，最后对计算出的分类执行后续处理</li>
-</ul>
-<p>我们尽量把过程可视化，这样方便我们比较直观地区理解，代码使用 Jupyter Notebook 编辑。</p>
-<h4 id="step1-引入数据"><a href="#step1-引入数据" class="headerlink" title="step1 引入数据"></a>step1 引入数据</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib </span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> datasets</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">%matplotlib inline </span><br><span class="line"></span><br><span class="line"><span class="comment"># 导入数据，从 seaborn 中导入「鸢尾花」数据</span></span><br><span class="line">dataset = sns.load_dataset(<span class="string">'Iris'</span>)</span><br><span class="line"><span class="comment"># 因为有多组特征，但是这里是举例子，且为了可视化，我们取前两个特征</span></span><br><span class="line"><span class="comment"># DataFrame 获取特定列方法 df[['a','b']]  | df.loc[:,['a',b]]</span></span><br><span class="line">dataset2 = dataset[[<span class="string">'species'</span>,<span class="string">'sepal_length'</span>,<span class="string">'sepal_width'</span>]] </span><br><span class="line">sns.relplot(x=<span class="string">'sepal_length'</span>,y=<span class="string">'sepal_width'</span>,hue=<span class="string">'species'</span>,data=dataset2)</span><br></pre></td></tr></table></figure>
-<p>输出如下：<br><img src="p1.png" alt=""></p>
-<p>图片还是有点复杂，随意取 setosa 和 versicolor</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dataset3 = dataset.loc[:,[<span class="string">'species'</span>,<span class="string">'sepal_length'</span>,<span class="string">'sepal_width'</span>]] </span><br><span class="line"><span class="comment"># virginica先不看</span></span><br><span class="line">dataset3 = dataset3[ dataset3[<span class="string">'species'</span>] != <span class="string">'virginica'</span>]</span><br><span class="line">sns.relplot(x=<span class="string">'sepal_length'</span>,y=<span class="string">'sepal_width'</span>,hue=<span class="string">'species'</span>,data=dataset3)</span><br></pre></td></tr></table></figure>
-<p>输出如下：<br><img src="p2.png" alt=""></p>
-<h4 id="step2-划分测试集和训练集"><a href="#step2-划分测试集和训练集" class="headerlink" title="step2 划分测试集和训练集"></a>step2 划分测试集和训练集</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 拆分数据,重新命令一下列名,查看一下测试集和训练集的分布</span></span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="comment"># dataset3先放着吧</span></span><br><span class="line">dataset4 = dataset3</span><br><span class="line"></span><br><span class="line"><span class="comment"># 划分测试集和训练集</span></span><br><span class="line">species_train , species_test  = train_test_split(dataset4[<span class="string">'species'</span>],test_size=<span class="number">0.2</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这里取个巧，因为数据量小，还是放到一起，比较好画图</span></span><br><span class="line">dataset4[<span class="string">'type'</span>] = dataset4[<span class="string">'species'</span>]</span><br><span class="line">dataset4[<span class="string">'type'</span>][species_test.index] = <span class="string">'test'</span></span><br><span class="line"></span><br><span class="line">sns.relplot(x=<span class="string">'sepal_length'</span>,y=<span class="string">'sepal_width'</span>,hue=<span class="string">'type'</span>,data=dataset3)</span><br></pre></td></tr></table></figure>
-<p>输出如下：<br><img src="p3.png" alt=""></p>
-<h4 id="step3-训练数据"><a href="#step3-训练数据" class="headerlink" title="step3 训练数据"></a>step3 训练数据</h4><p><code>knn</code>没有训练这一步</p>
-<h4 id="step4-预测数据"><a href="#step4-预测数据" class="headerlink" title="step4 预测数据"></a>step4 预测数据</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># KNN其实灭有训练的过程， 计算即可，但是为了符合标准流程，试一试</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> sklearn.neighbors <span class="keyword">import</span> KNeighborsClassifier</span><br><span class="line"></span><br><span class="line">data = dataset4 <span class="comment"># 复制一份最终的数据</span></span><br><span class="line"></span><br><span class="line">data_train = data[data[<span class="string">'type'</span>]!=<span class="string">'test'</span>]</span><br><span class="line">data_test = data[data[<span class="string">'type'</span>] == <span class="string">'test'</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 sklearn knn算法模型进行训练和预测</span></span><br><span class="line">knn = KNeighborsClassifier(n_neighbors=<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#length_train = data[data['type'] == 'test']['sepal_length'].values</span></span><br><span class="line"><span class="comment">#width_train = data[data['type'] == 'test']['sepal_width'].values</span></span><br><span class="line"></span><br><span class="line">knn.fit(data_train[[<span class="string">'sepal_length'</span>,<span class="string">'sepal_width'</span>]],data_train[<span class="string">'species'</span>])</span><br><span class="line">data_test[<span class="string">'type'</span>] = knn.predict(data_test[[<span class="string">'sepal_length'</span>,<span class="string">'sepal_width'</span>]])  <span class="comment">#这里灭有对齐</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 展示一下分类的结果，如下图所示，基本和 dataset3 一致</span></span><br><span class="line">data_res = pd.concat([data_train,data_test],axis=<span class="number">0</span>)</span><br><span class="line">sns.relplot(x=<span class="string">'sepal_length'</span>,y=<span class="string">'sepal_width'</span>,hue=<span class="string">'type'</span>,data=data_res)</span><br></pre></td></tr></table></figure>
-<p>输出如下：<br><img src="p4.png" alt=""></p>
-<p>可以看到，预测十分准确（主要是因为数据太干净太好了）</p>
-<h3 id="knn-简单实现"><a href="#knn-简单实现" class="headerlink" title="knn 简单实现"></a>knn 简单实现</h3><p>根据开头说的原理，我们可以给出一个很简单的实现，理解处理过程即可，细节灭有深究。<br>主要有三步：</p>
-<ol>
-<li>计算新数据与样本数据集中每条数据的距离。</li>
-<li>对求得的所有距离进行排序（从小到大，越小表示越相似）。</li>
-<li>取前 k （k 一般小于等于 20 ）个样本数据对应的分类标签。</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">myKnn</span>:</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,neighbor)</span>:</span></span><br><span class="line">        self.neighbor = neighbor</span><br><span class="line">        self.x = <span class="keyword">None</span> </span><br><span class="line">        self.y = <span class="keyword">None</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">fit</span><span class="params">(self,x,y)</span>:</span></span><br><span class="line">        <span class="comment"># knn 并灭有训练过程, 所以简单地对样本赋值即可</span></span><br><span class="line">        self.x = x</span><br><span class="line">        self.y = y </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_predict</span><span class="params">(self,x)</span>:</span></span><br><span class="line">        <span class="string">'''</span></span><br><span class="line"><span class="string">        核心步骤，寻找单个对象所属分类</span></span><br><span class="line"><span class="string">        '''</span></span><br><span class="line">        <span class="comment"># 计算欧式距离,如果点过多，则计算量会很大</span></span><br><span class="line">        distance = [sqrt(np.sum(i-x)**<span class="number">2</span>)  <span class="keyword">for</span> i <span class="keyword">in</span> self.x]</span><br><span class="line">        <span class="comment"># 返回排序后的下标</span></span><br><span class="line">        sorted_distance = np.argsort(distance) </span><br><span class="line">        <span class="comment"># 找到K个邻居</span></span><br><span class="line">        neighbor_index = sorted_distance[:self.neighbor]</span><br><span class="line">        neighbor_x = self.y[neighbor_index]</span><br><span class="line">        <span class="comment"># 找到K个邻居中最大的标识</span></span><br><span class="line">        <span class="keyword">return</span> Counter(neighbor_x).most_common(<span class="number">1</span>)[<span class="number">0</span>][<span class="number">0</span>]</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">predict</span><span class="params">(self,x_predict)</span>:</span></span><br><span class="line">        <span class="string">'''</span></span><br><span class="line"><span class="string">        多次调用单个对象的分类，即可实现多个样本的分类</span></span><br><span class="line"><span class="string">        '''</span></span><br><span class="line">        y_predict = [self._predict(x) <span class="keyword">for</span> x <span class="keyword">in</span> x_predict]</span><br><span class="line">        <span class="keyword">return</span> np.array(y_predict)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">score</span><span class="params">(y_predict,y_test)</span>:</span></span><br><span class="line">        right = <span class="number">0</span> </span><br><span class="line">        length = len(y_test)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(length):</span><br><span class="line">            <span class="keyword">if</span> y_predict[i] == y_test[i]:</span><br><span class="line">                right += <span class="number">1</span> </span><br><span class="line">        <span class="keyword">return</span> right  </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">show_neighbor</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(self.neighbor)</span><br></pre></td></tr></table></figure>
-<h4 id="数据的归一化问题"><a href="#数据的归一化问题" class="headerlink" title="数据的归一化问题"></a>数据的归一化问题</h4><p>假设我们的数据，一个特征是数字极大但另一个特征特别小，那么我们计算的时候，对象间的距离就会被数字大的特征影响，导致结果不准确。所以我们要使用归一化的方法来处理。<br>max-min 归一化：</p>
-<script type="math/tex; mode=display">X = \frac {(x - x.min)} {(x.max - x.min)}</script><p>$Z$归一化：</p>
-<script type="math/tex; mode=display">Z = \frac {x-\mu} {\sigma}</script><h3 id="knn-调参"><a href="#knn-调参" class="headerlink" title="knn 调参"></a>knn 调参</h3><p>k 是最重要的一个参数，一般建议是 k 小于20，鉴于数据量小，我们可以暴力的遍历一下来看看不同 k 值的表现</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 参考 In[243] 代码 , 获取测试集和训练集</span></span><br><span class="line"></span><br><span class="line">x_test = data_test[[<span class="string">'sepal_length'</span>,<span class="string">'sepal_width'</span>]]</span><br><span class="line">y_test = data_test[<span class="string">'species'</span>]</span><br><span class="line"></span><br><span class="line">x = data[[<span class="string">'sepal_length'</span>,<span class="string">'sepal_width'</span>]]</span><br><span class="line">y = data[<span class="string">'species'</span>]</span><br><span class="line"></span><br><span class="line">length = len(y_test)</span><br><span class="line">y_tmp = np.array(y_test)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 循环十次，找到最佳的K值</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">10</span>):</span><br><span class="line">    right = <span class="number">0</span> </span><br><span class="line">    <span class="comment"># 初始化对象</span></span><br><span class="line">    knnme = myKnn(neighbor=i)</span><br><span class="line">    knnme.fit(x.values,y.values)</span><br><span class="line">    y_predict = knnme.predict(x_test.values)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 计算正确率，以此来打分</span></span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> range(length):</span><br><span class="line">        <span class="keyword">if</span> y_predict[k] == y_tmp[k]:</span><br><span class="line">            right += <span class="number">1</span> </span><br><span class="line">        </span><br><span class="line">    print(i,right/length)</span><br></pre></td></tr></table></figure>
-<p>输出忽略，结论是 k = 3 或者 k = 5 时正确率最高。</p>
-<p>当然了一个算法不会如此简单，也还有其他参数，比如说【距离的权重】等等，后面还得细细看</p>
-<h3 id="knn-的优缺点"><a href="#knn-的优缺点" class="headerlink" title="knn 的优缺点"></a>knn 的优缺点</h3><p>优点：精度高、对异常值不敏感、无数据输入假定<br>缺点：计算复杂度高、空间复杂度高<br>适用数据范围：数值型和标称型</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1712,7 +1703,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">114</span>
+                  <span class="site-state-item-count">115</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1725,7 +1716,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">39</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
