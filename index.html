@@ -242,6 +242,158 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/《假设检验中用到的基础知识与变量》/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/《假设检验中用到的基础知识与变量》/" itemprop="url">《假设检验中用到的基础知识与变量》</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-08-21T16:30:12+08:00">
+                2022-08-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>实验组 $X<em>{1}$ ，样本数 $n</em>{1}$ ，样本均值  $\overline x<em>{1}$  ,总体均值 $u</em>{1}$ ，总体方差 $\sigma^{2}<em>{1}$  ，同理对于对照组 $X</em>{0}$  也有此变量。<br> 实验中我们假设 $X,Y$ 是满足独立同分布（iid）的，样本量也基本远远大于 30 ，所以根据中心极限定理可得：</p>
+<script type="math/tex; mode=display">
+ \bar{x} \sim N\left(\mu_{1}, \frac{\sigma_{1}^{2}}{n_{1}}\right), \bar{y} \sim N\left(\mu_{0}, \frac{\sigma_{0}^{2}}{n_{0}}\right)</script><p> 中心极限定理，变量 $X$ 独立同分布且有公共的期望和方差，则 ：</p>
+<script type="math/tex; mode=display">
+ \lim _{n \rightarrow \infty} \frac{1}{\sqrt{n} \sigma}\left(X_{1}+\cdots+X_{n}-n \mu\right)=\Phi(x)</script><p> 其中 $\Phi(x)$  为标准正态分布，则可以反推出</p>
+<script type="math/tex; mode=display">
+ \sum_{i=1}^{n}X_{i} \sim N(n\mu,n\sigma^{2})</script><p> 又因为</p>
+<script type="math/tex; mode=display">
+ {1 \over n }\sum_{i=1}^{n}X_{i}  = \overline x</script><p> 所以由（2）（3）（4） 可得（1）<br> 同时也有通俗理解，即对于整体做足够多次数的抽样，其均值的分布服从以总体均值和方差为参数的正态分布<br> 零假设：</p>
+<script type="math/tex; mode=display">
+ H_{0}:\left|\frac{\mu_{1}-\mu_{0}}{\mu_{0}}\right| \leq \delta</script><p> $\delta$ 可以理解为业务上想要的相对提升，称之为业务敏感度，不过这里为什么零假设会是小于等于 $\delta$  呢？<br> 因为零假设一般是我们希望证明其为错误的假设（即业务上这个变动没有用），通过严格控制显著性水平（一般 0.05 ），我们就可以通过拒绝零假设进而选择我们的备择假设 （变动有用）<br>显著检验<br>当 $\delta = 0 $  的时候，为显著检验，零假设则为 $H<em>{0}: \mu</em>{1}-\mu<em>{0}=0$ ,备择假设为 $H</em>{1}: \mu<em>{1}-\mu</em>{0} \neq 0$ ，可得：</p>
+<script type="math/tex; mode=display">
+ \bar{x}_{1}-\bar{x}_{0} \sim N\left(\mu_{1}-\mu_{0}, \frac{\sigma_{0}^{2}}{n_{0}}+\frac{\sigma_{1}^{2}}{n_{1}}\right)</script><p> 因为我们的 $\bar{x}<em>{1},\bar{x}</em>{0} $ 均为正态分布，从数学上可以证明两个或者多个独立的正态分布相加或者相减，其分布依旧为正态分布，由此得到我们的统计检验量：</p>
+<script type="math/tex; mode=display">
+ t=\frac{\bar{x}_{1}-\bar{x}_{0}}{\sqrt{\frac{\sigma_{0}^{2}}{n_{0}}+\frac{\sigma_{1}^{2}}{n_{1}}}}</script><p> 则可以得到：</p>
+<script type="math/tex; mode=display">
+ \frac{\bar{x}_{1}-\bar{x}_{0}-\left(\mu_{1}-\mu_{0}\right)}{\sqrt{\frac{\sigma_{0}^{2}}{n_{0}}+\frac{\sigma_{1}^{2}}{n_{1}}}} \sim N(0,1)</script><p> 从图片来理解:<br> <img src="/Users/freyyzhang/Desktop/X 平台假设检验学习/截屏2021-12-21 下午8.59.19.png" alt="截屏2021-12-21 下午8.59.19"><br> 所以此时我们只需要计算出统计检验量的样本观察值即可判断是否拒绝零假设。当然这里是双侧置信区间，也还有单侧置信区间，这里不表。<br>P值<br>P值：由检验统计量的样本观察值得出的原假设可被拒绝的最小显著性水平。或者也可以理解为：</p>
+<script type="math/tex; mode=display">
+ P{当 H_{0} 为真时拒绝 H_{0}}<= \alpha $$ 即公式表达为$P\left(t>Z_{1-\frac{\mathrm{e}}{2}} \mid H_{0}\right) \times 2$，展开则为：</script><p> p= \begin{cases}\left(1-\Phi\left(\frac{\bar{x}<em>{1}-\bar{x}</em>{0}}{\sqrt{\frac{\sigma<em>{0}^{2}}{n</em>{0}}+\frac{\sigma<em>{1}^{2}}{n</em>{1}}}}\right)\right) \times 2 &amp; , t \geq 0 \ \Phi\left(\frac{\overline{x<em>{1}-\bar{x}</em>{0}}}{\sqrt{\frac{\sigma<em>{0}^{2}}{\overline{n</em>{0}}}+\frac{\sigma<em>{1}^{2}}{n</em>{1}}}}\right) \times 2 &amp; , t&lt;0\end{cases}</p>
+<script type="math/tex; mode=display">
+ 画个图通俗理解下，这里的 $p，\alpha$ 个人理解都是代表了概率，拒绝 $H_{0}$ 的 情况下 $p$ 的概率小于显著性水平，即落在了拒绝域上面。
+ ![image-20211221211051783](/Users/freyyzhang/Library/Application Support/typora-user-images/image-20211221211051783.png)
+power
+统计功效：不犯第二类错误的概率
+ 画图理解：
+ ![image-20211221221340925](/Users/freyyzhang/Library/Application Support/typora-user-images/image-20211221221340925.png)
+ 所以我们统计功效的计算公式则为 $1-\beta$ 的概率：</script><p> \begin{aligned}<br> \operatorname{power}\left(h<em>{1}\right) &amp;=P\left(t&gt;Z</em>{1-\frac{\alpha}{2}} \mid H<em>{1}\right)+P\left(tZ</em>{1-\frac{\alpha}{2}} \mid H<em>{1}\right)+P\left(\frac{\bar{x}</em>{1}-\bar{x}<em>{0}}{\sqrt{\frac{\sigma</em>{0}^{2}}{n<em>{0}}+\frac{\sigma</em>{1}^{2}}{n<em>{1}}}Z</em>{1-\frac{g}{2}} \mid H<em>{1}}\right)+P\left(\frac{\bar{x}</em>{1}-\bar{x}<em>{0}-h</em>{1}+h<em>{1}}{\sqrt{\frac{\sigma</em>{0}^{2}}{n<em>{0}}+\frac{\sigma</em>{1}^{2}}{n<em>{1}}}}Z</em>{1-\frac{\alpha}{2}}-\frac{h<em>{1}}{\sqrt{\frac{\sigma</em>{0}^{2}}{n<em>{0}}+\frac{\sigma</em>{1}^{2}}{n<em>{1}}}} \mid H</em>{1}\right)+P\left(\frac{\bar{x}<em>{1}-\bar{x}</em>{0}-h<em>{1}}{\sqrt{\frac{\sigma</em>{0}^{2}}{n<em>{0}}+\frac{\sigma</em>{1}^{2}}{n<em>{1}}}}&lt;Z</em>{\frac{\alpha}{2}}-\frac{h<em>{1}}{\sqrt{\frac{\sigma</em>{0}^{2}}{n<em>{0}}+\frac{\sigma</em>{1}^{2}}{n<em>{1}}}} \mid H</em>{1}\right) \<br> &amp;=1-\Phi\left(Z<em>{1-\frac{\alpha}{2}}-\frac{h</em>{1}}{\sqrt{\frac{\sigma<em>{0}^{2}}{n</em>{0}}+\frac{\sigma<em>{1}^{2}}{n</em>{1}}}}\right)+\Phi\left(Z<em>{\frac{\alpha}{2}}-\frac{h</em>{1}}{\sqrt{\frac{\sigma<em>{0}^{2}}{n</em>{0}}+\frac{\sigma<em>{1}^{2}}{n</em>{1}}}}\right) \approx 1-\Phi\left(Z<em>{1-\frac{\alpha}{2}}-\frac{\left|h</em>{1}\right|}{\sqrt{\frac{\sigma<em>{0}^{2}}{n</em>{0}}+\frac{\sigma<em>{1}^{2}}{n</em>{1}}}}\right)<br> \end{aligned}</p>
+<script type="math/tex; mode=display">
+ 其中 $h_{1} $ 表示$ u_{1} - u_{0} $ 的真实差异值。
+ 等效检验推导基本同理。
+最小样本数的推导
+依然以双样本显著性检验举例，实际情况中为了便于计算，我们可以假设不同组的样本量大小和方差一致，即 $n_{0}=n_{1}=n, \sigma=\sigma_{0}=\sigma_{1}$</script><p> \begin{aligned}<br> &amp;1-\beta \approx 1-\Phi\left(Z<em>{1-\frac{\alpha}{2}}-\frac{\Delta}{\sqrt{\frac{\sigma</em>{0}^{2}}{n<em>{0}}+\frac{\sigma</em>{1}^{2}}{n<em>{1}}}}\right) \<br> &amp;\beta=\Phi\left(Z</em>{1-\frac{\alpha}{2}}-\frac{\Delta}{\sqrt{\frac{\sigma<em>{0}^{2}}{n</em>{0}}+\frac{\sigma<em>{1}^{2}}{n</em>{1}}}}\right) \<br> &amp;Z<em>{\beta}=Z</em>{1-\frac{\alpha}{2}}-\frac{\Delta}{\sqrt{\frac{\sigma<em>{0}^{2}}{n</em>{0}}+\frac{\sigma<em>{1}^{2}}{n</em>{1}}}} \<br> &amp;n=2 \times\left(\frac{\sigma \cdot\left(Z<em>{1-\alpha / 2}-Z</em>{\beta}\right)}{\Delta}\right)^{2}<br> \end{aligned}</p>
+<p> $$<br> 这里的公式 2 到公式 3 是从概率值到 $Z$ 分布值等价映射，因为 $\phi(x)$ 本身就表示了标准正态分布。<br> 单侧检验推导过程同理。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://snailed.cn/《MMD》/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1701,178 +1853,6 @@ L_{2} = \sum_{l=1}^{n}|x_{i}^{l} - x_{j}^{l}|^{ 1 \over 2}</script><h4 id="K-值
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/ch2-感知机/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/ch2-感知机/" itemprop="url">ch2-感知机</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-12-06T15:24:39+08:00">
-                2020-12-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="感知机"><a href="#感知机" class="headerlink" title="感知机"></a>感知机</h3><p>定义如下：</p>
-<script type="math/tex; mode=display">
-sign(x)=
-\left\{
-\begin{array}{ll}+1,& x \geq 0\\
--1,& x < 0
-\end{array}
-\right.</script><h4 id="线性可分性"><a href="#线性可分性" class="headerlink" title="线性可分性"></a>线性可分性</h4><p>给定一个数据集 $T$ ，存在一个超平面 $S$ ，满足能够将数据集的正实例点和负实例点完全正确地划分到超平面两侧，则称此数据集是线性可分的。</p>
-<h4 id="感知机的损失函数"><a href="#感知机的损失函数" class="headerlink" title="感知机的损失函数"></a>感知机的损失函数</h4><p>由超平面 $S$ 的方程 $wx+b$ 可以得到对于任意一个点，到超平面的距离是</p>
-<script type="math/tex; mode=display">
-\frac{1}{||w||} \cdot | wx + b|</script><p>其中 $\frac{1}{||w||}$ 是 L2 范数。</p>
-<p>那么对于某一误分类点，则有：</p>
-<script type="math/tex; mode=display">
-- \frac{y_{i}}{||w||} |wx+b| > 0</script><p>考虑所有误分类点，则有：</p>
-<script type="math/tex; mode=display">
-- \sum_{i=1}^{n} \frac{y_{i}}{||w||} (wx+b)</script><p>我们忽略 $\frac{1}{||w||}$ ，则得到了感知机算法的损失函数：</p>
-<script type="math/tex; mode=display">
-- \sum_{i=1}^{n} y_{i} (wx_{i}+b)</script><p>使用随机梯度下降算法对损失函数进行最优化。</p>
-<h4 id="训练过程"><a href="#训练过程" class="headerlink" title="训练过程"></a>训练过程</h4><p>输出：参数 $w,b$ </p>
-<script type="math/tex; mode=display">
-f(x) = sign (wx+b)</script><ol>
-<li><p>选取初始值 $w<em>{0}$ , $b</em>{0}$ （一般默认为 0 ）</p>
-</li>
-<li><p>在训练集中选取数据 $(x<em>{i},y</em>{i})$</p>
-</li>
-<li><p>如果 $y<em>{i}(w \cdot x</em>{i} + b) &lt;= 0$ 则：</p>
-<script type="math/tex; mode=display">w \gets w +\eta x_{i} y_{i} \\ b \gets b + \eta y_{i}</script></li>
-<li><p>重复步骤 2 和 3 ，直到完全分类未知。</p>
-</li>
-</ol>
-<h4 id="算法的收敛性"><a href="#算法的收敛性" class="headerlink" title="算法的收敛性"></a>算法的收敛性</h4><p>对于线性可分的数据集，感知机算法是收敛的。</p>
-<script type="math/tex; mode=display">
-k <= (\frac{R}{\gamma})^2</script><p>其中 $R=max|x_{i}|$ , $\gamma &gt; 0$ 。</p>
-<h4 id="感知机的对偶形式"><a href="#感知机的对偶形式" class="headerlink" title="感知机的对偶形式"></a>感知机的对偶形式</h4><p>我们知道利用随机梯度函数优化的时候，有：</p>
-<script type="math/tex; mode=display">
-w \gets w +\eta x_{i} y_{i}</script><script type="math/tex; mode=display">
-b \gets b + \eta y_{i}</script><p>这里我们可以知道每次修改的量都是一定的，这里我们定义 $\alpha<em>{i} = n</em>{i} \cdot \gamma$ , 其中 $n_{i}$ 表示该点被选择了第 $i$ 次，那么</p>
-<script type="math/tex; mode=display">
-w = \sum_{i=1}^{N} \alpha_{i}x_{i}y_{i}</script><script type="math/tex; mode=display">
-b = \sum_{i=1}^{N} \alpha_{i} y_{i}</script><p>这样，则模型变为：</p>
-<script type="math/tex; mode=display">
-f(x) = sign( \sum_{i=1}^{N} \alpha_{i}x_{i}y_{i} \cdot x + \sum_{i=1}^{N} \alpha_{i} y_{i})</script><p>其中我们只需要对 $\alpha_{i}$ 进行迭代就好了,训练步骤基本同上。</p>
-<p>那我们为什么要对偶形式呢？疑问我们可以看到 $f(x)$ 中样本点的特征向量以内积的形式存在，如果我们可以提前计算好，那么就可以大大滴加快训练速度。</p>
-<h5 id="Gram-矩阵"><a href="#Gram-矩阵" class="headerlink" title="Gram 矩阵"></a>Gram 矩阵</h5><script type="math/tex; mode=display">
-G_{ij}=x_{i} \cdot  x_{j}</script><h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>感知机学习算法是基于<strong>随机梯度下降法</strong>的对损失函数的最优化算法，有对偶形式，算法简单。若数据集线性可分，则感知机是收敛的</p>
-<h3 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h3><ol>
-<li><p>初始点的选择对随机梯度下降算法的影响。</p>
-<p>如果算法是收敛的，那么可能存在多个解。</p>
-</li>
-</ol>
-<h3 id="作业题"><a href="#作业题" class="headerlink" title="作业题"></a>作业题</h3><p>Q：感知机为什么线性不可分？</p>
-<p>A: 因为 XOR 的训练集线性不可分。坐标轴上点 （0，0） = （1,1） = 1 ， （0，1） = （1,0 ） = 0 ，此时异或无法线性可分。</p>
-<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p>很好地一篇学习笔记: <a href="https://www.zybuluo.com/ArrowLLL/note/827264" target="_blank" rel="noopener">感知机学习笔记</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1925,7 +1905,7 @@ G_{ij}=x_{i} \cdot  x_{j}</script><h4 id="总结"><a href="#总结" class="heade
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">119</span>
+                  <span class="site-state-item-count">120</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

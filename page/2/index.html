@@ -242,6 +242,178 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/ch2-感知机/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/ch2-感知机/" itemprop="url">ch2-感知机</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-12-06T15:24:39+08:00">
+                2020-12-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="感知机"><a href="#感知机" class="headerlink" title="感知机"></a>感知机</h3><p>定义如下：</p>
+<script type="math/tex; mode=display">
+sign(x)=
+\left\{
+\begin{array}{ll}+1,& x \geq 0\\
+-1,& x < 0
+\end{array}
+\right.</script><h4 id="线性可分性"><a href="#线性可分性" class="headerlink" title="线性可分性"></a>线性可分性</h4><p>给定一个数据集 $T$ ，存在一个超平面 $S$ ，满足能够将数据集的正实例点和负实例点完全正确地划分到超平面两侧，则称此数据集是线性可分的。</p>
+<h4 id="感知机的损失函数"><a href="#感知机的损失函数" class="headerlink" title="感知机的损失函数"></a>感知机的损失函数</h4><p>由超平面 $S$ 的方程 $wx+b$ 可以得到对于任意一个点，到超平面的距离是</p>
+<script type="math/tex; mode=display">
+\frac{1}{||w||} \cdot | wx + b|</script><p>其中 $\frac{1}{||w||}$ 是 L2 范数。</p>
+<p>那么对于某一误分类点，则有：</p>
+<script type="math/tex; mode=display">
+- \frac{y_{i}}{||w||} |wx+b| > 0</script><p>考虑所有误分类点，则有：</p>
+<script type="math/tex; mode=display">
+- \sum_{i=1}^{n} \frac{y_{i}}{||w||} (wx+b)</script><p>我们忽略 $\frac{1}{||w||}$ ，则得到了感知机算法的损失函数：</p>
+<script type="math/tex; mode=display">
+- \sum_{i=1}^{n} y_{i} (wx_{i}+b)</script><p>使用随机梯度下降算法对损失函数进行最优化。</p>
+<h4 id="训练过程"><a href="#训练过程" class="headerlink" title="训练过程"></a>训练过程</h4><p>输出：参数 $w,b$ </p>
+<script type="math/tex; mode=display">
+f(x) = sign (wx+b)</script><ol>
+<li><p>选取初始值 $w<em>{0}$ , $b</em>{0}$ （一般默认为 0 ）</p>
+</li>
+<li><p>在训练集中选取数据 $(x<em>{i},y</em>{i})$</p>
+</li>
+<li><p>如果 $y<em>{i}(w \cdot x</em>{i} + b) &lt;= 0$ 则：</p>
+<script type="math/tex; mode=display">w \gets w +\eta x_{i} y_{i} \\ b \gets b + \eta y_{i}</script></li>
+<li><p>重复步骤 2 和 3 ，直到完全分类未知。</p>
+</li>
+</ol>
+<h4 id="算法的收敛性"><a href="#算法的收敛性" class="headerlink" title="算法的收敛性"></a>算法的收敛性</h4><p>对于线性可分的数据集，感知机算法是收敛的。</p>
+<script type="math/tex; mode=display">
+k <= (\frac{R}{\gamma})^2</script><p>其中 $R=max|x_{i}|$ , $\gamma &gt; 0$ 。</p>
+<h4 id="感知机的对偶形式"><a href="#感知机的对偶形式" class="headerlink" title="感知机的对偶形式"></a>感知机的对偶形式</h4><p>我们知道利用随机梯度函数优化的时候，有：</p>
+<script type="math/tex; mode=display">
+w \gets w +\eta x_{i} y_{i}</script><script type="math/tex; mode=display">
+b \gets b + \eta y_{i}</script><p>这里我们可以知道每次修改的量都是一定的，这里我们定义 $\alpha<em>{i} = n</em>{i} \cdot \gamma$ , 其中 $n_{i}$ 表示该点被选择了第 $i$ 次，那么</p>
+<script type="math/tex; mode=display">
+w = \sum_{i=1}^{N} \alpha_{i}x_{i}y_{i}</script><script type="math/tex; mode=display">
+b = \sum_{i=1}^{N} \alpha_{i} y_{i}</script><p>这样，则模型变为：</p>
+<script type="math/tex; mode=display">
+f(x) = sign( \sum_{i=1}^{N} \alpha_{i}x_{i}y_{i} \cdot x + \sum_{i=1}^{N} \alpha_{i} y_{i})</script><p>其中我们只需要对 $\alpha_{i}$ 进行迭代就好了,训练步骤基本同上。</p>
+<p>那我们为什么要对偶形式呢？疑问我们可以看到 $f(x)$ 中样本点的特征向量以内积的形式存在，如果我们可以提前计算好，那么就可以大大滴加快训练速度。</p>
+<h5 id="Gram-矩阵"><a href="#Gram-矩阵" class="headerlink" title="Gram 矩阵"></a>Gram 矩阵</h5><script type="math/tex; mode=display">
+G_{ij}=x_{i} \cdot  x_{j}</script><h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>感知机学习算法是基于<strong>随机梯度下降法</strong>的对损失函数的最优化算法，有对偶形式，算法简单。若数据集线性可分，则感知机是收敛的</p>
+<h3 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h3><ol>
+<li><p>初始点的选择对随机梯度下降算法的影响。</p>
+<p>如果算法是收敛的，那么可能存在多个解。</p>
+</li>
+</ol>
+<h3 id="作业题"><a href="#作业题" class="headerlink" title="作业题"></a>作业题</h3><p>Q：感知机为什么线性不可分？</p>
+<p>A: 因为 XOR 的训练集线性不可分。坐标轴上点 （0，0） = （1,1） = 1 ， （0，1） = （1,0 ） = 0 ，此时异或无法线性可分。</p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p>很好地一篇学习笔记: <a href="https://www.zybuluo.com/ArrowLLL/note/827264" target="_blank" rel="noopener">感知机学习笔记</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://snailed.cn/ch1-统计学习方法概论/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1673,138 +1845,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Presto踩坑笔记/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/Presto踩坑笔记/" itemprop="url">Presto 踩坑笔记</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-28T14:25:24+08:00">
-                2019-11-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="查-MySQL-不走索引"><a href="#查-MySQL-不走索引" class="headerlink" title="查 MySQL 不走索引"></a>查 MySQL 不走索引</h2><p>查一个大表，只需要计算当天的数据，建立的联合索引里面有 <code>createdtime</code> 这个字段。但是查的时候，只限定 <code>createdtime</code> 这个字段，但是极慢没有走索引。</p>
-<p>先 Presto 查询单个订单，秒出，即索引是有效的。然后怀疑是 Presto 日期函数处理结果的问题，发现果然不对劲。我们在 SQL 利用<code>to_unixtime()</code> 函数生成的结果是 <code>timestamp</code>类型的，MySQL表中 <code>createdtime</code> 的类型是 <code>bigint</code>，而 Presto 要求<strong>类型严格</strong>，所以踩坑了。。。</p>
-<p>解决办法很简单，使用 <code>cast</code> 做一下类型转化即可</p>
-<h2 id="找不到表名"><a href="#找不到表名" class="headerlink" title="找不到表名"></a>找不到表名</h2><p>订单表命名为 <code>order</code>，在 Hive 和 MySQL 中都是使用’`’去做转义，Presto死活找不到，后来发现是使用’”‘去搞的。。。</p>
-<h2 id="存成文件查询报错"><a href="#存成文件查询报错" class="headerlink" title="存成文件查询报错"></a>存成文件查询报错</h2><p>cli 中可以无错执行，<code>presto -f</code> 则报错。</p>
-<p>若存成文件执行，要在末尾加<code>;</code>。</p>
-<h2 id="重定向内容每一段包含’”‘"><a href="#重定向内容每一段包含’”‘" class="headerlink" title="重定向内容每一段包含’”‘"></a>重定向内容每一段包含’”‘</h2><p>例如查询出来的结果像这样：<code>&quot;123&quot;,&quot;123&quot;,&quot;123&quot;</code></p>
-<p>处理的时候很不方便，可以直接使用 <code>sed</code> 命令修改文件：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> sed <span class="string">'s/要被取代的字串/新的字串/g'</span></span></span><br><span class="line">sed -i 's/","/\t/g' demo.txt</span><br><span class="line">sed -i 's/"//g' demo.txt</span><br></pre></td></tr></table></figure></p>
-<h2 id="数据量太大"><a href="#数据量太大" class="headerlink" title="数据量太大"></a>数据量太大</h2><ol>
-<li>不要选取全部字段，选自己使用的</li>
-<li>减少数据量常规方法…</li>
-<li><code>join</code> 的时候大表放在左边，Presto 默认 broadcast join，即将 join 左边的表分割到多个 worker，然后将 join 右边的表数据整个复制一份发送到每个 worker 进行计算。如果右边的表数据量太大，则可能会报内存溢出错误。</li>
-</ol>
-<h2 id="未完待续"><a href="#未完待续" class="headerlink" title="未完待续"></a>未完待续</h2>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1857,7 +1897,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">119</span>
+                  <span class="site-state-item-count">120</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
