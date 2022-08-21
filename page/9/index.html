@@ -242,6 +242,217 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/seaborn-distribution/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/seaborn-distribution/" itemprop="url">seaborn-distribution</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-10T19:12:41+08:00">
+                2019-01-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="可视化数据集的分布"><a href="#可视化数据集的分布" class="headerlink" title="可视化数据集的分布"></a>可视化数据集的分布</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> stats</span><br><span class="line">%matplotlib inline</span><br></pre></td></tr></table></figure>
+<h2 id="单变量分布"><a href="#单变量分布" class="headerlink" title="单变量分布"></a>单变量分布</h2><p>displot()函数将绘制直方图，并拟合核密度函数(KDE)</p>
+<p>x=np.random.normal(size=100)<br>sns.distplot(x)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#去除kde</span></span><br><span class="line">sns.distplot(x,kde=<span class="keyword">False</span>,rug=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a21577f60&gt;
+</code></pre><p><img src="output_4_1.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#箱子划分有多细，Seaborn会默认猜测一个，但是更好的应该由我们来指定</span></span><br><span class="line">sns.distplot(x,bins=<span class="number">20</span>,kde=<span class="keyword">False</span>,rug=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a215fdbe0&gt;
+</code></pre><p><img src="output_5_1.png" alt="png"></p>
+<h3 id="核密度函数"><a href="#核密度函数" class="headerlink" title="核密度函数"></a>核密度函数</h3><blockquote>
+<p>The kernel density estimate may be less familiar, but it can be a useful tool for plotting the shape of a distribution. Like the histogram, the KDE plots encode the density of observations on one axis with height along the other axis:</p>
+</blockquote>
+<p>简单理解为<strong>展示密度</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.distplot(x,hist=<span class="keyword">False</span>,rug=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a216fada0&gt;
+</code></pre><p><img src="output_7_1.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.kdeplot(x,shade=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a2181cd68&gt;
+</code></pre><p><img src="output_8_1.png" alt="png"></p>
+<h2 id="双变量分布"><a href="#双变量分布" class="headerlink" title="双变量分布"></a>双变量分布</h2><blockquote>
+<p>It can also be useful to visualize a bivariate distribution of two variables. The easiest way to do this in seaborn is to just use the jointplot() function, which creates a multi-panel figure that shows both the bivariate (or joint) relationship between two variables along with the univariate (or marginal) distribution of each on separate axes.</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mean, cov = [<span class="number">0</span>, <span class="number">1</span>], [(<span class="number">1</span>, <span class="number">.5</span>), (<span class="number">.5</span>, <span class="number">1</span>)]</span><br><span class="line">data = np.random.multivariate_normal(mean, cov, <span class="number">200</span>)</span><br><span class="line">df = pd.DataFrame(data, columns=[<span class="string">"x"</span>, <span class="string">"y"</span>])</span><br><span class="line">df.head()</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>x</th>
+      <th>y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.620467</td>
+      <td>2.511505</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-0.529253</td>
+      <td>0.247477</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-1.361914</td>
+      <td>0.225665</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>-1.188358</td>
+      <td>0.785273</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1.158663</td>
+      <td>0.180673</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.jointplot(x=<span class="string">'x'</span>,y=<span class="string">'y'</span>,data=df)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;seaborn.axisgrid.JointGrid at 0x1a21b3a668&gt;
+</code></pre><p><img src="output_11_1.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x, y = np.random.multivariate_normal(mean, cov, <span class="number">1000</span>).T</span><br><span class="line"><span class="keyword">with</span> sns.axes_style(<span class="string">"white"</span>):</span><br><span class="line">    sns.jointplot(x=x, y=y, kind=<span class="string">"hex"</span>, color=<span class="string">"k"</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="output_12_0.png" alt="png"></p>
+<h3 id="Kernel-density-estimation"><a href="#Kernel-density-estimation" class="headerlink" title="Kernel density estimation"></a>Kernel density estimation</h3><p>这个和单变量分布的核密度函数差不多</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.jointplot(x=<span class="string">'x'</span>,y=<span class="string">'y'</span>,kind=<span class="string">'kde'</span>,data=df)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;seaborn.axisgrid.JointGrid at 0x1a21c534a8&gt;
+</code></pre><p><img src="output_14_1.png" alt="png"></p>
+<h2 id="可视化数据集中的成对关系"><a href="#可视化数据集中的成对关系" class="headerlink" title="可视化数据集中的成对关系"></a>可视化数据集中的成对关系</h2><p>这个没太看明白、、、</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">iris = sns.load_dataset(<span class="string">"iris"</span>)</span><br><span class="line">sns.pairplot(iris);</span><br></pre></td></tr></table></figure>
+<p><img src="output_16_0.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">g = sns.PairGrid(iris)</span><br><span class="line">g.map_diag(sns.kdeplot)</span><br><span class="line">g.map_offdiag(sns.kdeplot, n_levels=<span class="number">6</span>);</span><br></pre></td></tr></table></figure>
+<p><img src="output_17_0.png" alt="png"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://snailed.cn/seaborn-categorical/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -10379,129 +10590,6 @@ array([1.2 , 3.25, 4.1 ])
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/The-Zen-of-Python/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/The-Zen-of-Python/" itemprop="url">蛇宗三字经</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-26T00:37:28+08:00">
-                2018-12-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> this</span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">The Zen of Python, by Tim Peters</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Beautiful is better than ugly.</span></span><br><span class="line"><span class="string">Explicit is better than implicit.</span></span><br><span class="line"><span class="string">Simple is better than complex.</span></span><br><span class="line"><span class="string">Complex is better than complicated.</span></span><br><span class="line"><span class="string">Flat is better than nested.</span></span><br><span class="line"><span class="string">Sparse is better than dense.</span></span><br><span class="line"><span class="string">Readability counts.</span></span><br><span class="line"><span class="string">Special cases aren't special enough to break the rules.</span></span><br><span class="line"><span class="string">Although practicality beats purity.</span></span><br><span class="line"><span class="string">Errors should never pass silently.</span></span><br><span class="line"><span class="string">Unless explicitly silenced.</span></span><br><span class="line"><span class="string">In the face of ambiguity, refuse the temptation to guess.</span></span><br><span class="line"><span class="string">There should be one-- and preferably only one --obvious way to do it.</span></span><br><span class="line"><span class="string">Although that way may not be obvious at first unless you're Dutch.</span></span><br><span class="line"><span class="string">Now is better than never.</span></span><br><span class="line"><span class="string">Although never is often better than *right* now.</span></span><br><span class="line"><span class="string">If the implementation is hard to explain, it's a bad idea.</span></span><br><span class="line"><span class="string">If the implementation is easy to explain, it may be a good idea.</span></span><br><span class="line"><span class="string">Namespaces are one honking great idea -- let's do more of those!</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure>
-<p>翻译一下:</p>
-<p><strong>Python之禅</strong></p>
-<p>优美胜于丑陋（Python 以编写优美的代码为目标）<br>明了胜于晦涩（优美的代码应当是明了的，命名规范，风格相似）<br>简洁胜于复杂（优美的代码应当是简洁的，不要有复杂的内部实现）<br>复杂胜于凌乱（如果复杂不可避免，那代码间也不能有难懂的关系，要保持接口简洁）<br>扁平胜于嵌套（优美的代码应当是扁平的，不能有太多的嵌套）<br>间隔胜于紧凑（优美的代码有适当的间隔，不要奢望一行代码解决问题）<br>可读性很重要（优美的代码是可读的）<br>即便假借特例的实用性之名，也不可违背这些规则（这些规则至高无上）<br>不要包容所有错误，除非你确定需要这样做（精准地捕获异常，不写 except:pass 风格的代码）<br>当存在多种可能，不要尝试去猜测<br>而是尽量找一种，最好是唯一一种明显的解决方案（如果不确定，就用穷举法）<br>虽然这并不容易，因为你不是 Python 之父（这里的 Dutch 是指 Guido ）<br>做也许好过不做，但不假思索就动手还不如不做（动手之前要细思量）<br>如果你无法向人描述你的方案，那肯定不是一个好方案；反之亦然（方案测评标准）<br>命名空间是一种绝妙的理念，我们应当多加利用（倡导与号召）</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -10554,7 +10642,7 @@ array([1.2 , 3.25, 4.1 ])
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">118</span>
+                  <span class="site-state-item-count">119</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

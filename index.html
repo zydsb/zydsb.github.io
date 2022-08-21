@@ -242,6 +242,161 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/《MMD》/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/《MMD》/" itemprop="url">《MMD》</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-08-21T16:07:53+08:00">
+                2022-08-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在论文 <a href="https://dl.acm.org/doi/10.5555/2503308.2188410" target="_blank" rel="noopener">A kernel two-sample test</a> 中 MMD 被首次提出，用于衡量两个样本是否来自于同一个分布，换而言之，分布 p 和分布 q 是否是同分布的。</p>
+<h3 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h3><p>在日常的统计分析中，我们通过分布的概率密度函数 f(x) 去描述概率的分布，一些比较常见的分布如正态分布等，我们可以通过均值和方差就完成描述，但是更加复杂的分布则不行。</p>
+<p>此时我们通过分布的中心矩来描述，比如一阶中心矩就是均值，二阶中心矩就是方差，三阶则是偏度，四阶则是峰度，还可以有更高的矩。此时，如果两个分布的矩很相似或者相同的话，我们就可以认为两个分布是一致的，就像我们判断两个人是不是亲兄弟，我们可以看长相身高，还可以去看瞳孔，甚至可以去比较 DNA 等等操作。</p>
+<p>所以我们可以理解 MMD 的基本思想为：如果两个分布的任意阶都是相同的，那么这两个分布是一致的。而如果这两个分布不相同的话，那么我们就让使两个分布距离最大的那个矩用来作为度量两个分布的标准。</p>
+<h3 id="MMD-计算"><a href="#MMD-计算" class="headerlink" title="MMD 计算"></a>MMD 计算</h3><p>MMD 的基本定义如下：</p>
+<script type="math/tex; mode=display">
+\operatorname{MMD}[\mathcal{F}, p, q]:=\sup _{f \in \mathcal{F}}\left(\mathbf{E}_{x}[f(x)]-\mathbf{E}_{y}[f(y)]\right)</script><p>其中 F 就是我们的函数集，Sup 则是求上界的意思，经验估计结果如下：</p>
+<script type="math/tex; mode=display">
+\operatorname{MMD}[\mathcal{F}, X, Y]:=\sup _{f \in \mathcal{F}}\left(\frac{1}{m} \sum_{i=1}^{m} f\left(x_{i}\right)-\frac{1}{n} \sum_{i=1}^{n} f\left(y_{i}\right)\right) .</script><p>其实光看上面的表述，我们还是一头雾水，我们来尝试理解一下;</p>
+<p>现在我们要在函数集 F 中（相当于去遍历分布的高阶矩），找到让两个分布差异最大（距离最大）的 f ，计算出 MMD 值，根据这个值去评价两个分布的差异。<br>所以这里有两个要点需要我们注意</p>
+<ul>
+<li>F 要足够多，这样才能寻找足够的高阶矩</li>
+<li>分布的距离是可以度量的</li>
+</ul>
+<p>此时，我们的 RKHS （再生核希尔伯特空间）闪亮登场，论文中证明了如果 F 是 universal RKHS 的 unit ball ，则可以比较好的满足以上两个性质。</p>
+<h4 id="核函数"><a href="#核函数" class="headerlink" title="核函数"></a>核函数</h4><p>提到 RKHS，其实这就和核函数有关了，因为我们可以简单理解为：我们使用核函数把数据映射到一个高维空间，这个空间就是再生核希尔伯特空间。</p>
+<p>这里我们简单理解下核函数：<br><img src="核函数.png" alt="核函数释义"></p>
+<p>简而言之：通过核函数，我们分布的相似程度可以通过距离来度量。</p>
+<h3 id="MMD-的计算"><a href="#MMD-的计算" class="headerlink" title="MMD 的计算"></a>MMD 的计算</h3><p>论文中也给出了我们如何进行化简计算：<br><img src="calc_1.png" alt="."><br><img src="calc_2.png" alt=".."></p>
+<p>这里的 k(x,x’) 即是我们的核函数。</p>
+<h4 id="常见核函数"><a href="#常见核函数" class="headerlink" title="常见核函数"></a>常见核函数</h4><p>主要有以下几种：</p>
+<ul>
+<li><p>线性核，就是没有映射</p>
+<script type="math/tex; mode=display">
+K(x_{1},x_{2}) = <x_{1},x_{2}></script></li>
+<li><p>高斯核函数，使用最为广泛，可以把原始特征映射到无穷维</p>
+<script type="math/tex; mode=display">
+\kappa\left(x_{1}, x_{2}\right)=\exp \left(-\frac{\left|x_{1}-x_{2}\right|^{2}}{2 \sigma^{2}}\right)</script></li>
+<li><p>多项式核函数</p>
+<script type="math/tex; mode=display">
+\kappa\left(x_{1}, x_{2}\right)=\left(\left\langle x_{1}, x_{2}\right\rangle+R\right)^{d}</script></li>
+</ul>
+<h3 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h3><p>通过 np.random.normal( ) 函数生成正态分布的数据  </p>
+<p><img src="np3.png" alt="data"></p>
+<p>测试结果：</p>
+<p><img src="np4.png" alt="res"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://snailed.cn/《PSM》/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -327,7 +482,14 @@
 <h3 id="PSM-的定义"><a href="#PSM-的定义" class="headerlink" title="PSM 的定义"></a>PSM 的定义</h3><p>PSM得分，即 e(x) 表示的是一个用户属于实验组的倾向性：<br>e(x) =Pr[T=1|X=x]<br>其中：<br>e(x)：表示一个用户属于实验组的得分。注意，这不是用户是否转化的概率！<br>X：用户的特征向量<br>T：用户是否被干预<br>Y：用户的行为结果</p>
 <p>这里的 e(x) 有两个性质，对于倾向性得分相同的用户，其 T 与 X，T 与 Y 都是独立的。所以此时我们可以不用去关心用户 X 的分布了，只需要去匹配用户的 e(x) ，就可以得到同质的实验组和对照组，继而去进行因果效应的评估。</p>
 <ul>
-<li>T 与 X 是独立的比较好理解，即我们的选择的实验组不应该与 X 有相关关系，比如一个实验：<br>  ○ T-是否给孩子吃“长高糖丸”<br>  ○ Y-实验组长高 5 cm ，对照组长高 3 cm<br>  ○ 此时 T 的选择就与 X （孩子家里的经济条件、父母重视程度）有关</li>
+<li>T 与 X 是独立的比较好理解，即我们的选择的实验组不应该与 X 有相关关系，比如一个实验：<ul>
+<li>T-是否给孩子吃“长高糖丸”</li>
+<li>Y-实验组长高 5 cm ，对照组长高 3 cm <ul>
+<li>此时 T 的选择就与 X （孩子家里的经济条件、父母重视程度）有关</li>
+</ul>
+</li>
+</ul>
+</li>
 <li>T 与 潜在结果也是独立的，即 Treatment 不影响我们的潜在结果的分布，只会影响我们的观察结果</li>
 </ul>
 <h3 id="PSM-的计算"><a href="#PSM-的计算" class="headerlink" title="PSM 的计算"></a>PSM 的计算</h3><p>这一步比较简单，我们可以使用常见机器学习算法，比如 LR 等对（X，T）进行建模，此时使用的是所有的数据，不区分实验组和对照组（因为我们整体来看，实验组的选取是随机的），输入是用户的特征 X ,训练的 label 则是用户是否被 treatment，然后可以利用训练好的模型对所有用户进行打分。</p>
@@ -1711,161 +1873,6 @@ G_{ij}=x_{i} \cdot  x_{j}</script><h4 id="总结"><a href="#总结" class="heade
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/ch1-统计学习方法概论/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/ch1-统计学习方法概论/" itemprop="url">ch1-统计学习方法概论</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-12-06T15:22:32+08:00">
-                2020-12-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="遇到的疑惑"><a href="#遇到的疑惑" class="headerlink" title="遇到的疑惑"></a>遇到的疑惑</h3><ol>
-<li><p>风险函数</p>
-<ul>
-<li><p>经验风险最小化：</p>
-<ul>
-<li>需要手动推导：模型是条件概率分布，损失函数是对数损失函数，则其经验风险最小化等价于极大似然函数。这里可以用逻辑回归举例</li>
-<li>极大似然估计的一个思想：既然发生了，那么该事件出现的概率其实就是很大的，用已经发生的事件去估计</li>
-</ul>
-</li>
-<li>未知的参数相对更为准确（频率派）</li>
-</ul>
-</li>
-</ol>
-<script type="math/tex; mode=display">
-\theta  = arg Max \quad P(X;\theta) \\ 
-= arg Max \quad \sum_{i=1}^{n} log(x_{i},\theta) \\
-=  arg Min \quad -\sum_{i=1}^{n} log(x_{i},\theta)</script><p>​     </p>
-<p>​     </p>
-<ul>
-<li><p>结构风险最小化：</p>
-<ul>
-<li>模型是条件概率分布，损失函数事对数损失函数，模型复杂度由模型的先验概率表示时。结构风险等价于最大后验概率估计</li>
-<li><p>这一点没有太理解。。</p>
-<ul>
-<li>相关链接： </li>
-</ul>
-</li>
-</ul>
-<ol>
-<li><a href="https://zhuanlan.zhihu.com/p/40024110" target="_blank" rel="noopener">极大似然和最大后延</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/32480810" target="_blank" rel="noopener">MLE与MAP</a> (ps:这篇写得更好)</li>
-</ol>
-</li>
-</ul>
-<p>先验分布是均匀分布的时候，MLE 等价于 MAP。</p>
-<h3 id="课后习题"><a href="#课后习题" class="headerlink" title="课后习题"></a>课后习题</h3><p>如上公式（1) ，已经证明。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1918,7 +1925,7 @@ G_{ij}=x_{i} \cdot  x_{j}</script><h4 id="总结"><a href="#总结" class="heade
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">118</span>
+                  <span class="site-state-item-count">119</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

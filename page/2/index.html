@@ -242,6 +242,161 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/ch1-统计学习方法概论/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/ch1-统计学习方法概论/" itemprop="url">ch1-统计学习方法概论</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-12-06T15:22:32+08:00">
+                2020-12-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="遇到的疑惑"><a href="#遇到的疑惑" class="headerlink" title="遇到的疑惑"></a>遇到的疑惑</h3><ol>
+<li><p>风险函数</p>
+<ul>
+<li><p>经验风险最小化：</p>
+<ul>
+<li>需要手动推导：模型是条件概率分布，损失函数是对数损失函数，则其经验风险最小化等价于极大似然函数。这里可以用逻辑回归举例</li>
+<li>极大似然估计的一个思想：既然发生了，那么该事件出现的概率其实就是很大的，用已经发生的事件去估计</li>
+</ul>
+</li>
+<li>未知的参数相对更为准确（频率派）</li>
+</ul>
+</li>
+</ol>
+<script type="math/tex; mode=display">
+\theta  = arg Max \quad P(X;\theta) \\ 
+= arg Max \quad \sum_{i=1}^{n} log(x_{i},\theta) \\
+=  arg Min \quad -\sum_{i=1}^{n} log(x_{i},\theta)</script><p>​     </p>
+<p>​     </p>
+<ul>
+<li><p>结构风险最小化：</p>
+<ul>
+<li>模型是条件概率分布，损失函数事对数损失函数，模型复杂度由模型的先验概率表示时。结构风险等价于最大后验概率估计</li>
+<li><p>这一点没有太理解。。</p>
+<ul>
+<li>相关链接： </li>
+</ul>
+</li>
+</ul>
+<ol>
+<li><a href="https://zhuanlan.zhihu.com/p/40024110" target="_blank" rel="noopener">极大似然和最大后延</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/32480810" target="_blank" rel="noopener">MLE与MAP</a> (ps:这篇写得更好)</li>
+</ol>
+</li>
+</ul>
+<p>先验分布是均匀分布的时候，MLE 等价于 MAP。</p>
+<h3 id="课后习题"><a href="#课后习题" class="headerlink" title="课后习题"></a>课后习题</h3><p>如上公式（1) ，已经证明。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://snailed.cn/2020观影记录/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1650,194 +1805,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Hive内置的常见算术运算符和逻辑运算符/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/Hive内置的常见算术运算符和逻辑运算符/" itemprop="url">Hive内置的常见算术运算符和逻辑运算符</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-10T11:48:26+08:00">
-                2019-10-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>在我们日常地使用中，我们经常会使用 hive 进行各种运算操作，其实这之中发生了很多 hive 数据类型之前的转换操作，比如 string + int 。今天我们来大概看一看，以便踩坑的时候可以更快地出坑。</p>
-<h2 id="基本知识"><a href="#基本知识" class="headerlink" title="基本知识"></a>基本知识</h2><p>可以先看看后面这篇文章：<a href="https://www.iteblog.com/archives/870.html" target="_blank" rel="noopener">Hive内置数据类型</a></p>
-<p>假如我们需要对两个不同数据类型的数字进行比较，一个是 int，一个是 smallint，那么在比较的时候，都会被隐式转化为 int 类型再进行比较。不顾我们不可以隐式地将一个 int 类型的数据转化成一个 smallint 类型的数据，除非使用 cast 。</p>
-<p>任何整数类型都可以隐式转换成一个范围更大的类型。任意 int 类型、float、string 都可以隐式转换成 double 类型！boolean不可以转化为其他任意类型。</p>
-<p>​    </p>
-<h2 id="具体操作"><a href="#具体操作" class="headerlink" title="具体操作"></a>具体操作</h2><h3 id="算术运算符"><a href="#算术运算符" class="headerlink" title="算术运算符"></a>算术运算符</h3><blockquote>
-<p>无特殊说明，则默认返回是变量的最小父类型</p>
-</blockquote>
-<ul>
-<li><p>等值比较</p>
-<p>语法：A = B</p>
-<p>说明：如果表达式 A 和表达式 B 相等，则为 True ，否则为 False</p>
-</li>
-<li><p>加法操作</p>
-<p>语法： A + B</p>
-<p>说明：返回 A+B 相加的结果。结果的数值类型等于 A 的类型和 B 的类型的最小父类型。比如 int + int 结果为 int 类型，int + double 为 double 类型</p>
-</li>
-<li><p>减法操作</p>
-<p> 语法：A - B </p>
-<p> 说明：同加法操作</p>
-</li>
-<li><p>乘法操作</p>
-<p>语法： A * B</p>
-<p>说明：同样是返回 A 与 B 的最小父类型，不过如果结果超过默认的结果类型的数值范围，为需要通过 cast 将结果转换成范围更大的数值类型</p>
-</li>
-<li><p>除法操作</p>
-<p>语法： A / B</p>
-<p>说明：返回 A 除以 B 的结果。结果的数值为 double 类型。<strong>Hive中最高精度的数据类型是 double ，只精确到小数点后面16位</strong></p>
-</li>
-<li><p>取余操作</p>
-<p>语法： A % B</p>
-<p>说明：pass</p>
-</li>
-<li><p>位与操作</p>
-<p>语法： A &amp; B</p>
-<p>说明：返回  A 和 B 按位进行与操作的结果</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hive (temp)&gt; select 4 &amp; 8;</span><br><span class="line">0</span><br><span class="line">hive (temp)&gt; select 4 &amp; 6;</span><br><span class="line">4</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>位或操作</p>
-<p>语法：A | B</p>
-<p>说明：返回  A 和 B 按位进行或操作的结果</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hive (temp)&gt; select 4 | 6;</span><br><span class="line">6</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>位异或操作</p>
-<p>语法：A ^ B  </p>
-<p>说明：返回 A 和 B 按位进行异或操作的结果</p>
-</li>
-<li><p>位取反操作</p>
-<p>语法：~A</p>
-<p>说明：返回 A 按位取反操作的结果，结果的数值类型等于 A 的类型</p>
-</li>
-</ul>
-<h3 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h3><ul>
-<li><p>逻辑与操作</p>
-<p>语法：A and B  或者 A  &amp;&amp; B  </p>
-<p>操作类型： boolean</p>
-<p>说明: pass </p>
-</li>
-<li><p>逻辑或操作</p>
-<p>语法：A or B  或者 A || B </p>
-<p>操作类型：boolean</p>
-<p>说明：pass</p>
-</li>
-<li><p>逻辑非操作</p>
-<p>语法：not A 或者 !A </p>
-<p>操作类型：boolean</p>
-<p>说明：pass </p>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1890,7 +1857,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">118</span>
+                  <span class="site-state-item-count">119</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

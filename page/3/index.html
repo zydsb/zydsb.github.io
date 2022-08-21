@@ -242,6 +242,194 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Hive内置的常见算术运算符和逻辑运算符/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Hive内置的常见算术运算符和逻辑运算符/" itemprop="url">Hive内置的常见算术运算符和逻辑运算符</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-10T11:48:26+08:00">
+                2019-10-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在我们日常地使用中，我们经常会使用 hive 进行各种运算操作，其实这之中发生了很多 hive 数据类型之前的转换操作，比如 string + int 。今天我们来大概看一看，以便踩坑的时候可以更快地出坑。</p>
+<h2 id="基本知识"><a href="#基本知识" class="headerlink" title="基本知识"></a>基本知识</h2><p>可以先看看后面这篇文章：<a href="https://www.iteblog.com/archives/870.html" target="_blank" rel="noopener">Hive内置数据类型</a></p>
+<p>假如我们需要对两个不同数据类型的数字进行比较，一个是 int，一个是 smallint，那么在比较的时候，都会被隐式转化为 int 类型再进行比较。不顾我们不可以隐式地将一个 int 类型的数据转化成一个 smallint 类型的数据，除非使用 cast 。</p>
+<p>任何整数类型都可以隐式转换成一个范围更大的类型。任意 int 类型、float、string 都可以隐式转换成 double 类型！boolean不可以转化为其他任意类型。</p>
+<p>​    </p>
+<h2 id="具体操作"><a href="#具体操作" class="headerlink" title="具体操作"></a>具体操作</h2><h3 id="算术运算符"><a href="#算术运算符" class="headerlink" title="算术运算符"></a>算术运算符</h3><blockquote>
+<p>无特殊说明，则默认返回是变量的最小父类型</p>
+</blockquote>
+<ul>
+<li><p>等值比较</p>
+<p>语法：A = B</p>
+<p>说明：如果表达式 A 和表达式 B 相等，则为 True ，否则为 False</p>
+</li>
+<li><p>加法操作</p>
+<p>语法： A + B</p>
+<p>说明：返回 A+B 相加的结果。结果的数值类型等于 A 的类型和 B 的类型的最小父类型。比如 int + int 结果为 int 类型，int + double 为 double 类型</p>
+</li>
+<li><p>减法操作</p>
+<p> 语法：A - B </p>
+<p> 说明：同加法操作</p>
+</li>
+<li><p>乘法操作</p>
+<p>语法： A * B</p>
+<p>说明：同样是返回 A 与 B 的最小父类型，不过如果结果超过默认的结果类型的数值范围，为需要通过 cast 将结果转换成范围更大的数值类型</p>
+</li>
+<li><p>除法操作</p>
+<p>语法： A / B</p>
+<p>说明：返回 A 除以 B 的结果。结果的数值为 double 类型。<strong>Hive中最高精度的数据类型是 double ，只精确到小数点后面16位</strong></p>
+</li>
+<li><p>取余操作</p>
+<p>语法： A % B</p>
+<p>说明：pass</p>
+</li>
+<li><p>位与操作</p>
+<p>语法： A &amp; B</p>
+<p>说明：返回  A 和 B 按位进行与操作的结果</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hive (temp)&gt; select 4 &amp; 8;</span><br><span class="line">0</span><br><span class="line">hive (temp)&gt; select 4 &amp; 6;</span><br><span class="line">4</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>位或操作</p>
+<p>语法：A | B</p>
+<p>说明：返回  A 和 B 按位进行或操作的结果</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hive (temp)&gt; select 4 | 6;</span><br><span class="line">6</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>位异或操作</p>
+<p>语法：A ^ B  </p>
+<p>说明：返回 A 和 B 按位进行异或操作的结果</p>
+</li>
+<li><p>位取反操作</p>
+<p>语法：~A</p>
+<p>说明：返回 A 按位取反操作的结果，结果的数值类型等于 A 的类型</p>
+</li>
+</ul>
+<h3 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h3><ul>
+<li><p>逻辑与操作</p>
+<p>语法：A and B  或者 A  &amp;&amp; B  </p>
+<p>操作类型： boolean</p>
+<p>说明: pass </p>
+</li>
+<li><p>逻辑或操作</p>
+<p>语法：A or B  或者 A || B </p>
+<p>操作类型：boolean</p>
+<p>说明：pass</p>
+</li>
+<li><p>逻辑非操作</p>
+<p>语法：not A 或者 !A </p>
+<p>操作类型：boolean</p>
+<p>说明：pass </p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://snailed.cn/了解逻辑回归/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1537,168 +1725,6 @@ F(n) = max(F(n-1)+x_{n},x_{n}) \\
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/Linux统计文件内容/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/Linux统计文件内容/" itemprop="url">Linux--sort&uniq</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-26T14:16:13+08:00">
-                2019-08-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>今天工作使用到对一个超过100万行的文件，去重统计某一列有多少个。使用命令如下<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat xx.csv | sort -t ',' -k 1,1 -u | wc -l</span><br></pre></td></tr></table></figure></p>
-<p>其中<code>-t</code>表示每行的分隔符是什么，<code>-k</code>表示统计第几列到第几列，<code>-u</code>表示去重</p>
-<p><code>wc -l</code> 统计文件有多少行</p>
-<p><code>sort</code> 和 <code>uniq</code> 这两个命令还有挺多东西需要学习一下的，后面整理一下。</p>
-<hr>
-<p>2019-08-26</p>
-<p>在工作的场景中，我们经常针对大文本做一些统计，比如说前文的去重统计某一列的id个数。使用 Python 统计固然可以，但是我们也有更方便的办法：<code>sort</code> and <code>uniq</code> 。</p>
-<p>我们先创建一个 <code>demo.txt</code> 的文件，来做实验：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">cat demo.txt</span></span><br><span class="line">1,2,3</span><br><span class="line">2,3,3</span><br><span class="line">2,3,4</span><br><span class="line">2,3,3</span><br><span class="line">5,5,2</span><br><span class="line">4,2,3</span><br></pre></td></tr></table></figure></p>
-<h4 id="sort-为排序而生"><a href="#sort-为排序而生" class="headerlink" title="sort : 为排序而生"></a><code>sort</code> : 为排序而生</h4><p><code>sort</code> 基本用法:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;filename&gt; | sort</span><br><span class="line">sort &lt;file1&gt; [&lt;file2&gt; [&lt;file3&gt; [...]]]</span><br></pre></td></tr></table></figure>
-<p>两个命令都可以， <code>sort</code> 会逐行读取内容，然后按照 <code>ASCII</code> 编码的顺序，升序排列文件的行，最后输出到标准输出，其中 <code>sort</code> 可以连续读入多个文件，然后合在一起排序。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">sort  demo.txt</span></span><br><span class="line">1,2,3</span><br><span class="line">2,3,3</span><br><span class="line">2,3,3</span><br><span class="line">2,3,4</span><br><span class="line">4,2,3</span><br><span class="line">5,5,2</span><br></pre></td></tr></table></figure>
-<p><code>sort</code> 常用选项：</p>
-<ul>
-<li>-o: 定向输出文件</li>
-<li>-r: 倒叙排列</li>
-<li>-n: 排序数字时使用 </li>
-<li>-u: 去除重复行</li>
-<li>-t: 指定分隔符（通常与 -k 联用）</li>
-<li>-k: 指定用于排序的列号</li>
-<li>-f: 忽略大小写</li>
-<li>-M: 能够排序月份</li>
-<li>-b: 忽略行首空白</li>
-<li>-u: 对有相同键的列去重</li>
-</ul>
-<h4 id="uniq-治重复专用"><a href="#uniq-治重复专用" class="headerlink" title="uniq 治重复专用"></a><code>uniq</code> 治重复专用</h4><p><code>uniq</code> 的作用可以描述为：针对相邻的重复行，进行相应的动作。(大哥讲太好，忍不住复制了过来)</p>
-<blockquote>
-<p>这句话中，有两个地方需要注意。首先，针对的是相邻的重复行。因此，uniq 对于不相邻的重复行是不起作用的。其次，进行相应的动作。这意味着，uniq 可以做的事情很多，不止一样。</p>
-</blockquote>
-<p><code>uniq</code> 默认是对相邻的重复行，进行去重的操作：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">cat demo.txt | sort  | uniq</span></span><br><span class="line">1,2,3</span><br><span class="line">2,3,3</span><br><span class="line">2,3,4</span><br><span class="line">4,2,3</span><br><span class="line">5,5,2</span><br><span class="line"><span class="meta">#</span><span class="bash"> 2,3,3进行了去重</span></span><br></pre></td></tr></table></figure>
-<p>上面命令也就很简单了：把 <code>demo.txt</code> 的文件按照升序排列，然后去除重复的行，最后输出到标准输出（屏幕）</p>
-<p>当然，我们也可以给 <code>uniq</code> 加上不同的参数，来解锁不同的姿势。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">cat &lt;filename&gt; | sort | uniq -d     # 只显示重复的行，每行只显示一次</span><br><span class="line">cat &lt;filename&gt; | sort | uniq -i     # 忽略大小写</span><br><span class="line">cat &lt;filename&gt; | sort | uniq -u     # 只显示只出现一次的行</span><br><span class="line">cat &lt;filename&gt; | sort | uniq -c     # 统计每行重复的次数</span><br></pre></td></tr></table></figure>
-<h4 id="使用sort-和-uniq"><a href="#使用sort-和-uniq" class="headerlink" title="使用sort 和 uniq"></a>使用<code>sort</code> 和 <code>uniq</code></h4><p>准备另一个集合    <code>demo_cp.txt</code></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">cat demo_cp.txt</span></span><br><span class="line">1,2,3</span><br><span class="line">2,3,3</span><br><span class="line">2,3,4</span><br><span class="line">2,3,3</span><br><span class="line">6,1,2</span><br></pre></td></tr></table></figure>
-<h5 id="求交集"><a href="#求交集" class="headerlink" title="求交集"></a>求交集</h5><p>我们想要知道两个文件里面都出现了的元素，那么就是两个文件重复的行，easy。<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">sort &lt;file1&gt; &lt;file2&gt; | uniq -d <span class="comment"># 交集</span></span></span><br></pre></td></tr></table></figure></p>
-<p>实战一下: </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">sort demo.txt demo_cp.txt | uniq -d</span></span><br><span class="line">1,2,3</span><br><span class="line">2,3,3</span><br><span class="line">2,3,4</span><br></pre></td></tr></table></figure>
-<h5 id="求并集"><a href="#求并集" class="headerlink" title="求并集"></a>求并集</h5><p>前文已经演示过了，easy</p>
-<h5 id="求差集"><a href="#求差集" class="headerlink" title="求差集"></a>求差集</h5><p>也就是重合过的不要呗，那就是 <code>uniq -u</code> 统计只出现过一次的行</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">sort &lt;file1&gt; &lt;file2&gt; | uniq -u <span class="comment"># 差集</span></span></span><br></pre></td></tr></table></figure>
-<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p>感恩大佬的文章<a href="https://liam.page/2016/05/05/best-match-using-sort-and-uniq-to-do-set-operations/" target="_blank" rel="noopener">最佳搭档：利用 sort 和 uniq 做集合运算</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1751,7 +1777,7 @@ F(n) = max(F(n-1)+x_{n},x_{n}) \\
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">118</span>
+                  <span class="site-state-item-count">119</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
