@@ -242,6 +242,158 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://snailed.cn/《PSM》/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="| Yang |">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/《PSM》/" itemprop="url">《PSM》</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-08-21T16:00:11+08:00">
+                2022-08-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="PSM-的背景"><a href="#PSM-的背景" class="headerlink" title="PSM 的背景"></a>PSM 的背景</h3><p>在我们去做 AB 实验的过程中，分组时一般将用户按照一定哈希算法进行随机分桶，此时我们可以认为不同桶之间的用户是同质的，或者可以说成是用户的特征分布是相似的，但是也会面临一些问题：</p>
+<ul>
+<li>实验无法进行随机分组，此时用户分布是不同质的，可能面临辛普森悖论等问题</li>
+<li>随机分组算法有概率生成的结果是不均匀的</li>
+</ul>
+<p>此时为了让用户同质，我们则应该回归匹配的方法，具体地有三种：</p>
+<ol>
+<li>精确匹配<br>对于我们实验组的每一个样本，从对照组中都去找一个一模一样的样本。这个方法在医学或者某些社会学研究中是可行的，但是对于互联网场景下，我们的维度会很多 or 我们的变量是连续变量，这么做就基本不可行了</li>
+<li>分层匹配<br>用户可能是在某些维度上的分布是不均匀的，此时我们可以将用户比较精细地划分为多层，保证每一层内的用户分布是同质的，此时我们去计算其 ATE，然后再将 ATE 进行加权平均，就可以得到总体的 ATE，比如用户在男女上分布是不均匀的，我们就可以在组内分开男女两层进行计算。<br>但是当我们的层数过多之后，整个用户的分布就会变得稀疏，方差变大，此时结论可信度就会降低..</li>
+<li>PSM 匹配<br>继而，大佬提出了更加普适性的方法 PSM，全称“Propensity Score Matching”，即倾向性得分匹配。我们根据分层法的思路来看，如果我们可以按照得分 p 来进行分层，和按照方法 2 来进行分层，可以得到类似的效果,则可以极大减少我们的分层数量，得到更准确的结果，当然，这一点大佬肯定已经证明是可行的~</li>
+</ol>
+<h3 id="PSM-的定义"><a href="#PSM-的定义" class="headerlink" title="PSM 的定义"></a>PSM 的定义</h3><p>PSM得分，即 e(x) 表示的是一个用户属于实验组的倾向性：<br>e(x) =Pr[T=1|X=x]<br>其中：<br>e(x)：表示一个用户属于实验组的得分。注意，这不是用户是否转化的概率！<br>X：用户的特征向量<br>T：用户是否被干预<br>Y：用户的行为结果</p>
+<p>这里的 e(x) 有两个性质，对于倾向性得分相同的用户，其 T 与 X，T 与 Y 都是独立的。所以此时我们可以不用去关心用户 X 的分布了，只需要去匹配用户的 e(x) ，就可以得到同质的实验组和对照组，继而去进行因果效应的评估。</p>
+<ul>
+<li>T 与 X 是独立的比较好理解，即我们的选择的实验组不应该与 X 有相关关系，比如一个实验：<br>  ○ T-是否给孩子吃“长高糖丸”<br>  ○ Y-实验组长高 5 cm ，对照组长高 3 cm<br>  ○ 此时 T 的选择就与 X （孩子家里的经济条件、父母重视程度）有关</li>
+<li>T 与 潜在结果也是独立的，即 Treatment 不影响我们的潜在结果的分布，只会影响我们的观察结果</li>
+</ul>
+<h3 id="PSM-的计算"><a href="#PSM-的计算" class="headerlink" title="PSM 的计算"></a>PSM 的计算</h3><p>这一步比较简单，我们可以使用常见机器学习算法，比如 LR 等对（X，T）进行建模，此时使用的是所有的数据，不区分实验组和对照组（因为我们整体来看，实验组的选取是随机的），输入是用户的特征 X ,训练的 label 则是用户是否被 treatment，然后可以利用训练好的模型对所有用户进行打分。</p>
+<p>个人理解这个打分模型不需要花过多的参数去调整，基于以下几点认知</p>
+<ul>
+<li>常见模型的结果：相同特征的样本得分一致，相似样本的样本得分差异较小</li>
+<li>我们的实验组选取本身就是随机的，所以模型性能注定不会特别好</li>
+</ul>
+<p>利用 PSM 进行匹配</p>
+<p>主要有以下几步：</p>
+<ol>
+<li>倾向性得分估算：计算每个用户的 PSM 得分</li>
+<li>倾向性得分匹配：根据我们计算得到的 e(x) 分数，寻求相等或者相近的用户进行匹配<br> a. 对于极端得分的用户，我们可以排除掉，比如选择[0.05,0.95]的分位区间，或者是取原本实验组和对照组的交集<br> b. 得分差异上限（caliper）：匹配的时候可以要求每一对的用户差异不可以高于 caliper，否则干掉<br> c. 匹配方法：有很多…本质都是寻求相近分数的用户</li>
+<li>平衡性检查：我们进行 PSM 匹配的目标就是为了让用户同质，所以我们有必要检查匹配玩之后的效果<br> a. 用户是否同质，主要表现在特征分布上的不同，所以我们可以观察特征匹配前后的分布图，比如说 QQ-plot<br> b. 量化指标观察，比如SMD = （ 实验组均值 - 对照组均值 ） / 实验组标准差，一般 SMD &lt;= 0.1，则可以认为是配平了的。（标准正态分布计算）</li>
+<li>因果效应推断<br> a. 计算 ATE ，这个不必多说<br> b. 拟合线性模型 f(y) = a<em>x + b</em>t ，此时 t 的系数 b 就是我们的因果效应</li>
+<li>敏感性判断：主要为了判断我们的特征是否真的与 T 与 Y 都是独立的，这里 pass </li>
+</ol>
+<h3 id="PSM-实践"><a href="#PSM-实践" class="headerlink" title="PSM 实践"></a>PSM 实践</h3><p>因具体数据涉及到业务，此处 pass </p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://snailed.cn/读《我的精神家园》/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1714,134 +1866,6 @@ G_{ij}=x_{i} \cdot  x_{j}</script><h4 id="总结"><a href="#总结" class="heade
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://snailed.cn/2020观影记录/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhangyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/timg.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="| Yang |">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020观影记录/" itemprop="url">2020观影记录</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-12-06T15:08:28+08:00">
-                2020-12-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="Top-5"><a href="#Top-5" class="headerlink" title="Top 5"></a>Top 5</h4><p>个人心中觉得今年我看过最好的五部电影：</p>
-<ol>
-<li>《花火》</li>
-<li>《肖申克的救赎》</li>
-<li>《横空出世》</li>
-<li>《降临》</li>
-<li>《运转手之恋》</li>
-</ol>
-<h4 id="观影明细"><a href="#观影明细" class="headerlink" title="观影明细"></a>观影明细</h4><p>《多哥》：想养狗。。。<br>《横空出世》<br>《心迷宫》<br>《花火》<br>《一个叫欧维的男人决定去死》<br>《坏孩子的天空》<br>《那年夏天，宁静的海》<br>《肖申克的救赎》<br>《遗愿清单》<br>《三块广告牌》<br>《贫民窟的百万富翁》<br>《烈火英雄》<br>《老师好》<br>《龙珠-布罗利》<br>《龙珠-复活的弗利萨》<br>《唐人街探案2》<br>《降临》<br>《航拍中国三》<br>《八佰》<br>《爆裂鼓手》<br>《的士速递》<br>《的士速递2》<br>《无姓之人》<br>《缝纫机乐队》<br>《赤焰战场》<br>《我和我的家乡》<br>《的士速递3》<br>《运转手之恋》<br>《扫毒2》<br>《门徒》<br>《扫毒》</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1894,7 +1918,7 @@ G_{ij}=x_{i} \cdot  x_{j}</script><h4 id="总结"><a href="#总结" class="heade
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">117</span>
+                  <span class="site-state-item-count">118</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
